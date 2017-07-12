@@ -21,6 +21,7 @@ void test_alexnet(){
 		"maxpool2",
 		"fc0",
 		"fc1",
+		"fc2",
 		"softmaxloss"});
 	cs.add(t);
 	cs.update();
@@ -118,7 +119,15 @@ void test_gnet_v1(){
 				{"maxpool_4d_30", "conv_4d_31"},
 			{"concat_4d"},
 		});
-	vector<string> t2({"concat_4d",
+	vector<vector<string> > t4e({
+			{"concat_4d"},
+				{"conv_4e_00"}, 
+				{"conv_4e_10", "conv_4e_11"},
+				{"conv_4e_20", "conv_4e_21"}, 
+				{"maxpool_4e_30", "conv_4e_31"},
+			{"concat_4e"},
+		});
+	vector<string> t2({"concat_4e",
 			"maxpool3"});
 	vector<vector<string> > t5a({
 			{"maxpool3"},
@@ -143,7 +152,7 @@ void test_gnet_v1(){
 	cs.add(t0).
 		add(t3a).add(t3b).
 		add(t1).
-		add(t4a).add(t4b).add(t4c).add(t4d).
+		add(t4a).add(t4b).add(t4c).add(t4d).add(t4e).
 		add(t2).
 		add(t5a).add(t5b).
 		add(t3);

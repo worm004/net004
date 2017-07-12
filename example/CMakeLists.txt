@@ -4,4 +4,9 @@ project("tests")
 
 include_directories("../include")
 add_executable(test_connections test_connections.cpp)
+add_executable(test_layers test_layers.cpp)
+add_executable(test_net test_net.cpp)
+
 target_link_libraries(test_connections net004)
+target_link_libraries(test_layers net004)
+target_link_libraries(test_net net004)

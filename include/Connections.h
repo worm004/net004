@@ -1,3 +1,5 @@
+#ifndef CONNECTIONS_H
+#define CONNECTIONS_H
 #include <string>
 #include <vector>
 #include <map>
@@ -14,7 +16,10 @@ class Connections{
 	bool exist(const std::string& src, const std::string& des);
 	bool tsort();
 
+	public:
+	std::vector<std::string> sorted_cs;
+
 	private:
 	std::map<std::string, std::set<std::string> > cs;
-	std::vector<std::string> sorted_cs;
 };
+#endif

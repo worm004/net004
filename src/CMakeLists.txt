@@ -4,4 +4,4 @@ project("net004")
 
 include_directories("../include")
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-add_library(net004 STATIC Connections.cpp)
+add_library(net004 STATIC Connections.cpp Layers.cpp Net004.cpp)
