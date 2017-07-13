@@ -1,11 +1,54 @@
 #include "Net004.h"
 using namespace std;
+void test_concat(){
+	Net004 net("test_concat");
+	Layers & ls = net.ls;
+	ls.add_data("data",1,3,227,227,"image");
+	ls.add_data("gt",1,1,1,1,"label");
+	ls.add_conv("conv0",{96,11,4,0},"relu");
+	ls.add_conv("conv_3a_00",{64,1,1,0},"relu");
+	ls.add_conv("conv_3a_10",{96,1,1,0},"relu");
+	ls.add_conv("conv_3a_11",{128,3,1,1},"relu");
+	ls.add_conv("conv_3a_20",{16,1,1,0},"relu");
+	ls.add_conv("conv_3a_21",{32,5,1,2},"relu");
+	ls.add_pool("maxpool_3a_30",{3,1,1},"max");
+	ls.add_conv("conv_3a_31",{32,1,1,0},"relu");
+	ls.add_concat("concat_3a");
+	ls.add_fc("fc0",1000,"");
+	ls.add_loss("softmaxloss","softmax");
+
+	Connections& cs = net.cs;
+	vector<string> t0({
+			"data",
+			"conv0"});
+	vector<vector<string> > t1a({
+			{"conv0"},
+				{"conv_3a_00"}, 
+				{"conv_3a_10", "conv_3a_11"},
+				{"conv_3a_20", "conv_3a_21"},
+				{"maxpool_3a_30", "conv_3a_31"},
+			{"concat_3a"}
+		});
+	vector<string> t2({"concat_3a",
+			"fc0",
+			"softmaxloss"});
+	vector<string> t3({"gt","softmaxloss"});
+	cs.add(t0).add(t1a).add(t2).add(t3);
+	cs.update();
+
+	// net
+	net.check();
+	net.setup();
+	net.show();
+}
 
 void test_alexnet(){
 	Net004 net("alexnet");
 
 	// layers
 	Layers &ls = net.ls;
+	ls.add_data("data",1,3,227,227,"image");
+	ls.add_data("gt",1,1,1,1,"label");
 	ls.add_conv("conv0",{96,11,4,0},"relu");
 	ls.add_lrn("lrn0",5,0.0001,0.75);
 	ls.add_pool("maxpool0",{3,2,0},"max");
@@ -24,7 +67,8 @@ void test_alexnet(){
 	// connections
 	Connections& cs = net.cs;
 	vector<string> t(
-		{"conv0",
+		{"data",
+		"conv0",
 		"lrn0",
 		"maxpool0",
 		"conv1",
@@ -38,18 +82,23 @@ void test_alexnet(){
 		"fc1",
 		"fc2",
 		"softmaxloss"});
-	cs.add(t);
+	vector<string> t2({"gt","softmaxloss"});
+	cs.add(t).add(t2);
 	cs.update();
 
 	// net
 	net.check();
+	net.setup();
 	net.show();
 }
 void test_vgg16(){
 
 	Net004 net("vgg16");
 
+	// layers
 	Layers &ls=net.ls;
+	ls.add_data("data",1,3,224,224,"image");
+	ls.add_data("gt",1,1,1,1,"label");
 	ls.add_conv("conv0",{64,3,1,1},"relu");
 	ls.add_conv("conv1",{64,3,1,1},"relu");
 	ls.add_pool("maxpool0",{2,2,0},"max");
@@ -73,9 +122,11 @@ void test_vgg16(){
 	ls.add_fc("fc2",1000,"relu");
 	ls.add_loss("softmaxloss","softmax");
 
+	// connections
 	Connections &cs=net.cs;
 	vector<string> t(
-		{"conv0",
+		{"data",
+		"conv0",
 		"conv1",
 		"maxpool0",
 		"conv2",
@@ -97,22 +148,28 @@ void test_vgg16(){
 		"fc1",
 		"fc2",
 		"softmaxloss"});
-	cs.add(t);
+	vector<string> t2({"gt","softmaxloss"});
+	cs.add(t).add(t2);
 	cs.update();
 
+	// net
 	net.check();
+	net.setup();
 	net.show();
-
 }
 void test_gnet_v1(){
 	Net004 net("gnet_v1");
 
+	// layers
 	Layers &ls = net.ls;
+	ls.add_data("data",1,3,224,224,"image");
+	ls.add_data("gt",1,1,1,1,"label");
+
 	ls.add_conv("conv0",{64,7,2,3},"relu");
 	ls.add_pool("maxpool0",{3,2,0},"max");
 	ls.add_lrn("lrn0",5,0.0001,0.75);
-	ls.add_conv("conv1",{64,1,1,3},"relu");
-	ls.add_conv("conv2",{192,3,1,3},"relu");
+	ls.add_conv("conv1",{64,1,1,0},"relu");
+	ls.add_conv("conv2",{192,3,1,1},"relu");
 	ls.add_lrn("lrn1",5,0.0001,0.75);
 	ls.add_pool("maxpool1",{3,2,0},"max");
 
@@ -214,8 +271,10 @@ void test_gnet_v1(){
 	ls.add_fc("fc0",1000,"");
 	ls.add_loss("softmaxloss","softmax");
 
+	// connections
 	Connections &cs = net.cs;
 	vector<string> t0({
+			"data",
 			"conv0",
 			"maxpool0",
 			"lrn0",
@@ -304,24 +363,25 @@ void test_gnet_v1(){
 			"avgpool0",
 			"fc0",
 			"softmaxloss"});
+	vector<string> t4({"gt","softmaxloss"});
 	cs.add(t0).
 		add(t3a).add(t3b).
 		add(t1).
 		add(t4a).add(t4b).add(t4c).add(t4d).add(t4e).
 		add(t2).
 		add(t5a).add(t5b).
-		add(t3);
+		add(t3).add(t4);
 	cs.update();
 
-	//net
+	// net
 	net.check();
+	net.setup();
 	net.show();
-
-
 }
 void test(){
 	//test_alexnet();
 	//test_vgg16();
+	//test_concat();
 	test_gnet_v1();
 }
 int main(){

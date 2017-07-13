@@ -9,6 +9,7 @@ class Net004{
 	Net004(const std::string&name):name(name){};
 	void check();
 	void show();
+	void setup();
 
 	Connections cs;
 	Layers ls;

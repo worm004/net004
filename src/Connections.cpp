@@ -64,9 +64,23 @@ void Connections::show(){
 	}
 	cout<<endl;
 }
-bool Connections::tsort(){
-	sorted_cs.clear();
-	map<string, int> ins;
+std::set<std::string> & Connections::operator [](const std::string& name){
+	if(cs.find(name) == cs.end()){
+		printf("error: connections cannot find layer: %s\n",name.c_str());
+		exit(0);
+	}
+	return cs[name];
+}
+void Connections::outdegrees(std::map<std::string, int>& outs){
+	outs.clear();
+	for(const auto& src: cs){
+		if(outs.find(src.first) == outs.end()) outs[src.first] = 0;
+		for(const auto& to: src.second)
+			outs[src.first] += 1;
+	}
+}
+void Connections::indegrees(std::map<std::string, int>& ins){
+	ins.clear();
 	for(const auto& src: cs){
 		if(ins.find(src.first) == ins.end()) ins[src.first] = 0;
 		for(const auto& to: src.second){
@@ -74,6 +88,11 @@ bool Connections::tsort(){
 			ins[to] += 1;
 		}
 	}
+}
+bool Connections::tsort(){
+	sorted_cs.clear();
+	map<string, int> ins;
+	indegrees(ins);
 	set<string> noins;
 	for(const auto& l: ins)
 		if(l.second == 0) noins.insert(l.first);
