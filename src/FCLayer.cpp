@@ -24,10 +24,14 @@ void FCLayer::show()const {
 		printf("\tinput: ");
 		inputs[0].show();
 	}
-	printf("\tbias: ");
-	bias.show();
-	printf("\tweight: ");
-	weight.show();
+	if(bias.total() != 0){
+		printf("\tbias: ");
+		bias.show();
+	}
+	if(weight.total() != 0){
+		printf("\tweight: ");
+		weight.show();
+	}
 
 	if(outputs.size() == 1){
 		printf("\toutput: ");

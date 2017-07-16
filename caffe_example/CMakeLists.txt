@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 2.8)
+set (CMAKE_CXX_STANDARD 11)
+project("caffe_example")
+
+set(Caffe_DIR "/Users/worm004/caffe/build/install/share/Caffe")
+find_package(Caffe)
+add_definitions(-DCPU_ONLY)
+include_directories(${Caffe_INCLUDE_DIRS})
+add_executable(cifar10 cifar10.cpp)
+
+target_link_libraries(cifar10 ${Caffe_LIBRARIES})

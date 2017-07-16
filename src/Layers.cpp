@@ -46,6 +46,20 @@ int Layers::parameter_number(const std::string& name){
 	}
 	return layers[name]->parameter_number();
 }
+int Layers::input_parameter_number(const std::string& name){
+	if(!exist(name)){
+		printf("error: no such layer named %s\n",name.c_str());
+		exit(0);
+	}
+	return layers[name]->input_parameter_number();
+}
+int Layers::output_parameter_number(const std::string& name){
+	if(!exist(name)){
+		printf("error: no such layer named %s\n",name.c_str());
+		exit(0);
+	}
+	return layers[name]->output_parameter_number();
+}
 void Layers::show(const std::string& name){
 	if(!exist(name)){
 		printf("error: no such layer named %s\n",name.c_str());

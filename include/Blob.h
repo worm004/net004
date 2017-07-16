@@ -9,7 +9,7 @@ struct Blob{
 	void alloc();
 	void clear();
 	void show() const;
-	int total();
+	int total() const;
 
 	public:
 	float *data = 0;

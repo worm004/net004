@@ -27,8 +27,19 @@ void Layer::connect2(Layer& l){
 	l.input_difs.push_back(Blob());
 	l.input_difs.back().set_shape(outputs[0]);
 	l.input_difs.back().set_data(output_difs[0].data);
-	//if(l.name == "concat_3a") printf("connect: %s %s %p %d %d\n",l.name.c_str(),l.type.c_str(),&l,l.inputs.size(), l.input_difs.size());
 }
 int Layer::parameter_number(){
 	return 0;
+}
+int Layer::input_parameter_number(){
+	int n = 0;
+	for(const auto&i: inputs)
+		n += i.total();
+	return n;
+}
+int Layer::output_parameter_number(){
+	int n = 0;
+	for(const auto&i: outputs)
+		n += i.total();
+	return n;
 }

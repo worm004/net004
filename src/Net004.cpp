@@ -20,14 +20,22 @@ void Net004::check(){
 }
 void Net004::show(){
 	printf("[net] %s\n",name.c_str());
-	int total_pm = 0;
+	int total_pm = 0, total_im = 0, total_om = 0;
 	for(const auto i : cs.sorted_cs){
 		ls.show(i);
 		int pm = ls.parameter_number(i);
+		int im = ls.input_parameter_number(i);
+		int om = ls.output_parameter_number(i);
 		total_pm += pm;
-		printf("parameter number: %d\n",pm);
+		total_im += im;
+		total_om += om;
+		if(pm != 0) printf("\tparameter number: %d\n",pm);
+		if(im != 0) printf("\tinput parameter number: %d\n",im);
+		if(om != 0) printf("\toutput parameter number: %d\n",om);
 	}
-	printf("total parameter number: %d\n",total_pm);
+	printf("total parameter number: %d (%.2f mb)\n",total_pm, sizeof(float)*total_pm/1024.0f/1024.0f);
+	printf("total input parameter number (include dif): %d (%.2f mb)\n", total_im * 2, sizeof(float) * 2 * total_im/1024.0f/1024.0f);
+	printf("total output parameter number (include dif): %d (%.2f mb)\n",total_om * 2, sizeof(float) * 2 * total_om/1024.0f/1024.0f);
 }
 void Net004::setup(){
 	map<string, int> ins,outs;
@@ -35,22 +43,16 @@ void Net004::setup(){
 	cs.outdegrees(outs);
 
 	for(const auto& i : cs.sorted_cs){
-		Layer* l0 = ls[i];
-		//printf("+");
-		//l0->show();
 		if(outs.find(i) == outs.end()) continue;
+		Layer* l0 = ls[i];
 		for (const auto& j : cs[i]){
 			Layer* l1 = ls[j];
-			//l1->show();
 			l0->connect2(*l1);
-			if(ins[j] == 0){
+			ins[j] -= 1;
+			if(ins[j] < 0){
 				printf("error: should not reach this line\n");
 				exit(0);
-			}
-			ins[j] -= 1;
-			if(ins[j] == 0){
-				l1->setup();
-			}
+			} else if(ins[j] == 0) l1->setup();
 		}
 	}
 }

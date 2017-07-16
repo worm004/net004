@@ -16,6 +16,9 @@ class Layer{
 	virtual void setup_data();
 	virtual void connect2(Layer& l);
 	virtual int parameter_number();
+	int input_parameter_number();
+	int output_parameter_number();
+
 	void setup();
 	static int i2o_floor(int w, int kernel, int stride, int padding){
 		return (w + 2 * padding - kernel) / stride + 1;

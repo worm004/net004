@@ -20,6 +20,8 @@ class Layers{
 	bool exist(const std::string& name);
 	int count();
 	int parameter_number(const std::string& name);
+	int input_parameter_number(const std::string& name);
+	int output_parameter_number(const std::string& name);
 
 	private:
 	std::map<std::string, Layer*> layers;

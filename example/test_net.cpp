@@ -1,5 +1,41 @@
 #include "Net004.h"
 using namespace std;
+void test_cifar10(){
+	Net004 net("cifar10");
+	Layers & ls = net.ls;
+	ls.add_data("data",1,3,32,32,"image");
+	ls.add_data("gt",1,1,1,1,"label");
+	ls.add_conv("conv0",{32,5,1,2},"relu");
+	ls.add_pool("maxpool0",{3,2,0},"max");
+	ls.add_conv("conv1",{32,5,1,2},"relu");
+	ls.add_pool("maxpool1",{3,2,0},"max");
+	ls.add_conv("conv2",{64,5,1,2},"relu");
+	ls.add_pool("maxpool2",{3,2,0},"avg");
+	ls.add_fc("fc0",64,"");
+	ls.add_fc("fc1",10,"");
+	ls.add_loss("softmaxloss","softmax");
+	//ls.show();
+	Connections& cs = net.cs;
+	vector<string> t0({
+			"data",
+			"conv0",
+			"maxpool0",
+			"conv1",
+			"maxpool1",
+			"conv2",
+			"maxpool2",
+			"fc0",
+			"fc1",
+			"softmaxloss"});
+	vector<string> t1({"gt","softmaxloss"});
+	cs.add(t0).add(t1);
+	cs.update();
+	//cs.show();
+	
+	net.check();
+	net.setup();
+	net.show();
+}
 void test_concat(){
 	Net004 net("test_concat");
 	Layers & ls = net.ls;
@@ -379,10 +415,11 @@ void test_gnet_v1(){
 	net.show();
 }
 void test(){
+	test_cifar10();
 	//test_alexnet();
 	//test_vgg16();
 	//test_concat();
-	test_gnet_v1();
+	//test_gnet_v1();
 }
 int main(){
 	test();

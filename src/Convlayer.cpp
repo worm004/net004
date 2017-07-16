@@ -38,12 +38,16 @@ void ConvLayer::show()const {
 	//printf("\tinput dif:");
 	//input_difs[0].show();
 
-	printf("\tbias: ");
-	bias.show();
-	//printf("\tbias dif: ");
-	//bias_dif.show();
-	printf("\tweight: ");
-	weight.show();
+	if(bias.total() != 0){
+		printf("\tbias: ");
+		bias.show();
+	}
+	if(weight.total() != 0){
+		//printf("\tbias dif: ");
+		//bias_dif.show();
+		printf("\tweight: ");
+		weight.show();
+	}
 	//printf("\tweight dif: ");
 	//weight_dif.show();
 
