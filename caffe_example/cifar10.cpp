@@ -9,36 +9,26 @@ using namespace cv;
 void show_param(caffe::Blob<float> *b){
 	const float *data = b->cpu_data();
 	int num = b->num(), channel = b->channels(), height = b->height(), width = b->width();
-	for(int n=0;n<num;++n){
-		printf("filter %d/%d\n",n+1,num);
-		for(int c=0;c<channel;++c){
-			if((height >1) || (width > 1)) printf("channel %d/%d\n",c+1,channel);
-			for(int h=0;h<height;++h){
-				for(int w=0;w<width;++w){
-					printf(" %.2f ",data[(h*width+w) + height*width*c] + height*width*channel*n);
-				}
-			}
-			if((height >1) || (width > 1)) printf("\n");
-		}
-		printf("\n");
 
-	}
+	for(int n=0;n<num;++n)
+	for(int c=0;c<channel;++c)
+	for(int h=0;h<height;++h)
+	for(int w=0;w<width;++w)
+		printf(" %f",data[w + h*width + height*width*c + height*width*channel*n]);
 }
 void show_blob(caffe::Blob<float> *b){
 	const float *data = b->cpu_data();
 	int num = b->num(), channel = b->channels(), height = b->height(), width = b->width();
 	for(int n=0;n<num;++n){
-		printf("batch %d/%d\n",n+1,num);
+		//printf("batch %d/%d\n",n+1,num);
 		for(int c=0;c<channel;++c){
-			printf("channel %d/%d\n",c+1,channel);
+			//printf("channel %d/%d\n",c+1,channel);
 			for(int h=0;h<height;++h){
 				for(int w=0;w<width;++w){
-					printf(" %.2f ",data[(h*width+w) + height*width*c] + height*width*channel*n);
+					printf(" %f",data[(h*width+w) + height*width*c + height*width*channel*n]);
 				}
 			}
-			printf("\n");
 		}
-		printf("\n");
 	}
 
 }
@@ -49,21 +39,20 @@ void show_data_flow(const std::shared_ptr<caffe::Net<float> >& net){
 
 	for(int i=0;i<layers.size();++i){
 		printf("%s %lu %lu\n",layers[i]->type(), bottoms[i].size(), tops[i].size());
-
 		for(int j=0;j<bottoms[i].size();++j){
 			caffe::Blob<float> *b = bottoms[i][j];
 			printf("bottoms(%d): %s\n",j,b->shape_string().c_str());
 			show_blob(b);
+			printf("\n");
 		}
-
 		for(int j=0;j<tops[i].size();++j){
 			const float *data = tops[i][j]->cpu_data();
 			caffe::Blob<float> *b = tops[i][j];
 			printf("tops(%d): %s\n",j,tops[i][j]->shape_string().c_str());
 			show_blob(b);
+			printf("\n");
 		}
 	}
-	getchar();
 }
 void show_model(const std::shared_ptr<caffe::Net<float> >& net){
 	const vector<boost::shared_ptr<caffe::Layer<float> >> layers = net->layers();
@@ -73,14 +62,9 @@ void show_model(const std::shared_ptr<caffe::Net<float> >& net){
 		for(int j=0;j<params.size();++j){
 			printf("param %d: %s\n",j, params[j]->shape_string().c_str());
 			show_param(params[j].get());
+			printf("\n");
 		}
 	}
-
-	//const vector<boost::shared_ptr<caffe::Blob<float> > >& params = net->params();
-	//const vector<string>& names = net->param_display_names();
-	//for(int i=0;i<params.size();++i){
-	//	printf("%d %s %s\n",i,names[i].c_str(), params[i]->shape_string().c_str());
-	//}
 }
 int main(){
 	vector<string> classes = { "airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck" };
@@ -95,6 +79,7 @@ int main(){
 	caffe::Caffe::set_mode(caffe::Caffe::CPU);
 	net = make_shared<caffe::Net<float>> (net_path, caffe::TEST);
 	net->CopyTrainedLayersFrom(model_path);
+	//show_model(net);
 	net->input_blobs()[0]->Reshape(1, 3, 32, 32);
 	net->Reshape();
 	float * input = net->input_blobs()[0]->mutable_cpu_data();
@@ -118,7 +103,6 @@ int main(){
 	// forward
 	//caffe::Caffe::set_mode(caffe::Caffe::CPU);
 	const caffe::Blob<float>* blob = net->Forward()[0];
-	show_model(net);
 	//show_data_flow(net);
 	const float* output =  blob->cpu_data();
 	for(int i=0;i<10;++i)

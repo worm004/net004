@@ -1,0 +1,10 @@
+airplane -0.94
+automobile 1.34
+bird -5.08
+cat 1.41
+deer -3.53
+dog -5.83
+frog 7.21
+horse -13.47
+ship 17.87
+truck 3.48
