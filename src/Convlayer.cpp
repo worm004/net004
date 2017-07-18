@@ -60,15 +60,15 @@ void ConvLayer::forward(){
 	//	}
 
 
-		printf("\ninput:\n");
-		for(int k=0;k<1;++k){
-			for(int i=0;i<inputs[0].h;++i){
-				for(int j=0;j<inputs[0].w;++j)
-					printf("%f ",inputs[0].data[inputs[0].h * inputs[0].w *k + i*inputs[0].w + j]);
-				printf("\n");
-			}
-			printf("\n");
-		}
+		//printf("\ninput:\n");
+		//for(int k=0;k<1;++k){
+		//	for(int i=0;i<inputs[0].h;++i){
+		//		for(int j=0;j<inputs[0].w;++j)
+		//			printf("%f ",inputs[0].data[inputs[0].h * inputs[0].w *k + i*inputs[0].w + j]);
+		//		printf("\n");
+		//	}
+		//	printf("\n");
+		//}
 
 	//	printf("\ncols:\n");
 	//	int w = kernel*kernel, h = outputs[0].h * outputs[0].w;
@@ -82,14 +82,14 @@ void ConvLayer::forward(){
 	//		//getchar();
 	//	}
 
-		printf("\noutput:\n");
-		for(int k=0;k<1;++k){
-			for(int i=0;i<1/*outputs[0].h*/;++i){
-				for(int j=0;j<outputs[0].w;++j)
-					printf("%f ",outputs[0].data[outputs[0].h * outputs[0].w *k + i*outputs[0].w + j]);
-			}
-		}
-		getchar();
+		//printf("\noutput:\n");
+		//for(int k=0;k<1;++k){
+		//	for(int i=0;i<1/*outputs[0].h*/;++i){
+		//		for(int j=0;j<outputs[0].w;++j)
+		//			printf("%f ",outputs[0].data[outputs[0].h * outputs[0].w *k + i*outputs[0].w + j]);
+		//	}
+		//}
+		//getchar();
 	//}
 
 

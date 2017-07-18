@@ -59,7 +59,7 @@ void PoolLayer::forward_avgpool(){
 	//		getchar();
 	//	}
 	//}
-	getchar();
+	//getchar();
 
 }
 void PoolLayer::forward_maxpool(){
@@ -88,13 +88,13 @@ void PoolLayer::forward_maxpool(){
 }
 void PoolLayer::forward(){
 	printf("forward: %s %s %s\n",type.c_str(), name.c_str(), method.c_str());
-	printf("input:\n");
-	for(int k=0;k<1;++k){
-		for(int i=0;i<2;++i){
-			for(int j=0;j<inputs[0].w;++j)
-				printf("%f ",inputs[0].data[inputs[0].h * inputs[0].w *k + i*inputs[0].w + j]);
-		}
-	}
+	//printf("input:\n");
+	//for(int k=0;k<1;++k){
+	//	for(int i=0;i<2;++i){
+	//		for(int j=0;j<inputs[0].w;++j)
+	//			printf("%f ",inputs[0].data[inputs[0].h * inputs[0].w *k + i*inputs[0].w + j]);
+	//	}
+	//}
 
 	if(method == "max"){
 		forward_maxpool();
@@ -104,14 +104,14 @@ void PoolLayer::forward(){
 	}
 
 	
-	printf("\noutput:\n");
-	for(int k=0;k<1;++k){
-		for(int i=0;i<2;++i){
-			for(int j=0;j<outputs[0].w;++j)
-				printf("%f ",outputs[0].data[outputs[0].h * outputs[0].w *k + i*outputs[0].w + j]);
-		}
-	}
-	getchar();
+	//printf("\noutput:\n");
+	//for(int k=0;k<1;++k){
+	//	for(int i=0;i<2;++i){
+	//		for(int j=0;j<outputs[0].w;++j)
+	//			printf("%f ",outputs[0].data[outputs[0].h * outputs[0].w *k + i*outputs[0].w + j]);
+	//	}
+	//}
+	//getchar();
 
 }
 void PoolLayer::backward(){

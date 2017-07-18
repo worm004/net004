@@ -113,7 +113,6 @@ void test_cifar10(){
 	Net004 net("cifar10");
 	Layers & ls = net.ls;
 	ls.add_data("data",1,3,32,32,"image");
-	ls.add_data("gt",1,1,1,1,"label");
 	ls.add_conv("conv0",{32,5,1,2},"");
 	ls.add_activity("relu0","relu");
 	ls.add_pool("maxpool0",{3,2,0},"max");
@@ -123,7 +122,6 @@ void test_cifar10(){
 	ls.add_pool("avgpool1",{3,2,0},"avg");
 	ls.add_fc("fc0",64,"");
 	ls.add_fc("fc1",10,"");
-	ls.add_loss("softmaxloss","softmax");
 	//ls.show();
 	Connections& cs = net.cs;
 	vector<string> t0({
@@ -136,18 +134,21 @@ void test_cifar10(){
 			"conv2",
 			"avgpool1",
 			"fc0",
-			"fc1",
-			"softmaxloss"});
-	vector<string> t1({"gt","softmaxloss"});
-	cs.add(t0).add(t1);
+			"fc1"});
+	cs.add(t0);
 	cs.update();
 	//cs.show();
 	net.check();
 	net.setup();
 	load_model(net);
 	load_img(net);
-	net.show();
+	//net.show();
+	
 	net.forward();
+	Layer * l = ls["fc1"];
+	for(int i=0;i<l->outputs[0].total();++i)
+		printf("%f ",l->outputs[0].data[i]);
+	printf("\n");
 }
 
 int main(){

@@ -13,6 +13,28 @@ FCLayer::~FCLayer(){
 }
 void FCLayer::forward(){
 	printf("forward: %s %s\n",type.c_str(), name.c_str());
+
+	//printf("input:\n");
+	//for(int i=0;i<std::min(100,inputs[0].total());++i)
+	//	printf("%f ",inputs[0].data[i]);
+		
+	float* weight_data = weight.data;
+	float* data = inputs[0].data;
+	float* odata = outputs[0].data;
+	int in = inputs[0].total();
+
+	for(int i=0;i<n;++i){
+		float val = 0.0f;
+		for(int j=0;j<in;++j){
+			val += data[j] * weight_data[j+i*in];
+		}
+		odata[i] = val + bias.data[i];
+	}
+
+	//printf("\noutput:\n");
+	//for(int i=0;i<std::min(100,outputs[0].total());++i)
+	//	printf("%f ",outputs[0].data[i]);
+	//getchar();
 }
 void FCLayer::backward(){
 }
