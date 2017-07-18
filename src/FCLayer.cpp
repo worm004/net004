@@ -12,6 +12,7 @@ FCLayer::FCLayer(
 FCLayer::~FCLayer(){
 }
 void FCLayer::forward(){
+	printf("forward: %s %s\n",type.c_str(), name.c_str());
 }
 void FCLayer::backward(){
 }

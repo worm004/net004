@@ -8,6 +8,7 @@ LossLayer::LossLayer(const std::string&name,
 LossLayer::~LossLayer(){
 }
 void LossLayer::forward(){
+	printf("forward: %s %s\n",type.c_str(), name.c_str());
 }
 void LossLayer::backward(){
 }

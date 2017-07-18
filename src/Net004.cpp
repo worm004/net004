@@ -56,3 +56,7 @@ void Net004::setup(){
 		}
 	}
 }
+void Net004::forward(){
+	for(const auto& i : cs.sorted_cs) 
+		ls[i]->forward();
+}

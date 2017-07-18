@@ -10,6 +10,7 @@ class Net004{
 	void check();
 	void show();
 	void setup();
+	void forward();
 
 	Connections cs;
 	Layers ls;

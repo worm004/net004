@@ -7,6 +7,7 @@
 #include "FCLayer.h"
 #include "LossLayer.h"
 #include "ConcatLayer.h"
+#include "ActivityLayer.h"
 
 void Layers::add(const std::string& name, Layer** p){
 	if(layers.find(name) != layers.end()){
@@ -73,6 +74,10 @@ void Layers::show(){
 }
 
 // different types of layers
+void Layers::add_activity(const std::string& name, const std::string& method){
+	Layer* l = new ActivityLayer(name,method);
+	add(name, &l);
+}
 void Layers::add_data(const std::string& name, int n, int c, int h, int w, const std::string& method){
 	Layer* l = new DataLayer(name, n,c,h,w, method);
 	add(name, &l);

@@ -11,10 +11,10 @@ class FCLayer: public Layer{
 	virtual void setup_shape();
 	virtual void setup_data();
 	virtual int parameter_number();
+	Blob weight, weight_dif, bias, bias_dif;
 	private:
 	int n = 0;
 	std::string activity;
-	Blob weight, weight_dif, bias, bias_dif;
 };
 
 #endif

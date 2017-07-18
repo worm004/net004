@@ -12,6 +12,7 @@ class Layers{
 	void add_fc(const std::string& name, int n, const std::string& activity);
 	void add_loss(const std::string& name, const std::string& method);
 	void add_concat(const std::string& name);
+	void add_activity(const std::string& name, const std::string& method);
 	void add(const std::string& name, Layer** p);
 	void show();
 	void show(const std::string& name);
