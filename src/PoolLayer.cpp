@@ -16,103 +16,84 @@ PoolLayer::PoolLayer(
 PoolLayer::~PoolLayer(){
 }
 void PoolLayer::forward_avgpool(){
-	//printf("forward: %s %s %s\n",type.c_str(), name.c_str(), method.c_str());
-	//printf("stride: %d, kernel: %d, padding: %d\n",stride, kernel, padding);
+	int h = inputs[0].h,
+	    w = inputs[0].w,
+	    bc = inputs[0].n * inputs[0].c,
+	    bottom = (h + padding * 2 - kernel)%kernel + h + padding - kernel,
+	    right = (w + padding * 2 - kernel)%kernel + w + padding - kernel;
+	float *idata = inputs[0].data,
+	      *odata = outputs[0].data;
 
-	//printf("input:\n");
-	//for(int k=0;k<1;++k){
-	//	for(int i=0;i<2;++i){
-	//		for(int j=0;j<inputs[0].w;++j)
-	//			printf("%f ",inputs[0].data[inputs[0].h * inputs[0].w *k + i*inputs[0].w + j]);
-	//		printf("\n");
-	//	}
-	//}
-
-	float *input_data = inputs[0].data;
-	float *output_data = outputs[0].data;
-	int h = inputs[0].h, w = inputs[0].w;
-	int ah = (h + padding * 2 - kernel)%kernel;
-	int aw = (w + padding * 2 - kernel)%kernel;
-	int ii=0;
-	for(int k=0;k<inputs[0].c;++k)
-	for(int i=-padding;i<=h+padding+ah-kernel;i+=stride)
-	for(int j=-padding;j<=w+padding+aw-kernel;j+=stride){
-		float val = 0.0;
+	for(int t = 0, cur = 0; t < bc; ++t, idata += w*h)
+	for(int i=-padding;i<=bottom;i+=stride)
+	for(int j=-padding;j<=right;j+=stride){
+		float val = 0.0f;
 		int n = 0;
 		for(int ik = 0;ik<kernel;++ik)
 		for(int jk = 0;jk<kernel;++jk){
 			int y = i + ik, x = j + jk;
 			if((y < 0) || (x < 0) || (y >= h) || (x >= w))
 				continue;
-			val += input_data[k*h*w + w*y + x];
+			val += idata[w*y + x];
 			++n;
 		}
-		output_data[ii++] = val/n;
+		if(n == 0) odata[cur++] = 0.0f;
+		else odata[cur++] = val/n;
 	}
-
-	//printf("result:\n");
-	//for(int k=0;k<outputs[0].c;++k){
-	//	for(int i=0;i<outputs[0].h;++i){
-	//		for(int j=0;j<outputs[0].w;++j)
-	//			printf("%f ",outputs[0].data[outputs[0].h * outputs[0].w *k + i*outputs[0].w + j]);
-	//		printf("\n");
-	//		getchar();
-	//	}
-	//}
-	//getchar();
-
 }
 void PoolLayer::forward_maxpool(){
-	//printf("stride: %d, kernel: %d, padding: %d\n",stride, kernel, padding);
-	float *input_data = inputs[0].data;
-	float *output_data = outputs[0].data;
-	int h = inputs[0].h, w = inputs[0].w;
-	int ah = (h + padding * 2 - kernel)%kernel;
-	int aw = (w + padding * 2 - kernel)%kernel;
-	int ii=0;
-	for(int k=0;k<inputs[0].c;++k)
-	for(int i=-padding;i<=h+padding+ah-kernel;i+=stride)
-	for(int j=-padding;j<=w+padding+aw-kernel;j+=stride){
+	int h = inputs[0].h,
+	    w = inputs[0].w,
+	    bc = inputs[0].n * inputs[0].c,
+	    bottom = (h + padding * 2 - kernel)%kernel + h + padding - kernel,
+	    right = (w + padding * 2 - kernel)%kernel + w + padding - kernel;
+	float *idata = inputs[0].data,
+	      *odata = outputs[0].data;
+
+	for(int t = 0, cur = 0; t < bc; ++t, idata += w*h)
+	for(int i=-padding;i<=bottom;i+=stride)
+	for(int j=-padding;j<=right;j+=stride){
 		float val = -1e10;
 		for(int ik = 0;ik<kernel;++ik)
 		for(int jk = 0;jk<kernel;++jk){
 			int y = i + ik, x = j + jk;
 			if((y < 0) || (x < 0) || (y >= h) || (x >= w))
 				continue;
-			val = std::max(val, input_data[k*h*w + w*y + x]);
-			//printf("%f\n",input_data[k*h*w + w*y + x]);
-			//getchar();
+			val = std::max(val, idata[w*y + x]);
 		}
-		output_data[ii++] = val;
+		odata[cur++] = val;
 	}
 }
 void PoolLayer::forward(){
 	printf("forward: %s %s %s\n",type.c_str(), name.c_str(), method.c_str());
-	//printf("input:\n");
-	//for(int k=0;k<1;++k){
-	//	for(int i=0;i<2;++i){
-	//		for(int j=0;j<inputs[0].w;++j)
-	//			printf("%f ",inputs[0].data[inputs[0].h * inputs[0].w *k + i*inputs[0].w + j]);
+	//for(int b=0;b<2;++b){
+	//	printf("\ninput %d:\n",b);
+	//	for(int k=0;k<1;++k){
+	//		for(int i=0;i<inputs[0].h;++i){
+	//			for(int j=0;j<inputs[0].w;++j)
+	//				printf("%f ",inputs[0].data[b*inputs[0].h*inputs[0].w*inputs[0].c + inputs[0].h * inputs[0].w *k + i*inputs[0].w + j]);
+	//			printf("\n");
+	//		}
+	//		printf("\n");
 	//	}
 	//}
 
-	if(method == "max"){
-		forward_maxpool();
-	}
-	if(method == "avg"){
-		forward_avgpool();
-	}
-
+	if(method == "max") forward_maxpool();
+	else if(method == "avg") forward_avgpool();
+	else printf("not implemented %s in activity layer\n",method.c_str());
 	
-	//printf("\noutput:\n");
-	//for(int k=0;k<1;++k){
-	//	for(int i=0;i<2;++i){
-	//		for(int j=0;j<outputs[0].w;++j)
-	//			printf("%f ",outputs[0].data[outputs[0].h * outputs[0].w *k + i*outputs[0].w + j]);
+
+	//for(int b=0;b<2;++b){
+	//	printf("\noutput %d:\n",b);
+	//	for(int k=0;k<1;++k){
+	//		for(int i=0;i<1/*outputs[0].h*/;++i){
+	//			for(int j=0;j<outputs[0].w;++j)
+	//				printf("%f ",outputs[0].data[b*outputs[0].h*outputs[0].w*outputs[0].c + outputs[0].h * outputs[0].w *k + i*outputs[0].w + j]);
+	//		}
 	//	}
+	//	printf("\n");
 	//}
 	//getchar();
-
 }
 void PoolLayer::backward(){
 }

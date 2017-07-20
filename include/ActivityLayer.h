@@ -12,6 +12,8 @@ class ActivityLayer: public Layer{
 	virtual void setup_data();
 	virtual void show() const;
 
+	void forward_relu();
+
 	private:
 	std::string method;
 };

@@ -9,28 +9,20 @@ ActivityLayer::ActivityLayer(
 }
 ActivityLayer::~ActivityLayer(){
 }
+
+void ActivityLayer::forward_relu(){
+	float * odata = outputs[0].data,
+		* idata = inputs[0].data;
+	int n = inputs[0].total();
+	for(int i=0;i<n;++i) if (idata[i] < 0.0f) odata[i] = 0.0f;
+}
+
 void ActivityLayer::forward(){
 	printf("forward: %s %s\n",type.c_str(), name.c_str());
-	//printf("input:\n");
-	//for(int k=0;k<1;++k){
-	//	for(int i=0;i<2;++i){
-	//		for(int j=0;j<inputs[0].w;++j)
-	//			printf("%f ",inputs[0].data[inputs[0].h * inputs[0].w *k + i*inputs[0].w + j]);
-	//	}
-	//}
 
-	int n = inputs[0].total();
-	for(int i=0;i<n;++i)
-		if (inputs[0].data[i] < 0) outputs[0].data[i] = 0;
+	if(method == "relu") forward_relu();
+	else printf("not implemented %s in activit layer\n",method.c_str());
 
-	//printf("\noutput:\n");
-	//for(int k=0;k<1;++k){
-	//	for(int i=0;i<2;++i){
-	//		for(int j=0;j<outputs[0].w;++j)
-	//			printf("%f ",outputs[0].data[outputs[0].h * outputs[0].w *k + i*outputs[0].w + j]);
-	//	}
-	//}
-	//getchar();
 }
 void ActivityLayer::backward(){
 }

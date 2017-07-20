@@ -47,7 +47,8 @@ void load_img(Net004& net){
 	DataLayer* l = (DataLayer*)ls["data"];
 	Mat img = imread("/Users/worm004/Projects/net004/caffe_example/westerdam-ship-size.jpg");
 	resize(img,img,Size(l->outputs[0].h, l->outputs[0].w));
-	l->load_image((uchar*)img.data);
+	l->add_image((uchar*)img.data,0);
+	l->add_image((uchar*)img.data,1);
 }
 void load_model(Net004& net){
 	string path = "/Users/worm004/Projects/net004/caffe_example/cifar10_quick_iter_5000.caffemodel.txt";
@@ -112,7 +113,7 @@ void load_model(Net004& net){
 void test_cifar10(){
 	Net004 net("cifar10");
 	Layers & ls = net.ls;
-	ls.add_data("data",1,3,32,32,"image");
+	ls.add_data("data",2,3,32,32,"image");
 	ls.add_conv("conv0",{32,5,1,2},"");
 	ls.add_activity("relu0","relu");
 	ls.add_pool("maxpool0",{3,2,0},"max");
@@ -146,9 +147,12 @@ void test_cifar10(){
 	
 	net.forward();
 	Layer * l = ls["fc1"];
-	for(int i=0;i<l->outputs[0].total();++i)
-		printf("%f ",l->outputs[0].data[i]);
-	printf("\n");
+	for(int i=0;i<l->outputs[0].n;++i){
+		for(int j=0;j<l->outputs[0].c*l->outputs[0].h*l->outputs[0].w;++j)
+			printf("%f ",l->outputs[0].data[j + i * l->outputs[0].c*l->outputs[0].h*l->outputs[0].w]);
+		
+		printf("\n");
+	}
 }
 
 int main(){

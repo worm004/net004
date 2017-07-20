@@ -34,15 +34,16 @@ void DataLayer::show() const{
 		type.c_str(), name.c_str(),
 		ob.n,ob.c,ob.h,ob.w);
 }
-void DataLayer::load_image(unsigned char* data){
+void DataLayer::add_image(unsigned char* data, int index){
 	if(outputs.size() == 0) {
 		printf("datalayer has not been setup (outputs.size() == 0)\n");
 		return ;
 	}
 	int h = outputs[0].h, w = outputs[0].w, c = outputs[0].c;
+	float *odata = outputs[0].data + index * w * h * c;
 	for(int i=0;i<h;++i)
 	for(int j=0;j<w;++j)
 	for(int k=0;k<c;++k)
-		outputs[0].data[(i*32+j) + 32*32*k] = data[(i*32+j)*c+(c-k-1)] - 127;
+		odata[(i*w+j) + w*h*k] = data[(i*w+j)*c+(c-k-1)] - 127;
 	
 }
