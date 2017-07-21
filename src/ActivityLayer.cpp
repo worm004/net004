@@ -14,7 +14,16 @@ void ActivityLayer::forward_relu(){
 	float * odata = outputs[0].data,
 		* idata = inputs[0].data;
 	int nchw = inputs[0].nchw();
-	for(int i=0;i<nchw;++i) if (idata[i] < 0.0f) odata[i] = 0.0f;
+
+	// do this when backward
+	//for(int i=0;i<nchw;++i) 
+	//	mask[i] = 1;
+
+	for(int i=0;i<nchw;++i)
+		if (idata[i] < 0.0f){
+			odata[i] = 0.0f;
+			mask[i] = 0;
+		}
 }
 
 void ActivityLayer::forward(){
@@ -44,6 +53,9 @@ void ActivityLayer::setup_data(){
 		printf("error: conv output blob number should be 1\n");
 		exit(0);
 	}
+	mask = new bool[outputs[0].nchw()];
+	memset(mask,0,sizeof(bool)*outputs[0].nchw());
+
 	outputs[0].set_data(inputs[0].data);
 
 }

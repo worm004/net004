@@ -151,7 +151,8 @@ void test_cifar10(){
 	//net.show();
 	
 	auto t1 = now();
-	net.forward();
+	for(int i=0;i<40;++i) 
+		net.forward();
 	auto t2 = now();
 	cout<<"forward: "<<cal_duration(t1,t2)<<" ms"<<endl;
 

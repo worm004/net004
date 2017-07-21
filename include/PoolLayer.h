@@ -21,5 +21,6 @@ class PoolLayer: public Layer{
 	private:
 	int stride = 0, padding = 0, kernel = 0;
 	std::string method;
+	int * mask = 0;
 };
 #endif

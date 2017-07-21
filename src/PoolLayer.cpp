@@ -44,23 +44,37 @@ void PoolLayer::forward_avgpool(){
 void PoolLayer::forward_maxpool(){
 	int h = inputs[0].h,
 	    w = inputs[0].w,
+	    hw = inputs[0].hw(),
 	    bc = inputs[0].n * inputs[0].c,
 	    bottom = (h + padding * 2 - kernel)%kernel + h + padding - kernel,
 	    right = (w + padding * 2 - kernel)%kernel + w + padding - kernel;
 	float *idata = inputs[0].data,
 	      *odata = outputs[0].data;
 
-	for(int t = 0, cur = 0; t < bc; ++t, idata += w*h)
+	//do this when backward
+	//int nchw = outputs[0].nchw();
+	//for(int i=0;i<nchw;++i) mask[i] = -1;
+
+	for(int t = 0, cur = 0; t < bc; ++t, idata += hw)
 	for(int i=-padding;i<=bottom;i+=stride)
 	for(int j=-padding;j<=right;j+=stride){
 		float val = -1e10;
-		for(int ik = 0;ik<kernel;++ik)
-		for(int jk = 0;jk<kernel;++jk){
-			int y = i + ik, x = j + jk;
-			if((y < 0) || (x < 0) || (y >= h) || (x >= w))
-				continue;
-			val = std::max(val, idata[w*y + x]);
+		int index = -1;
+		for(int ik = 0;ik<kernel;++ik){
+			int y = i + ik;
+			if((y < 0) || (y >= h)) continue;
+			float *idatay = idata + w*y;
+			for(int jk = 0;jk<kernel;++jk){
+				int x = j + jk;
+				if((x < 0) || (x >= w)) continue;
+				float v = idatay[x];
+				if(v > val){
+					val = v;
+					index = y*w + x;
+				}
+			}
 		}
+		mask[cur] = index;
 		odata[cur++] = val;
 	}
 }
@@ -110,6 +124,10 @@ void PoolLayer::setup_data(){
 		printf("error: pool output blob number should be 1\n");
 		exit(0);
 	}
+	int nchw = outputs[0].nchw();
+	mask = new int[nchw];
+	for(int i=0;i<nchw;++i) mask[i] = -1;
+
 	outputs[0].alloc();
 	output_difs[0].alloc();
 }

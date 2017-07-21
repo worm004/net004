@@ -16,6 +16,7 @@ class ActivityLayer: public Layer{
 
 	private:
 	std::string method;
+	bool *mask = 0;
 };
 
 #endif

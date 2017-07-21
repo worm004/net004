@@ -107,6 +107,7 @@ int main(){
 	// forward
 	//caffe::Caffe::set_mode(caffe::Caffe::CPU);
 	auto t1 = now();
+	for(int i=0;i<40;++i)
 		const caffe::Blob<float>* blob = net->Forward()[0];
 
 	auto t2 = now();

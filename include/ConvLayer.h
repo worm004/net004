@@ -22,10 +22,8 @@ class ConvLayer: public Layer{
 	Blob weight, weight_dif, bias, bias_dif;
 
 	float* col = 0;
-	float* col_bias = 0;
-	float* ones = 0;
-
 	int* table = 0;
+	bool *activity_mask = 0;
 	private:
 	int kernel = 0, filters = 0, padding = 0, stride = 0;
 	std::string activity;

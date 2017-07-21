@@ -37,8 +37,8 @@ void ConvLayer::forward(){
 	      * weight_data = weight.data, 
 	      * bias_data = bias.data;
 	for(int b = 0;b < batch_size; ++b){
-		im2col(idata, input.c, input.h, input.w, col_data, kernel, stride, padding);
-		//im2col2(idata, table, col_data, kernel * kernel * outputs[0].hw() * inputs[0].c);
+		//im2col(idata, input.c, input.h, input.w, col_data, kernel, stride, padding);
+		im2col2(idata, table, col_data, kernel * kernel * outputs[0].hw() * inputs[0].c);
 
 		cblas_sgemm(CblasRowMajor, 
 				CblasNoTrans, CblasTrans, 
@@ -60,58 +60,20 @@ void ConvLayer::forward(){
 	if(activity == "relu"){
 		int nchw = output.nchw();
 		float* odata = output.data;
-		for(int i=0;i<nchw;++i) if(odata[i] < 0) odata[i] = 0;
+
+		// do this in backward
+		//for(int i=0;i<nchw;++i) 
+		//	activity_mask[i] = 1;
+
+		for(int i=0;i<nchw;++i) 
+			if(odata[i] < 0.0f) {
+				odata[i] = 0.0f;
+			 	activity_mask[i] = 0;
+			 }
 	}
 
 	//show_inputs();
 	//show_outputs();
-	//getchar();
-
-
-	//if(name == "conv1"){
-
-	//	printf("filters: %d, kernel: %d, stride: %d, padding: %d, h: %d, w: %d\n", filters, kernel, stride, padding, outputs[0].h, outputs[0].w);
-	//	printf("bias:\n");
-	//	for(int i=0;i<bias.total();++i)
-	//		printf("%f ",bias.data[i]);
-
-	//	printf("\nweight:\n");
-	//	for(int i=0;i<1;++i){
-	//	for(int k=0;k<1/*b.c*/;++k)
-	//	for(int j=0;j<kernel*kernel;++j)
-	//		printf("%.2f ",weight.data[i*b.c*kernel*kernel + k*kernel*kernel+j]);
-	//	}
-
-
-
-	//	printf("\ncols:\n");
-	//	int w = kernel*kernel, h = outputs[0].h * outputs[0].w;
-	//	for(int i=0;i<1;++i){
-	//		for(int k=0;k<1/*b.c*/;++k){
-	//			for(int j=0;j<w;++j){
-	//				printf("%.2f ",col[i * w * b.c + k * w + j]);
-	//			}
-	//			printf("\n");
-	//		}
-	//		//getchar();
-	//	}
-
-	//}
-
-
-	//int w = kernel*kernel, h = outputs[0].h * outputs[0].w;
-	//printf("col: kernel: %d, stride: %d, padding: %d, w: %d, h: %d\n", 
-	//		kernel, stride, padding, w, h);
-
-	
-	//printf("result:\n");
-	//for(int k=0;k<outputs[0].c;++k){
-	//	for(int i=0;i<outputs[0].h;++i){
-	//		for(int j=0;j<outputs[0].w;++j)
-	//			printf("%f ",outputs[0].data[b.h * b.w *k + i*b.w + j]);
-	//		//printf("\n");
-	//	}
-	//}
 	//getchar();
 }
 
@@ -163,17 +125,17 @@ void ConvLayer::setup_data(){
 	}
 
 	// col
-	int ncol = kernel * kernel * outputs[0].hw() * inputs[0].c * outputs[0].n;
+	int ncol = kernel * kernel * outputs[0].hw() * inputs[0].c * inputs[0].n;
 	col = new float[ncol];
 	memset(col, 0, sizeof(float) * ncol);
 
-	//col_bias = new float[ncol];
-	//memset(col_bia, 0, sizeof(float) * ncol);
-	//ones = new float[outputs[0].];
+	table = new int[ncol];
+	memset(table, 0, sizeof(int) * ncol / inputs[0].n);
+	generate_table(inputs[0].c, inputs[0].h, inputs[0].w, table, kernel, stride, padding);
 
-	//table = new int[ncol];
-	//memset(table, 0, sizeof(int) * kernel * kernel * outputs[0].hw() * inputs[0].c);
-	//generate_table(inputs[0].c, inputs[0].h, inputs[0].w, table, kernel, stride, padding);
+	// activity
+	activity_mask = new bool[outputs[0].nchw()];
+	memset(activity_mask, 0, sizeof(bool) * outputs[0].nchw());
 
 	// weight and bias
 	weight.alloc();
