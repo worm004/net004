@@ -13,12 +13,12 @@ ActivityLayer::~ActivityLayer(){
 void ActivityLayer::forward_relu(){
 	float * odata = outputs[0].data,
 		* idata = inputs[0].data;
-	int n = inputs[0].total();
-	for(int i=0;i<n;++i) if (idata[i] < 0.0f) odata[i] = 0.0f;
+	int nchw = inputs[0].nchw();
+	for(int i=0;i<nchw;++i) if (idata[i] < 0.0f) odata[i] = 0.0f;
 }
 
 void ActivityLayer::forward(){
-	printf("forward: %s %s\n",type.c_str(), name.c_str());
+	//printf("forward: %s %s\n",type.c_str(), name.c_str());
 
 	if(method == "relu") forward_relu();
 	else printf("not implemented %s in activit layer\n",method.c_str());

@@ -1,6 +1,7 @@
 #include "stdlib.h"
 #include "ConvLayer.h"
 #include "im2col.h"
+#include "Accelerate/Accelerate.h"
 
 ConvLayer::ConvLayer(
 	const std::string&name, 
@@ -21,60 +22,51 @@ ConvLayer::~ConvLayer(){
 }
 
 void ConvLayer::forward(){
-	printf("forward: %s %s\n",type.c_str(), name.c_str());
-	int batch_size = inputs[0].n;
-	int istep = inputs[0].c * inputs[0].h * inputs[0].w;
-	int ostep = outputs[0].c * outputs[0].h * outputs[0].w;
-	int ncol = kernel * kernel * outputs[0].h * outputs[0].w * inputs[0].c;
-	float * idata = inputs[0].data, 
-	      * odata = outputs[0].data,
-	      * col_data = col,
-	      *weight_data = weight.data, 
-	      *bias_data = bias.data;
-	int w = kernel * kernel * inputs[0].c, 
-	    nloc = outputs[0].h * outputs[0].w;
-	for(int b = 0;b < batch_size; ++b){
-		im2col(idata, inputs[0].c, inputs[0].h, inputs[0].w, col_data, kernel, stride, padding);
+	//printf("forward: %s %s\n",type.c_str(), name.c_str());
+	Blob &input = inputs[0], 
+	     &output = outputs[0];
 
-		for(int i=0;i<filters;++i)
-		for(int j=0;j<nloc;++j){
-			float val = 0.0f;
-			for(int k=0;k<w;++k)
-				val += weight_data[i * w + k] * col_data[j * w + k];
-			odata[i * nloc + j] = val + bias_data[i];
-		}
+	int batch_size = input.n,
+	    istep = input.chw(), 
+	    ncol = kernel * kernel * output.hw() * input.c,
+	    w = kernel * kernel * input.c, 
+	    nloc = output.hw();
+	float * idata = input.data, 
+	      * odata = output.data,
+	      * col_data = col,
+	      * weight_data = weight.data, 
+	      * bias_data = bias.data;
+	for(int b = 0;b < batch_size; ++b){
+		im2col(idata, input.c, input.h, input.w, col_data, kernel, stride, padding);
+		//im2col2(idata, table, col_data, kernel * kernel * outputs[0].hw() * inputs[0].c);
+
+		cblas_sgemm(CblasRowMajor, 
+				CblasNoTrans, CblasTrans, 
+				filters, nloc, w,
+				1.0f,
+				weight_data, w,
+				col_data, w,
+				0.0,
+				odata, nloc);
+
+		for(int i = 0; i < filters; ++i)
+		for(int j = 0; j < nloc; ++j)
+			odata[i*nloc +j] += bias_data[i];
 
 		idata += istep;
-		odata += ostep;
+		odata += output.chw();
 		col_data += ncol;
 	}
-
-	//Blob &b = inputs[0];
-	//float * data = b.data;
-	//im2col(data, b.c, b.h, b.w, col, kernel, stride, padding);
-
-	//float *weight_data = weight.data,
-	//      *bias_data = bias.data,
-	//      *out_data = outputs[0].data;
-
-	//int w = kernel * kernel * b.c;
-	//int w1 = outputs[0].h * outputs[0].w;
-
-	//for(int i=0;i<filters;++i)
-	//for(int j=0;j<w1;++j){
-	//	float val = 0.0f;
-	//	for(int k=0;k<w;++k)
-	//		val += weight_data[i * w + k] * col[j * w + k];
-	//	out_data[i * w1 + j] = val + bias_data[i];
-	//}
-
 	if(activity == "relu"){
-		int total = outputs[0].total();
-		float* odata = outputs[0].data;
-		for(int i=0;i<total;++i) 
-			if(odata[i] < 0 ) 
-				odata[i] = 0;
+		int nchw = output.nchw();
+		float* odata = output.data;
+		for(int i=0;i<nchw;++i) if(odata[i] < 0) odata[i] = 0;
 	}
+
+	//show_inputs();
+	//show_outputs();
+	//getchar();
+
 
 	//if(name == "conv1"){
 
@@ -91,17 +83,6 @@ void ConvLayer::forward(){
 	//	}
 
 
-		//for(int b=0;b<2;++b){
-		//	printf("\ninput %d:\n",b);
-		//	for(int k=0;k<1;++k){
-		//		for(int i=0;i<inputs[0].h;++i){
-		//			for(int j=0;j<inputs[0].w;++j)
-		//				printf("%f ",inputs[0].data[b*inputs[0].h*inputs[0].w*inputs[0].c + inputs[0].h * inputs[0].w *k + i*inputs[0].w + j]);
-		//			printf("\n");
-		//		}
-		//		printf("\n");
-		//	}
-		//}
 
 	//	printf("\ncols:\n");
 	//	int w = kernel*kernel, h = outputs[0].h * outputs[0].w;
@@ -115,17 +96,6 @@ void ConvLayer::forward(){
 	//		//getchar();
 	//	}
 
-		//for(int b=0;b<2;++b){
-		//	printf("\noutput %d:\n",b);
-		//	for(int k=0;k<1;++k){
-		//		for(int i=0;i<1/*outputs[0].h*/;++i){
-		//			for(int j=0;j<outputs[0].w;++j)
-		//				printf("%f ",outputs[0].data[b*outputs[0].h*outputs[0].w*outputs[0].c + outputs[0].h * outputs[0].w *k + i*outputs[0].w + j]);
-		//		}
-		//	}
-		//	printf("\n");
-		//}
-		//getchar();
 	//}
 
 
@@ -161,11 +131,11 @@ void ConvLayer::show()const {
 	//printf("\tinput dif:");
 	//input_difs[0].show();
 
-	if(bias.total() != 0){
+	if(bias.nchw() != 0){
 		printf("\tbias: ");
 		bias.show();
 	}
-	if(weight.total() != 0){
+	if(weight.nchw() != 0){
 		//printf("\tbias dif: ");
 		//bias_dif.show();
 		printf("\tweight: ");
@@ -183,7 +153,7 @@ void ConvLayer::show()const {
 }
 
 int ConvLayer::parameter_number(){
-	return weight.total() + bias.total();
+	return weight.nchw() + bias.nchw();
 }
 
 void ConvLayer::setup_data(){
@@ -191,11 +161,20 @@ void ConvLayer::setup_data(){
 		printf("error: conv output blob number should be 1\n");
 		exit(0);
 	}
+
 	// col
-	int ncol = kernel * kernel * outputs[0].h * outputs[0].w * inputs[0].c * inputs[0].n;
+	int ncol = kernel * kernel * outputs[0].hw() * inputs[0].c * outputs[0].n;
 	col = new float[ncol];
 	memset(col, 0, sizeof(float) * ncol);
-	
+
+	//col_bias = new float[ncol];
+	//memset(col_bia, 0, sizeof(float) * ncol);
+	//ones = new float[outputs[0].];
+
+	//table = new int[ncol];
+	//memset(table, 0, sizeof(int) * kernel * kernel * outputs[0].hw() * inputs[0].c);
+	//generate_table(inputs[0].c, inputs[0].h, inputs[0].w, table, kernel, stride, padding);
+
 	// weight and bias
 	weight.alloc();
 	weight_dif.alloc();

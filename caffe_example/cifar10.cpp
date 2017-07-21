@@ -1,8 +1,12 @@
 #include "stdio.h"
 #include <string>
 #include <vector>
+#include <chrono>
 #include "caffe/caffe.hpp"
 #include "opencv2/opencv.hpp"
+
+#define now() (std::chrono::high_resolution_clock::now())
+#define cal_duration(t1,t2) (std::chrono::duration_cast<std::chrono::milliseconds>((t2) - (t1)).count())
 
 using namespace std;
 using namespace cv;
@@ -80,7 +84,7 @@ int main(){
 	net = make_shared<caffe::Net<float>> (net_path, caffe::TEST);
 	net->CopyTrainedLayersFrom(model_path);
 	//show_model(net);
-	net->input_blobs()[0]->Reshape(1, 3, 32, 32);
+	net->input_blobs()[0]->Reshape(20, 3, 32, 32);
 	net->Reshape();
 	float * input = net->input_blobs()[0]->mutable_cpu_data();
 
@@ -102,11 +106,15 @@ int main(){
 	
 	// forward
 	//caffe::Caffe::set_mode(caffe::Caffe::CPU);
-	const caffe::Blob<float>* blob = net->Forward()[0];
+	auto t1 = now();
+		const caffe::Blob<float>* blob = net->Forward()[0];
+
+	auto t2 = now();
+	cout<<"forward: "<<cal_duration(t1,t2)<<" ms"<<endl;
 	//show_data_flow(net);
-	const float* output =  blob->cpu_data();
-	for(int i=0;i<10;++i)
-		printf("%s %.2f\n",classes[i].c_str(),output[i]);
+	//const float* output =  blob->cpu_data();
+	//for(int i=0;i<10;++i)
+	//	printf("%s %.2f\n",classes[i].c_str(),output[i]);
 
 	return 0;
 }

@@ -1,8 +1,14 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "Blob.h"
-int Blob::total() const{
+int Blob::nchw() const{
 	return n * c * h * w;
+}
+int Blob::chw() const{
+	return c * h * w;
+}
+int Blob::hw() const{
+	return h * w;
 }
 void Blob::set_shape(const Blob& b){
 	set_shape(b.n, b.c, b.h, b.w);
@@ -27,7 +33,7 @@ void Blob::set_data(float * data){
 	owner = false;
 }
 void Blob::alloc(){
-	if(total() <= 0){
+	if(nchw() <= 0){
 		printf("cannot alloc new blob: %d %d %d %d\n",n,c,h,w);
 		exit(0);
 	}
@@ -35,7 +41,7 @@ void Blob::alloc(){
 		delete [] data;
 		data = 0;
 	}
-	data = new float[total()];
+	data = new float[nchw()];
 	owner = true;
 }
 void Blob::show() const{

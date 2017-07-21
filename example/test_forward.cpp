@@ -5,11 +5,16 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <chrono>
 #include "Net004.h"
 #include "ConvLayer.h"
 #include "DataLayer.h"
 #include "FCLayer.h"
 #include "opencv2/opencv.hpp"
+
+#define now() (std::chrono::high_resolution_clock::now())
+#define cal_duration(t1,t2) (std::chrono::duration_cast<std::chrono::milliseconds>((t2) - (t1)).count())
+
 using namespace cv;
 using namespace std;
 void load_txt_model(const string& path, vector< vector<vector<float> > > & model, vector<string> & names){
@@ -67,7 +72,7 @@ void load_model(Net004& net){
 	ConvLayer * conv0 = (ConvLayer*)ls["conv0"];
 	float * weight_data = conv0->weight.data;
 	float * bias_data = conv0->bias.data;
-	cout<<"conv0: "<<model[0][0].size()<<" : "<<conv0->weight.total()<<" "<<model[0][1].size()<<" : "<<conv0->bias.total()<<endl;
+	cout<<"conv0: "<<model[0][0].size()<<" : "<<conv0->weight.nchw()<<" "<<model[0][1].size()<<" : "<<conv0->bias.nchw()<<endl;
 	for(int i=0;i<model[0][0].size();++i)
 		weight_data[i] = model[0][0][i];
 	for(int i=0;i<model[0][1].size();++i)
@@ -76,7 +81,7 @@ void load_model(Net004& net){
 	ConvLayer * conv1 = (ConvLayer*)ls["conv1"];
 	float * weight1_data = conv1->weight.data;
 	float * bias1_data = conv1->bias.data;
-	cout<<"conv1: "<<model[1][0].size()<<" : "<<conv1->weight.total()<<" "<<model[1][1].size()<<" : "<<conv1->bias.total()<<endl;
+	cout<<"conv1: "<<model[1][0].size()<<" : "<<conv1->weight.nchw()<<" "<<model[1][1].size()<<" : "<<conv1->bias.nchw()<<endl;
 	for(int i=0;i<model[1][0].size();++i)
 		weight1_data[i] = model[1][0][i];
 	for(int i=0;i<model[1][1].size();++i)
@@ -85,7 +90,7 @@ void load_model(Net004& net){
 	ConvLayer * conv2 = (ConvLayer*)ls["conv2"];
 	float * weight2_data = conv2->weight.data;
 	float * bias2_data = conv2->bias.data;
-	cout<<"conv2: "<<model[2][0].size()<<" : "<<conv2->weight.total()<<" "<<model[2][1].size()<<" : "<<conv2->bias.total()<<endl;
+	cout<<"conv2: "<<model[2][0].size()<<" : "<<conv2->weight.nchw()<<" "<<model[2][1].size()<<" : "<<conv2->bias.nchw()<<endl;
 	for(int i=0;i<model[2][0].size();++i)
 		weight2_data[i] = model[2][0][i];
 	for(int i=0;i<model[2][1].size();++i)
@@ -94,7 +99,7 @@ void load_model(Net004& net){
 	FCLayer * fc0 = (FCLayer*)ls["fc0"];
 	float * weight3_data = fc0->weight.data;
 	float * bias3_data = fc0->bias.data;
-	cout<<"fc0: "<<model[3][0].size()<<" : "<<fc0->weight.total()<<" "<<model[3][1].size()<<" : "<<fc0->bias.total()<<endl;
+	cout<<"fc0: "<<model[3][0].size()<<" : "<<fc0->weight.nchw()<<" "<<model[3][1].size()<<" : "<<fc0->bias.nchw()<<endl;
 	for(int i=0;i<model[3][0].size();++i)
 		weight3_data[i] = model[3][0][i];
 	for(int i=0;i<model[3][1].size();++i)
@@ -103,7 +108,7 @@ void load_model(Net004& net){
 	FCLayer * fc1 = (FCLayer*)ls["fc1"];
 	float * weight4_data = fc1->weight.data;
 	float * bias4_data = fc1->bias.data;
-	cout<<"fc1: "<<model[4][0].size()<<" : "<<fc1->weight.total()<<" "<<model[4][1].size()<<" : "<<fc1->bias.total()<<endl;
+	cout<<"fc1: "<<model[4][0].size()<<" : "<<fc1->weight.nchw()<<" "<<model[4][1].size()<<" : "<<fc1->bias.nchw()<<endl;
 	for(int i=0;i<model[4][0].size();++i)
 		weight4_data[i] = model[4][0][i];
 	for(int i=0;i<model[4][1].size();++i)
@@ -113,7 +118,7 @@ void load_model(Net004& net){
 void test_cifar10(){
 	Net004 net("cifar10");
 	Layers & ls = net.ls;
-	ls.add_data("data",2,3,32,32,"image");
+	ls.add_data("data",20,3,32,32,"image");
 	ls.add_conv("conv0",{32,5,1,2},"");
 	ls.add_activity("relu0","relu");
 	ls.add_pool("maxpool0",{3,2,0},"max");
@@ -145,7 +150,11 @@ void test_cifar10(){
 	load_img(net);
 	//net.show();
 	
+	auto t1 = now();
 	net.forward();
+	auto t2 = now();
+	cout<<"forward: "<<cal_duration(t1,t2)<<" ms"<<endl;
+
 	Layer * l = ls["fc1"];
 	for(int i=0;i<l->outputs[0].n;++i){
 		for(int j=0;j<l->outputs[0].c*l->outputs[0].h*l->outputs[0].w;++j)

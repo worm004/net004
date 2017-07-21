@@ -19,6 +19,9 @@ class Layer{
 	int input_parameter_number();
 	int output_parameter_number();
 
+	void show_inputs();
+	void show_outputs();
+
 	void setup();
 	static int i2o_floor(int w, int kernel, int stride, int padding){
 		return (w + 2 * padding - kernel) / stride + 1;

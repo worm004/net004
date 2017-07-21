@@ -14,8 +14,10 @@ class Layers{
 	void add_concat(const std::string& name);
 	void add_activity(const std::string& name, const std::string& method);
 	void add(const std::string& name, Layer** p);
+
 	void show();
 	void show(const std::string& name);
+	
 	void clear();
 	Layer* operator [] (const std::string& name);
 	bool exist(const std::string& name);
