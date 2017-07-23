@@ -17,6 +17,7 @@ DataLayer::DataLayer(
 	output_difs.resize(1);
 	outputs[0].set_shape(n,c,h,w);
 	outputs[0].alloc();
+	outputs[0].type = method;
 }
 DataLayer::~DataLayer(){
 }
@@ -46,4 +47,12 @@ void DataLayer::add_image(unsigned char* data, int index){
 	for(int k=0;k<c;++k)
 		odata[(i*w+j) + w*h*k] = data[(i*w+j)*c+(c-k-1)] - 127;
 	
+}
+void DataLayer::add_label(int label, int index){
+	if(outputs.size() == 0) {
+		printf("datalayer has not been setup (outputs.size() == 0)\n");
+		return ;
+	}
+	float *ldata = outputs[0].data + index;
+	ldata[0] = label;
 }

@@ -24,6 +24,8 @@ void Layer::connect2(Layer& l){
 	l.inputs.push_back(Blob());
 	l.inputs.back().set_shape(outputs[0]);
 	l.inputs.back().set_data(outputs[0].data);
+	l.inputs.back().type = outputs[0].type;
+
 	l.input_difs.push_back(Blob());
 	l.input_difs.back().set_shape(outputs[0]);
 	l.input_difs.back().set_data(output_difs[0].data);

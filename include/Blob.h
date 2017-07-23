@@ -1,5 +1,6 @@
 #ifndef BLOB_H
 #define BLOB_H
+#include <string>
 struct Blob{
 	public:
 	~Blob();
@@ -16,6 +17,7 @@ struct Blob{
 	public:
 	float *data = 0;
 	int n = 0, c = 0, w = 0, h = 0;
+	std::string type;
 	
 	private:
 	bool owner = true;

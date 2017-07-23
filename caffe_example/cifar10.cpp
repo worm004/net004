@@ -81,12 +81,15 @@ int main(){
 	// load caffe
   	std::shared_ptr<caffe::Net<float> > net;
 	caffe::Caffe::set_mode(caffe::Caffe::CPU);
-	net = make_shared<caffe::Net<float>> (net_path, caffe::TEST);
+	net = make_shared<caffe::Net<float>> (net_path, caffe::TRAIN);
 	net->CopyTrainedLayersFrom(model_path);
 	//show_model(net);
-	net->input_blobs()[0]->Reshape(20, 3, 32, 32);
+	net->input_blobs()[0]->Reshape(1, 3, 32, 32);
+	net->input_blobs()[1]->Reshape(1, 1, 1, 1);
 	net->Reshape();
 	float * input = net->input_blobs()[0]->mutable_cpu_data();
+	float * input2 = net->input_blobs()[1]->mutable_cpu_data();
+	input2[0] = 7;
 
 	// load img
 	Mat img = imread(img_path);
@@ -107,12 +110,11 @@ int main(){
 	// forward
 	//caffe::Caffe::set_mode(caffe::Caffe::CPU);
 	auto t1 = now();
-	for(int i=0;i<40;++i)
-		const caffe::Blob<float>* blob = net->Forward()[0];
+	const caffe::Blob<float>* blob = net->Forward()[0];
 
 	auto t2 = now();
 	cout<<"forward: "<<cal_duration(t1,t2)<<" ms"<<endl;
-	//show_data_flow(net);
+	show_data_flow(net);
 	//const float* output =  blob->cpu_data();
 	//for(int i=0;i<10;++i)
 	//	printf("%s %.2f\n",classes[i].c_str(),output[i]);

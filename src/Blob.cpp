@@ -45,5 +45,5 @@ void Blob::alloc(){
 	owner = true;
 }
 void Blob::show() const{
-	printf("n = %d, c = %d, h = %d, w = %d\n", n, c, h, w);
+	printf("n = %d, c = %d, h = %d, w = %d, type: %s\n", n, c, h, w, type.c_str());
 }

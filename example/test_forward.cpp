@@ -10,6 +10,7 @@
 #include "ConvLayer.h"
 #include "DataLayer.h"
 #include "FCLayer.h"
+#include "LossLayer.h"
 #include "opencv2/opencv.hpp"
 
 #define now() (std::chrono::high_resolution_clock::now())
@@ -53,7 +54,10 @@ void load_img(Net004& net){
 	Mat img = imread("/Users/worm004/Projects/net004/caffe_example/westerdam-ship-size.jpg");
 	resize(img,img,Size(l->outputs[0].h, l->outputs[0].w));
 	l->add_image((uchar*)img.data,0);
-	l->add_image((uchar*)img.data,1);
+
+	DataLayer* l2 = (DataLayer*)ls["label"];
+	l2->add_label(8,0);
+	//l->add_image((uchar*)img.data,1);
 }
 void load_model(Net004& net){
 	string path = "/Users/worm004/Projects/net004/caffe_example/cifar10_quick_iter_5000.caffemodel.txt";
@@ -118,7 +122,9 @@ void load_model(Net004& net){
 void test_cifar10(){
 	Net004 net("cifar10");
 	Layers & ls = net.ls;
-	ls.add_data("data",20,3,32,32,"image");
+	int batch_size = 1;
+	ls.add_data("data",batch_size,3,32,32,"image");
+	ls.add_data("label",batch_size,1,1,1,"label");
 	ls.add_conv("conv0",{32,5,1,2},"");
 	ls.add_activity("relu0","relu");
 	ls.add_pool("maxpool0",{3,2,0},"max");
@@ -128,6 +134,7 @@ void test_cifar10(){
 	ls.add_pool("avgpool1",{3,2,0},"avg");
 	ls.add_fc("fc0",64,"");
 	ls.add_fc("fc1",10,"");
+	ls.add_loss("loss","softmax");
 	//ls.show();
 	Connections& cs = net.cs;
 	vector<string> t0({
@@ -140,8 +147,10 @@ void test_cifar10(){
 			"conv2",
 			"avgpool1",
 			"fc0",
-			"fc1"});
-	cs.add(t0);
+			"fc1",
+			"loss"});
+	vector<string> tlabel({"label","loss"});
+	cs.add(tlabel).add(t0);
 	cs.update();
 	//cs.show();
 	net.check();
@@ -151,12 +160,11 @@ void test_cifar10(){
 	//net.show();
 	
 	auto t1 = now();
-	for(int i=0;i<40;++i) 
-		net.forward();
+	net.forward();
 	auto t2 = now();
 	cout<<"forward: "<<cal_duration(t1,t2)<<" ms"<<endl;
 
-	Layer * l = ls["fc1"];
+	Layer * l = ls["loss"];
 	for(int i=0;i<l->outputs[0].n;++i){
 		for(int j=0;j<l->outputs[0].c*l->outputs[0].h*l->outputs[0].w;++j)
 			printf("%f ",l->outputs[0].data[j + i * l->outputs[0].c*l->outputs[0].h*l->outputs[0].w]);

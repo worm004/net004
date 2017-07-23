@@ -11,10 +11,13 @@ class LossLayer: public Layer{
 	virtual void setup_shape();
 	virtual void setup_data();
 	private:
+	void forward_softmax();
+	private:
 	std::string method;
 
+	
+	Blob softmaxblob, maxs, sums;
 	Blob predict, gt;
-	float loss = 0.0f;
 };
 
 #endif
