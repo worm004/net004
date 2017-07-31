@@ -78,6 +78,7 @@ void ConvLayer::forward(){
 }
 
 void ConvLayer::backward(){
+	printf("backward: %s %s\n",type.c_str(), name.c_str());
 }
 
 void ConvLayer::show()const {

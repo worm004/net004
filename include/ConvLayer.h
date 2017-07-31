@@ -18,6 +18,11 @@ class ConvLayer: public Layer{
 	virtual void setup_data();
 	virtual void show() const;
 	virtual int parameter_number();
+	int get_kernel(){return kernel;}
+	int get_filters(){return filters;}
+	int get_padding(){return padding;}
+	int get_stride(){return stride;}
+	std::string& get_activity(){return activity;}
 
 	Blob weight, weight_dif, bias, bias_dif;
 

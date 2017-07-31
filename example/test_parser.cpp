@@ -1,3 +1,5 @@
+#include "opencv2/opencv.hpp"
+#include "Parser.h"
 #include "math.h"
 #include "stdlib.h"
 #include "stdio.h"
@@ -11,13 +13,23 @@
 #include "DataLayer.h"
 #include "FCLayer.h"
 #include "LossLayer.h"
-#include "opencv2/opencv.hpp"
 
 #define now() (std::chrono::high_resolution_clock::now())
 #define cal_duration(t1,t2) (std::chrono::duration_cast<std::chrono::milliseconds>((t2) - (t1)).count())
 
-using namespace cv;
 using namespace std;
+using namespace cv;
+void load_img(Net004& net){
+	Layers & ls = net.ls;
+	DataLayer* l = (DataLayer*)ls["data"];
+	Mat img = imread("/Users/worm004/Projects/net004/caffe_example/westerdam-ship-size.jpg");
+	resize(img,img,Size(l->outputs[0].h, l->outputs[0].w));
+	l->add_image((uchar*)img.data,0);
+
+	DataLayer* l2 = (DataLayer*)ls["label"];
+	l2->add_label(8,0);
+	//l->add_image((uchar*)img.data,1);
+}
 void load_txt_model(const string& path, vector< vector<vector<float> > > & model, vector<string> & names){
 	ifstream file(path);
 	while(1){
@@ -47,17 +59,6 @@ void load_txt_model(const string& path, vector< vector<vector<float> > > & model
 		}
 		//getchar();
 	}
-}
-void load_img(Net004& net){
-	Layers & ls = net.ls;
-	DataLayer* l = (DataLayer*)ls["data"];
-	Mat img = imread("/Users/worm004/Projects/net004/caffe_example/westerdam-ship-size.jpg");
-	resize(img,img,Size(l->outputs[0].h, l->outputs[0].w));
-	l->add_image((uchar*)img.data,0);
-
-	DataLayer* l2 = (DataLayer*)ls["label"];
-	l2->add_label(8,0);
-	//l->add_image((uchar*)img.data,1);
 }
 void load_model(Net004& net){
 	string path = "/Users/worm004/Projects/net004/caffe_example/cifar10_quick_iter_5000.caffemodel.txt";
@@ -117,9 +118,8 @@ void load_model(Net004& net){
 		weight4_data[i] = model[4][0][i];
 	for(int i=0;i<model[4][1].size();++i)
 		bias4_data[i] = model[4][1][i];
-
 }
-void test_cifar10(){
+void test_txt2model_cifar10(){
 	Net004 net("cifar10");
 	Layers & ls = net.ls;
 	int batch_size = 1;
@@ -135,7 +135,6 @@ void test_cifar10(){
 	ls.add_fc("fc0",64,"");
 	ls.add_fc("fc1",10,"");
 	ls.add_loss("loss","softmax");
-	//ls.show();
 	Connections& cs = net.cs;
 	vector<string> t0({
 			"data",
@@ -152,32 +151,59 @@ void test_cifar10(){
 	vector<string> tlabel({"label","loss"});
 	cs.add(tlabel).add(t0);
 	cs.update();
-	//cs.show();
 	net.check();
 	net.setup();
 	load_model(net);
-	load_img(net);
-	net.show();
-	
-	auto t1 = now();
-	net.forward();
-	auto t2 = now();
-	cout<<"forward: "<<cal_duration(t1,t2)<<" ms"<<endl;
 
+	//ls.show();
+	//cs.show();
+	//net.show();
+	//Parser parser;
+	//parser.write(&net, "../models/cifar.net004.net", "../models/cifar.net004.data");
+	
+	load_img(net);
+	net.forward();
 	Layer * l = ls["loss"];
+
+	//for(int i=0;i<l->inputs[0].n;++i){
+	//	for(int j=0;j<l->inputs[0].chw();++j)
+	//		printf("%f ",l->inputs[0].data[j + i * l->inputs[0].chw()]);
+	//	printf("\n");
+	//}
 	for(int i=0;i<l->outputs[0].n;++i){
 		for(int j=0;j<l->outputs[0].chw();++j)
 			printf("%f ",l->outputs[0].data[j + i * l->outputs[0].chw()]);
 		printf("\n");
 	}
-
-	//auto t3 = now();
-	//net.backward();
-	//auto t4 = now();
-	//cout<<"backward: "<<cal_duration(t3,t4)<<" ms"<<endl;
 }
+void test_model_cifar10(){
+	Parser parser;
+	Net004 net("cifar10");
+	parser.read("../models/cifar.net004.net", "../models/cifar.net004.data", &net);
 
+	Layers & ls = net.ls;
+	Connections& cs = net.cs;
+	//ls.show();
+	//cs.show();
+	//net.show();
+
+	load_img(net);
+	net.forward();
+
+	Layer * l = ls["loss"];
+	//for(int i=0;i<l->inputs[0].n;++i){
+	//	for(int j=0;j<l->inputs[0].chw();++j)
+	//		printf("%f ",l->inputs[0].data[j + i * l->inputs[0].chw()]);
+	//	printf("\n");
+	//}
+	for(int i=0;i<l->outputs[0].n;++i){
+		for(int j=0;j<l->outputs[0].chw();++j)
+			printf("%f ",l->outputs[0].data[j + i * l->outputs[0].chw()]);
+		printf("\n");
+	}
+}
 int main(){
-	test_cifar10();
+	//test_txt2model_cifar10();
+	test_model_cifar10();
 	return 0;
 }

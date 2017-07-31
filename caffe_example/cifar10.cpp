@@ -20,6 +20,21 @@ void show_param(caffe::Blob<float> *b){
 	for(int w=0;w<width;++w)
 		printf(" %f",data[w + h*width + height*width*c + height*width*channel*n]);
 }
+void show_blob_diff(caffe::Blob<float> *b){
+	const float *data = b->cpu_diff();
+	int num = b->num(), channel = b->channels(), height = b->height(), width = b->width();
+	for(int n=0;n<num;++n){
+		//printf("batch %d/%d\n",n+1,num);
+		for(int c=0;c<channel;++c){
+			//printf("channel %d/%d\n",c+1,channel);
+			for(int h=0;h<height;++h){
+				for(int w=0;w<width;++w){
+					printf(" %f",data[(h*width+w) + height*width*c + height*width*channel*n]);
+				}
+			}
+		}
+	}
+}
 void show_blob(caffe::Blob<float> *b){
 	const float *data = b->cpu_data();
 	int num = b->num(), channel = b->channels(), height = b->height(), width = b->width();
@@ -32,6 +47,41 @@ void show_blob(caffe::Blob<float> *b){
 					printf(" %f",data[(h*width+w) + height*width*c + height*width*channel*n]);
 				}
 			}
+		}
+	}
+
+}
+void show_data_flow_backward(const std::shared_ptr<caffe::Net<float> >& net){
+	const vector<boost::shared_ptr<caffe::Layer<float> >> layers = net->layers();
+	const vector<vector<caffe::Blob<float> *> >& bottoms = net->bottom_vecs();
+	const vector<vector<caffe::Blob<float> *> >& tops = net->top_vecs();
+	for(int i=layers.size()-1;i>0;--i){
+		printf("%s %lu %lu\n",layers[i]->type(), tops[i].size(), bottoms[i].size());
+		for(int j=0;j<tops[i].size();++j){
+			const float *data = tops[i][j]->cpu_data();
+			caffe::Blob<float> *b = tops[i][j];
+			printf("tops(%d): %s\n",j,tops[i][j]->shape_string().c_str());
+			show_blob(b);
+			printf("\n");
+		}
+		for(int j=0;j<tops[i].size();++j){
+			const float *data = tops[i][j]->cpu_data();
+			caffe::Blob<float> *b = tops[i][j];
+			printf("tops diff(%d): %s\n",j,tops[i][j]->shape_string().c_str());
+			show_blob_diff(b);
+			printf("\n");
+		}
+		for(int j=0;j<bottoms[i].size();++j){
+			caffe::Blob<float> *b = bottoms[i][j];
+			printf("bottoms(%d): %s\n",j,b->shape_string().c_str());
+			show_blob(b);
+			printf("\n");
+		}
+		for(int j=0;j<bottoms[i].size();++j){
+			caffe::Blob<float> *b = bottoms[i][j];
+			printf("bottoms diff(%d): %s\n",j,b->shape_string().c_str());
+			show_blob_diff(b);
+			printf("\n");
 		}
 	}
 
@@ -89,7 +139,7 @@ int main(){
 	net->Reshape();
 	float * input = net->input_blobs()[0]->mutable_cpu_data();
 	float * input2 = net->input_blobs()[1]->mutable_cpu_data();
-	input2[0] = 7;
+	input2[0] = 0;
 
 	// load img
 	Mat img = imread(img_path);
@@ -111,10 +161,12 @@ int main(){
 	//caffe::Caffe::set_mode(caffe::Caffe::CPU);
 	auto t1 = now();
 	const caffe::Blob<float>* blob = net->Forward()[0];
+	net->Backward();
 
 	auto t2 = now();
 	cout<<"forward: "<<cal_duration(t1,t2)<<" ms"<<endl;
-	show_data_flow(net);
+	//show_data_flow(net);
+	show_data_flow_backward(net);
 	//const float* output =  blob->cpu_data();
 	//for(int i=0;i<10;++i)
 	//	printf("%s %.2f\n",classes[i].c_str(),output[i]);

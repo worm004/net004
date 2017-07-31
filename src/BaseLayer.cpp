@@ -7,6 +7,10 @@ Layer::Layer(
 		type(type){
 }
 Layer::~Layer(){
+	for(int i=0;i<inputs.size();++i)
+		inputs[i].clear();
+	for(int i=0;i<outputs.size();++i)
+		outputs[i].clear();
 }
 void Layer::setup_shape(){
 }

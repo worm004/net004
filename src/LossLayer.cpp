@@ -8,6 +8,8 @@ LossLayer::LossLayer(const std::string&name,
 }
 LossLayer::~LossLayer(){
 }
+void LossLayer::backward_softmax(){
+}
 void LossLayer::forward_softmax(){
 	int batch_size = predict.n, c = predict.c, hw = predict.hw();
 	float *pdata = predict.data, *gdata = gt.data;
@@ -51,12 +53,14 @@ void LossLayer::forward_softmax(){
 }
 void LossLayer::forward(){
 	//printf("forward: %s %s\n",type.c_str(), method.c_str());
-	
 	if(method == "softmax")
 		forward_softmax();
 	
 }
 void LossLayer::backward(){
+	printf("backward: %s %s\n",type.c_str(), method.c_str());
+	if(method == "softmax")
+		backward_softmax();
 }
 void LossLayer::show()const {
 	printf("[%s%s] name: %s\n",

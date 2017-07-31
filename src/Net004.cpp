@@ -60,3 +60,7 @@ void Net004::forward(){
 	for(const auto& i : cs.sorted_cs) 
 		ls[i]->forward();
 }
+void Net004::backward(){
+	for(int i=cs.sorted_cs.size()-1; i>=0;--i)
+		ls[cs.sorted_cs[i]]->backward();
+}

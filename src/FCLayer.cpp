@@ -43,6 +43,7 @@ void FCLayer::forward(){
 	//getchar();
 }
 void FCLayer::backward(){
+	printf("backward: %s %s\n",type.c_str(), name.c_str());
 }
 void FCLayer::show()const {
 	printf("[%s%s] name: %s, n: %d\n",

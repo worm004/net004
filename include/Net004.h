@@ -11,6 +11,7 @@ class Net004{
 	void show();
 	void setup();
 	void forward();
+	void backward();
 
 	Connections cs;
 	Layers ls;

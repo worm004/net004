@@ -17,6 +17,12 @@ class PoolLayer: public Layer{
 	virtual void show()const;
 	void forward_maxpool();
 	void forward_avgpool();
+	void backward_maxpool();
+	void backward_avgpool();
+	int get_stride(){return stride;}
+	int get_padding(){return padding;}
+	int get_kernel(){return kernel;}
+	std::string get_method(){return method;}
 
 	private:
 	int stride = 0, padding = 0, kernel = 0;

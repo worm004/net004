@@ -34,6 +34,7 @@ void ActivityLayer::forward(){
 
 }
 void ActivityLayer::backward(){
+	printf("backward: %s %s\n",type.c_str(), name.c_str());
 }
 void ActivityLayer::setup_shape(){
 	if( (inputs.size()!=1) || (input_difs.size()!=1)){

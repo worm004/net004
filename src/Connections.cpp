@@ -111,6 +111,9 @@ bool Connections::tsort(){
 	return true;
 
 }
+bool Connections::exist(const std::string& src){
+	return cs.find(src) != cs.end();
+}
 bool Connections::exist(const string& src, const string& des){
 	if(cs.find(src) == cs.end()) return false;
 	auto & c = cs[src];

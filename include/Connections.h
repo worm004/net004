@@ -14,6 +14,7 @@ class Connections{
 	void indegrees(std::map<std::string, int>& ins);
 	void outdegrees(std::map<std::string, int>& outs);
 	std::set<std::string> & operator [](const std::string& name);
+	bool exist(const std::string& src);
 
 	private:
 	bool exist(const std::string& src, const std::string& des);

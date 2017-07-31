@@ -13,6 +13,7 @@ class ActivityLayer: public Layer{
 	virtual void show() const;
 
 	void forward_relu();
+	std::string get_method(){return method;}
 
 	private:
 	std::string method;

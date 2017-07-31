@@ -1,0 +1,36 @@
+Layer: data data
+1 3 32 32 image
+Layer: conv conv0
+5 32 2 1 none
+Layer: data label
+1 1 1 1 label
+Layer: pool maxpool0
+3 0 2 max
+Layer: activity relu0
+relu
+Layer: conv conv1
+5 32 2 1 relu
+Layer: pool avgpool0
+3 0 2 avg
+Layer: conv conv2
+5 64 2 1 relu
+Layer: pool avgpool1
+3 0 2 avg
+Layer: fc fc0
+64 none
+Layer: fc fc1
+10 none
+Layer: loss loss
+softmax
+Connections:
+data conv0
+conv0 maxpool0
+label loss
+maxpool0 relu0
+relu0 conv1
+conv1 avgpool0
+avgpool0 conv2
+conv2 avgpool1
+avgpool1 fc0
+fc0 fc1
+fc1 loss

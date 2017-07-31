@@ -88,7 +88,15 @@ void PoolLayer::forward(){
 	//show_outputs();
 	//getchar();
 }
+void PoolLayer::backward_maxpool(){
+}
+void PoolLayer::backward_avgpool(){
+}
 void PoolLayer::backward(){
+	printf("backward: %s %s %s\n",type.c_str(), name.c_str(), method.c_str());
+	if(method == "max") backward_maxpool();
+	else if(method == "avg") backward_avgpool();
+	else printf("not implemented %s in activity layer\n",method.c_str());
 }
 void PoolLayer::show()const {
 	printf("[%s%s] name: %s, kernel: %d, stride: %d, padding: %d\n",
