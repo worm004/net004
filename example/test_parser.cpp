@@ -179,7 +179,10 @@ void test_txt2model_cifar10(){
 void test_model_cifar10(){
 	Parser parser;
 	Net004 net("cifar10");
+	//auto t1 = now();
 	parser.read("../models/cifar.net004.net", "../models/cifar.net004.data", &net);
+	//auto t2 = now();
+	//cout<<cal_duration(t1,t2)<<endl;
 
 	Layers & ls = net.ls;
 	Connections& cs = net.cs;

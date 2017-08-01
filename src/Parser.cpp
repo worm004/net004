@@ -10,6 +10,7 @@
 #include "LossLayer.h"
 #include "ConcatLayer.h"
 #include "ActivityLayer.h"
+#include "my_bigfile_reader.h"
 
 using namespace std;
 void Parser::write(Net004* net, const std::string& net_path, const std::string& data_path){	
@@ -156,7 +157,8 @@ void Parser::read(const std::string& net_path, const std::string& data_path,Net0
 	read_net(net_path,net);
 	net->check();
 	net->setup();
-	read_data(data_path,net);
+	//read_data(data_path,net);
+	read_data2(data_path,net);
 	//net->show();
 }
 void Parser::read_net(const std::string& path, Net004* net){
@@ -192,6 +194,42 @@ void Parser::read_net(const std::string& path, Net004* net){
 	}
 	net_file.close();
 	cs.update();
+}
+void Parser::read_data2(const std::string& path, Net004* net){
+	Layers & ls = net->ls;
+	MY_BIGFILE_READER reader;
+	reader.read(path.c_str());
+	while(*reader.pbuf){
+		char buf[100], layer_name[100], data_name[100];
+		reader.to_str(buf,' ');
+		reader.to_str(layer_name,' ');
+		reader.to_str(data_name,'\n');
+		int n = reader.read_int(' ');
+		int c = reader.read_int(' ');
+		int h = reader.read_int(' ');
+		int w = reader.read_int('\n');
+		Layer* layer = ls[layer_name];
+		Blob* b;
+		if(layer->type == "conv"){
+			ConvLayer* l = (ConvLayer*)layer;
+			if(data_name == string("weight")) b = &(l->weight);
+			else if(data_name == string("bias")) b = &(l->bias);
+		}
+		else if(layer->type == "fc"){
+			FCLayer* l = (FCLayer*)layer;
+			if(data_name == string("weight")) b = &(l->weight);
+			else if(data_name == string("bias")) b = &(l->bias);
+		}
+		if((b->n != n) || (b->c != c) || (b->h != h) || (b->w != w)){
+			printf("layer name: %s\nread: %d %d %d %d\n",layer_name,n,c,h,w);
+			b->show();
+			printf("Blob size does not match in net and data\n");
+			exit(0);
+		}
+		int total = n*c*h*w;
+		for(int i=0;i<total;++i) b->data[i] = reader.read_float(' ');
+		reader.to_str(buf,'\n');
+	}
 }
 void Parser::read_data(const std::string& path, Net004* net){
 	Layers & ls = net->ls;

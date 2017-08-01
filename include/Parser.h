@@ -28,6 +28,7 @@ class Parser{
 
 	void read_net(const std::string& path, Net004* net);
 	void read_data(const std::string& path, Net004* net);
+	void read_data2(const std::string& path, Net004* net);
 	void read_net_data(const std::string& line, const std::string& name, Layers* ls);
 	void read_net_conv(const std::string& line, const std::string& name, Layers* ls);
 	void read_net_pool(const std::string& line, const std::string& name, Layers* ls);
