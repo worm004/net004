@@ -5,6 +5,5 @@ project(net004)
 add_subdirectory(src)
 add_subdirectory(example)
 
-add_subdirectory(caffe_example)
 add_subdirectory(tools)
 add_subdirectory(tests)

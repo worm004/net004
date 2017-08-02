@@ -9,5 +9,10 @@ find_package(OpenCV)
 add_definitions(-DCPU_ONLY)
 include_directories(${Caffe_INCLUDE_DIRS})
 include_directories(${OpenCV_INCLUDE_DIRS})
+
 add_executable(model_cvt model_cvt.cpp caffe_parser.cpp)
 target_link_libraries(model_cvt ${Caffe_LIBRARIES} net004 ${OpenCV_LIBRARIES})
+
+add_executable(caffe_show caffe_show.cpp)
+target_link_libraries(caffe_show ${Caffe_LIBRARIES} ${OpenCV_LIBRARIES})
+
