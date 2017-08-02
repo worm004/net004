@@ -6,6 +6,7 @@
 
 class Net004{
 	public:
+	Net004(){}
 	Net004(const std::string&name):name(name){};
 	void check();
 	void show();
@@ -16,7 +17,6 @@ class Net004{
 	Connections cs;
 	Layers ls;
 
-	private:
 	std::string name;
 };
 #endif

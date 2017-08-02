@@ -7,5 +7,4 @@ find_package(Caffe)
 add_definitions(-DCPU_ONLY)
 include_directories(${Caffe_INCLUDE_DIRS})
 add_executable(cifar10 cifar10.cpp)
-
 target_link_libraries(cifar10 ${Caffe_LIBRARIES})

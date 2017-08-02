@@ -169,6 +169,8 @@ void Parser::read_net(const std::string& path, Net004* net){
 	string line;
 	char layer_type[100], layer_name[100];
 	bool isconnect = false;
+	getline(net_file,line);
+	net->name = line;
 	while(1){
 		getline(net_file,line);
 		if(net_file.eof()) break;

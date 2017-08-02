@@ -78,9 +78,9 @@ void FCLayer::setup_shape(){
 	const Blob& ib = inputs[0];
 	int in = ib.c*ib.h*ib.h;
 
-	weight.set_shape(1,in * n , 1, 1);
+	weight.set_shape(n,in , 1, 1);
 	weight_dif.set_shape(weight);
-	bias.set_shape(1,n,1,1);
+	bias.set_shape(n,1,1,1);
 	bias_dif.set_shape(bias);
 
 	// output

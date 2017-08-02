@@ -157,9 +157,9 @@ void ConvLayer::setup_shape(){
 	
 	// weight and bias
 	const Blob& ib = inputs[0];
-	weight.set_shape(1,ib.c * filters, kernel, kernel);
+	weight.set_shape(filters,ib.c, kernel, kernel);
 	weight_dif.set_shape(weight);
-	bias.set_shape(1,filters,1,1);
+	bias.set_shape(filters,1,1,1);
 	bias_dif.set_shape(bias);
 
 	// output
