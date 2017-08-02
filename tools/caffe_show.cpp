@@ -14,6 +14,13 @@ void show_param(caffe::Blob<float> *b, ofstream& ofile){
 		ofile << " "<<data[i];
 	ofile << endl;
 }
+void show_param_diff(caffe::Blob<float> *b, ofstream& ofile){
+	const float *data = b->cpu_diff();
+	int total = b->num() * b->channels() * b->height() * b->width();
+	for(int i=0;i<total;++i)
+		ofile << " "<<data[i];
+	ofile << endl;
+}
 void show_model(const std::shared_ptr<caffe::Net<float> >& net, const std::string& path ){
 	const vector<boost::shared_ptr<caffe::Layer<float> >> layers = net->layers();
 	ofstream ofile(path);
@@ -115,7 +122,11 @@ void show_backward(const std::shared_ptr<caffe::Net<float> >&net, const std::str
 	const vector<vector<caffe::Blob<float> *> >& tops = net->top_vecs();
 
 	for(int i=0;i<layers.size();++i){
-		ofile<<layers[i]->type()<<" "<<bottoms[i].size()<<" "<<tops[i].size()<<endl;
+		const vector<boost::shared_ptr<caffe::Blob<float> > >& params = layers[i]->blobs();
+		string layer_type = layers[i]->type();
+
+		ofile<<layer_type<<" "<<bottoms[i].size()<<" "<<tops[i].size()<<" "<<params.size()<<endl;
+
 		for(int j=0;j<bottoms[i].size();++j){
 			caffe::Blob<float> *b = bottoms[i][j];
 			ofile<<"bottoms diff("<<j<<"): "<<b->shape_string()<<endl;
@@ -126,6 +137,20 @@ void show_backward(const std::shared_ptr<caffe::Net<float> >&net, const std::str
 			caffe::Blob<float> *b = tops[i][j];
 			ofile<<"tops diff("<<j<<"): "<<b->shape_string()<<endl;
 			show_blob_diff(b,ofile);
+		}
+
+		if((layer_type == "Convolution") || (layer_type == "InnerProduct")){
+			ofile << "weight diff: "<<params[0]->shape_string()<<endl;
+			show_param_diff(params[0].get(), ofile);
+
+			ofile << "bias diff: "<<params[1]->shape_string()<<endl;
+			show_param_diff(params[1].get(), ofile);
+		}
+		else{
+			for(int j=0;j<params.size();++j){
+				ofile << "param diff: "<<params[j]->shape_string()<<endl;
+				show_param_diff(params[j].get(), ofile);
+			}
 		}
 	}
 
