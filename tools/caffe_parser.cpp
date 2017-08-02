@@ -105,7 +105,7 @@ void CaffeModelParser::write_net(const std::string& net_path){
 void CaffeModelParser::write_net_conv(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
 	const caffe::ConvolutionParameter& conv_param = param.convolution_param();
 	ofile<<"Layer: conv "<<layer_name<<endl;
-	ofile<<conv_param.kernel_size()[0]<<" "<<conv_param.num_output()<<" "<<conv_param.pad()[0]<<" "<<conv_param.stride()[0]<<endl;
+	ofile<<conv_param.kernel_size()[0]<<" "<<conv_param.num_output()<<" "<<conv_param.pad()[0]<<" "<<conv_param.stride()[0]<<" none"<<endl;
 }
 void CaffeModelParser::write_net_pool(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
 	const caffe::PoolingParameter& pool_param = param.pooling_param();
