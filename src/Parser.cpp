@@ -158,7 +158,8 @@ void Parser::read(const std::string& net_path, const std::string& data_path,Net0
 	net->check();
 	net->setup();
 	//read_data(data_path,net);
-	read_data2(data_path,net);
+	//read_data2(data_path,net);
+	read_data3(data_path,net);
 	//net->show();
 }
 void Parser::read_net(const std::string& path, Net004* net){
@@ -196,6 +197,41 @@ void Parser::read_net(const std::string& path, Net004* net){
 	}
 	net_file.close();
 	cs.update();
+}
+void Parser::read_data3(const std::string& path, Net004* net){
+	Layers & ls = net->ls;
+	FILE* file = fopen(path.c_str(), "rb");
+	while(!feof(file)){
+		char buffer[100],layer_name[100],data_name[100];
+		fread(buffer, sizeof(char), 100, file);
+		sscanf(buffer,"Layer: %s %s",layer_name,data_name);
+		int n,c,h,w;
+		fread(&n, sizeof(int), 1, file);
+		fread(&c, sizeof(int), 1, file);
+		fread(&h, sizeof(int), 1, file);
+		fread(&w, sizeof(int), 1, file);
+		int total = n*c*h*w;
+		Layer* layer = ls[layer_name];
+		Blob* b;
+		if(layer->type == "conv"){
+			ConvLayer* l = (ConvLayer*)layer;
+			if(data_name == string("weight")) b = &(l->weight);
+			else if(data_name == string("bias")) b = &(l->bias);
+		}
+		else if(layer->type == "fc"){
+			FCLayer* l = (FCLayer*)layer;
+			if(data_name == string("weight")) b = &(l->weight);
+			else if(data_name == string("bias")) b = &(l->bias);
+		}
+		if((b->n != n) || (b->c != c) || (b->h != h) || (b->w != w)){
+			printf("layer name: %s\nread: %d %d %d %d\n",layer_name,n,c,h,w);
+			b->show();
+			printf("Blob size does not match in net and data\n");
+			exit(0);
+		}
+		fread(b->data,sizeof(float),total,file);
+	}
+	fclose(file);
 }
 void Parser::read_data2(const std::string& path, Net004* net){
 	Layers & ls = net->ls;

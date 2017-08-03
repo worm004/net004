@@ -44,22 +44,26 @@ void show_model(const std::shared_ptr<caffe::Net<float> >& net, const std::strin
 	}
 	ofile.close();
 }
-void load_img(const std::shared_ptr<caffe::Net<float> >& net, const std::string& img_path, int label){
-	net->input_blobs()[0]->Reshape(1, 3, 32, 32);
+void load_img(const std::shared_ptr<caffe::Net<float> >& net, const std::string& img_path, int label, float mean_r, float mean_g, float mean_b){
+	int c = net->input_blobs()[0]->channels(),
+	    h = net->input_blobs()[0]->height(), 
+	    w = net->input_blobs()[0]->width();
+
+	net->input_blobs()[0]->Reshape(1, c, h, w);
 	net->input_blobs()[1]->Reshape(1, 1, 1, 1);
 	net->Reshape();
-	float * input = net->input_blobs()[0]->mutable_cpu_data();
-	float * input2 = net->input_blobs()[1]->mutable_cpu_data();
+	float * input = net->input_blobs()[0]->mutable_cpu_data(),
+	      * input2 = net->input_blobs()[1]->mutable_cpu_data();
 	input2[0] = label;
 
 	Mat img = imread(img_path);
-	resize(img,img,Size(32,32));
+	resize(img,img,Size(h,w));
 	uchar* data = (uchar*)img.data;
-	for(int i=0;i<32;++i){
-		for(int j=0;j<32;++j){
-			input[(i*32+j) + 32*32*0] = data[(i*32+j)*3+2] - 127;
-			input[(i*32+j) + 32*32*1] = data[(i*32+j)*3+1] - 127;
-			input[(i*32+j) + 32*32*2] = data[(i*32+j)*3+0] - 127;
+	for(int i=0;i<h;++i){
+		for(int j=0;j<w;++j){
+			input[(i*w+j) + w*h*0] = data[(i*w+j)*3+2] - mean_r;
+			input[(i*w+j) + w*h*1] = data[(i*w+j)*3+1] - mean_g;
+			input[(i*w+j) + w*h*2] = data[(i*w+j)*3+0] - mean_b;
 		}
 	}
 }
@@ -160,8 +164,17 @@ int main(int argc, char** argv){
 	google::InitGoogleLogging(argv[0]);
 	google::SetCommandLineOption("GLOG_minloglevel", "2");
 
-	string net_path = "../caffe_models/cifar10_quick_train_test.prototxt",
-	       model_path = "../caffe_models/cifar10_quick_iter_5000.caffemodel.h5",
+	// cifar10
+	//int label = 8;
+	//float mean_r = 127 ,mean_g = 127 ,mean_b = 127;
+	//string net_path = "../caffe_models/cifar10_quick_train_test.prototxt",
+	//       model_path = "../caffe_models/cifar10_quick_iter_5000.caffemodel.h5",
+	
+	// vgg16
+	int label = 628;
+	float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
+	string net_path = "../caffe_models/VGG_ILSVRC_16_layers_deploy.prototxt",
+	       model_path = "../caffe_models/VGG_ILSVRC_16_layers.caffemodel",
 	       model_text_path = "model.txt",
 	       forward_text_path = "forward.txt",
 	       backward_text_path = "backward.txt";
@@ -170,14 +183,13 @@ int main(int argc, char** argv){
 	caffe::Caffe::set_mode(caffe::Caffe::CPU);
 	net = make_shared<caffe::Net<float>> (net_path, caffe::TEST);
 	net->CopyTrainedLayersFrom(model_path);
-	show_model(net, model_text_path);
+	//show_model(net, model_text_path);
 
 	string img_path = "../imgs/westerdam-ship-size.jpg";
-	int label = 8;
-	load_img(net,img_path,label);
+	load_img(net,img_path,label,mean_r,mean_g,mean_b);
 	net->Forward();
 	show_forward(net, forward_text_path);
-	net->Backward();
+	//net->Backward();
 	show_backward(net, backward_text_path);
 
 	return 0;

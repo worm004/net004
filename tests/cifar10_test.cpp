@@ -34,7 +34,7 @@ float caffe_forward(const std::string& img_path, int label){
 }
 float net004_forward(const std::string& img_path, int label){
 	string net_path = "../models/cifar.net004.net",
-	       model_path = "../models/cifar.net004.data";
+	       model_path = "../models/cifar2.net004.data";
 	Net004 net;
 	Parser parser;
 	parser.read(net_path, model_path, &net);
@@ -42,7 +42,7 @@ float net004_forward(const std::string& img_path, int label){
 	DataLayer* l = (DataLayer*)ls["data"];
 	Mat img = imread(img_path);
 	resize(img,img,Size(l->outputs[0].h, l->outputs[0].w));
-	l->add_image((uchar*)img.data,0);
+	l->add_image((uchar*)img.data,0,127,127,127);
 	((DataLayer*)ls["label"])->add_label(label,0);
 	net.forward();
 	return net.ls["loss"]->outputs[0].data[0];

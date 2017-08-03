@@ -11,3 +11,6 @@ include_directories(${Caffe_INCLUDE_DIRS})
 include_directories(${OpenCV_INCLUDE_DIRS})
 add_executable(cifar10_test cifar10_test.cpp)
 target_link_libraries(cifar10_test ${Caffe_LIBRARIES} net004 ${OpenCV_LIBRARIES})
+
+add_executable(vgg16_test vgg16_test.cpp)
+target_link_libraries(vgg16_test ${Caffe_LIBRARIES} net004 ${OpenCV_LIBRARIES})

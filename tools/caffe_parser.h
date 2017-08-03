@@ -20,6 +20,7 @@ private:
 	void write_net_softmaxloss(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile);
 	void write_net(const std::string& net_path);
 	void write_model(const std::string& model_path);
+	void write_model2(const std::string& model_path);
 	void read_connections();
 private:
 	std::shared_ptr<caffe::Net<float> > net;

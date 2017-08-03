@@ -16,7 +16,7 @@ class DataLayer: public Layer{
 	virtual void setup_shape();
 	virtual void setup_data();
 	virtual void show() const;
-	void add_image(unsigned char* data, int index);
+	void add_image(unsigned char* data, int index, float mean_r, float mean_g, float mean_b);
 	void add_label(int label, int index);
 
 	std::string method;

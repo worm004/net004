@@ -8,10 +8,14 @@ using namespace std;
 using namespace cv;
 
 void cvt_caffe_model(){
-	string caffe_net_path = "../caffe_models/cifar10_quick_train_test.prototxt",
-	       caffe_model_path = "../caffe_models/cifar10_quick_iter_5000.caffemodel.h5",
-	       net004_net_path = "../models/cifar.net004.net",
-	       net004_model_path = "../models/cifar.net004.data";
+	//string caffe_net_path = "../caffe_models/cifar10_quick_train_test.prototxt",
+	//       caffe_model_path = "../caffe_models/cifar10_quick_iter_5000.caffemodel.h5",
+	//       net004_net_path = "../models/cifar.net004.net",
+	//       net004_model_path = "../models/cifar.net004.data";
+	string caffe_net_path = "../caffe_models/VGG_ILSVRC_16_layers_deploy.prototxt",
+	       caffe_model_path = "../caffe_models/VGG_ILSVRC_16_layers.caffemodel",
+	       net004_net_path = "../models/vgg16.net004.net",
+	       net004_model_path = "../models/vgg16.net004.data";
 
 	CaffeModelParser parser;
 	printf("convert caffe model:\n");

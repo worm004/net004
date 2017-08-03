@@ -53,7 +53,7 @@ void load_img(Net004& net){
 	DataLayer* l = (DataLayer*)ls["data"];
 	Mat img = imread("/Users/worm004/Projects/net004/caffe_example/westerdam-ship-size.jpg");
 	resize(img,img,Size(l->outputs[0].h, l->outputs[0].w));
-	l->add_image((uchar*)img.data,0);
+	l->add_image((uchar*)img.data,0,127,127,127);
 
 	DataLayer* l2 = (DataLayer*)ls["label"];
 	l2->add_label(8,0);

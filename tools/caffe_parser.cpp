@@ -42,7 +42,45 @@ void CaffeModelParser::read_connections(){
 }
 void CaffeModelParser::write(const std::string& net_path, const std::string& model_path){
 	write_net(net_path);
-	write_model(model_path);
+	//write_model(model_path);
+	write_model2(model_path);
+}
+void CaffeModelParser::write_model2(const std::string& model_path){
+	FILE* file = fopen(model_path.c_str(), "wb");
+	const vector<boost::shared_ptr<caffe::Layer<float> >> layers = net->layers();
+	const vector<string>& layer_names = net->layer_names(), &blob_names = net->blob_names();
+	for(int i=0;i<layers.size();++i){
+		const vector<boost::shared_ptr<caffe::Blob<float> > >& params = layers[i]->blobs();
+		const string& layer_type = layers[i]->type();
+		if((layer_type == "Convolution") || (layer_type == "InnerProduct")){
+			caffe::Blob<float> *bweight = params[0].get();
+			char buffer[100];
+			sprintf(buffer,"Layer: %s weight",layer_names[i].c_str());
+			fwrite(buffer, sizeof(char), 100, file);
+			int num = bweight->num(), channel = bweight->channels(), height = bweight->height(), width = bweight->width();
+			fwrite(&num, sizeof(int), 1, file);
+			fwrite(&channel, sizeof(int), 1, file);
+			fwrite(&height, sizeof(int), 1, file);
+			fwrite(&width, sizeof(int), 1, file);
+			int total = bweight->num() * bweight->channels() * bweight->height() * bweight->width();
+			fwrite(bweight->cpu_data(), sizeof(float), total, file);
+
+			caffe::Blob<float> *bbias = params[1].get();
+			sprintf(buffer,"Layer: %s bias",layer_names[i].c_str());
+			fwrite(buffer, sizeof(char), 100, file);
+			num = bbias->num();
+			channel = bbias->channels();
+			height = bbias->height();
+			width = bbias->width();
+			fwrite(&num, sizeof(int), 1, file);
+			fwrite(&channel, sizeof(int), 1, file);
+			fwrite(&height, sizeof(int), 1, file);
+			fwrite(&width, sizeof(int), 1, file);
+			total = bbias->num() * bbias->channels() * bbias->height() * bbias->width();
+			fwrite(bbias->cpu_data(), sizeof(float), total, file);
+		}
+	}
+	fclose(file);
 }
 void CaffeModelParser::write_model(const std::string& model_path){
 	ofstream ofile(model_path);
@@ -79,6 +117,7 @@ void CaffeModelParser::write_net(const std::string& net_path){
 	for(int i=0;i<layers.size();++i){
 		string layer_type = layers[i]->type(), 
 		       layer_name = layer_names[i];
+		printf("%d %s %s\n",i,layer_type.c_str(),layer_name.c_str());
 		const caffe::LayerParameter& param = layers[i]->layer_param();
 		if(layer_type == "Input"){
 			const vector<int> top_ids = net->top_ids(i);
@@ -105,7 +144,11 @@ void CaffeModelParser::write_net(const std::string& net_path){
 void CaffeModelParser::write_net_conv(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
 	const caffe::ConvolutionParameter& conv_param = param.convolution_param();
 	ofile<<"Layer: conv "<<layer_name<<endl;
-	ofile<<conv_param.kernel_size()[0]<<" "<<conv_param.num_output()<<" "<<conv_param.pad()[0]<<" "<<conv_param.stride()[0]<<" none"<<endl;
+	int kernel_size = conv_param.kernel_size().size() == 1?conv_param.kernel_size()[0]:1;
+	int pad = conv_param.pad().size() == 1? conv_param.pad()[0]:0;
+	int stride = conv_param.stride().size() == 1? conv_param.stride()[0]:1;
+
+	ofile<<kernel_size<<" "<<conv_param.num_output()<<" "<<pad<<" "<<stride<<" none"<<endl;
 }
 void CaffeModelParser::write_net_pool(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
 	const caffe::PoolingParameter& pool_param = param.pooling_param();
