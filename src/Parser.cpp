@@ -10,7 +10,6 @@
 #include "LossLayer.h"
 #include "ConcatLayer.h"
 #include "ActivityLayer.h"
-#include "my_bigfile_reader.h"
 
 using namespace std;
 void Parser::write(Net004* net, const std::string& net_path, const std::string& data_path){	
@@ -28,27 +27,27 @@ void Parser::write(Net004* net, const std::string& net_path, const std::string& 
 		net_file<<"Layer: "<<layer_type<<" "<<layer_name<<endl;
 		if(layer_type == "data"){
 			write_net_data(layer, net_file);
-			write_dat_data2(layer, data_file);
+			write_dat_data(layer, data_file);
 		}
 		else if(layer_type == "conv"){
 			write_net_conv(layer, net_file);
-			write_dat_conv2(layer, data_file);
+			write_dat_conv(layer, data_file);
 		}
 		else if(layer_type == "pool"){
 			write_net_pool(layer, net_file);
-			write_dat_pool2(layer, data_file);
+			write_dat_pool(layer, data_file);
 		}
 		else if(layer_type == "activity"){
 			write_net_activity(layer, net_file);
-			write_dat_activity2(layer, data_file);
+			write_dat_activity(layer, data_file);
 		}
 		else if(layer_type == "fc"){
 			write_net_fc(layer, net_file);
-			write_dat_fc2(layer, data_file);
+			write_dat_fc(layer, data_file);
 		}
 		else if(layer_type == "loss"){
 			write_net_loss(layer, net_file);
-			write_dat_loss2(layer, data_file);
+			write_dat_loss(layer, data_file);
 		}
 		else{
 			printf("no such parser for layer: %s\n",layer_type.c_str());
@@ -107,9 +106,9 @@ void Parser::write_connections(Net004* net, std::ofstream& ofile){
 	}
 }
 
-void Parser::write_dat_data2(Layer* layer, FILE* ofile){
+void Parser::write_dat_data(Layer* layer, FILE* ofile){
 }
-void Parser::write_dat_conv2(Layer* layer, FILE* ofile){
+void Parser::write_dat_conv(Layer* layer, FILE* ofile){
 	ConvLayer* l = (ConvLayer*)layer;
 	char buffer[100];
 	sprintf(buffer,"Layer: %s weight",l->name.c_str());
@@ -129,11 +128,11 @@ void Parser::write_dat_conv2(Layer* layer, FILE* ofile){
 	fwrite(&(l->bias.w), sizeof(int), 1, ofile);
 	fwrite(l->bias.data, sizeof(float), l->bias.nchw(), ofile);
 }
-void Parser::write_dat_pool2(Layer* layer, FILE* ofile){
+void Parser::write_dat_pool(Layer* layer, FILE* ofile){
 }
-void Parser::write_dat_activity2(Layer* layer, FILE* ofile){
+void Parser::write_dat_activity(Layer* layer, FILE* ofile){
 }
-void Parser::write_dat_fc2(Layer* layer, FILE* ofile){
+void Parser::write_dat_fc(Layer* layer, FILE* ofile){
 	FCLayer* l = (FCLayer*)layer;
 	char buffer[100];
 	sprintf(buffer,"Layer: %s weight",l->name.c_str());
@@ -153,57 +152,9 @@ void Parser::write_dat_fc2(Layer* layer, FILE* ofile){
 	fwrite(&(l->bias.w), sizeof(int), 1, ofile);
 	fwrite(l->bias.data, sizeof(float), l->bias.nchw(), ofile);
 }
-void Parser::write_dat_loss2(Layer* layer, FILE* ofile){
+void Parser::write_dat_loss(Layer* layer, FILE* ofile){
 }
 
-void Parser::write_dat_data(Layer* layer, std::ofstream& ofile){
-	// no parameter
-}
-void Parser::write_dat_conv(Layer* layer, std::ofstream& ofile){
-	ConvLayer* l = (ConvLayer*)layer;
-	ofile<<"Layer: "<<l->name<<" "<<"weight"<<endl;
-	ofile<<l->weight.n<<" "<<l->weight.c<<" "<<l->weight.h<<" "<<l->weight.w<<endl;
-	float * wdata = l->weight.data;
-	int n = l->weight.nchw();
-	for(int i=0;i<n;++i)
-		ofile<<wdata[i]<<" ";
-	ofile<<endl;
-
-	ofile<<"Layer: "<<l->name<<" "<<"bias"<<endl;
-	ofile<<l->bias.n<<" "<<l->bias.c<<" "<<l->bias.h<<" "<<l->bias.w<<endl;
-	float * bdata = l->bias.data;
-	n = l->bias.nchw();
-	for(int i=0;i<n;++i)
-		ofile<<bdata[i]<<" ";
-	ofile<<endl;
-}
-void Parser::write_dat_pool(Layer* layer, std::ofstream& ofile){
-	// no parameter
-}
-void Parser::write_dat_activity(Layer* layer, std::ofstream& ofile){
-	// no parameter
-}
-void Parser::write_dat_fc(Layer* layer, std::ofstream& ofile){
-	FCLayer* l = (FCLayer*)layer;
-	ofile<<"Layer: "<<l->name<<" "<<"weight"<<endl;
-	ofile<<l->weight.n<<" "<<l->weight.c<<" "<<l->weight.h<<" "<<l->weight.w<<endl;
-	float * wdata = l->weight.data;
-	int n = l->weight.nchw();
-	for(int i=0;i<n;++i)
-		ofile<<wdata[i]<<" ";
-	ofile<<endl;
-
-	ofile<<"Layer: "<<l->name<<" "<<"bias"<<endl;
-	ofile<<l->bias.n<<" "<<l->bias.c<<" "<<l->bias.h<<" "<<l->bias.w<<endl;
-	float * bdata = l->bias.data;
-	n = l->bias.nchw();
-	for(int i=0;i<n;++i)
-		ofile<<bdata[i]<<" ";
-	ofile<<endl;
-}
-void Parser::write_dat_loss(Layer* layer, std::ofstream& ofile){
-	// no parameter
-}
 
 void Parser::read(const std::string& net_path, const std::string& data_path,Net004* net){
 	read_net(net_path,net);
@@ -287,6 +238,7 @@ void Parser::read_net_data(const std::string& line, const std::string& name, Lay
 	char method[100];
 	int n,c,h,w;
 	sscanf(line.c_str(),"%d %d %d %d %s",&n,&c,&h,&w,method);
+	if(batch_size != -1) n = batch_size;
 	ls->add_data(name,n,c,h,w,method);
 }
 void Parser::read_net_conv(const std::string& line, const std::string& name, Layers* ls){

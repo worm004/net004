@@ -117,7 +117,7 @@ void CaffeModelParser::write_net(const std::string& net_path){
 	for(int i=0;i<layers.size();++i){
 		string layer_type = layers[i]->type(), 
 		       layer_name = layer_names[i];
-		printf("%d %s %s\n",i,layer_type.c_str(),layer_name.c_str());
+		//printf("%d %s %s\n",i,layer_type.c_str(),layer_name.c_str());
 		const caffe::LayerParameter& param = layers[i]->layer_param();
 		if(layer_type == "Input"){
 			const vector<int> top_ids = net->top_ids(i);

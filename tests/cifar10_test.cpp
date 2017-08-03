@@ -41,15 +41,22 @@ float net004_forward(const std::string& img_path, int label){
 	       model_path = "../models/cifar.net004.data";
 	Net004 net;
 	Parser parser;
+	parser.batch_size = 10;
 	parser.read(net_path, model_path, &net);
 	Layers & ls = net.ls;
 	DataLayer* l = (DataLayer*)ls["data"];
 	Mat img = imread(img_path);
 	resize(img,img,Size(l->outputs[0].h, l->outputs[0].w));
-	l->add_image((uchar*)img.data,0,127,127,127);
-	((DataLayer*)ls["label"])->add_label(label,0);
+
+	// all batch uses same data
+	for(int i=0;i<parser.batch_size;++i){
+		l->add_image((uchar*)img.data,i,127,127,127);
+		((DataLayer*)ls["label"])->add_label(label,i);
+	}
+
 	net.forward();
-	return net.ls["loss"]->outputs[0].data[0];
+
+	return net.ls["loss"]->outputs[0].data[0]/parser.batch_size;
 }
 int main(int argc, char **argv){
 	google::InitGoogleLogging(argv[0]);
