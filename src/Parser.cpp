@@ -17,7 +17,9 @@ void Parser::write(Net004* net, const std::string& net_path, const std::string& 
 	Connections &cs = net->cs;
 	Layers &ls = net->ls;
 	ofstream net_file(net_path);
-	ofstream data_file(data_path);
+
+	net_file<<net->name<<endl;
+	FILE* data_file = fopen(data_path.c_str(), "wb");
 	int n = ls.count();
 	for(int i=0;i<n;++i){
 		Layer* layer = ls[cs.sorted_cs[i]];
@@ -26,27 +28,27 @@ void Parser::write(Net004* net, const std::string& net_path, const std::string& 
 		net_file<<"Layer: "<<layer_type<<" "<<layer_name<<endl;
 		if(layer_type == "data"){
 			write_net_data(layer, net_file);
-			write_dat_data(layer, data_file);
+			write_dat_data2(layer, data_file);
 		}
 		else if(layer_type == "conv"){
 			write_net_conv(layer, net_file);
-			write_dat_conv(layer, data_file);
+			write_dat_conv2(layer, data_file);
 		}
 		else if(layer_type == "pool"){
 			write_net_pool(layer, net_file);
-			write_dat_pool(layer, data_file);
+			write_dat_pool2(layer, data_file);
 		}
 		else if(layer_type == "activity"){
 			write_net_activity(layer, net_file);
-			write_dat_activity(layer, data_file);
+			write_dat_activity2(layer, data_file);
 		}
 		else if(layer_type == "fc"){
 			write_net_fc(layer, net_file);
-			write_dat_fc(layer, data_file);
+			write_dat_fc2(layer, data_file);
 		}
 		else if(layer_type == "loss"){
 			write_net_loss(layer, net_file);
-			write_dat_loss(layer, data_file);
+			write_dat_loss2(layer, data_file);
 		}
 		else{
 			printf("no such parser for layer: %s\n",layer_type.c_str());
@@ -55,8 +57,9 @@ void Parser::write(Net004* net, const std::string& net_path, const std::string& 
 	}
 	write_connections(net,net_file);
 	net_file.close();
-	data_file.close();
+	fclose(data_file);
 }
+
 void Parser::write_net_data(Layer* layer, std::ofstream& ofile){
 	// if need
 	DataLayer *l = (DataLayer*)layer;
@@ -102,6 +105,55 @@ void Parser::write_connections(Net004* net, std::ofstream& ofile){
 		const set<string> &tos = cs[from];
 		for(auto to: tos) ofile<<from<<" "<<to<<endl;
 	}
+}
+
+void Parser::write_dat_data2(Layer* layer, FILE* ofile){
+}
+void Parser::write_dat_conv2(Layer* layer, FILE* ofile){
+	ConvLayer* l = (ConvLayer*)layer;
+	char buffer[100];
+	sprintf(buffer,"Layer: %s weight",l->name.c_str());
+	fwrite(buffer, sizeof(char), 100, ofile);
+	fwrite(&(l->weight.n), sizeof(int), 1, ofile);
+	fwrite(&(l->weight.c), sizeof(int), 1, ofile);
+	fwrite(&(l->weight.h), sizeof(int), 1, ofile);
+	fwrite(&(l->weight.w), sizeof(int), 1, ofile);
+	fwrite(l->weight.data, sizeof(float), l->weight.nchw(), ofile);
+
+
+	sprintf(buffer,"Layer: %s bias",l->name.c_str());
+	fwrite(buffer, sizeof(char), 100, ofile);
+	fwrite(&(l->bias.n), sizeof(int), 1, ofile);
+	fwrite(&(l->bias.c), sizeof(int), 1, ofile);
+	fwrite(&(l->bias.h), sizeof(int), 1, ofile);
+	fwrite(&(l->bias.w), sizeof(int), 1, ofile);
+	fwrite(l->bias.data, sizeof(float), l->bias.nchw(), ofile);
+}
+void Parser::write_dat_pool2(Layer* layer, FILE* ofile){
+}
+void Parser::write_dat_activity2(Layer* layer, FILE* ofile){
+}
+void Parser::write_dat_fc2(Layer* layer, FILE* ofile){
+	FCLayer* l = (FCLayer*)layer;
+	char buffer[100];
+	sprintf(buffer,"Layer: %s weight",l->name.c_str());
+	fwrite(buffer, sizeof(char), 100, ofile);
+	fwrite(&(l->weight.n), sizeof(int), 1, ofile);
+	fwrite(&(l->weight.c), sizeof(int), 1, ofile);
+	fwrite(&(l->weight.h), sizeof(int), 1, ofile);
+	fwrite(&(l->weight.w), sizeof(int), 1, ofile);
+	fwrite(l->weight.data, sizeof(float), l->weight.nchw(), ofile);
+
+
+	sprintf(buffer,"Layer: %s bias",l->name.c_str());
+	fwrite(buffer, sizeof(char), 100, ofile);
+	fwrite(&(l->bias.n), sizeof(int), 1, ofile);
+	fwrite(&(l->bias.c), sizeof(int), 1, ofile);
+	fwrite(&(l->bias.h), sizeof(int), 1, ofile);
+	fwrite(&(l->bias.w), sizeof(int), 1, ofile);
+	fwrite(l->bias.data, sizeof(float), l->bias.nchw(), ofile);
+}
+void Parser::write_dat_loss2(Layer* layer, FILE* ofile){
 }
 
 void Parser::write_dat_data(Layer* layer, std::ofstream& ofile){
@@ -157,9 +209,7 @@ void Parser::read(const std::string& net_path, const std::string& data_path,Net0
 	read_net(net_path,net);
 	net->check();
 	net->setup();
-	//read_data(data_path,net);
-	//read_data2(data_path,net);
-	read_data3(data_path,net);
+	read_data(data_path,net);
 	//net->show();
 }
 void Parser::read_net(const std::string& path, Net004* net){
@@ -198,7 +248,7 @@ void Parser::read_net(const std::string& path, Net004* net){
 	net_file.close();
 	cs.update();
 }
-void Parser::read_data3(const std::string& path, Net004* net){
+void Parser::read_data(const std::string& path, Net004* net){
 	Layers & ls = net->ls;
 	FILE* file = fopen(path.c_str(), "rb");
 	while(!feof(file)){
@@ -232,82 +282,6 @@ void Parser::read_data3(const std::string& path, Net004* net){
 		fread(b->data,sizeof(float),total,file);
 	}
 	fclose(file);
-}
-void Parser::read_data2(const std::string& path, Net004* net){
-	Layers & ls = net->ls;
-	MY_BIGFILE_READER reader;
-	reader.read(path.c_str());
-	while(*reader.pbuf){
-		char buf[100], layer_name[100], data_name[100];
-		reader.to_str(buf,' ');
-		reader.to_str(layer_name,' ');
-		reader.to_str(data_name,'\n');
-		int n = reader.read_int(' ');
-		int c = reader.read_int(' ');
-		int h = reader.read_int(' ');
-		int w = reader.read_int('\n');
-		Layer* layer = ls[layer_name];
-		Blob* b;
-		if(layer->type == "conv"){
-			ConvLayer* l = (ConvLayer*)layer;
-			if(data_name == string("weight")) b = &(l->weight);
-			else if(data_name == string("bias")) b = &(l->bias);
-		}
-		else if(layer->type == "fc"){
-			FCLayer* l = (FCLayer*)layer;
-			if(data_name == string("weight")) b = &(l->weight);
-			else if(data_name == string("bias")) b = &(l->bias);
-		}
-		if((b->n != n) || (b->c != c) || (b->h != h) || (b->w != w)){
-			printf("layer name: %s\nread: %d %d %d %d\n",layer_name,n,c,h,w);
-			b->show();
-			printf("Blob size does not match in net and data\n");
-			exit(0);
-		}
-		int total = n*c*h*w;
-		for(int i=0;i<total;++i) b->data[i] = reader.read_float(' ');
-		reader.to_str(buf,'\n');
-	}
-}
-void Parser::read_data(const std::string& path, Net004* net){
-	Layers & ls = net->ls;
-	ifstream data_file(path);
-	string line;
-	while(1){
-		getline(data_file,line);
-		if(data_file.eof()) break;
-		char layer_name[100], data_name[100];
-		sscanf(line.c_str(),"Layer: %s %s",layer_name, data_name);
-
-		getline(data_file,line);
-		if(data_file.eof()) break;
-		int n,c,h,w;
-		sscanf(line.c_str(),"%d %d %d %d",&n,&c,&h,&w);
-
-		// checking
-		Layer* layer = ls[layer_name];
-		Blob* b;
-		if(layer->type == "conv"){
-			ConvLayer* l = (ConvLayer*)layer;
-			if(data_name == string("weight")) b = &(l->weight);
-			else if(data_name == string("bias")) b = &(l->bias);
-		}
-		else if(layer->type == "fc"){
-			FCLayer* l = (FCLayer*)layer;
-			if(data_name == string("weight")) b = &(l->weight);
-			else if(data_name == string("bias")) b = &(l->bias);
-		}
-		if((b->n != n) || (b->c != c) || (b->h != h) || (b->w != w)){
-			printf("layer name: %s\nread: %d %d %d %d\n",layer_name,n,c,h,w);
-			b->show();
-			printf("Blob size does not match in net and data\n");
-			exit(0);
-		}
-		int total = n*c*h*w;
-		for(int i=0;i<total;++i) data_file>>b->data[i];
-		getline(data_file, line);
-	}
-	data_file.close();
 }
 void Parser::read_net_data(const std::string& line, const std::string& name, Layers* ls){
 	char method[100];

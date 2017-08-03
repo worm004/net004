@@ -14,27 +14,31 @@ float caffe_forward(const std::string& img_path, int label){
 	caffe::Caffe::set_mode(caffe::Caffe::CPU);
 	net = make_shared<caffe::Net<float>> (net_path, caffe::TEST);
 	net->CopyTrainedLayersFrom(model_path);
-	net->input_blobs()[0]->Reshape(1, 3, 32, 32);
+
+	int c = net->input_blobs()[0]->channels(),
+	    h = net->input_blobs()[0]->height(), 
+	    w = net->input_blobs()[0]->width();
+	net->input_blobs()[0]->Reshape(1, c, h, w);
 	net->input_blobs()[1]->Reshape(1, 1, 1, 1);
 	net->Reshape();
 	float * input = net->input_blobs()[0]->mutable_cpu_data(), 
 	      * input2 = net->input_blobs()[1]->mutable_cpu_data();
 	input2[0] = label;
 	Mat img = imread(img_path);
-	resize(img,img,Size(32,32));
+	resize(img,img,Size(h,w));
 	uchar* data = (uchar*)img.data;
-	for(int i=0;i<32;++i)
-	for(int j=0;j<32;++j){
-		input[(i*32+j) + 32*32*0] = data[(i*32+j)*3+2] - 127;
-		input[(i*32+j) + 32*32*1] = data[(i*32+j)*3+1] - 127;
-		input[(i*32+j) + 32*32*2] = data[(i*32+j)*3+0] - 127;
+	for(int i=0;i<h;++i)
+	for(int j=0;j<w;++j){
+		input[(i*w+j) + h*w*0] = data[(i*w+j)*3+2] - 127;
+		input[(i*w+j) + h*w*1] = data[(i*w+j)*3+1] - 127;
+		input[(i*w+j) + h*w*2] = data[(i*w+j)*3+0] - 127;
 	}
 	const caffe::Blob<float>* blob = net->Forward()[0];
 	return blob->cpu_data()[0];
 }
 float net004_forward(const std::string& img_path, int label){
 	string net_path = "../models/cifar.net004.net",
-	       model_path = "../models/cifar2.net004.data";
+	       model_path = "../models/cifar.net004.data";
 	Net004 net;
 	Parser parser;
 	parser.read(net_path, model_path, &net);

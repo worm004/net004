@@ -46,21 +46,6 @@ float caffe_forward(const std::string& img_path, int label){
 	t2 = now();
 	cout<<"forward: "<<cal_duration(t1,t2)<<endl;
 
-	//ifstream file("../caffe_models/imagenet.list");
-	//vector<pair<string,float> > labels;
-	//for(int i=0;i<1000;++i){
-	//	string line;
-	//	getline(file,line);
-	//	labels.push_back(make_pair(line,blob->cpu_data()[i]));
-	//}
-
-	//sort(labels.begin(), labels.end(), 
-	//		[](const pair<string,float> & a, const pair<string,float> & b) -> bool
-	//		{ return a.second < b.second; });
-
-	//for(int i=990;i<1000;++i)
-	//	printf("[%f] %s\n",labels[i].second, labels[i].first.c_str());
-
 	return blob->cpu_data()[0];
 }
 float net004_forward(const std::string& img_path, int label){

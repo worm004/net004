@@ -14,3 +14,6 @@ target_link_libraries(cifar10_test ${Caffe_LIBRARIES} net004 ${OpenCV_LIBRARIES}
 
 add_executable(vgg16_test vgg16_test.cpp)
 target_link_libraries(vgg16_test ${Caffe_LIBRARIES} net004 ${OpenCV_LIBRARIES})
+
+add_executable(parser parser.cpp)
+target_link_libraries(parser net004 ${OpenCV_LIBRARIES})

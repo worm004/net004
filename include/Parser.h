@@ -26,10 +26,16 @@ class Parser{
 	void write_dat_fc(Layer* layer, std::ofstream& ofile);
 	void write_dat_loss(Layer* layer, std::ofstream& ofile);
 
+	void write_dat_data2(Layer* layer, FILE* ofile);
+	void write_dat_conv2(Layer* layer, FILE* ofile);
+	void write_dat_pool2(Layer* layer, FILE* ofile);
+	void write_dat_activity2(Layer* layer, FILE* ofile);
+	void write_dat_fc2(Layer* layer, FILE* ofile);
+	void write_dat_loss2(Layer* layer, FILE* ofile);
+
+
 	void read_net(const std::string& path, Net004* net);
 	void read_data(const std::string& path, Net004* net);
-	void read_data2(const std::string& path, Net004* net);
-	void read_data3(const std::string& path, Net004* net);
 	void read_net_data(const std::string& line, const std::string& name, Layers* ls);
 	void read_net_conv(const std::string& line, const std::string& name, Layers* ls);
 	void read_net_pool(const std::string& line, const std::string& name, Layers* ls);
