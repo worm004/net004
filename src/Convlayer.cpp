@@ -9,12 +9,14 @@ ConvLayer::ConvLayer(
 	int kernel, 
 	int stride, 
 	int padding, 
+	int group,
 	const std::string& activity):
 		kernel(kernel), 
 		filters(filters), 
 		padding(padding), 
 		stride(stride), 
 		activity(activity), 
+		group(group),
 		Layer(name,"conv"){
 }
 
@@ -22,7 +24,7 @@ ConvLayer::~ConvLayer(){
 }
 
 void ConvLayer::forward(){
-	//printf("forward: %s %s\n",type.c_str(), name.c_str());
+	printf("forward: %s %s\n",type.c_str(), name.c_str());
 	Blob &input = inputs[0], 
 	     &output = outputs[0];
 
@@ -72,8 +74,8 @@ void ConvLayer::forward(){
 			 }
 	}
 
-	//show_inputs();
-	//show_outputs();
+	show_inputs();
+	show_outputs();
 	//getchar();
 }
 
@@ -157,7 +159,7 @@ void ConvLayer::setup_shape(){
 	
 	// weight and bias
 	const Blob& ib = inputs[0];
-	weight.set_shape(filters,ib.c, kernel, kernel);
+	weight.set_shape(filters,ib.c/group, kernel, kernel);
 	weight_dif.set_shape(weight);
 	bias.set_shape(filters,1,1,1);
 	bias_dif.set_shape(bias);

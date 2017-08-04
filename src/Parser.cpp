@@ -190,6 +190,7 @@ void Parser::read_net(const std::string& path, Net004* net){
 			else if(layer_type == string("fc")) read_net_fc(line,layer_name,&ls);
 			else if(layer_type == string("loss")) read_net_loss(line,layer_name,&ls);
 			else if(layer_type == string("data")) read_net_data(line,layer_name,&ls);
+			else if(layer_type == string("lrn")) read_net_lrn(line,layer_name,&ls);
 			else {
 				printf("No such layer to parser %s\n",layer_type);
 				exit(0);
@@ -241,12 +242,18 @@ void Parser::read_net_data(const std::string& line, const std::string& name, Lay
 	if(batch_size != -1) n = batch_size;
 	ls->add_data(name,n,c,h,w,method);
 }
+void Parser::read_net_lrn(const std::string& line, const std::string& name, Layers* ls){
+	int local_size;
+	float alpha,beta;
+	sscanf(line.c_str(),"%d %f %f",&local_size,&alpha,&beta);
+	ls->add_lrn(name,local_size,alpha,beta);
+}
 void Parser::read_net_conv(const std::string& line, const std::string& name, Layers* ls){
 	char activity[100];
-	int kernel, filters, padding, stride;
-	sscanf(line.c_str(),"%d %d %d %d %s",&kernel, &filters, &padding, &stride, activity);
-	if (activity == string("none")) ls->add_conv(name,{filters,kernel,stride,padding},"");
-	else ls->add_conv(name,{filters,kernel,stride,padding},activity);
+	int kernel, filters, padding, stride, group;
+	sscanf(line.c_str(),"%d %d %d %d %d %s",&kernel, &filters, &padding, &stride, &group, activity);
+	if (activity == string("none")) ls->add_conv(name,{filters,kernel,stride,padding,group},"");
+	else ls->add_conv(name,{filters,kernel,stride,padding,group},activity);
 }
 void Parser::read_net_pool(const std::string& line, const std::string& name, Layers* ls){
 	char method[100];

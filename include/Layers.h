@@ -6,7 +6,7 @@
 class Layers{
 	public:
 	void add_data(const std::string& name, int n, int c, int h, int w, const std::string& method);
-	void add_conv(const std::string& name, const std::vector<int>& p4, const std::string& activity);
+	void add_conv(const std::string& name, const std::vector<int>& p5, const std::string& activity);
 	void add_pool(const std::string& name, const std::vector<int>& p3, const std::string& method);
 	void add_lrn(const std::string& name, int n, float alpha, float beta);
 	void add_fc(const std::string& name, int n, const std::string& activity);

@@ -61,16 +61,18 @@ void Layer::show_inputs(){
 
 		for(int b=0;b<n;++b){
 			printf("input batch %d:\n",b);
-			for(int k=0;k<1/*c*/;++k){
+			for(int k=0;k<c;++k){
 				for(int i=0;i<h;++i){
 					for(int j=0;j<w;++j)
-						printf("%f ",input.data[b*c*h*w + h*w*k + i*w + j]);
-					printf("\n");
+						printf("%g ", input.data[b*c*h*w + h*w*k + i*w + j]);
+						//printf("%d: %g, ",i*w+j, input.data[b*c*h*w + h*w*k + i*w + j]);
+					//printf("\n");
 				}
-				printf("\n");
+				//printf("\n");
 			}
 		}
 	}
+	printf("\n");
 }
 void Layer::show_outputs(){
 	if(outputs.size() == 0){
@@ -84,14 +86,16 @@ void Layer::show_outputs(){
 
 		for(int b=0;b<n;++b){
 			printf("output batch %d:\n",b);
-			for(int k=0;k<1/*c*/;++k){
+			for(int k=0;k<c;++k){
 				for(int i=0;i<h;++i){
 					for(int j=0;j<w;++j)
-						printf("%f ",output.data[b*c*h*w + h*w*k + i*w + j]);
-					printf("\n");
+						//printf("%d: %g, ",i*w+j, output.data[b*c*h*w + h*w*k + i*w + j]);
+						printf("%g ", output.data[b*c*h*w + h*w*k + i*w + j]);
+					//printf("\n");
 				}
-				printf("\n");
+				//printf("\n");
 			}
 		}
 	}
+	printf("\n");
 }

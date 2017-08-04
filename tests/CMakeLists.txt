@@ -17,3 +17,6 @@ target_link_libraries(vgg16_test ${Caffe_LIBRARIES} net004 ${OpenCV_LIBRARIES})
 
 add_executable(parser parser.cpp)
 target_link_libraries(parser net004 ${OpenCV_LIBRARIES})
+
+add_executable(alexnet_test alexnet_test.cpp)
+target_link_libraries(alexnet_test net004 ${OpenCV_LIBRARIES} ${Caffe_LIBRARIES})

@@ -3,7 +3,7 @@
 #include "BaseLayer.h"
 class LRNLayer: public Layer{
 	public:
-	LRNLayer(const std::string&name, int n, float beta, float alpha);
+	LRNLayer(const std::string&name, int n, float alpha, float beta);
 	virtual ~LRNLayer();
 	virtual void forward();
 	virtual void backward();
@@ -14,6 +14,7 @@ class LRNLayer: public Layer{
 	private:
 	int n = 0;
 	float beta = 0.0f, alpha = 0.0f;
+	Blob buffer;
 };
 
 #endif

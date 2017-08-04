@@ -82,8 +82,8 @@ void Layers::add_data(const std::string& name, int n, int c, int h, int w, const
 	Layer* l = new DataLayer(name, n,c,h,w, method);
 	add(name, &l);
 }
-void Layers::add_conv(const std::string&name, const std::vector<int>& p4, const std::string& activity){
-	Layer* l = new ConvLayer(name,p4[0],p4[1],p4[2],p4[3],activity);
+void Layers::add_conv(const std::string&name, const std::vector<int>& p5, const std::string& activity){
+	Layer* l = new ConvLayer(name,p5[0],p5[1],p5[2],p5[3],p5[4],activity);
 	add(name, &l);
 }
 void Layers::add_pool(const std::string&name, const std::vector<int>& p3, const std::string& method){

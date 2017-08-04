@@ -37,4 +37,5 @@ class Parser{
 	void read_net_activity(const std::string& line, const std::string& name, Layers* ls);
 	void read_net_fc(const std::string& line, const std::string& name, Layers* ls);
 	void read_net_loss(const std::string& line, const std::string& name, Layers* ls);
+	void read_net_lrn(const std::string& line, const std::string& name, Layers* ls);
 };

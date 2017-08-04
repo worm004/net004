@@ -132,6 +132,7 @@ void CaffeModelParser::write_net(const std::string& net_path){
 		else if(layer_type == "ReLU") write_net_relu(layer_name, param, ofile);
 		else if(layer_type == "InnerProduct") write_net_fc(layer_name, param, ofile);
 		else if(layer_type == "SoftmaxWithLoss") write_net_softmaxloss(layer_name, param, ofile);
+		else if(layer_type == "LRN") write_net_lrn(layer_name, param, ofile);
 		else{
 			printf("unknown layer: %s\n",layer_type.c_str());
 			exit(0);
@@ -147,8 +148,9 @@ void CaffeModelParser::write_net_conv(const std::string& layer_name, const caffe
 	int kernel_size = conv_param.kernel_size().size() == 1?conv_param.kernel_size()[0]:1;
 	int pad = conv_param.pad().size() == 1? conv_param.pad()[0]:0;
 	int stride = conv_param.stride().size() == 1? conv_param.stride()[0]:1;
+	int group = conv_param.group();
 
-	ofile<<kernel_size<<" "<<conv_param.num_output()<<" "<<pad<<" "<<stride<<" none"<<endl;
+	ofile<<kernel_size<<" "<<conv_param.num_output()<<" "<<pad<<" "<<stride<<" "<<group<<" none"<<endl;
 }
 void CaffeModelParser::write_net_pool(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
 	const caffe::PoolingParameter& pool_param = param.pooling_param();
@@ -185,6 +187,12 @@ void CaffeModelParser::write_net_fc(const std::string& layer_name, const caffe::
 void CaffeModelParser::write_net_softmaxloss(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
 	ofile<<"Layer: loss "<<layer_name<<endl;
 	ofile<<"softmax"<<endl;
+}
+void CaffeModelParser::write_net_lrn(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
+	const caffe::LRNParameter& lrn_param = param.lrn_param();
+	ofile<<"Layer: lrn "<<layer_name<<endl;
+	ofile<<lrn_param.local_size()<<" "<<lrn_param.alpha()<<" "<<lrn_param.beta()<<endl;
+
 }
 void CaffeModelParser::show_layers(){
 	const vector<boost::shared_ptr<caffe::Layer<float> >> layers = net->layers();

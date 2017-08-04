@@ -4,19 +4,19 @@ Layer: data data
 Layer: data label
 1 1 1 1 label
 Layer: conv conv1
-5 32 2 1 none
+5 32 2 1 1 none
 Layer: pool pool1
 3 0 2 max
 Layer: activity relu1
 relu
 Layer: conv conv2
-5 32 2 1 none
+5 32 2 1 1 none
 Layer: activity relu2
 relu
 Layer: pool pool2
 3 0 2 avg
 Layer: conv conv3
-5 64 2 1 none
+5 64 2 1 1 none
 Layer: activity relu3
 relu
 Layer: pool pool3

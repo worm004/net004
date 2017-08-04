@@ -168,29 +168,36 @@ int main(int argc, char** argv){
 	//int label = 8;
 	//float mean_r = 127 ,mean_g = 127 ,mean_b = 127;
 	//string net_path = "../caffe_models/cifar10_quick_train_test.prototxt",
-	//       model_path = "../caffe_models/cifar10_quick_iter_5000.caffemodel.h5",
+	//       model_path = "../caffe_models/cifar10_quick_iter_5000.caffemodel.h5";
 	
 	// vgg16
+	//int label = 628;
+	//float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
+	//string net_path = "../caffe_models/VGG_ILSVRC_16_layers_deploy.prototxt",
+	//       model_path = "../caffe_models/VGG_ILSVRC_16_layers.caffemodel";
+	
+
 	int label = 628;
 	float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
-	string net_path = "../caffe_models/VGG_ILSVRC_16_layers_deploy.prototxt",
-	       model_path = "../caffe_models/VGG_ILSVRC_16_layers.caffemodel",
-	       model_text_path = "model.txt",
+	string net_path = "../caffe_models/bvlc_alexnet.prototxt",
+	       model_path = "../caffe_models/bvlc_alexnet.caffemodel";
+	
+	string model_text_path = "model.txt",
 	       forward_text_path = "forward.txt",
 	       backward_text_path = "backward.txt";
-	
+
   	std::shared_ptr<caffe::Net<float> > net;
 	caffe::Caffe::set_mode(caffe::Caffe::CPU);
 	net = make_shared<caffe::Net<float>> (net_path, caffe::TEST);
 	net->CopyTrainedLayersFrom(model_path);
-	//show_model(net, model_text_path);
+	show_model(net, model_text_path);
 
 	string img_path = "../imgs/westerdam-ship-size.jpg";
 	load_img(net,img_path,label,mean_r,mean_g,mean_b);
 	net->Forward();
 	show_forward(net, forward_text_path);
 	//net->Backward();
-	show_backward(net, backward_text_path);
+	//show_backward(net, backward_text_path);
 
 	return 0;
 }
