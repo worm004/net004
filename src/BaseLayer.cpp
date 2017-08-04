@@ -51,11 +51,11 @@ int Layer::output_parameter_number(){
 }
 void Layer::show_inputs(){
 	if(inputs.size() == 0){
-		printf("\nno input\n");
+		printf("no input\n");
 		return;
 	}
 	for(int index = 0; index < inputs.size(); ++index){
-		printf("\ninput index: %d\n",index);
+		printf("input index: %d\n",index);
 		Blob &input = inputs[index];
 		int n = input.n, c = input.c, h = input.h, w = input.w;
 
@@ -76,11 +76,11 @@ void Layer::show_inputs(){
 }
 void Layer::show_outputs(){
 	if(outputs.size() == 0){
-		printf("\nno output\n");
+		printf("no output\n");
 		return;
 	}
 	for(int index = 0; index < outputs.size(); ++index){
-		printf("\noutput index: %d\n",index);
+		printf("output index: %d\n",index);
 		Blob &output = outputs[index];
 		int n = output.n, c = output.c, h = output.h, w = output.w;
 

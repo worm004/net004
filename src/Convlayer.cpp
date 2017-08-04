@@ -24,7 +24,7 @@ ConvLayer::~ConvLayer(){
 }
 
 void ConvLayer::forward(){
-	printf("forward: %s %s\n",type.c_str(), name.c_str());
+	//printf("forward: %s %s\n",type.c_str(), name.c_str());
 	Blob &input = inputs[0], 
 	     &output = outputs[0];
 
@@ -40,16 +40,29 @@ void ConvLayer::forward(){
 	      * bias_data = bias.data;
 	for(int b = 0;b < batch_size; ++b){
 		//im2col(idata, input.c, input.h, input.w, col_data, kernel, stride, padding);
-		im2col2(idata, table, col_data, kernel * kernel * outputs[0].hw() * inputs[0].c);
+		//im2col2(idata, table, col_data, kernel * kernel * outputs[0].hw() * inputs[0].c);
 
-		cblas_sgemm(CblasRowMajor, 
-				CblasNoTrans, CblasTrans, 
-				filters, nloc, w,
-				1.0f,
-				weight_data, w,
-				col_data, w,
-				0.0,
-				odata, nloc);
+		//cblas_sgemm(CblasRowMajor, 
+		//		CblasNoTrans, CblasTrans, 
+		//		filters, nloc, w,
+		//		1.0f,
+		//		weight_data, w,
+		//		col_data, w,
+		//		0.0,
+		//		odata, nloc);
+		
+		for(int g=0;g<group;++g){
+			im2col2(idata + input.chw()/group*g, table, col_data + ncol/group * g, kernel * kernel * outputs[0].hw() * inputs[0].c/group);
+
+			cblas_sgemm(CblasRowMajor, 
+					CblasNoTrans, CblasTrans, 
+					filters/group, nloc, w/group,
+					1.0f,
+					weight_data + g * weight.nchw()/group, w/group,
+					col_data + ncol/group * g, w/group,
+					0.0,
+					odata + output.chw()/group * g, nloc);
+		}
 
 		for(int i = 0; i < filters; ++i)
 		for(int j = 0; j < nloc; ++j)
@@ -74,8 +87,8 @@ void ConvLayer::forward(){
 			 }
 	}
 
-	show_inputs();
-	show_outputs();
+	//show_inputs();
+	//show_outputs();
 	//getchar();
 }
 
@@ -132,9 +145,9 @@ void ConvLayer::setup_data(){
 	col = new float[ncol];
 	memset(col, 0, sizeof(float) * ncol);
 
-	table = new int[ncol];
-	memset(table, 0, sizeof(int) * ncol / inputs[0].n);
-	generate_table(inputs[0].c, inputs[0].h, inputs[0].w, table, kernel, stride, padding);
+	table = new int[ncol/inputs[0].n/group];
+	memset(table, 0, sizeof(int) * ncol / inputs[0].n/group);
+	generate_table(inputs[0].c/group, inputs[0].h, inputs[0].w, table, kernel, stride, padding);
 
 	// activity
 	activity_mask = new bool[outputs[0].nchw()];

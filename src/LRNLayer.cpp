@@ -14,7 +14,7 @@ LRNLayer::LRNLayer(
 LRNLayer::~LRNLayer(){
 }
 void LRNLayer::forward(){
-	printf("forward: %s %s\n",type.c_str(), name.c_str());
+	//printf("forward: %s %s\n",type.c_str(), name.c_str());
 	
 	const Blob& ib = inputs[0], &ob = outputs[0];
 	float *buf_data = buffer.data;
@@ -49,8 +49,8 @@ void LRNLayer::forward(){
 	int nchw = ib.nchw();
 	for(int i=0;i<nchw;++i)
 		odata[i] = pow(1 + odata[i],-beta) * idata[i];
-	show_inputs();
-	show_outputs();
+	//show_inputs();
+	//show_outputs();
 }
 void LRNLayer::backward(){
 }

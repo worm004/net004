@@ -27,12 +27,12 @@ void ActivityLayer::forward_relu(){
 }
 
 void ActivityLayer::forward(){
-	printf("forward: %s %s\n",type.c_str(), name.c_str());
+	//printf("forward: %s %s\n",type.c_str(), name.c_str());
 
-	show_inputs();
+	//show_inputs();
 	if(method == "relu") forward_relu();
 	else printf("not implemented %s in activit layer\n",method.c_str());
-	show_outputs();
+	//show_outputs();
 
 }
 void ActivityLayer::backward(){
