@@ -93,22 +93,30 @@ bool Connections::tsort(){
 	sorted_cs.clear();
 	map<string, int> ins;
 	indegrees(ins);
+
 	set<string> noins;
 	for(const auto& l: ins)
 		if(l.second == 0) noins.insert(l.first);
 	while(!noins.empty()){
-		const string& l = *noins.begin();
-		noins.erase(noins.begin());
+		const string l = *noins.begin();
 		sorted_cs.push_back(l);
+		noins.erase(noins.begin());
 		if(cs.find(l) == cs.end()) continue;
 		for(const auto& to : cs[l]){
 			ins[to] -= 1;
-			if(ins[to] == 0) noins.insert(to);
+			if(ins[to] == 0) {
+				noins.insert(to);
+			}
 		}
 	}
-	for(const auto&l:ins)
-		if(l.second !=0) return false;
-	return true;
+
+	bool ret = true;
+	for(const auto&l:ins){
+		if(l.second !=0) {
+			ret = false;
+		}
+	}
+	return ret;
 
 }
 bool Connections::exist(const std::string& src){

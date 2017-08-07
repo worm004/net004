@@ -11,8 +11,9 @@ class Layers{
 	void add_lrn(const std::string& name, int n, float alpha, float beta);
 	void add_fc(const std::string& name, int n, const std::string& activity);
 	void add_loss(const std::string& name, const std::string& method);
-	void add_concat(const std::string& name);
+	void add_concat(const std::string& name, const std::string& method = "channel");
 	void add_activity(const std::string& name, const std::string& method);
+	void add_split(const std::string& name);
 	void add(const std::string& name, Layer** p);
 
 	void show();

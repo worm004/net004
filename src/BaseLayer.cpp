@@ -11,6 +11,8 @@ Layer::~Layer(){
 		inputs[i].clear();
 	for(int i=0;i<outputs.size();++i)
 		outputs[i].clear();
+	inputs.clear();
+	outputs.clear();
 }
 void Layer::setup_shape(){
 }

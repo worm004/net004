@@ -20,3 +20,6 @@ target_link_libraries(parser net004 ${OpenCV_LIBRARIES})
 
 add_executable(alexnet_test alexnet_test.cpp)
 target_link_libraries(alexnet_test net004 ${OpenCV_LIBRARIES} ${Caffe_LIBRARIES})
+
+add_executable(gnetv1_test gnetv1_test.cpp)
+target_link_libraries(gnetv1_test net004 ${OpenCV_LIBRARIES} ${Caffe_LIBRARIES})

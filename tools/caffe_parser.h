@@ -19,6 +19,8 @@ private:
 	void write_net_fc(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile);
 	void write_net_softmaxloss(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile);
 	void write_net_lrn(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile);
+	void write_net_split(const std::string& layer_name, std::ofstream& ofile);
+	void write_net_concat(const std::string& layer_name, std::ofstream& ofile);
 	void write_net(const std::string& net_path);
 	void write_model(const std::string& model_path);
 	void write_model2(const std::string& model_path);

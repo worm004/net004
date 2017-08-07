@@ -8,6 +8,7 @@
 #include "LossLayer.h"
 #include "ConcatLayer.h"
 #include "ActivityLayer.h"
+#include "SplitLayer.h"
 
 void Layers::add(const std::string& name, Layer** p){
 	if(layers.find(name) != layers.end()){
@@ -102,7 +103,11 @@ void Layers::add_loss(const std::string&name, const std::string& method){
 	Layer* l = new LossLayer(name,method);
 	add(name, &l);
 }
-void Layers::add_concat(const std::string& name){
-	Layer* l = new ConcatLayer(name);
+void Layers::add_concat(const std::string& name, const std::string& method){
+	Layer* l = new ConcatLayer(name, method);
+	add(name, &l);
+}
+void Layers::add_split(const std::string& name){
+	Layer* l = new SplitLayer(name);
 	add(name, &l);
 }

@@ -3,7 +3,7 @@
 #include "BaseLayer.h"
 class ConcatLayer: public Layer{
 	public:
-	ConcatLayer(const std::string&name);
+	ConcatLayer(const std::string&name, const std::string& method);
 	virtual ~ConcatLayer();
 	virtual void forward();
 	virtual void backward();
@@ -11,7 +11,10 @@ class ConcatLayer: public Layer{
 	virtual void setup_data();
 	virtual void show()const;
 
+	void forward_channel();
+
 	Blob output, output_dif;
+	std::string method;
 };
 
 #endif

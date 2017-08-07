@@ -1,12 +1,38 @@
 #include "stdlib.h"
 #include "ConcatLayer.h"
-ConcatLayer::ConcatLayer(const std::string&name):Layer(name,"concat"){
+ConcatLayer::ConcatLayer(const std::string&name, const std::string& method):Layer(name,"concat"), method(method){
 }
 ConcatLayer::~ConcatLayer(){
 }
 void ConcatLayer::forward(){
+	//printf("forward: %s %s\n",type.c_str(), name.c_str());
+	//show_inputs();
+
+	if(method == "channel"){
+		forward_channel();
+	}
+	else{
+		printf("no such method: %s in concat layer\n",method.c_str());
+		exit(0);
+	}
+	//show_outputs();
+}
+void ConcatLayer::forward_channel(){
+	int n = inputs[0].n;
+	Blob& ob = outputs[0];
+	float *odata = ob.data;
+	
+	for(int i=0;i<n;++i){
+		for(int j=0;j<inputs.size();++j){
+			const Blob& ib = inputs[j];
+			float *idata = ib.data + ib.chw() * i;
+			memcpy(odata,idata,sizeof(float)*ib.chw());
+			odata += ib.chw();
+		}
+	}
 }
 void ConcatLayer::backward(){
+	printf("backward: %s %s\n",type.c_str(), name.c_str());
 }
 void ConcatLayer::setup_shape(){
 	if( (inputs.size()<=1) || (input_difs.size()<=1)){

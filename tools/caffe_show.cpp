@@ -176,12 +176,18 @@ int main(int argc, char** argv){
 	//string net_path = "../caffe_models/VGG_ILSVRC_16_layers_deploy.prototxt",
 	//       model_path = "../caffe_models/VGG_ILSVRC_16_layers.caffemodel";
 	
-
+	// alexnet
+	//int label = 628;
+	//float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
+	//string net_path = "../caffe_models/bvlc_alexnet.prototxt",
+	//       model_path = "../caffe_models/bvlc_alexnet.caffemodel";
+	
+	// gnet
 	int label = 628;
 	float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
-	string net_path = "../caffe_models/bvlc_alexnet.prototxt",
-	       model_path = "../caffe_models/bvlc_alexnet.caffemodel";
-	
+	string net_path = "../caffe_models/bvlc_googlenet_deploy.prototxt",
+	       model_path = "../caffe_models/bvlc_googlenet.caffemodel";
+
 	string model_text_path = "model.txt",
 	       forward_text_path = "forward.txt",
 	       backward_text_path = "backward.txt";

@@ -27,7 +27,7 @@ class Layer{
 		return (w + 2 * padding - kernel) / stride + 1;
 	}
 	static int i2o_ceil(int w, int kernel, int stride, int padding){
-		return static_cast<int>(std::ceil(static_cast<float>( w + 2 * padding - kernel) / stride)) + 1;
+		return (w + 2 * padding - kernel + stride - 1) / stride + 1;
 	}
 
 	std::vector<Blob> inputs, input_difs, outputs, output_difs;

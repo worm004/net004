@@ -42,12 +42,16 @@ void PoolLayer::forward_avgpool(){
 	}
 }
 void PoolLayer::forward_maxpool(){
+
 	int h = inputs[0].h,
 	    w = inputs[0].w,
 	    hw = inputs[0].hw(),
 	    bc = inputs[0].n * inputs[0].c,
-	    bottom = (h + padding * 2 - kernel)%kernel + h + padding - kernel,
-	    right = (w + padding * 2 - kernel)%kernel + w + padding - kernel;
+	    //bottom = (h + padding * 2 - kernel)%kernel + h + padding - kernel,
+	    //right = (w + padding * 2 - kernel)%kernel + w + padding - kernel;
+	    bottom = ((h + padding * 2 - kernel+stride-1)/stride + 1)*stride - padding-1,
+	    right = ((w + padding * 2 - kernel+stride-1)/stride + 1)*stride - padding-1;
+
 	float *idata = inputs[0].data,
 	      *odata = outputs[0].data;
 
@@ -86,7 +90,6 @@ void PoolLayer::forward(){
 
 	//show_inputs();
 	//show_outputs();
-	//getchar();
 }
 void PoolLayer::backward_maxpool(){
 }

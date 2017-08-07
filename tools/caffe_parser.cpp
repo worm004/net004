@@ -133,6 +133,8 @@ void CaffeModelParser::write_net(const std::string& net_path){
 		else if(layer_type == "InnerProduct") write_net_fc(layer_name, param, ofile);
 		else if(layer_type == "SoftmaxWithLoss") write_net_softmaxloss(layer_name, param, ofile);
 		else if(layer_type == "LRN") write_net_lrn(layer_name, param, ofile);
+		else if(layer_type == "Split") write_net_split(layer_name, ofile);
+		else if(layer_type == "Concat") write_net_concat(layer_name, ofile);
 		else{
 			printf("unknown layer: %s\n",layer_type.c_str());
 			exit(0);
@@ -141,6 +143,14 @@ void CaffeModelParser::write_net(const std::string& net_path){
 	ofile<<"Connections:"<<endl;
 	for(auto i:connections) ofile<<i.first<<" "<<i.second<<endl;
 	ofile.close();
+}
+void CaffeModelParser::write_net_concat(const std::string& layer_name, std::ofstream& ofile){
+	ofile<<"Layer: concat "<<layer_name<<endl;
+	ofile<<"channel"<<endl;
+}
+void CaffeModelParser::write_net_split(const std::string& layer_name, std::ofstream& ofile){
+	ofile<<"Layer: split "<<layer_name<<endl;
+	ofile<<endl;
 }
 void CaffeModelParser::write_net_conv(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
 	const caffe::ConvolutionParameter& conv_param = param.convolution_param();

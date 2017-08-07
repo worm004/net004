@@ -12,6 +12,17 @@
 #include "ActivityLayer.h"
 
 using namespace std;
+Parser::Parser(){
+	read_net_funcs["conv"] = &Parser::read_net_conv;
+	read_net_funcs["pool"] = &Parser::read_net_pool;
+	read_net_funcs["activity"] = &Parser::read_net_activity;
+	read_net_funcs["fc"] = &Parser::read_net_fc;
+	read_net_funcs["loss"] = &Parser::read_net_loss;
+	read_net_funcs["lrn"] = &Parser::read_net_lrn;
+	read_net_funcs["data"] = &Parser::read_net_data;
+	read_net_funcs["split"] = &Parser::read_net_split;
+	read_net_funcs["concat"] = &Parser::read_net_concat;
+}
 void Parser::write(Net004* net, const std::string& net_path, const std::string& data_path){	
 	Connections &cs = net->cs;
 	Layers &ls = net->ls;
@@ -143,7 +154,6 @@ void Parser::write_dat_fc(Layer* layer, FILE* ofile){
 	fwrite(&(l->weight.w), sizeof(int), 1, ofile);
 	fwrite(l->weight.data, sizeof(float), l->weight.nchw(), ofile);
 
-
 	sprintf(buffer,"Layer: %s bias",l->name.c_str());
 	fwrite(buffer, sizeof(char), 100, ofile);
 	fwrite(&(l->bias.n), sizeof(int), 1, ofile);
@@ -183,14 +193,10 @@ void Parser::read_net(const std::string& path, Net004* net){
 				char from[100],to[100];
 				sscanf(line.c_str(),"%s %s",from,to);
 				cs.add(vector<string>({from,to}));
+			}else if(read_net_funcs.find(layer_type) != read_net_funcs.end()){
+				read_net_func func = read_net_funcs[layer_type];
+				(this->*func)(line,layer_name,&ls);
 			}
-			else if(layer_type == string("conv")) read_net_conv(line,layer_name,&ls);
-			else if(layer_type == string("pool")) read_net_pool(line,layer_name,&ls);
-			else if(layer_type == string("activity")) read_net_activity(line,layer_name,&ls);
-			else if(layer_type == string("fc")) read_net_fc(line,layer_name,&ls);
-			else if(layer_type == string("loss")) read_net_loss(line,layer_name,&ls);
-			else if(layer_type == string("data")) read_net_data(line,layer_name,&ls);
-			else if(layer_type == string("lrn")) read_net_lrn(line,layer_name,&ls);
 			else {
 				printf("No such layer to parser %s\n",layer_type);
 				exit(0);
@@ -242,6 +248,9 @@ void Parser::read_net_data(const std::string& line, const std::string& name, Lay
 	if(batch_size != -1) n = batch_size;
 	ls->add_data(name,n,c,h,w,method);
 }
+void Parser::read_net_split(const std::string& line, const std::string& name, Layers* ls){
+	ls->add_split(name);
+}
 void Parser::read_net_lrn(const std::string& line, const std::string& name, Layers* ls){
 	int local_size;
 	float alpha,beta;
@@ -277,4 +286,9 @@ void Parser::read_net_loss(const std::string& line, const std::string& name, Lay
 	char method[100];
 	sscanf(line.c_str(),"%s",method);
 	ls->add_loss(name, method);
+}
+void Parser::read_net_concat(const std::string& line, const std::string& name, Layers* ls){
+	char method[100];
+	sscanf(line.c_str(),"%s",method);
+	ls->add_concat(name, method);
 }
