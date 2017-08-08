@@ -1,3 +1,4 @@
+#include <iostream>
 #include <string>
 #include <fstream>
 #include <vector>
@@ -32,8 +33,10 @@ void show_model(const std::shared_ptr<caffe::Net<float> >& net, const std::strin
 			ofile << "weight: "<<params[0]->shape_string()<<endl;
 			show_param(params[0].get(), ofile);
 
-			ofile << "bias: "<<params[1]->shape_string()<<endl;
-			show_param(params[1].get(), ofile);
+			if(params.size()>1){
+				ofile << "bias: "<<params[1]->shape_string()<<endl;
+				show_param(params[1].get(), ofile);
+			}
 		}
 		else{
 			for(int j=0;j<params.size();++j){
@@ -183,10 +186,16 @@ int main(int argc, char** argv){
 	//       model_path = "../caffe_models/bvlc_alexnet.caffemodel";
 	
 	// gnet
+	//int label = 628;
+	//float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
+	//string net_path = "../caffe_models/bvlc_googlenet_deploy.prototxt",
+	//       model_path = "../caffe_models/bvlc_googlenet.caffemodel";
+
+	// resnet
 	int label = 628;
 	float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
-	string net_path = "../caffe_models/bvlc_googlenet_deploy.prototxt",
-	       model_path = "../caffe_models/bvlc_googlenet.caffemodel";
+	string net_path = "../caffe_models/ResNet-50-deploy.prototxt",
+	       model_path = "../caffe_models/ResNet-50-model.caffemodel";
 
 	string model_text_path = "model.txt",
 	       forward_text_path = "forward.txt",
@@ -198,10 +207,10 @@ int main(int argc, char** argv){
 	net->CopyTrainedLayersFrom(model_path);
 	show_model(net, model_text_path);
 
-	string img_path = "../imgs/westerdam-ship-size.jpg";
-	load_img(net,img_path,label,mean_r,mean_g,mean_b);
-	net->Forward();
-	show_forward(net, forward_text_path);
+	//string img_path = "../imgs/westerdam-ship-size.jpg";
+	//load_img(net,img_path,label,mean_r,mean_g,mean_b);
+	//net->Forward();
+	//show_forward(net, forward_text_path);
 	//net->Backward();
 	//show_backward(net, backward_text_path);
 

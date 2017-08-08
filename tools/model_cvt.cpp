@@ -23,10 +23,15 @@ void cvt_caffe_model(){
 	//       net004_net_path = "../models/alexnet.net004.net",
 	//       net004_model_path = "../models/alexnet.net004.data";
 
-	string caffe_net_path = "../caffe_models/bvlc_googlenet_deploy.prototxt",
-	       caffe_model_path = "../caffe_models/bvlc_googlenet.caffemodel",
-	       net004_net_path = "../models/gnetv1.net004.net",
-	       net004_model_path = "../models/gnetv1.net004.data";
+	//string caffe_net_path = "../caffe_models/bvlc_googlenet_deploy.prototxt",
+	//       caffe_model_path = "../caffe_models/bvlc_googlenet.caffemodel",
+	//       net004_net_path = "../models/gnetv1.net004.net",
+	//       net004_model_path = "../models/gnetv1.net004.data";
+
+	string caffe_net_path = "../caffe_models/ResNet-50-deploy.prototxt",
+	       caffe_model_path = "../caffe_models/ResNet-50-model.caffemodel",
+	       net004_net_path = "../models/resnet50.net004.net",
+	       net004_model_path = "../models/resnet50.net004.data";
 
 	CaffeModelParser parser;
 	printf("convert caffe model:\n");

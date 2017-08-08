@@ -45,6 +45,19 @@ void CaffeModelParser::write(const std::string& net_path, const std::string& mod
 	//write_model(model_path);
 	write_model2(model_path);
 }
+
+void CaffeModelParser::write_blob(const std::string& layer_name, const std::string& blob_name, const caffe::Blob<float> *blob, FILE* file){
+	char buffer[100];
+	sprintf(buffer,"Layer: %s %s",layer_name.c_str(),blob_name.c_str());
+	fwrite(buffer, sizeof(char), 100, file);
+	int num = blob->num(), channel = blob->channels(), height = blob->height(), width = blob->width();
+	int total = num * channel * height * width;
+	fwrite(&num, sizeof(int), 1, file);
+	fwrite(&channel, sizeof(int), 1, file);
+	fwrite(&height, sizeof(int), 1, file);
+	fwrite(&width, sizeof(int), 1, file);
+	fwrite(blob->cpu_data(), sizeof(float), total, file);
+}
 void CaffeModelParser::write_model2(const std::string& model_path){
 	FILE* file = fopen(model_path.c_str(), "wb");
 	const vector<boost::shared_ptr<caffe::Layer<float> >> layers = net->layers();
@@ -53,31 +66,17 @@ void CaffeModelParser::write_model2(const std::string& model_path){
 		const vector<boost::shared_ptr<caffe::Blob<float> > >& params = layers[i]->blobs();
 		const string& layer_type = layers[i]->type();
 		if((layer_type == "Convolution") || (layer_type == "InnerProduct")){
-			caffe::Blob<float> *bweight = params[0].get();
-			char buffer[100];
-			sprintf(buffer,"Layer: %s weight",layer_names[i].c_str());
-			fwrite(buffer, sizeof(char), 100, file);
-			int num = bweight->num(), channel = bweight->channels(), height = bweight->height(), width = bweight->width();
-			fwrite(&num, sizeof(int), 1, file);
-			fwrite(&channel, sizeof(int), 1, file);
-			fwrite(&height, sizeof(int), 1, file);
-			fwrite(&width, sizeof(int), 1, file);
-			int total = bweight->num() * bweight->channels() * bweight->height() * bweight->width();
-			fwrite(bweight->cpu_data(), sizeof(float), total, file);
-
-			caffe::Blob<float> *bbias = params[1].get();
-			sprintf(buffer,"Layer: %s bias",layer_names[i].c_str());
-			fwrite(buffer, sizeof(char), 100, file);
-			num = bbias->num();
-			channel = bbias->channels();
-			height = bbias->height();
-			width = bbias->width();
-			fwrite(&num, sizeof(int), 1, file);
-			fwrite(&channel, sizeof(int), 1, file);
-			fwrite(&height, sizeof(int), 1, file);
-			fwrite(&width, sizeof(int), 1, file);
-			total = bbias->num() * bbias->channels() * bbias->height() * bbias->width();
-			fwrite(bbias->cpu_data(), sizeof(float), total, file);
+			write_blob(layer_names[i], "weight", params[0].get(),file);
+			if(params.size()>1) write_blob(layer_names[i], "bias", params[1].get(),file);
+		} 
+		else if(layer_type == "BatchNorm"){
+			write_blob(layer_names[i], "mean", params[0].get(),file);
+			if(params.size()>1) write_blob(layer_names[i], "variance", params[1].get(),file);
+			if(params.size()>2) write_blob(layer_names[i], "scale", params[2].get(),file);
+		}
+		else if(layer_type == "Scale"){
+			write_blob(layer_names[i], "scale", params[0].get(),file);
+			if(params.size()>1) write_blob(layer_names[i], "bias", params[1].get(),file);
 		}
 	}
 	fclose(file);
@@ -135,6 +134,9 @@ void CaffeModelParser::write_net(const std::string& net_path){
 		else if(layer_type == "LRN") write_net_lrn(layer_name, param, ofile);
 		else if(layer_type == "Split") write_net_split(layer_name, ofile);
 		else if(layer_type == "Concat") write_net_concat(layer_name, ofile);
+		else if(layer_type == "BatchNorm") write_net_bn(layer_name,param,ofile);
+		else if(layer_type == "Scale") write_net_scale(layer_name,param,ofile);
+		else if(layer_type == "Eltwise") write_net_eltwise(layer_name,param,ofile);
 		else{
 			printf("unknown layer: %s\n",layer_type.c_str());
 			exit(0);
@@ -143,6 +145,35 @@ void CaffeModelParser::write_net(const std::string& net_path){
 	ofile<<"Connections:"<<endl;
 	for(auto i:connections) ofile<<i.first<<" "<<i.second<<endl;
 	ofile.close();
+}
+void CaffeModelParser::write_net_eltwise(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
+	ofile<<"Layer: eltwise "<<layer_name<<endl;
+	const caffe::EltwiseParameter& eltwise_param = param.eltwise_param();
+	if(eltwise_param.operation() == caffe::EltwiseParameter_EltwiseOp_SUM){
+		ofile<<"sum"<<endl;
+	}
+	else if(eltwise_param.operation() == caffe::EltwiseParameter_EltwiseOp_MAX){
+		ofile<<"max"<<endl;
+	}
+	else if(eltwise_param.operation() == caffe::EltwiseParameter_EltwiseOp_PROD){
+		ofile<<"prod"<<endl;
+	}
+	else{
+		printf("no such op in eltwise\n");
+		exit(0);
+	}
+}
+void CaffeModelParser::write_net_scale(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
+	const caffe::ScaleParameter& scale_param = param.scale_param();
+	ofile<<"Layer: scale "<<layer_name<<endl;
+	if(scale_param.bias_term())
+		ofile<<"bias"<<endl;
+	else
+		ofile<<"no bias"<<endl;
+}
+void CaffeModelParser::write_net_bn(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
+	ofile<<"Layer: batchnorm "<<layer_name<<endl;
+	ofile<<endl;
 }
 void CaffeModelParser::write_net_concat(const std::string& layer_name, std::ofstream& ofile){
 	ofile<<"Layer: concat "<<layer_name<<endl;

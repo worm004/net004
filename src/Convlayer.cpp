@@ -64,9 +64,11 @@ void ConvLayer::forward(){
 					odata + output.chw()/group * g, nloc);
 		}
 
-		for(int i = 0; i < filters; ++i)
-		for(int j = 0; j < nloc; ++j)
-			odata[i*nloc +j] += bias_data[i];
+		if(bias_data){
+			for(int i = 0; i < filters; ++i)
+			for(int j = 0; j < nloc; ++j)
+				odata[i*nloc +j] += bias_data[i];
+		}
 
 		idata += istep;
 		odata += output.chw();

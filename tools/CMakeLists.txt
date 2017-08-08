@@ -16,3 +16,5 @@ target_link_libraries(model_cvt ${Caffe_LIBRARIES} net004 ${OpenCV_LIBRARIES})
 add_executable(caffe_show caffe_show.cpp)
 target_link_libraries(caffe_show ${Caffe_LIBRARIES} ${OpenCV_LIBRARIES})
 
+add_executable(caffe_mean_show caffe_mean_show.cpp)
+target_link_libraries(caffe_mean_show ${Caffe_LIBRARIES} ${OpenCV_LIBRARIES})
