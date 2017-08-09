@@ -24,7 +24,7 @@ ConvLayer::~ConvLayer(){
 }
 
 void ConvLayer::forward(){
-	printf("forward: %s %s\n",type.c_str(), name.c_str());
+	//printf("forward: %s %s\n",type.c_str(), name.c_str());
 	Blob &input = inputs[0], 
 	     &output = outputs[0];
 

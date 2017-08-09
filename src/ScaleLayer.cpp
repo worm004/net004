@@ -6,7 +6,7 @@ ScaleLayer::ScaleLayer(const std::string& name):
 ScaleLayer::~ScaleLayer(){
 }
 void ScaleLayer::forward(){
-	printf("forward: %s %s\n",type.c_str(), name.c_str());
+	//printf("forward: %s %s\n",type.c_str(), name.c_str());
 
 	float *weight_data = weight.data, *bias_data = bias.data;
 

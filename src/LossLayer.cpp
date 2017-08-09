@@ -52,11 +52,11 @@ void LossLayer::forward_softmax(){
 
 }
 void LossLayer::forward(){
-	printf("forward: %s %s\n",type.c_str(), method.c_str());
-	show_inputs();
+	//printf("forward: %s %s\n",type.c_str(), method.c_str());
+	//show_inputs();
 	if(method == "softmax")
 		forward_softmax();
-	show_outputs();
+	//show_outputs();
 	
 }
 void LossLayer::backward(){

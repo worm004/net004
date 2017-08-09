@@ -40,6 +40,18 @@ void cvt_caffe_model(const std::string& name){
 	net004_net_path = "../models/resnet50.net004.net",
 	net004_model_path = "../models/resnet50.net004.data";
 	}
+	else if(name == "resnet101"){
+	caffe_net_path = "../caffe_models/ResNet-101-deploy.prototxt",
+	caffe_model_path = "../caffe_models/ResNet-101-model.caffemodel",
+	net004_net_path = "../models/resnet101.net004.net",
+	net004_model_path = "../models/resnet101.net004.data";
+	}
+	else if(name == "resnet152"){
+	caffe_net_path = "../caffe_models/ResNet-152-deploy.prototxt",
+	caffe_model_path = "../caffe_models/ResNet-152-model.caffemodel",
+	net004_net_path = "../models/resnet152.net004.net",
+	net004_model_path = "../models/resnet152.net004.data";
+	}
 	else{
 		printf("no such net: %s\n",name.c_str());
 		return;

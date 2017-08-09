@@ -12,9 +12,20 @@
 #define cal_duration(t1,t2) (std::chrono::duration_cast<std::chrono::milliseconds>((t2) - (t1)).count())
 using namespace cv;
 using namespace std;
-float caffe_forward(const std::string& img_path, int label){
-	string net_path = "../caffe_models/ResNet-50-deploy.prototxt",
-	       model_path = "../caffe_models/ResNet-50-model.caffemodel";
+float caffe_forward(const std::string& img_path, int label, const std::string& net_name){
+	string net_path, model_path;
+
+	if(net_name == "50"){
+		net_path = "../caffe_models/ResNet-50-deploy.prototxt";
+		model_path = "../caffe_models/ResNet-50-model.caffemodel";
+	} else if(net_name == "101"){
+		net_path = "../caffe_models/ResNet-101-deploy.prototxt";
+		model_path = "../caffe_models/ResNet-101-model.caffemodel";
+	} else if(net_name == "152"){
+		net_path = "../caffe_models/ResNet-152-deploy.prototxt";
+		model_path = "../caffe_models/ResNet-152-model.caffemodel";
+	}
+
   	std::shared_ptr<caffe::Net<float> > net;
 	caffe::Caffe::set_mode(caffe::Caffe::CPU);
 	auto t1 = now();
@@ -62,9 +73,21 @@ float caffe_forward(const std::string& img_path, int label){
 
 	return blob->cpu_data()[0];
 }
-float net004_forward(const std::string& img_path, int label){
-	string net_path = "../models/resnet50.net004.net",
-	       model_path = "../models/resnet50.net004.data";
+float net004_forward(const std::string& img_path, int label, const std::string& net_name){
+	string net_path, model_path;
+	
+	if(net_name == "50"){
+	net_path = "../models/resnet50.net004.net";
+	model_path = "../models/resnet50.net004.data";
+	}else if(net_name == "101"){
+	net_path = "../models/resnet101.net004.net";
+	model_path = "../models/resnet101.net004.data";
+	}else if(net_name == "152"){
+	net_path = "../models/resnet152.net004.net";
+	model_path = "../models/resnet152.net004.data";
+	}
+
+
 	Net004 net;
 	Parser parser;
 	auto t1 = now();
@@ -101,16 +124,21 @@ float net004_forward(const std::string& img_path, int label){
 	return net.ls["loss"]->outputs[0].data[0];
 }
 int main(int argc, char **argv){
+
+
 	google::InitGoogleLogging(argv[0]);
 	google::SetCommandLineOption("GLOG_minloglevel", "2");
 
 	string img_path = "../imgs/westerdam-ship-size.jpg";
 	int label = 628;
-	//float caffe_score = caffe_forward(img_path, label);
-	float net004_score = net004_forward(img_path, label);
+	char nets[3][100] = {"50","101","152"};
 
-	//bool ret = abs(caffe_score - net004_score) < 1e-5;
-	//printf("[TEST] gnetv1 test %s\n",ret?"sucessful":"failed");
+	for(int i=0;i<3;++i){
+		float caffe_score = caffe_forward(img_path, label,nets[i]);
+		float net004_score = net004_forward(img_path, label,nets[i]);
+		bool ret = abs(caffe_score - net004_score) < 1e-5;
+		printf("[TEST] resnet%s test %s\n",nets[i],ret?"sucessful":"failed");
+	}
 
 	return 0;
 }

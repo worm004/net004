@@ -83,7 +83,7 @@ void PoolLayer::forward_maxpool(){
 	}
 }
 void PoolLayer::forward(){
-	printf("forward: %s %s %s\n",type.c_str(), name.c_str(), method.c_str());
+	//printf("forward: %s %s %s\n",type.c_str(), name.c_str(), method.c_str());
 	//show_inputs();
 	if(method == "max") forward_maxpool();
 	else if(method == "avg") forward_avgpool();

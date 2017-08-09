@@ -6,7 +6,7 @@ BNLayer::BNLayer(const std::string& name):Layer(name,"bn"){
 BNLayer::~BNLayer(){
 }
 void BNLayer::forward(){
-	printf("forward: %s %s\n",type.c_str(), name.c_str());
+	//printf("forward: %s %s\n",type.c_str(), name.c_str());
 
 	//show_inputs();
 	// this should be done before forward

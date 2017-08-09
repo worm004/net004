@@ -5,7 +5,7 @@ EltwiseLayer::EltwiseLayer(const std::string& name, const std::string& method):m
 EltwiseLayer::~EltwiseLayer(){
 }
 void EltwiseLayer::forward(){
-	printf("forward: %s %s\n",type.c_str(), name.c_str());
+	//printf("forward: %s %s\n",type.c_str(), name.c_str());
 	//show_inputs();
 	if(method == "sum"){
 		int nchw = outputs[0].nchw();
