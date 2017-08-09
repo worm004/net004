@@ -40,7 +40,7 @@ void ActivityLayer::backward(){
 }
 void ActivityLayer::setup_shape(){
 	if( (inputs.size()!=1) || (input_difs.size()!=1)){
-		printf("error: conv input blob number should be 1\n");
+		printf("error: acvtivity input blob number should be 1\n");
 		exit(0);
 	}
 	const Blob& ib = inputs[0];
@@ -53,7 +53,7 @@ void ActivityLayer::setup_shape(){
 }
 void ActivityLayer::setup_data(){
 	if( (outputs.size()!=1) || (output_difs.size()!=1)){
-		printf("error: conv output blob number should be 1\n");
+		printf("error: activity output blob number should be 1\n");
 		exit(0);
 	}
 	mask = new bool[outputs[0].nchw()];

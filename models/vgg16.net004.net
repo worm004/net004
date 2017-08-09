@@ -4,77 +4,77 @@ Layer: data data
 Layer: data label
 1 1 1 1 label
 Layer: conv conv1_1
-3 64 1 1 1 none
+3 64 1 1 1 1 none
 Layer: activity relu1_1
 relu
 Layer: conv conv1_2
-3 64 1 1 1 none
+3 64 1 1 1 1 none
 Layer: activity relu1_2
 relu
 Layer: pool pool1
 2 0 2 max
 Layer: conv conv2_1
-3 128 1 1 1 none
+3 128 1 1 1 1 none
 Layer: activity relu2_1
 relu
 Layer: conv conv2_2
-3 128 1 1 1 none
+3 128 1 1 1 1 none
 Layer: activity relu2_2
 relu
 Layer: pool pool2
 2 0 2 max
 Layer: conv conv3_1
-3 256 1 1 1 none
+3 256 1 1 1 1 none
 Layer: activity relu3_1
 relu
 Layer: conv conv3_2
-3 256 1 1 1 none
+3 256 1 1 1 1 none
 Layer: activity relu3_2
 relu
 Layer: conv conv3_3
-3 256 1 1 1 none
+3 256 1 1 1 1 none
 Layer: activity relu3_3
 relu
 Layer: pool pool3
 2 0 2 max
 Layer: conv conv4_1
-3 512 1 1 1 none
+3 512 1 1 1 1 none
 Layer: activity relu4_1
 relu
 Layer: conv conv4_2
-3 512 1 1 1 none
+3 512 1 1 1 1 none
 Layer: activity relu4_2
 relu
 Layer: conv conv4_3
-3 512 1 1 1 none
+3 512 1 1 1 1 none
 Layer: activity relu4_3
 relu
 Layer: pool pool4
 2 0 2 max
 Layer: conv conv5_1
-3 512 1 1 1 none
+3 512 1 1 1 1 none
 Layer: activity relu5_1
 relu
 Layer: conv conv5_2
-3 512 1 1 1 none
+3 512 1 1 1 1 none
 Layer: activity relu5_2
 relu
 Layer: conv conv5_3
-3 512 1 1 1 none
+3 512 1 1 1 1 none
 Layer: activity relu5_3
 relu
 Layer: pool pool5
 2 0 2 max
 Layer: fc fc6
-4096 none
+4096 1 none
 Layer: activity relu6
 relu
 Layer: fc fc7
-4096 none
+4096 1 none
 Layer: activity relu7
 relu
 Layer: fc fc8
-1000 none
+1000 1 none
 Layer: loss loss
 softmax
 Connections:

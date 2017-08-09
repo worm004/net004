@@ -3,7 +3,7 @@
 #include "BaseLayer.h"
 class ScaleLayer: public Layer{
 	public:
-	ScaleLayer(const std::string& name);
+	ScaleLayer(const std::string& name, bool is_bias);
 	virtual ~ScaleLayer();
 	virtual void forward();
 	virtual void backward();
@@ -13,5 +13,6 @@ class ScaleLayer: public Layer{
 	virtual int parameter_number();
 
 	Blob weight, bias, weight_dif, bias_dif;
+	bool is_bias = 0;
 };
 #endif

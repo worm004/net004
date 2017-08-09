@@ -1,6 +1,7 @@
 #include "stdlib.h"
 #include "ScaleLayer.h"
-ScaleLayer::ScaleLayer(const std::string& name):
+ScaleLayer::ScaleLayer(const std::string& name, bool is_bias):
+	is_bias(is_bias),
 	Layer(name,"scale"){
 }
 ScaleLayer::~ScaleLayer(){
@@ -15,7 +16,7 @@ void ScaleLayer::forward(){
 	float *input_data = inputs[0].data, *output_data = outputs[0].data;
 
 	//show_inputs();
-	if(bias_data){
+	if(is_bias){
 		for(int i=0;i<n;++i){
 			for(int j=0;j<c;++j){
 				float s = weight_data[j];
@@ -53,6 +54,10 @@ void ScaleLayer::setup_shape(){
 	const Blob& ib = inputs[0];
 	weight.set_shape(ib.c,1,1,1);
 	weight_dif.set_shape(weight);
+	if(is_bias){
+		bias.set_shape(ib.c,1,1,1);
+		bias_dif.set_shape(bias);
+	}
 
 	// output
 	outputs.resize(1);
@@ -68,6 +73,10 @@ void ScaleLayer::setup_data(){
 	// mean and variance
 	weight.alloc();
 	weight_dif.alloc();
+	if(is_bias){
+		bias.alloc();
+		bias_dif.alloc();
+	}
 
 	// output
 	outputs[0].set_data(inputs[0].data);

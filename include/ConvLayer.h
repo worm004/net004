@@ -11,6 +11,7 @@ class ConvLayer: public Layer{
 		int stride, 
 		int padding,
 		int group,
+		bool is_bias,
 		const std::string& activity);
 	virtual ~ConvLayer();
 	virtual void forward();
@@ -32,6 +33,7 @@ class ConvLayer: public Layer{
 	bool *activity_mask = 0;
 	private:
 	int kernel = 0, filters = 0, padding = 0, stride = 0, group = 1;
+	bool is_bias = 0;
 	std::string activity;
 };
 

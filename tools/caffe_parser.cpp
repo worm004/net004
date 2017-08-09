@@ -165,7 +165,8 @@ void CaffeModelParser::write_net_eltwise(const std::string& layer_name, const ca
 }
 void CaffeModelParser::write_net_scale(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
 	ofile<<"Layer: scale "<<layer_name<<endl;
-	ofile<<endl;
+	bool is_bias = param.scale_param().bias_term();
+	ofile<<is_bias<<endl;
 }
 void CaffeModelParser::write_net_bn(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
 	ofile<<"Layer: batchnorm "<<layer_name<<endl;
@@ -186,8 +187,9 @@ void CaffeModelParser::write_net_conv(const std::string& layer_name, const caffe
 	int pad = conv_param.pad().size() == 1? conv_param.pad()[0]:0;
 	int stride = conv_param.stride().size() == 1? conv_param.stride()[0]:1;
 	int group = conv_param.group();
+	bool is_bias = conv_param.bias_term();
 
-	ofile<<kernel_size<<" "<<conv_param.num_output()<<" "<<pad<<" "<<stride<<" "<<group<<" none"<<endl;
+	ofile<<kernel_size<<" "<<conv_param.num_output()<<" "<<pad<<" "<<stride<<" "<<group<<" "<<is_bias<<" none"<<endl;
 }
 void CaffeModelParser::write_net_pool(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
 	const caffe::PoolingParameter& pool_param = param.pooling_param();
@@ -220,7 +222,8 @@ void CaffeModelParser::write_net_relu(const std::string& layer_name, const caffe
 void CaffeModelParser::write_net_fc(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
 	const caffe::InnerProductParameter& fc_param = param.inner_product_param();
 	ofile<<"Layer: fc "<<layer_name<<endl;
-	ofile<<fc_param.num_output()<<" none"<<endl;
+	bool is_bias = fc_param.bias_term();
+	ofile<<fc_param.num_output()<<" "<<is_bias<<" none"<<endl;
 }
 void CaffeModelParser::write_net_softmaxloss(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
 	ofile<<"Layer: loss "<<layer_name<<endl;

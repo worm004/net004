@@ -10,6 +10,7 @@ ConvLayer::ConvLayer(
 	int stride, 
 	int padding, 
 	int group,
+	bool is_bias,
 	const std::string& activity):
 		kernel(kernel), 
 		filters(filters), 
@@ -17,6 +18,7 @@ ConvLayer::ConvLayer(
 		stride(stride), 
 		activity(activity), 
 		group(group),
+		is_bias(is_bias),
 		Layer(name,"conv"){
 }
 
@@ -65,10 +67,7 @@ void ConvLayer::forward(){
 
 		}
 
-		if(bias_data){
-			//printf("%s\n",name.c_str());
-			//printf("bias %d %d %d %d\n",bias.n,bias.c,bias.h,bias.w);
-			//getchar();
+		if(is_bias){
 			for(int i = 0; i < filters; ++i)
 			for(int j = 0; j < nloc; ++j)
 				odata[i*nloc +j] += bias_data[i];
@@ -111,21 +110,15 @@ void ConvLayer::show()const {
 		printf("\tinput: ");
 		inputs[0].show();
 	}
-	//printf("\tinput dif:");
-	//input_difs[0].show();
 
 	if(bias.nchw() != 0){
 		printf("\tbias: ");
 		bias.show();
 	}
 	if(weight.nchw() != 0){
-		//printf("\tbias dif: ");
-		//bias_dif.show();
 		printf("\tweight: ");
 		weight.show();
 	}
-	//printf("\tweight dif: ");
-	//weight_dif.show();
 
 	if(outputs.size() == 1){
 		printf("\toutput: ");
@@ -161,9 +154,10 @@ void ConvLayer::setup_data(){
 	// weight and bias
 	weight.alloc();
 	weight_dif.alloc();
-	//bias.alloc();
-	//bias_dif.alloc();
-
+	if(is_bias){
+		bias.alloc();
+		bias_dif.alloc();
+	}
 	// output
 	outputs[0].alloc();
 	output_difs[0].alloc();
@@ -179,8 +173,10 @@ void ConvLayer::setup_shape(){
 	const Blob& ib = inputs[0];
 	weight.set_shape(filters,ib.c/group, kernel, kernel);
 	weight_dif.set_shape(weight);
-	//bias.set_shape(filters,1,1,1);
-	//bias_dif.set_shape(bias);
+	if(is_bias){
+		bias.set_shape(filters,1,1,1);
+		bias_dif.set_shape(bias);
+	}
 
 	// output
 	outputs.resize(1);

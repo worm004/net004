@@ -86,8 +86,8 @@ void Layers::add_data(const std::string& name, int n, int c, int h, int w, const
 	Layer* l = new DataLayer(name, n,c,h,w, method);
 	add(name, &l);
 }
-void Layers::add_conv(const std::string&name, const std::vector<int>& p5, const std::string& activity){
-	Layer* l = new ConvLayer(name,p5[0],p5[1],p5[2],p5[3],p5[4],activity);
+void Layers::add_conv(const std::string&name, const std::vector<int>& p5, bool is_bias, const std::string& activity){
+	Layer* l = new ConvLayer(name,p5[0],p5[1],p5[2],p5[3],p5[4],is_bias,activity);
 	add(name, &l);
 }
 void Layers::add_pool(const std::string&name, const std::vector<int>& p3, const std::string& method){
@@ -98,8 +98,8 @@ void Layers::add_lrn(const std::string&name, int n, float alpha,float beta){
 	Layer* l = new LRNLayer(name,n,alpha,beta);
 	add(name, &l);
 }
-void Layers::add_fc(const std::string&name, int n, const std::string& activity){
-	Layer* l = new FCLayer(name,n,activity);
+void Layers::add_fc(const std::string&name, int n, bool is_bias, const std::string& activity){
+	Layer* l = new FCLayer(name,n,is_bias,activity);
 	add(name, &l);
 }
 void Layers::add_loss(const std::string&name, const std::string& method){
@@ -118,8 +118,8 @@ void Layers::add_bn(const std::string& name){
 	Layer* l = new BNLayer(name);
 	add(name, &l);
 }
-void Layers::add_scale(const std::string& name){
-	Layer* l = new ScaleLayer(name);
+void Layers::add_scale(const std::string& name,bool is_bias){
+	Layer* l = new ScaleLayer(name,is_bias);
 	add(name, &l);
 }
 void Layers::add_eltwise(const std::string& name, const std::string& method){

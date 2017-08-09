@@ -3,7 +3,7 @@
 #include "BaseLayer.h"
 class FCLayer: public Layer{
 	public:
-	FCLayer(const std::string&name, int n, const std::string& activity);
+	FCLayer(const std::string&name, int n, bool is_bias,const std::string& activity);
 	virtual ~FCLayer();
 	virtual void forward();
 	virtual void backward();
@@ -16,6 +16,7 @@ class FCLayer: public Layer{
 	Blob weight, weight_dif, bias, bias_dif;
 	private:
 	int n = 0;
+	bool is_bias = 0;
 	std::string activity;
 };
 

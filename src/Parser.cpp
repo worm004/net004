@@ -230,24 +230,12 @@ void Parser::read_data(const std::string& path, Net004* net){
 		if(layer->type == "conv"){
 			ConvLayer* l = (ConvLayer*)layer;
 			if(data_name == string("weight")) b = &(l->weight);
-			else if(data_name == string("bias")) {
-				b = &(l->bias);
-				b->set_shape(n,1,1,1);
-				l->bias_dif.set_shape(l->bias);
-				b->alloc();
-				l->bias_dif.alloc();
-			}
+			else if(data_name == string("bias")) b = &(l->bias);
 		}
 		else if(layer->type == "fc"){
 			FCLayer* l = (FCLayer*)layer;
 			if(data_name == string("weight")) b = &(l->weight);
-			else if(data_name == string("bias")){
-				b = &(l->bias);
-				b->set_shape(n,1,1,1);
-				l->bias_dif.set_shape(l->bias);
-				b->alloc();
-				l->bias_dif.alloc();
-			}
+			else if(data_name == string("bias")) b = &(l->bias);
 		}
 		else if(layer->type == "bn"){
 			BNLayer* l = (BNLayer*)layer;
@@ -258,13 +246,7 @@ void Parser::read_data(const std::string& path, Net004* net){
 		else if(layer->type == "scale"){
 			ScaleLayer* l = (ScaleLayer*)layer;
 			if(data_name == string("scale")) b = &(l->weight);
-			else if(data_name == string("bias")){
-				b = &(l->bias);
-				b->set_shape(n,1,1,1);
-				l->bias_dif.set_shape(l->bias);
-				b->alloc();
-				l->bias_dif.alloc();
-			}
+			else if(data_name == string("bias")) b = &(l->bias);
 		}
 
 		if((b->n != n) || (b->c != c) || (b->h != h) || (b->w != w)){
@@ -296,9 +278,10 @@ void Parser::read_net_lrn(const std::string& line, const std::string& name, Laye
 void Parser::read_net_conv(const std::string& line, const std::string& name, Layers* ls){
 	char activity[100];
 	int kernel, filters, padding, stride, group;
-	sscanf(line.c_str(),"%d %d %d %d %d %s",&kernel, &filters, &padding, &stride, &group, activity);
-	if (activity == string("none")) ls->add_conv(name,{filters,kernel,stride,padding,group},"");
-	else ls->add_conv(name,{filters,kernel,stride,padding,group},activity);
+	int bias = 0; 
+	sscanf(line.c_str(),"%d %d %d %d %d %d %s",&kernel, &filters, &padding, &stride, &group, &bias, activity);
+	if (activity == string("none")) ls->add_conv(name,{filters,kernel,stride,padding,group},bias!=0,"");
+	else ls->add_conv(name,{filters,kernel,stride,padding,group},bias!=0,activity);
 }
 void Parser::read_net_pool(const std::string& line, const std::string& name, Layers* ls){
 	char method[100];
@@ -313,10 +296,10 @@ void Parser::read_net_activity(const std::string& line, const std::string& name,
 }
 void Parser::read_net_fc(const std::string& line, const std::string& name, Layers* ls){
 	char activity[100];
-	int n;
-	sscanf(line.c_str(),"%d %s",&n, activity);
-	if (activity == string("none")) ls->add_fc(name,n,"");
-	else ls->add_fc(name,n,activity);
+	int n, bias=0;
+	sscanf(line.c_str(),"%d %d %s",&n,&bias, activity);
+	if (activity == string("none")) ls->add_fc(name,n,bias!=0,"");
+	else ls->add_fc(name,n,bias!=0,activity);
 }
 void Parser::read_net_loss(const std::string& line, const std::string& name, Layers* ls){
 	char method[100];
@@ -332,7 +315,9 @@ void Parser::read_net_bn(const std::string& line, const std::string& name, Layer
 	ls->add_bn(name);
 }
 void Parser::read_net_scale(const std::string& line, const std::string& name, Layers* ls){
-	ls->add_scale(name);
+	int bias=0;
+	sscanf(line.c_str(),"%d",&bias);
+	ls->add_scale(name,bias!=0);
 }
 void Parser::read_net_eltwise(const std::string& line, const std::string& name, Layers* ls){
 	char method[100];

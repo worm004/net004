@@ -14,7 +14,7 @@ void SplitLayer::backward(){
 }
 void SplitLayer::setup_shape(){
 	if( (inputs.size()!=1) || (input_difs.size()!=1)){
-		printf("error: conv input blob number should be 1\n");
+		printf("error: split input blob number should be 1\n");
 		exit(0);
 	}
 	// output
@@ -25,7 +25,7 @@ void SplitLayer::setup_shape(){
 }
 void SplitLayer::setup_data(){
 	if( (outputs.size()!=1) || (output_difs.size()!=1)){
-		printf("error: conv output blob number should be 1\n");
+		printf("error: split output blob number should be 1\n");
 		exit(0);
 	}
 

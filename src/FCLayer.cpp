@@ -5,8 +5,10 @@
 FCLayer::FCLayer(
 	const std::string&name, 
 	int n, 
+	bool is_bias,
 	const std::string& activity):
 		n(n), 
+		is_bias(is_bias),
 		activity(activity),
 		Layer(name,"fc"){
 }
@@ -29,13 +31,14 @@ void FCLayer::forward(){
 			0.0,
 			odata, n);
 
-	for(int b = 0; b < batch_size; ++b){
-		float *weight_data = weight.data;
-		for(int y = 0; y < h; ++y){
-			odata[y] += bias.data[y];
+	if(is_bias){
+		for(int b = 0; b < batch_size; ++b){
+			float *weight_data = weight.data;
+			for(int y = 0; y < h; ++y){
+				odata[y] += bias.data[y];
+			}
+			odata += h;
 		}
-		odata += h;
-		idata += w;
 	}
 	
 	//show_inputs();
@@ -80,6 +83,10 @@ void FCLayer::setup_shape(){
 
 	weight.set_shape(n,in , 1, 1);
 	weight_dif.set_shape(weight);
+	if(is_bias){
+		bias.set_shape(n,1,1,1);
+		bias_dif.set_shape(bias);
+	}
 
 	// output
 	outputs.resize(1);
@@ -95,6 +102,11 @@ void FCLayer::setup_data(){
 	// weight and bias
 	weight.alloc();
 	weight_dif.alloc();
+	if(is_bias){
+		bias.alloc();
+		bias_dif.alloc();
+	}
+
 
 	// output
 	outputs[0].alloc();
