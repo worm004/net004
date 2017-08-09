@@ -126,8 +126,12 @@ void PoolLayer::setup_shape(){
 	const Blob& ib = inputs[0];
 	outputs.resize(1);
 	output_difs.resize(1);
+
+	if (kernel == -1) kernel = ib.h;//global
+
 	int oh = Layer::i2o_ceil(ib.h,kernel,stride,padding),
 	    ow = Layer::i2o_ceil(ib.w,kernel,stride,padding);
+
 	outputs[0].set_shape(ib.n, ib.c, oh, ow);
 	output_difs[0].set_shape(outputs[0]);
 }

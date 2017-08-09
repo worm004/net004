@@ -201,7 +201,8 @@ void CaffeModelParser::write_net_pool(const std::string& layer_name, const caffe
 		printf("should not touch here\n");
 		exit(0);
 	}
-	ofile<<pool_param.kernel_size()<<" "<<pool_param.pad()<<" "<<pool_param.stride()<<" "<<method<<endl;
+	int k = pool_param.global_pooling()?-1:pool_param.kernel_size();
+	ofile<<k<<" "<<pool_param.pad()<<" "<<pool_param.stride()<<" "<<method<<endl;
 }
 void CaffeModelParser::write_net_data(const std::string& layer_name, const std::string& blob_name, int n,int c,int h,int w, std::ofstream& ofile){
 	ofile<<"Layer: data "<<blob_name<<endl;
