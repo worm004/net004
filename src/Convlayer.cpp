@@ -135,13 +135,11 @@ int ConvLayer::parameter_number(){
 	return weight.nchw() + bias.nchw();
 }
 
-
 void ConvLayer::setup_shape(){
 	if(inputs.size()!=1){
 		printf("error: conv input blob number should be 1\n");
 		exit(0);
 	}
-	
 	const Blob& ib = inputs[0];
 	weight.set_shape(filters,ib.c/group, kernel, kernel);
 	if(is_bias) bias.set_shape(filters,1,1,1);
