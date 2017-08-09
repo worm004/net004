@@ -24,7 +24,7 @@ void Layer::setup(){
 }
 void Layer::connect2(Layer& l){
 	if( (outputs.size()!=1) || (output_difs.size()!=1)){
-		printf("error: connnect2: output blob number should be 1\n");
+		printf("error: connnect2: %s output blob number should be 1 (now %lu)\n",name.c_str(),outputs.size());
 		exit(0);
 	}
 	l.inputs.push_back(Blob());
@@ -73,6 +73,7 @@ void Layer::show_inputs(){
 				//printf("\n");
 			}
 		}
+		printf("\n");
 	}
 	printf("\n");
 }

@@ -7,31 +7,44 @@
 using namespace std;
 using namespace cv;
 
-void cvt_caffe_model(){
-	//string caffe_net_path = "../caffe_models/cifar10_quick_train_test.prototxt",
-	//       caffe_model_path = "../caffe_models/cifar10_quick_iter_5000.caffemodel.h5",
-	//       net004_net_path = "../models/cifar.net004.net",
-	//       net004_model_path = "../models/cifar.net004.data";
-	
-	//string caffe_net_path = "../caffe_models/VGG_ILSVRC_16_layers_deploy.prototxt",
-	//       caffe_model_path = "../caffe_models/VGG_ILSVRC_16_layers.caffemodel",
-	//       net004_net_path = "../models/vgg16.net004.net",
-	//       net004_model_path = "../models/vgg16.net004.data";
+void cvt_caffe_model(const std::string& name){
+	string caffe_net_path, caffe_model_path, net004_net_path,net004_model_path;
 
-	//string caffe_net_path = "../caffe_models/bvlc_alexnet.prototxt",
-	//       caffe_model_path = "../caffe_models/bvlc_alexnet.caffemodel",
-	//       net004_net_path = "../models/alexnet.net004.net",
-	//       net004_model_path = "../models/alexnet.net004.data";
+	if(name == "cifar10"){
+	caffe_net_path = "../caffe_models/cifar10_quick_train_test.prototxt",
+	caffe_model_path = "../caffe_models/cifar10_quick_iter_5000.caffemodel.h5",
+	net004_net_path = "../models/cifar.net004.net",
+	net004_model_path = "../models/cifar.net004.data";
+	}
+	else if(name == "vgg16"){
+	caffe_net_path = "../caffe_models/VGG_ILSVRC_16_layers_deploy.prototxt",
+	caffe_model_path = "../caffe_models/VGG_ILSVRC_16_layers.caffemodel",
+	net004_net_path = "../models/vgg16.net004.net",
+	net004_model_path = "../models/vgg16.net004.data";
+	}
+	else if(name == "alexnet"){
+	caffe_net_path = "../caffe_models/bvlc_alexnet.prototxt",
+	caffe_model_path = "../caffe_models/bvlc_alexnet.caffemodel",
+	net004_net_path = "../models/alexnet.net004.net",
+	net004_model_path = "../models/alexnet.net004.data";
+	}
+	else if(name == "gnetv1"){
+	caffe_net_path = "../caffe_models/bvlc_googlenet_deploy.prototxt",
+	caffe_model_path = "../caffe_models/bvlc_googlenet.caffemodel",
+	net004_net_path = "../models/gnetv1.net004.net",
+	net004_model_path = "../models/gnetv1.net004.data";
+	}
+	else if(name == "resnet50"){
+	caffe_net_path = "../caffe_models/ResNet-50-deploy.prototxt",
+	caffe_model_path = "../caffe_models/ResNet-50-model.caffemodel",
+	net004_net_path = "../models/resnet50.net004.net",
+	net004_model_path = "../models/resnet50.net004.data";
+	}
+	else{
+		printf("no such net: %s\n",name.c_str());
+		return;
+	}
 
-	//string caffe_net_path = "../caffe_models/bvlc_googlenet_deploy.prototxt",
-	//       caffe_model_path = "../caffe_models/bvlc_googlenet.caffemodel",
-	//       net004_net_path = "../models/gnetv1.net004.net",
-	//       net004_model_path = "../models/gnetv1.net004.data";
-
-	string caffe_net_path = "../caffe_models/ResNet-50-deploy.prototxt",
-	       caffe_model_path = "../caffe_models/ResNet-50-model.caffemodel",
-	       net004_net_path = "../models/resnet50.net004.net",
-	       net004_model_path = "../models/resnet50.net004.data";
 
 	CaffeModelParser parser;
 	printf("convert caffe model:\n");
@@ -46,9 +59,13 @@ void cvt_caffe_model(){
 
 }
 int main(int argc, char **argv){
+	if(argc != 2){
+		printf("1 param is needed\n");
+		return 0;
+	}
 	google::InitGoogleLogging(argv[0]);
 	google::SetCommandLineOption("GLOG_minloglevel", "2");
 
-	cvt_caffe_model();
+	cvt_caffe_model(argv[1]);
 	return 0;
 }

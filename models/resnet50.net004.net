@@ -8,7 +8,7 @@ Layer: conv conv1
 Layer: batchnorm bn_conv1
 
 Layer: scale scale_conv1
-bias
+
 Layer: activity conv1_relu
 relu
 Layer: pool pool1
@@ -20,13 +20,13 @@ Layer: conv res2a_branch1
 Layer: batchnorm bn2a_branch1
 
 Layer: scale scale2a_branch1
-bias
+
 Layer: conv res2a_branch2a
 1 64 0 1 1 none
 Layer: batchnorm bn2a_branch2a
 
 Layer: scale scale2a_branch2a
-bias
+
 Layer: activity res2a_branch2a_relu
 relu
 Layer: conv res2a_branch2b
@@ -34,7 +34,7 @@ Layer: conv res2a_branch2b
 Layer: batchnorm bn2a_branch2b
 
 Layer: scale scale2a_branch2b
-bias
+
 Layer: activity res2a_branch2b_relu
 relu
 Layer: conv res2a_branch2c
@@ -42,7 +42,7 @@ Layer: conv res2a_branch2c
 Layer: batchnorm bn2a_branch2c
 
 Layer: scale scale2a_branch2c
-bias
+
 Layer: eltwise res2a
 sum
 Layer: activity res2a_relu
@@ -54,7 +54,7 @@ Layer: conv res2b_branch2a
 Layer: batchnorm bn2b_branch2a
 
 Layer: scale scale2b_branch2a
-bias
+
 Layer: activity res2b_branch2a_relu
 relu
 Layer: conv res2b_branch2b
@@ -62,7 +62,7 @@ Layer: conv res2b_branch2b
 Layer: batchnorm bn2b_branch2b
 
 Layer: scale scale2b_branch2b
-bias
+
 Layer: activity res2b_branch2b_relu
 relu
 Layer: conv res2b_branch2c
@@ -70,7 +70,7 @@ Layer: conv res2b_branch2c
 Layer: batchnorm bn2b_branch2c
 
 Layer: scale scale2b_branch2c
-bias
+
 Layer: eltwise res2b
 sum
 Layer: activity res2b_relu
@@ -82,7 +82,7 @@ Layer: conv res2c_branch2a
 Layer: batchnorm bn2c_branch2a
 
 Layer: scale scale2c_branch2a
-bias
+
 Layer: activity res2c_branch2a_relu
 relu
 Layer: conv res2c_branch2b
@@ -90,7 +90,7 @@ Layer: conv res2c_branch2b
 Layer: batchnorm bn2c_branch2b
 
 Layer: scale scale2c_branch2b
-bias
+
 Layer: activity res2c_branch2b_relu
 relu
 Layer: conv res2c_branch2c
@@ -98,7 +98,7 @@ Layer: conv res2c_branch2c
 Layer: batchnorm bn2c_branch2c
 
 Layer: scale scale2c_branch2c
-bias
+
 Layer: eltwise res2c
 sum
 Layer: activity res2c_relu
@@ -110,13 +110,13 @@ Layer: conv res3a_branch1
 Layer: batchnorm bn3a_branch1
 
 Layer: scale scale3a_branch1
-bias
+
 Layer: conv res3a_branch2a
 1 128 0 2 1 none
 Layer: batchnorm bn3a_branch2a
 
 Layer: scale scale3a_branch2a
-bias
+
 Layer: activity res3a_branch2a_relu
 relu
 Layer: conv res3a_branch2b
@@ -124,7 +124,7 @@ Layer: conv res3a_branch2b
 Layer: batchnorm bn3a_branch2b
 
 Layer: scale scale3a_branch2b
-bias
+
 Layer: activity res3a_branch2b_relu
 relu
 Layer: conv res3a_branch2c
@@ -132,7 +132,7 @@ Layer: conv res3a_branch2c
 Layer: batchnorm bn3a_branch2c
 
 Layer: scale scale3a_branch2c
-bias
+
 Layer: eltwise res3a
 sum
 Layer: activity res3a_relu
@@ -144,7 +144,7 @@ Layer: conv res3b_branch2a
 Layer: batchnorm bn3b_branch2a
 
 Layer: scale scale3b_branch2a
-bias
+
 Layer: activity res3b_branch2a_relu
 relu
 Layer: conv res3b_branch2b
@@ -152,7 +152,7 @@ Layer: conv res3b_branch2b
 Layer: batchnorm bn3b_branch2b
 
 Layer: scale scale3b_branch2b
-bias
+
 Layer: activity res3b_branch2b_relu
 relu
 Layer: conv res3b_branch2c
@@ -160,7 +160,7 @@ Layer: conv res3b_branch2c
 Layer: batchnorm bn3b_branch2c
 
 Layer: scale scale3b_branch2c
-bias
+
 Layer: eltwise res3b
 sum
 Layer: activity res3b_relu
@@ -172,7 +172,7 @@ Layer: conv res3c_branch2a
 Layer: batchnorm bn3c_branch2a
 
 Layer: scale scale3c_branch2a
-bias
+
 Layer: activity res3c_branch2a_relu
 relu
 Layer: conv res3c_branch2b
@@ -180,7 +180,7 @@ Layer: conv res3c_branch2b
 Layer: batchnorm bn3c_branch2b
 
 Layer: scale scale3c_branch2b
-bias
+
 Layer: activity res3c_branch2b_relu
 relu
 Layer: conv res3c_branch2c
@@ -188,7 +188,7 @@ Layer: conv res3c_branch2c
 Layer: batchnorm bn3c_branch2c
 
 Layer: scale scale3c_branch2c
-bias
+
 Layer: eltwise res3c
 sum
 Layer: activity res3c_relu
@@ -200,7 +200,7 @@ Layer: conv res3d_branch2a
 Layer: batchnorm bn3d_branch2a
 
 Layer: scale scale3d_branch2a
-bias
+
 Layer: activity res3d_branch2a_relu
 relu
 Layer: conv res3d_branch2b
@@ -208,7 +208,7 @@ Layer: conv res3d_branch2b
 Layer: batchnorm bn3d_branch2b
 
 Layer: scale scale3d_branch2b
-bias
+
 Layer: activity res3d_branch2b_relu
 relu
 Layer: conv res3d_branch2c
@@ -216,7 +216,7 @@ Layer: conv res3d_branch2c
 Layer: batchnorm bn3d_branch2c
 
 Layer: scale scale3d_branch2c
-bias
+
 Layer: eltwise res3d
 sum
 Layer: activity res3d_relu
@@ -228,13 +228,13 @@ Layer: conv res4a_branch1
 Layer: batchnorm bn4a_branch1
 
 Layer: scale scale4a_branch1
-bias
+
 Layer: conv res4a_branch2a
 1 256 0 2 1 none
 Layer: batchnorm bn4a_branch2a
 
 Layer: scale scale4a_branch2a
-bias
+
 Layer: activity res4a_branch2a_relu
 relu
 Layer: conv res4a_branch2b
@@ -242,7 +242,7 @@ Layer: conv res4a_branch2b
 Layer: batchnorm bn4a_branch2b
 
 Layer: scale scale4a_branch2b
-bias
+
 Layer: activity res4a_branch2b_relu
 relu
 Layer: conv res4a_branch2c
@@ -250,7 +250,7 @@ Layer: conv res4a_branch2c
 Layer: batchnorm bn4a_branch2c
 
 Layer: scale scale4a_branch2c
-bias
+
 Layer: eltwise res4a
 sum
 Layer: activity res4a_relu
@@ -262,7 +262,7 @@ Layer: conv res4b_branch2a
 Layer: batchnorm bn4b_branch2a
 
 Layer: scale scale4b_branch2a
-bias
+
 Layer: activity res4b_branch2a_relu
 relu
 Layer: conv res4b_branch2b
@@ -270,7 +270,7 @@ Layer: conv res4b_branch2b
 Layer: batchnorm bn4b_branch2b
 
 Layer: scale scale4b_branch2b
-bias
+
 Layer: activity res4b_branch2b_relu
 relu
 Layer: conv res4b_branch2c
@@ -278,7 +278,7 @@ Layer: conv res4b_branch2c
 Layer: batchnorm bn4b_branch2c
 
 Layer: scale scale4b_branch2c
-bias
+
 Layer: eltwise res4b
 sum
 Layer: activity res4b_relu
@@ -290,7 +290,7 @@ Layer: conv res4c_branch2a
 Layer: batchnorm bn4c_branch2a
 
 Layer: scale scale4c_branch2a
-bias
+
 Layer: activity res4c_branch2a_relu
 relu
 Layer: conv res4c_branch2b
@@ -298,7 +298,7 @@ Layer: conv res4c_branch2b
 Layer: batchnorm bn4c_branch2b
 
 Layer: scale scale4c_branch2b
-bias
+
 Layer: activity res4c_branch2b_relu
 relu
 Layer: conv res4c_branch2c
@@ -306,7 +306,7 @@ Layer: conv res4c_branch2c
 Layer: batchnorm bn4c_branch2c
 
 Layer: scale scale4c_branch2c
-bias
+
 Layer: eltwise res4c
 sum
 Layer: activity res4c_relu
@@ -318,7 +318,7 @@ Layer: conv res4d_branch2a
 Layer: batchnorm bn4d_branch2a
 
 Layer: scale scale4d_branch2a
-bias
+
 Layer: activity res4d_branch2a_relu
 relu
 Layer: conv res4d_branch2b
@@ -326,7 +326,7 @@ Layer: conv res4d_branch2b
 Layer: batchnorm bn4d_branch2b
 
 Layer: scale scale4d_branch2b
-bias
+
 Layer: activity res4d_branch2b_relu
 relu
 Layer: conv res4d_branch2c
@@ -334,7 +334,7 @@ Layer: conv res4d_branch2c
 Layer: batchnorm bn4d_branch2c
 
 Layer: scale scale4d_branch2c
-bias
+
 Layer: eltwise res4d
 sum
 Layer: activity res4d_relu
@@ -346,7 +346,7 @@ Layer: conv res4e_branch2a
 Layer: batchnorm bn4e_branch2a
 
 Layer: scale scale4e_branch2a
-bias
+
 Layer: activity res4e_branch2a_relu
 relu
 Layer: conv res4e_branch2b
@@ -354,7 +354,7 @@ Layer: conv res4e_branch2b
 Layer: batchnorm bn4e_branch2b
 
 Layer: scale scale4e_branch2b
-bias
+
 Layer: activity res4e_branch2b_relu
 relu
 Layer: conv res4e_branch2c
@@ -362,7 +362,7 @@ Layer: conv res4e_branch2c
 Layer: batchnorm bn4e_branch2c
 
 Layer: scale scale4e_branch2c
-bias
+
 Layer: eltwise res4e
 sum
 Layer: activity res4e_relu
@@ -374,7 +374,7 @@ Layer: conv res4f_branch2a
 Layer: batchnorm bn4f_branch2a
 
 Layer: scale scale4f_branch2a
-bias
+
 Layer: activity res4f_branch2a_relu
 relu
 Layer: conv res4f_branch2b
@@ -382,7 +382,7 @@ Layer: conv res4f_branch2b
 Layer: batchnorm bn4f_branch2b
 
 Layer: scale scale4f_branch2b
-bias
+
 Layer: activity res4f_branch2b_relu
 relu
 Layer: conv res4f_branch2c
@@ -390,7 +390,7 @@ Layer: conv res4f_branch2c
 Layer: batchnorm bn4f_branch2c
 
 Layer: scale scale4f_branch2c
-bias
+
 Layer: eltwise res4f
 sum
 Layer: activity res4f_relu
@@ -402,13 +402,13 @@ Layer: conv res5a_branch1
 Layer: batchnorm bn5a_branch1
 
 Layer: scale scale5a_branch1
-bias
+
 Layer: conv res5a_branch2a
 1 512 0 2 1 none
 Layer: batchnorm bn5a_branch2a
 
 Layer: scale scale5a_branch2a
-bias
+
 Layer: activity res5a_branch2a_relu
 relu
 Layer: conv res5a_branch2b
@@ -416,7 +416,7 @@ Layer: conv res5a_branch2b
 Layer: batchnorm bn5a_branch2b
 
 Layer: scale scale5a_branch2b
-bias
+
 Layer: activity res5a_branch2b_relu
 relu
 Layer: conv res5a_branch2c
@@ -424,7 +424,7 @@ Layer: conv res5a_branch2c
 Layer: batchnorm bn5a_branch2c
 
 Layer: scale scale5a_branch2c
-bias
+
 Layer: eltwise res5a
 sum
 Layer: activity res5a_relu
@@ -436,7 +436,7 @@ Layer: conv res5b_branch2a
 Layer: batchnorm bn5b_branch2a
 
 Layer: scale scale5b_branch2a
-bias
+
 Layer: activity res5b_branch2a_relu
 relu
 Layer: conv res5b_branch2b
@@ -444,7 +444,7 @@ Layer: conv res5b_branch2b
 Layer: batchnorm bn5b_branch2b
 
 Layer: scale scale5b_branch2b
-bias
+
 Layer: activity res5b_branch2b_relu
 relu
 Layer: conv res5b_branch2c
@@ -452,7 +452,7 @@ Layer: conv res5b_branch2c
 Layer: batchnorm bn5b_branch2c
 
 Layer: scale scale5b_branch2c
-bias
+
 Layer: eltwise res5b
 sum
 Layer: activity res5b_relu
@@ -464,7 +464,7 @@ Layer: conv res5c_branch2a
 Layer: batchnorm bn5c_branch2a
 
 Layer: scale scale5c_branch2a
-bias
+
 Layer: activity res5c_branch2a_relu
 relu
 Layer: conv res5c_branch2b
@@ -472,7 +472,7 @@ Layer: conv res5c_branch2b
 Layer: batchnorm bn5c_branch2b
 
 Layer: scale scale5c_branch2b
-bias
+
 Layer: activity res5c_branch2b_relu
 relu
 Layer: conv res5c_branch2c
@@ -480,7 +480,7 @@ Layer: conv res5c_branch2c
 Layer: batchnorm bn5c_branch2c
 
 Layer: scale scale5c_branch2c
-bias
+
 Layer: eltwise res5c
 sum
 Layer: activity res5c_relu

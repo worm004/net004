@@ -45,5 +45,12 @@ void im2col2(float * im, int *table, float* des, int count){
 		if(t >= 0) des[i] = im[t];
 		else des[i] = 0.0f;
 	}
+
+	//for(int i=0;i<7;++i){
+	//for(int j=0;j<7;++j)
+	//	printf(" %d",table[i*7+j]);
+	//	printf("\n");
+	//}
+	//getchar();
 }
 

@@ -39,10 +39,6 @@ void SplitLayer::show() const{
 		printf("\tinput: ");
 		inputs[0].show();
 	}
-	else{
-		printf("should only be 1 input in split layer\n");
-		exit(0);
-	}
 
 	if(outputs.size() != 0){
 		printf("\toutput: ");

@@ -46,8 +46,8 @@ void FCLayer::backward(){
 	printf("backward: %s %s\n",type.c_str(), name.c_str());
 }
 void FCLayer::show()const {
-	printf("[%s%s] name: %s, n: %d\n",
-			type.c_str(),activity.empty()?"":("+"+activity).c_str(), 
+	printf("[%s%s%s] name: %s, n: %d\n",
+			type.c_str(),activity.empty()?"":("+"+activity).c_str(),bias.data?"+bias":"", 
 			name.c_str(),n);
 
 	if(inputs.size() == 1){
@@ -80,8 +80,6 @@ void FCLayer::setup_shape(){
 
 	weight.set_shape(n,in , 1, 1);
 	weight_dif.set_shape(weight);
-	bias.set_shape(n,1,1,1);
-	bias_dif.set_shape(bias);
 
 	// output
 	outputs.resize(1);
@@ -97,8 +95,6 @@ void FCLayer::setup_data(){
 	// weight and bias
 	weight.alloc();
 	weight_dif.alloc();
-	bias.alloc();
-	bias_dif.alloc();
 
 	// output
 	outputs[0].alloc();

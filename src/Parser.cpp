@@ -10,6 +10,8 @@
 #include "LossLayer.h"
 #include "ConcatLayer.h"
 #include "ActivityLayer.h"
+#include "BNLayer.h"
+#include "ScaleLayer.h"
 
 using namespace std;
 Parser::Parser(){
@@ -22,6 +24,10 @@ Parser::Parser(){
 	read_net_funcs["data"] = &Parser::read_net_data;
 	read_net_funcs["split"] = &Parser::read_net_split;
 	read_net_funcs["concat"] = &Parser::read_net_concat;
+
+	read_net_funcs["batchnorm"] = &Parser::read_net_bn;
+	read_net_funcs["scale"] = &Parser::read_net_scale;
+	read_net_funcs["eltwise"] = &Parser::read_net_eltwise;
 }
 void Parser::write(Net004* net, const std::string& net_path, const std::string& data_path){	
 	Connections &cs = net->cs;
@@ -224,13 +230,43 @@ void Parser::read_data(const std::string& path, Net004* net){
 		if(layer->type == "conv"){
 			ConvLayer* l = (ConvLayer*)layer;
 			if(data_name == string("weight")) b = &(l->weight);
-			else if(data_name == string("bias")) b = &(l->bias);
+			else if(data_name == string("bias")) {
+				b = &(l->bias);
+				b->set_shape(n,1,1,1);
+				l->bias_dif.set_shape(l->bias);
+				b->alloc();
+				l->bias_dif.alloc();
+			}
 		}
 		else if(layer->type == "fc"){
 			FCLayer* l = (FCLayer*)layer;
 			if(data_name == string("weight")) b = &(l->weight);
-			else if(data_name == string("bias")) b = &(l->bias);
+			else if(data_name == string("bias")){
+				b = &(l->bias);
+				b->set_shape(n,1,1,1);
+				l->bias_dif.set_shape(l->bias);
+				b->alloc();
+				l->bias_dif.alloc();
+			}
 		}
+		else if(layer->type == "bn"){
+			BNLayer* l = (BNLayer*)layer;
+			if(data_name == string("mean")) b = &(l->mean);
+			else if(data_name == string("variance")) b = &(l->variance);
+			else if(data_name == string("scale")) b = &(l->scale);
+		}
+		else if(layer->type == "scale"){
+			ScaleLayer* l = (ScaleLayer*)layer;
+			if(data_name == string("scale")) b = &(l->weight);
+			else if(data_name == string("bias")){
+				b = &(l->bias);
+				b->set_shape(n,1,1,1);
+				l->bias_dif.set_shape(l->bias);
+				b->alloc();
+				l->bias_dif.alloc();
+			}
+		}
+
 		if((b->n != n) || (b->c != c) || (b->h != h) || (b->w != w)){
 			printf("layer name: %s\nread: %d %d %d %d\n",layer_name,n,c,h,w);
 			b->show();
@@ -291,4 +327,15 @@ void Parser::read_net_concat(const std::string& line, const std::string& name, L
 	char method[100];
 	sscanf(line.c_str(),"%s",method);
 	ls->add_concat(name, method);
+}
+void Parser::read_net_bn(const std::string& line, const std::string& name, Layers* ls){
+	ls->add_bn(name);
+}
+void Parser::read_net_scale(const std::string& line, const std::string& name, Layers* ls){
+	ls->add_scale(name);
+}
+void Parser::read_net_eltwise(const std::string& line, const std::string& name, Layers* ls){
+	char method[100];
+	sscanf(line.c_str(),"%s",method);
+	ls->add_eltwise(name,method);
 }

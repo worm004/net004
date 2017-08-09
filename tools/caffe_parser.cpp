@@ -164,12 +164,8 @@ void CaffeModelParser::write_net_eltwise(const std::string& layer_name, const ca
 	}
 }
 void CaffeModelParser::write_net_scale(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
-	const caffe::ScaleParameter& scale_param = param.scale_param();
 	ofile<<"Layer: scale "<<layer_name<<endl;
-	if(scale_param.bias_term())
-		ofile<<"bias"<<endl;
-	else
-		ofile<<"no bias"<<endl;
+	ofile<<endl;
 }
 void CaffeModelParser::write_net_bn(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
 	ofile<<"Layer: batchnorm "<<layer_name<<endl;

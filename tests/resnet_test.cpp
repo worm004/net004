@@ -63,8 +63,8 @@ float caffe_forward(const std::string& img_path, int label){
 	return blob->cpu_data()[0];
 }
 float net004_forward(const std::string& img_path, int label){
-	string net_path = "../models/gnetv1.net004.net",
-	       model_path = "../models/gnetv1.net004.data";
+	string net_path = "../models/resnet50.net004.net",
+	       model_path = "../models/resnet50.net004.data";
 	Net004 net;
 	Parser parser;
 	auto t1 = now();
@@ -78,7 +78,6 @@ float net004_forward(const std::string& img_path, int label){
 	l->add_image((uchar*)img.data,0, 123.68, 116.779, 103.939);
 	((DataLayer*)ls["label"])->add_label(label,0);
 	//net.show();
-	//getchar();
 
 	t1 = now();
 	net.forward();
@@ -107,8 +106,8 @@ int main(int argc, char **argv){
 
 	string img_path = "../imgs/westerdam-ship-size.jpg";
 	int label = 628;
-	float caffe_score = caffe_forward(img_path, label);
-	//float net004_score = net004_forward(img_path, label);
+	//float caffe_score = caffe_forward(img_path, label);
+	float net004_score = net004_forward(img_path, label);
 
 	//bool ret = abs(caffe_score - net004_score) < 1e-5;
 	//printf("[TEST] gnetv1 test %s\n",ret?"sucessful":"failed");

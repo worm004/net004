@@ -24,7 +24,7 @@ ConvLayer::~ConvLayer(){
 }
 
 void ConvLayer::forward(){
-	//printf("forward: %s %s\n",type.c_str(), name.c_str());
+	printf("forward: %s %s\n",type.c_str(), name.c_str());
 	Blob &input = inputs[0], 
 	     &output = outputs[0];
 
@@ -62,9 +62,13 @@ void ConvLayer::forward(){
 					col_data + ncol/group * g, w/group,
 					0.0,
 					odata + output.chw()/group * g, nloc);
+
 		}
 
 		if(bias_data){
+			//printf("%s\n",name.c_str());
+			//printf("bias %d %d %d %d\n",bias.n,bias.c,bias.h,bias.w);
+			//getchar();
 			for(int i = 0; i < filters; ++i)
 			for(int j = 0; j < nloc; ++j)
 				odata[i*nloc +j] += bias_data[i];
@@ -88,7 +92,6 @@ void ConvLayer::forward(){
 			 	activity_mask[i] = 0;
 			 }
 	}
-
 	//show_inputs();
 	//show_outputs();
 	//getchar();
@@ -99,10 +102,10 @@ void ConvLayer::backward(){
 }
 
 void ConvLayer::show()const {
-	printf("[%s%s] name: %s, filters: %d, kernel: %d, stride: %d, padding: %d\n",
-		type.c_str(),activity.empty()?"":("+"+activity).c_str(), 
+	printf("[%s%s%s] name: %s, filters: %d, kernel: %d, stride: %d, padding: %d, group: %d\n",
+		type.c_str(),activity.empty()?"":("+"+activity).c_str(),bias.data?"+bias":"",
 		name.c_str(),
-		filters,kernel,stride,padding);
+		filters,kernel,stride,padding,group);
 
 	if(inputs.size() == 1){
 		printf("\tinput: ");
@@ -158,8 +161,8 @@ void ConvLayer::setup_data(){
 	// weight and bias
 	weight.alloc();
 	weight_dif.alloc();
-	bias.alloc();
-	bias_dif.alloc();
+	//bias.alloc();
+	//bias_dif.alloc();
 
 	// output
 	outputs[0].alloc();
@@ -176,8 +179,8 @@ void ConvLayer::setup_shape(){
 	const Blob& ib = inputs[0];
 	weight.set_shape(filters,ib.c/group, kernel, kernel);
 	weight_dif.set_shape(weight);
-	bias.set_shape(filters,1,1,1);
-	bias_dif.set_shape(bias);
+	//bias.set_shape(filters,1,1,1);
+	//bias_dif.set_shape(bias);
 
 	// output
 	outputs.resize(1);

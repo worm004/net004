@@ -13,6 +13,7 @@ struct Blob{
 	int nchw() const;
 	int chw() const;
 	int hw() const;
+	bool is_shape_same(const Blob&b);
 
 	public:
 	float *data = 0;

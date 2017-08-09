@@ -14,6 +14,9 @@ class Layers{
 	void add_concat(const std::string& name, const std::string& method = "channel");
 	void add_activity(const std::string& name, const std::string& method);
 	void add_split(const std::string& name);
+	void add_bn(const std::string& name);
+	void add_scale(const std::string& name);
+	void add_eltwise(const std::string& name, const std::string& method);
 	void add(const std::string& name, Layer** p);
 
 	void show();

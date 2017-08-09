@@ -5,7 +5,7 @@ ConcatLayer::ConcatLayer(const std::string&name, const std::string& method):Laye
 ConcatLayer::~ConcatLayer(){
 }
 void ConcatLayer::forward(){
-	//printf("forward: %s %s\n",type.c_str(), name.c_str());
+	printf("forward: %s %s\n",type.c_str(), name.c_str());
 	//show_inputs();
 
 	if(method == "channel"){

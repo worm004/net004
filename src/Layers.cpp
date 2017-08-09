@@ -9,6 +9,9 @@
 #include "ConcatLayer.h"
 #include "ActivityLayer.h"
 #include "SplitLayer.h"
+#include "BNLayer.h"
+#include "ScaleLayer.h"
+#include "EltwiseLayer.h"
 
 void Layers::add(const std::string& name, Layer** p){
 	if(layers.find(name) != layers.end()){
@@ -109,5 +112,17 @@ void Layers::add_concat(const std::string& name, const std::string& method){
 }
 void Layers::add_split(const std::string& name){
 	Layer* l = new SplitLayer(name);
+	add(name, &l);
+}
+void Layers::add_bn(const std::string& name){
+	Layer* l = new BNLayer(name);
+	add(name, &l);
+}
+void Layers::add_scale(const std::string& name){
+	Layer* l = new ScaleLayer(name);
+	add(name, &l);
+}
+void Layers::add_eltwise(const std::string& name, const std::string& method){
+	Layer* l = new EltwiseLayer(name, method);
 	add(name, &l);
 }

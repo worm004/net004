@@ -46,6 +46,9 @@ class Parser{
 	void read_net_lrn(params);
 	void read_net_split(params);
 	void read_net_concat(params);
+	void read_net_bn(params);
+	void read_net_scale(params);
+	void read_net_eltwise(params);
 #undef params 
 
 	private:

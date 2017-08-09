@@ -205,12 +205,12 @@ int main(int argc, char** argv){
 	caffe::Caffe::set_mode(caffe::Caffe::CPU);
 	net = make_shared<caffe::Net<float>> (net_path, caffe::TEST);
 	net->CopyTrainedLayersFrom(model_path);
-	show_model(net, model_text_path);
+	//show_model(net, model_text_path);
 
-	//string img_path = "../imgs/westerdam-ship-size.jpg";
-	//load_img(net,img_path,label,mean_r,mean_g,mean_b);
-	//net->Forward();
-	//show_forward(net, forward_text_path);
+	string img_path = "../imgs/westerdam-ship-size.jpg";
+	load_img(net,img_path,label,mean_r,mean_g,mean_b);
+	net->Forward();
+	show_forward(net, forward_text_path);
 	//net->Backward();
 	//show_backward(net, backward_text_path);
 
