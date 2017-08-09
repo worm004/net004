@@ -70,7 +70,7 @@ void LossLayer::show()const {
 			name.c_str());
 }
 void LossLayer::setup_shape(){
-	if( (inputs.size()!=2) || (input_difs.size()!=2)){
+	if(inputs.size()!=2){
 		printf("error: loss input blob number should be 2\n");
 		exit(0);
 	}
@@ -98,9 +98,7 @@ void LossLayer::setup_shape(){
 	}
 	
 	outputs.resize(1);
-	output_difs.resize(1);
 	outputs[0].set_shape(1, 1, 1, 1);
-	output_difs[0].set_shape(outputs[0]);
 
 	if(method == "softmax"){
 		maxs.set_shape(1,1,predict.h,predict.w);
@@ -108,17 +106,33 @@ void LossLayer::setup_shape(){
 		softmaxblob.set_shape(1,predict.c,predict.h,predict.w);
 	}
 
+	if(is_train){
+		if(input_difs.size()!=2){
+			printf("error: loss input blob number should be 2\n");
+			exit(0);
+		}
+		output_difs.resize(1);
+		output_difs[0].set_shape(outputs[0]);
+	}
+
 }
 void LossLayer::setup_data(){
-	if( (outputs.size()!=1) || (output_difs.size()!=1)){
+	if(outputs.size()!=1){
 		printf("error: loss output blob number should be 1\n");
 		exit(0);
 	}
 	outputs[0].alloc();
-	output_difs[0].alloc();
 	if(method == "softmax"){
 		maxs.alloc();
 		sums.alloc();
 		softmaxblob.alloc();
+	}
+
+	if(is_train){
+		if(output_difs.size()!=1){
+			printf("error: loss output blob number should be 1\n");
+			exit(0);
+		}
+		output_difs[0].alloc();
 	}
 }

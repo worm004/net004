@@ -42,6 +42,9 @@ void Net004::setup(){
 	cs.indegrees(ins);
 	cs.outdegrees(outs);
 
+	for(const auto& i : cs.sorted_cs) 
+		ls[i]->set_train(is_train);
+
 	for(const auto& i : cs.sorted_cs){
 		if(outs.find(i) == outs.end()) continue;
 		Layer* l0 = ls[i];

@@ -18,28 +18,47 @@ void EltwiseLayer::forward(){
 void EltwiseLayer::backward(){
 }
 void EltwiseLayer::setup_shape(){
-	if( (inputs.size()!=2) || (input_difs.size()!=2)){
+	if(inputs.size()!=2){
 		printf("error: elewise input blob number should be 2\n");
 		exit(0);
 	}
-	else if(!(inputs[0].is_shape_same(inputs[1]) && input_difs[0].is_shape_same(input_difs[1]))){
+	else if(!inputs[0].is_shape_same(inputs[1])){
 		printf("error: eltwise input 2 blobs should have same shape\n");
+		exit(0);
 	}
 
 	// output
 	const Blob& ib = inputs[0];
 	outputs.resize(1);
-	output_difs.resize(1);
 	outputs[0].set_shape(ib);
-	output_difs[0].set_shape(outputs[0]);
+
+	if(is_train){
+		if(input_difs.size()!=2){
+			printf("error: elewise input blob number should be 2\n");
+			exit(0);
+		}
+		else if(!input_difs[0].is_shape_same(input_difs[1])){
+			printf("error: eltwise input 2 blobs should have same shape\n");
+			exit(0);
+		}
+		output_difs.resize(1);
+		output_difs[0].set_shape(outputs[0]);
+	}
 }
 void EltwiseLayer::setup_data(){
-	if( (outputs.size()!=1) || (output_difs.size()!=1)){
+	if(outputs.size()!=1){
 		printf("error: eltwise output blob number should be 1\n");
 		exit(0);
 	}
 	outputs[0].alloc();
-	output_difs[0].alloc();
+
+	if(is_train){
+		if(output_difs.size()!=1){
+			printf("error: eltwise output blob number should be 1\n");
+			exit(0);
+		}
+		output_difs[0].alloc();
+	}
 }
 void EltwiseLayer::show() const{
 	printf("[%s+%s] name: %s\n", type.c_str(),method.c_str(), name.c_str()); 

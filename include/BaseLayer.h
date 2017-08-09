@@ -23,6 +23,7 @@ class Layer{
 	void show_outputs();
 
 	void setup();
+	void set_train(bool is_train);
 	static int i2o_floor(int w, int kernel, int stride, int padding){
 		return (w + 2 * padding - kernel) / stride + 1;
 	}
@@ -32,5 +33,6 @@ class Layer{
 
 	std::vector<Blob> inputs, input_difs, outputs, output_difs;
 	std::string type, name;
+	bool is_train = false;
 };
 #endif

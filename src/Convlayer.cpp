@@ -81,15 +81,20 @@ void ConvLayer::forward(){
 		int nchw = output.nchw();
 		float* odata = output.data;
 
+		if(is_train){
 		// do this in backward
 		//for(int i=0;i<nchw;++i) 
 		//	activity_mask[i] = 1;
-
-		for(int i=0;i<nchw;++i) 
-			if(odata[i] < 0.0f) {
-				odata[i] = 0.0f;
-			 	activity_mask[i] = 0;
-			 }
+			for(int i=0;i<nchw;++i) 
+				if(odata[i] < 0.0f) {
+					odata[i] = 0.0f;
+					activity_mask[i] = 0;
+				}
+		}
+		else{
+			for(int i=0;i<nchw;++i) 
+				if(odata[i] < 0.0f) odata[i] = 0.0f;
+		}
 	}
 	//show_inputs();
 	//show_outputs();
@@ -124,8 +129,6 @@ void ConvLayer::show()const {
 		printf("\toutput: ");
 		outputs[0].show();
 	}
-	//printf("\toutput dif:");
-	//output_difs[0].show();
 }
 
 int ConvLayer::parameter_number(){
@@ -133,7 +136,7 @@ int ConvLayer::parameter_number(){
 }
 
 void ConvLayer::setup_data(){
-	if( (outputs.size()!=1) || (output_difs.size()!=1)){
+	if(outputs.size()!=1){
 		printf("error: conv output blob number should be 1\n");
 		exit(0);
 	}
@@ -147,42 +150,50 @@ void ConvLayer::setup_data(){
 	memset(table, 0, sizeof(int) * ncol / inputs[0].n/group);
 	generate_table(inputs[0].c/group, inputs[0].h, inputs[0].w, table, kernel, stride, padding);
 
-	// activity
-	activity_mask = new bool[outputs[0].nchw()];
-	memset(activity_mask, 0, sizeof(bool) * outputs[0].nchw());
-
-	// weight and bias
+	// weight, bias and output
 	weight.alloc();
-	weight_dif.alloc();
-	if(is_bias){
-		bias.alloc();
-		bias_dif.alloc();
-	}
-	// output
+	if(is_bias) bias.alloc();
 	outputs[0].alloc();
-	output_difs[0].alloc();
+
+	if(is_train){
+		if(output_difs.size()!=1){
+			printf("error: conv output blob number should be 1\n");
+			exit(0);
+		}
+
+		// activity
+		activity_mask = new bool[outputs[0].nchw()];
+		memset(activity_mask, 0, sizeof(bool) * outputs[0].nchw());
+
+		weight_dif.alloc();
+		if(is_bias) bias_dif.alloc();
+		output_difs[0].alloc();
+	}
 }
 
 void ConvLayer::setup_shape(){
-	if( (inputs.size()!=1) || (input_difs.size()!=1)){
+	if(inputs.size()!=1){
 		printf("error: conv input blob number should be 1\n");
 		exit(0);
 	}
 	
-	// weight and bias
+	// weight, bias and output
 	const Blob& ib = inputs[0];
 	weight.set_shape(filters,ib.c/group, kernel, kernel);
-	weight_dif.set_shape(weight);
-	if(is_bias){
-		bias.set_shape(filters,1,1,1);
-		bias_dif.set_shape(bias);
-	}
-
-	// output
+	if(is_bias) bias.set_shape(filters,1,1,1);
 	outputs.resize(1);
-	output_difs.resize(1);
 	int oh = Layer::i2o_floor(ib.h,kernel,stride,padding),
 	    ow = Layer::i2o_floor(ib.w,kernel,stride,padding);
 	outputs[0].set_shape(ib.n, filters, oh, ow);
-	output_difs[0].set_shape(outputs[0]);
+
+	if(is_train){
+		if(input_difs.size()!=1){
+			printf("error: conv input blob number should be 1\n");
+			exit(0);
+		}
+		weight_dif.set_shape(weight);
+		if(is_bias) bias_dif.set_shape(bias);
+		output_difs.resize(1);
+		output_difs[0].set_shape(outputs[0]);
+	}
 }

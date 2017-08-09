@@ -70,7 +70,7 @@ void LRNLayer::show()const {
 
 }
 void LRNLayer::setup_shape(){
-	if( (inputs.size()!=1) || (input_difs.size()!=1)){
+	if(inputs.size()!=1){
 		printf("error: lrn input blob number should be 1\n");
 		exit(0);
 	}
@@ -78,19 +78,32 @@ void LRNLayer::setup_shape(){
 	// output
 	const Blob& ib = inputs[0];
 	outputs.resize(1);
-	output_difs.resize(1);
 	outputs[0].set_shape(ib);
-	output_difs[0].set_shape(outputs[0]);
-
 	buffer.set_shape(1,outputs[0].c,outputs[0].h,outputs[0].w);
+
+	if(is_train){
+		if(input_difs.size()!=1){
+			printf("error: lrn input blob number should be 1\n");
+			exit(0);
+		}
+		output_difs.resize(1);
+		output_difs[0].set_shape(outputs[0]);
+	}
 }
 void LRNLayer::setup_data(){
-	if( (outputs.size()!=1) || (output_difs.size()!=1)){
+	if(outputs.size()!=1){
 		printf("error: lrn output blob number should be 1\n");
 		exit(0);
 	}
 	outputs[0].alloc();
-	output_difs[0].alloc();
 
 	buffer.alloc();
+
+	if(is_train){
+		if(output_difs.size()!=1){
+			printf("error: lrn output blob number should be 1\n");
+			exit(0);
+		}
+		output_difs[0].alloc();
+	}
 }

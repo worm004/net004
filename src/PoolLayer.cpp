@@ -47,39 +47,62 @@ void PoolLayer::forward_maxpool(){
 	    w = inputs[0].w,
 	    hw = inputs[0].hw(),
 	    bc = inputs[0].n * inputs[0].c,
-	    //bottom = (h + padding * 2 - kernel)%kernel + h + padding - kernel,
-	    //right = (w + padding * 2 - kernel)%kernel + w + padding - kernel;
 	    bottom = ((h + padding * 2 - kernel+stride-1)/stride + 1)*stride - padding-1,
 	    right = ((w + padding * 2 - kernel+stride-1)/stride + 1)*stride - padding-1;
 
 	float *idata = inputs[0].data,
 	      *odata = outputs[0].data;
 
-	//do this when backward
-	//int nchw = outputs[0].nchw();
-	//for(int i=0;i<nchw;++i) mask[i] = -1;
+	if(is_train){
+		//do this when backward
+		//int nchw = outputs[0].nchw();
+		//for(int i=0;i<nchw;++i) mask[i] = -1;
 
-	for(int t = 0, cur = 0; t < bc; ++t, idata += hw)
-	for(int i=-padding;i<=bottom;i+=stride)
-	for(int j=-padding;j<=right;j+=stride){
-		float val = -1e10;
-		int index = -1;
-		for(int ik = 0;ik<kernel;++ik){
-			int y = i + ik;
-			if((y < 0) || (y >= h)) continue;
-			float *idatay = idata + w*y;
-			for(int jk = 0;jk<kernel;++jk){
-				int x = j + jk;
-				if((x < 0) || (x >= w)) continue;
-				float v = idatay[x];
-				if(v > val){
-					val = v;
-					index = y*w + x;
+		for(int t = 0, cur = 0; t < bc; ++t, idata += hw)
+		for(int i=-padding;i<=bottom;i+=stride)
+		for(int j=-padding;j<=right;j+=stride){
+			float val = -1e10;
+			int index = -1;
+			for(int ik = 0;ik<kernel;++ik){
+				int y = i + ik;
+				if((y < 0) || (y >= h)) continue;
+				float *idatay = idata + w*y;
+				for(int jk = 0;jk<kernel;++jk){
+					int x = j + jk;
+					if((x < 0) || (x >= w)) continue;
+					float v = idatay[x];
+					if(v > val){
+						val = v;
+						index = y*w + x;
+					}
 				}
 			}
+			mask[cur] = index;
+			odata[cur++] = val;
 		}
-		mask[cur] = index;
-		odata[cur++] = val;
+	}
+	else{
+		for(int t = 0, cur = 0; t < bc; ++t, idata += hw)
+		for(int i=-padding;i<=bottom;i+=stride)
+		for(int j=-padding;j<=right;j+=stride){
+			float val = -1e10;
+			int index = -1;
+			for(int ik = 0;ik<kernel;++ik){
+				int y = i + ik;
+				if((y < 0) || (y >= h)) continue;
+				float *idatay = idata + w*y;
+				for(int jk = 0;jk<kernel;++jk){
+					int x = j + jk;
+					if((x < 0) || (x >= w)) continue;
+					float v = idatay[x];
+					if(v > val){
+						val = v;
+						index = y*w + x;
+					}
+				}
+			}
+			odata[cur++] = val;
+		}
 	}
 }
 void PoolLayer::forward(){
@@ -117,33 +140,42 @@ void PoolLayer::show()const {
 	}
 }
 void PoolLayer::setup_shape(){
-	if( (inputs.size()!=1) || (input_difs.size()!=1)){
+	if(inputs.size()!=1){
 		printf("error: pool input blob number should be 1\n");
 		exit(0);
 	}
-
 	// output
 	const Blob& ib = inputs[0];
-	outputs.resize(1);
-	output_difs.resize(1);
-
 	if (kernel == -1) kernel = ib.h;//global
-
+	outputs.resize(1);
 	int oh = Layer::i2o_ceil(ib.h,kernel,stride,padding),
 	    ow = Layer::i2o_ceil(ib.w,kernel,stride,padding);
-
 	outputs[0].set_shape(ib.n, ib.c, oh, ow);
-	output_difs[0].set_shape(outputs[0]);
+
+	if(is_train){
+		if(input_difs.size()!=1){
+			printf("error: pool input blob number should be 1\n");
+			exit(0);
+		}
+		output_difs.resize(1);
+		output_difs[0].set_shape(outputs[0]);
+	}
 }
 void PoolLayer::setup_data(){
-	if( (outputs.size()!=1) || (output_difs.size()!=1)){
+	if(outputs.size()!=1){
 		printf("error: pool output blob number should be 1\n");
 		exit(0);
 	}
 	int nchw = outputs[0].nchw();
-	mask = new int[nchw];
-	for(int i=0;i<nchw;++i) mask[i] = -1;
-
 	outputs[0].alloc();
-	output_difs[0].alloc();
+
+	if(is_train){
+		if(output_difs.size()!=1){
+			printf("error: pool output blob number should be 1\n");
+			exit(0);
+		}
+		mask = new int[nchw];
+		for(int i=0;i<nchw;++i) mask[i] = -1;
+		output_difs[0].alloc();
+	}
 }

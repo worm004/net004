@@ -22,8 +22,11 @@ void Layer::setup(){
 	setup_shape();
 	setup_data();
 }
+
+void Layer::set_train(bool is_train){this->is_train = is_train;}
+
 void Layer::connect2(Layer& l){
-	if( (outputs.size()!=1) || (output_difs.size()!=1)){
+	if(outputs.size()!=1){
 		printf("error: connnect2: %s output blob number should be 1 (now %lu)\n",name.c_str(),outputs.size());
 		exit(0);
 	}
@@ -32,9 +35,15 @@ void Layer::connect2(Layer& l){
 	l.inputs.back().set_data(outputs[0].data);
 	l.inputs.back().type = outputs[0].type;
 
-	l.input_difs.push_back(Blob());
-	l.input_difs.back().set_shape(outputs[0]);
-	l.input_difs.back().set_data(output_difs[0].data);
+	if(is_train){
+		if(output_difs.size()!=1){
+			printf("error: connnect2: %s output blob number should be 1 (now %lu)\n",name.c_str(),outputs.size());
+			exit(0);
+		}
+		l.input_difs.push_back(Blob());
+		l.input_difs.back().set_shape(outputs[0]);
+		l.input_difs.back().set_data(output_difs[0].data);
+	}
 }
 int Layer::parameter_number(){
 	return 0;
