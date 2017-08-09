@@ -14,6 +14,8 @@ class PoolLayer: public Layer{
 	virtual void backward();
 	virtual void setup_shape();
 	virtual void setup_data();
+	virtual void setup_dif_shape();
+	virtual void setup_dif_data();
 	virtual void show()const;
 	void forward_maxpool();
 	void forward_avgpool();

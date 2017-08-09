@@ -55,17 +55,6 @@ void BNLayer::setup_shape(){
 	outputs.resize(1);
 	outputs[0].set_shape(ib);
 
-	if(is_train){
-		if(input_difs.size()!=1){
-			printf("error: bn input blob number should be 1\n");
-			exit(0);
-		}
-		mean_dif.set_shape(mean);
-		variance_dif.set_shape(variance);
-		scale_dif.set_shape(scale);
-		output_difs.resize(1);
-		output_difs[0].set_shape(outputs[0]);
-	}
 }
 void BNLayer::setup_data(){
 	if(outputs.size()!=1){
@@ -79,16 +68,27 @@ void BNLayer::setup_data(){
 	// output
 	outputs[0].set_data(inputs[0].data);
 
-	if(is_train){
-		if(output_difs.size()!=1){
-			printf("error: bn output blob number should be 1\n");
-			exit(0);
-		}
-		mean_dif.alloc();
-		variance_dif.alloc();
-		scale_dif.alloc();
-		output_difs[0].alloc();
+}
+void BNLayer::setup_dif_shape(){
+	if(input_difs.size()!=1){
+		printf("error: bn input blob number should be 1\n");
+		exit(0);
 	}
+	mean_dif.set_shape(mean);
+	variance_dif.set_shape(variance);
+	scale_dif.set_shape(scale);
+	output_difs.resize(1);
+	output_difs[0].set_shape(outputs[0]);
+}
+void BNLayer::setup_dif_data(){
+	if(output_difs.size()!=1){
+		printf("error: bn output blob number should be 1\n");
+		exit(0);
+	}
+	mean_dif.alloc();
+	variance_dif.alloc();
+	scale_dif.alloc();
+	output_difs[0].alloc();
 }
 void BNLayer::show() const{
 	printf("[%s] name: %s\n", type.c_str(), name.c_str()); 

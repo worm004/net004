@@ -53,15 +53,6 @@ void ActivityLayer::setup_shape(){
 	const Blob& ib = inputs[0];
 	outputs.resize(1);
 	outputs[0].set_shape(ib);
-
-	if(is_train){
-		if(input_difs.size()!=1){
-			printf("error: acvtivity input blob number should be 1\n");
-			exit(0);
-		}
-		output_difs.resize(1);
-		output_difs[0].set_shape(outputs[0]);
-	}
 }
 void ActivityLayer::setup_data(){
 	if(outputs.size()!=1){
@@ -70,15 +61,23 @@ void ActivityLayer::setup_data(){
 	}
 
 	outputs[0].set_data(inputs[0].data);
-	if(is_train){
-		if(output_difs.size()!=1){
-			printf("error: activity output blob number should be 1\n");
-			exit(0);
-		}
-		mask = new bool[outputs[0].nchw()];
-		memset(mask,0,sizeof(bool)*outputs[0].nchw());
-	}
 
+}
+void ActivityLayer::setup_dif_shape(){
+	if(input_difs.size()!=1){
+		printf("error: acvtivity input blob number should be 1\n");
+		exit(0);
+	}
+	output_difs.resize(1);
+	output_difs[0].set_shape(outputs[0]);
+}
+void ActivityLayer::setup_dif_data(){
+	if(output_difs.size()!=1){
+		printf("error: activity output blob number should be 1\n");
+		exit(0);
+	}
+	mask = new bool[outputs[0].nchw()];
+	memset(mask,0,sizeof(bool)*outputs[0].nchw());
 }
 void ActivityLayer::show() const{
 	printf("[%s] name: %s, method: %s\n", type.c_str(),name.c_str(), method.c_str());

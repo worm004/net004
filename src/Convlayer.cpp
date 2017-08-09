@@ -135,6 +135,31 @@ int ConvLayer::parameter_number(){
 	return weight.nchw() + bias.nchw();
 }
 
+
+void ConvLayer::setup_shape(){
+	if(inputs.size()!=1){
+		printf("error: conv input blob number should be 1\n");
+		exit(0);
+	}
+	
+	const Blob& ib = inputs[0];
+	weight.set_shape(filters,ib.c/group, kernel, kernel);
+	if(is_bias) bias.set_shape(filters,1,1,1);
+	outputs.resize(1);
+	int oh = Layer::i2o_floor(ib.h,kernel,stride,padding),
+	    ow = Layer::i2o_floor(ib.w,kernel,stride,padding);
+	outputs[0].set_shape(ib.n, filters, oh, ow);
+}
+void ConvLayer::setup_dif_shape(){
+	if(input_difs.size()!=1){
+		printf("error: conv input blob number should be 1\n");
+		exit(0);
+	}
+	weight_dif.set_shape(weight);
+	if(is_bias) bias_dif.set_shape(bias);
+	output_difs.resize(1);
+	output_difs[0].set_shape(outputs[0]);
+}
 void ConvLayer::setup_data(){
 	if(outputs.size()!=1){
 		printf("error: conv output blob number should be 1\n");
@@ -155,45 +180,18 @@ void ConvLayer::setup_data(){
 	if(is_bias) bias.alloc();
 	outputs[0].alloc();
 
-	if(is_train){
-		if(output_difs.size()!=1){
-			printf("error: conv output blob number should be 1\n");
-			exit(0);
-		}
-
-		// activity
-		activity_mask = new bool[outputs[0].nchw()];
-		memset(activity_mask, 0, sizeof(bool) * outputs[0].nchw());
-
-		weight_dif.alloc();
-		if(is_bias) bias_dif.alloc();
-		output_difs[0].alloc();
-	}
 }
-
-void ConvLayer::setup_shape(){
-	if(inputs.size()!=1){
-		printf("error: conv input blob number should be 1\n");
+void ConvLayer::setup_dif_data(){
+	if(output_difs.size()!=1){
+		printf("error: conv output blob number should be 1\n");
 		exit(0);
 	}
-	
-	// weight, bias and output
-	const Blob& ib = inputs[0];
-	weight.set_shape(filters,ib.c/group, kernel, kernel);
-	if(is_bias) bias.set_shape(filters,1,1,1);
-	outputs.resize(1);
-	int oh = Layer::i2o_floor(ib.h,kernel,stride,padding),
-	    ow = Layer::i2o_floor(ib.w,kernel,stride,padding);
-	outputs[0].set_shape(ib.n, filters, oh, ow);
 
-	if(is_train){
-		if(input_difs.size()!=1){
-			printf("error: conv input blob number should be 1\n");
-			exit(0);
-		}
-		weight_dif.set_shape(weight);
-		if(is_bias) bias_dif.set_shape(bias);
-		output_difs.resize(1);
-		output_difs[0].set_shape(outputs[0]);
-	}
+	// activity
+	activity_mask = new bool[outputs[0].nchw()];
+	memset(activity_mask, 0, sizeof(bool) * outputs[0].nchw());
+
+	weight_dif.alloc();
+	if(is_bias) bias_dif.alloc();
+	output_difs[0].alloc();
 }

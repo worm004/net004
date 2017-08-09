@@ -14,6 +14,8 @@ class Layer{
 	virtual void show() const = 0;
 	virtual void setup_shape();
 	virtual void setup_data();
+	virtual void setup_dif_shape();
+	virtual void setup_dif_data();
 	virtual void connect2(Layer& l);
 	virtual int parameter_number();
 	int input_parameter_number();

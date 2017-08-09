@@ -52,14 +52,6 @@ void ConcatLayer::setup_shape(){
 	}
 	outputs[0].set_shape(ib.n, c, ib.h, ib.w);
 
-	if(is_train){
-		if(input_difs.size()<=1){
-			printf("error: concat input blob number should be > 1\n");
-			exit(0);
-		}
-		output_difs.resize(1);
-		output_difs[0].set_shape(outputs[0]);
-	}
 }
 void ConcatLayer::setup_data(){
 	if(outputs.size()!=1){
@@ -68,13 +60,21 @@ void ConcatLayer::setup_data(){
 	}
 	outputs[0].alloc();
 
-	if(is_train){
-		if(output_difs.size()!=1){
-			printf("error: concat output blob number should be 1\n");
-			exit(0);
-		}
-		output_difs[0].alloc();
+}
+void ConcatLayer::setup_dif_shape(){
+	if(input_difs.size()<=1){
+		printf("error: concat input blob number should be > 1\n");
+		exit(0);
 	}
+	output_difs.resize(1);
+	output_difs[0].set_shape(outputs[0]);
+}
+void ConcatLayer::setup_dif_data(){
+	if(output_difs.size()!=1){
+		printf("error: concat output blob number should be 1\n");
+		exit(0);
+	}
+	output_difs[0].alloc();
 }
 
 void ConcatLayer::show()const {

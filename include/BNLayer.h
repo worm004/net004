@@ -10,6 +10,8 @@ class BNLayer: public Layer{
 	virtual void backward();
 	virtual void setup_shape();
 	virtual void setup_data();
+	virtual void setup_dif_shape();
+	virtual void setup_dif_data();
 	virtual void show() const;
 	virtual int parameter_number();
 

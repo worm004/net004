@@ -10,6 +10,8 @@ class FCLayer: public Layer{
 	virtual void show()const;
 	virtual void setup_shape();
 	virtual void setup_data();
+	virtual void setup_dif_shape();
+	virtual void setup_dif_data();
 	virtual int parameter_number();
 	int get_n(){return n;}
 	std::string& get_activity(){return activity;}

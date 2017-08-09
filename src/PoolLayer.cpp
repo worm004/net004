@@ -151,15 +151,6 @@ void PoolLayer::setup_shape(){
 	int oh = Layer::i2o_ceil(ib.h,kernel,stride,padding),
 	    ow = Layer::i2o_ceil(ib.w,kernel,stride,padding);
 	outputs[0].set_shape(ib.n, ib.c, oh, ow);
-
-	if(is_train){
-		if(input_difs.size()!=1){
-			printf("error: pool input blob number should be 1\n");
-			exit(0);
-		}
-		output_difs.resize(1);
-		output_difs[0].set_shape(outputs[0]);
-	}
 }
 void PoolLayer::setup_data(){
 	if(outputs.size()!=1){
@@ -168,14 +159,22 @@ void PoolLayer::setup_data(){
 	}
 	int nchw = outputs[0].nchw();
 	outputs[0].alloc();
-
-	if(is_train){
-		if(output_difs.size()!=1){
-			printf("error: pool output blob number should be 1\n");
-			exit(0);
-		}
-		mask = new int[nchw];
-		for(int i=0;i<nchw;++i) mask[i] = -1;
-		output_difs[0].alloc();
+}
+void PoolLayer::setup_dif_shape(){
+	if(input_difs.size()!=1){
+		printf("error: pool input blob number should be 1\n");
+		exit(0);
 	}
+	output_difs.resize(1);
+	output_difs[0].set_shape(outputs[0]);
+}
+void PoolLayer::setup_dif_data(){
+	if(output_difs.size()!=1){
+		printf("error: pool output blob number should be 1\n");
+		exit(0);
+	}
+	int nchw = outputs[0].nchw();
+	mask = new int[nchw];
+	for(int i=0;i<nchw;++i) mask[i] = -1;
+	output_difs[0].alloc();
 }

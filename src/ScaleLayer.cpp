@@ -60,16 +60,6 @@ void ScaleLayer::setup_shape(){
 	outputs.resize(1);
 	outputs[0].set_shape(ib);
 
-	if(is_train){
-		if(input_difs.size()!=1){
-			printf("error: scale input blob number should be 1\n");
-			exit(0);
-		}
-		weight_dif.set_shape(weight);
-		if(is_bias) bias_dif.set_shape(bias);
-		output_difs.resize(1);
-		output_difs[0].set_shape(outputs[0]);
-	}
 }
 void ScaleLayer::setup_data(){
 	if(outputs.size()!=1){
@@ -83,15 +73,25 @@ void ScaleLayer::setup_data(){
 	// output
 	outputs[0].set_data(inputs[0].data);
 
-	if(is_train){
-		if(output_difs.size()!=1){
-			printf("error: scale output blob number should be 1\n");
-			exit(0);
-		}
-		weight_dif.alloc();
-		if(is_bias) bias_dif.alloc();
-		output_difs[0].alloc();
+}
+void ScaleLayer::setup_dif_shape(){
+	if(input_difs.size()!=1){
+		printf("error: scale input blob number should be 1\n");
+		exit(0);
 	}
+	weight_dif.set_shape(weight);
+	if(is_bias) bias_dif.set_shape(bias);
+	output_difs.resize(1);
+	output_difs[0].set_shape(outputs[0]);
+}
+void ScaleLayer::setup_dif_data(){
+	if(output_difs.size()!=1){
+		printf("error: scale output blob number should be 1\n");
+		exit(0);
+	}
+	weight_dif.alloc();
+	if(is_bias) bias_dif.alloc();
+	output_difs[0].alloc();
 }
 void ScaleLayer::show() const{
 	printf("[%s%s] name: %s\n", type.c_str(),bias.data?"+bias":"", name.c_str()); 

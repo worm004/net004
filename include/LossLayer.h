@@ -10,6 +10,8 @@ class LossLayer: public Layer{
 	virtual void show()const;
 	virtual void setup_shape();
 	virtual void setup_data();
+	virtual void setup_dif_shape();
+	virtual void setup_dif_data();
 	std::string get_method(){return method;}
 	private:
 	void forward_softmax();

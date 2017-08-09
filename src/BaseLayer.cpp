@@ -18,9 +18,17 @@ void Layer::setup_shape(){
 }
 void Layer::setup_data(){
 }
+void Layer::setup_dif_shape(){
+}
+void Layer::setup_dif_data(){
+}
 void Layer::setup(){
 	setup_shape();
 	setup_data();
+	if(is_train){
+		setup_dif_shape();
+		setup_dif_data();
+	}
 }
 
 void Layer::set_train(bool is_train){this->is_train = is_train;}

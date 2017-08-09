@@ -84,18 +84,6 @@ void FCLayer::setup_shape(){
 	if(is_bias) bias.set_shape(n,1,1,1);
 	outputs.resize(1);
 	outputs[0].set_shape(ib.n, n, 1, 1);
-
-	if(is_train){
-		if(input_difs.size()!=1){
-			printf("error: fc input blob number should be 1\n");
-			exit(0);
-		}
-		weight_dif.set_shape(weight);
-		if(is_bias)
-			bias_dif.set_shape(bias);
-		output_difs.resize(1);
-		output_difs[0].set_shape(outputs[0]);
-	}
 }
 void FCLayer::setup_data(){
 	if(outputs.size()!=1){
@@ -106,17 +94,26 @@ void FCLayer::setup_data(){
 	weight.alloc();
 	if(is_bias) bias.alloc();
 	outputs[0].alloc();
-
-
-	if(is_train){
-		if(output_difs.size()!=1){
-			printf("error: fc output blob number should be 1\n");
-			exit(0);
-		}
-		weight_dif.alloc();
-		if(is_bias) bias_dif.alloc();
-		output_difs[0].alloc();
+}
+void FCLayer::setup_dif_shape(){
+	if(input_difs.size()!=1){
+		printf("error: fc input blob number should be 1\n");
+		exit(0);
 	}
+	weight_dif.set_shape(weight);
+	if(is_bias)
+		bias_dif.set_shape(bias);
+	output_difs.resize(1);
+	output_difs[0].set_shape(outputs[0]);
+}
+void FCLayer::setup_dif_data(){
+	if(output_difs.size()!=1){
+		printf("error: fc output blob number should be 1\n");
+		exit(0);
+	}
+	weight_dif.alloc();
+	if(is_bias) bias_dif.alloc();
+	output_difs[0].alloc();
 }
 int FCLayer::parameter_number(){
 	return weight.nchw() + bias.nchw();
