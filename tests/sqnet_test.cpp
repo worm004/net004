@@ -21,6 +21,9 @@ float caffe_forward(const std::string& img_path, int label, const std::string& n
 	} else if(net_name == "1.1"){
 		net_path = "../caffe_models/sqnet1.1.prototxt";
 		model_path = "../caffe_models/sqnet1.1.caffemodel";
+	} else if(net_name == "res"){
+		net_path = "../caffe_models/sqnet_res.prototxt";
+		model_path = "../caffe_models/sqnet_res.caffemodel";
 	}
 
   	std::shared_ptr<caffe::Net<float> > net;
@@ -78,6 +81,9 @@ float net004_forward(const std::string& img_path, int label, const std::string& 
 	}else if(net_name == "1.1"){
 		net_path = "../models/sqnet1.1.net004.net";
 		model_path = "../models/sqnet1.1.net004.data";
+	} else if(net_name == "res"){
+		net_path = "../models/sqnet_res.net004.net";
+		model_path = "../models/sqnet_res.net004.data";
 	}
 
 	Net004 net;
@@ -122,9 +128,9 @@ int main(int argc, char **argv){
 
 	string img_path = "../imgs/westerdam-ship-size.jpg";
 	int label = 628;
-	char nets[2][100] = {"1.0","1.1"};
+	char nets[3][100] = {"1.0","1.1","res"};
 
-	for(int i=0;i<2;++i){
+	for(int i=0;i<3;++i){
 		float caffe_score = caffe_forward(img_path, label,nets[i]);
 		float net004_score = net004_forward(img_path, label,nets[i]);
 		bool ret = abs(caffe_score - net004_score) < 1e-5;

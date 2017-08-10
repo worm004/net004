@@ -64,6 +64,12 @@ void cvt_caffe_model(const std::string& name){
 	net004_net_path = "../models/sqnet1.1.net004.net",
 	net004_model_path = "../models/sqnet1.1.net004.data";
 	}
+	else if(name == "sqnet_res"){
+	caffe_net_path = "../caffe_models/sqnet_res.prototxt",
+	caffe_model_path = "../caffe_models/sqnet_res.caffemodel",
+	net004_net_path = "../models/sqnet_res.net004.net",
+	net004_model_path = "../models/sqnet_res.net004.data";
+	}
 	else{
 		printf("no such net: %s\n",name.c_str());
 		return;
