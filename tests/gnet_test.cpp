@@ -12,9 +12,19 @@
 #define cal_duration(t1,t2) (std::chrono::duration_cast<std::chrono::milliseconds>((t2) - (t1)).count())
 using namespace cv;
 using namespace std;
-float caffe_forward(const std::string& img_path, int label){
-	string net_path = "../caffe_models/bvlc_googlenet_deploy.prototxt",
-	       model_path = "../caffe_models/bvlc_googlenet.caffemodel";
+float caffe_forward(const std::string& img_path, int label, const std::string& name){
+	string net_path, model_path;
+
+	if(name == "v1"){
+		net_path = "../caffe_models/bvlc_googlenet_deploy.prototxt";
+		model_path = "../caffe_models/bvlc_googlenet.caffemodel";
+	}else if(name == "v3"){
+		net_path = "../caffe_models/deploy_inception-v3.prototxt";
+		model_path = "../caffe_models/inception-v3.caffemodel";
+	}else if(name == "v4"){
+		net_path = "../caffe_models/deploy_inception-v4.prototxt";
+		model_path = "../caffe_models/inception-v4.caffemodel";
+	}
   	std::shared_ptr<caffe::Net<float> > net;
 	caffe::Caffe::set_mode(caffe::Caffe::CPU);
 	auto t1 = now();
@@ -62,9 +72,19 @@ float caffe_forward(const std::string& img_path, int label){
 
 	return blob->cpu_data()[0];
 }
-float net004_forward(const std::string& img_path, int label){
-	string net_path = "../models/gnetv1.net004.net",
-	       model_path = "../models/gnetv1.net004.data";
+float net004_forward(const std::string& img_path, int label, const std::string& name){
+	string net_path, model_path;
+
+	if(name == "v1"){
+		net_path = "../models/gnetv1.net004.net";
+		model_path = "../models/gnetv1.net004.data";
+	}else if(name == "v3"){
+		net_path = "../models/gnetv3.net004.net";
+		model_path = "../models/gnetv3.net004.data";
+	}else if(name == "v4"){
+		net_path = "../models/gnetv3.net004.net";
+		model_path = "../models/gnetv3.net004.data";
+	}
 	Net004 net;
 	Parser parser;
 	auto t1 = now();
@@ -102,16 +122,21 @@ float net004_forward(const std::string& img_path, int label){
 	return net.ls["loss"]->outputs[0].data[0];
 }
 int main(int argc, char **argv){
+	char names[3][100] = {"v1","v3","v4"};
+	
 	google::InitGoogleLogging(argv[0]);
 	google::SetCommandLineOption("GLOG_minloglevel", "2");
 
 	string img_path = "../imgs/westerdam-ship-size.jpg";
 	int label = 628;
-	float caffe_score = caffe_forward(img_path, label);
-	float net004_score = net004_forward(img_path, label);
+	
+	for(int i=0;i<1;++i){
+		float caffe_score = caffe_forward(img_path, label, names[i]);
+		float net004_score = net004_forward(img_path, label, names[i]);
 
-	bool ret = abs(caffe_score - net004_score) < 1e-5;
-	printf("[TEST] gnetv1 test %s\n",ret?"sucessful":"failed");
+		bool ret = abs(caffe_score - net004_score) < 1e-5;
+		printf("[TEST] gnet%s test %s\n",names[i],ret?"sucessful":"failed");
+	}
 
 	return 0;
 }

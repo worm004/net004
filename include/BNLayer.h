@@ -4,7 +4,7 @@
 
 class BNLayer: public Layer{
 	public:
-	BNLayer(const std::string& name);
+	BNLayer(const std::string& name, float eps);
 	virtual ~BNLayer();
 	virtual void forward();
 	virtual void backward();
@@ -16,5 +16,6 @@ class BNLayer: public Layer{
 	virtual int parameter_number();
 
 	Blob mean, variance, mean_dif, variance_dif, scale, scale_dif;
+	float eps;
 };
 #endif

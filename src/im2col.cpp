@@ -27,13 +27,13 @@ void im2col(float * im, int c, int h, int w, float *des, int kernel, int stride,
 	//printf("%d = %d x %d x %d\n",ii,kernel * kernel, c, ii/kernel/kernel/c);
 	//getchar();
 }
-void generate_table(int c, int h, int w, int *table, int kernel, int stride, int pad){
+void generate_table(int c, int h, int w, int *table, int kernel_h,int kernel_w, int stride_h, int stride_w, int pad_h, int pad_w){
 	int ii = 0;
-	for(int iy = -pad; iy <= h + pad - kernel; iy += stride)
-	for(int ix = -pad; ix <= w + pad - kernel; ix += stride)
+	for(int iy = -pad_h; iy <= h + pad_h - kernel_h; iy += stride_h)
+	for(int ix = -pad_w; ix <= w + pad_w - kernel_w; ix += stride_w)
 	for(int oc = 0; oc < c; ++oc)
-	for(int ik = 0; ik < kernel; ++ik)
-	for(int jk = 0; jk < kernel; ++jk,++ii){
+	for(int ik = 0; ik < kernel_h; ++ik)
+	for(int jk = 0; jk < kernel_w; ++jk,++ii){
 		int y = iy + ik, x = ix + jk;
 		if((x < 0)|| (x>=w) || (y<0) || (y>=h)) table[ii] = -1;
 		else table[ii] = w*h*oc + y * w + x;

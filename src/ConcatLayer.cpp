@@ -1,12 +1,12 @@
 #include "stdlib.h"
 #include "ConcatLayer.h"
-ConcatLayer::ConcatLayer(const std::string&name, const std::string& method):Layer(name,"concat"), method(method){
+ConcatLayer::ConcatLayer(const std::string&name, const std::vector<std::string>& names, const std::string& method):Layer(name,"concat"), method(method){
 }
 ConcatLayer::~ConcatLayer(){
 }
 void ConcatLayer::forward(){
-	//printf("forward: %s %s\n",type.c_str(), name.c_str());
-	//show_inputs();
+	printf("forward: %s %s\n",type.c_str(), name.c_str());
+		//show_inputs();
 
 	if(method == "channel"){
 		forward_channel();
@@ -15,7 +15,7 @@ void ConcatLayer::forward(){
 		printf("no such method: %s in concat layer\n",method.c_str());
 		exit(0);
 	}
-	//show_outputs();
+		//show_outputs();
 }
 void ConcatLayer::forward_channel(){
 	int n = inputs[0].n;

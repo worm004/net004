@@ -70,6 +70,18 @@ void cvt_caffe_model(const std::string& name){
 	net004_net_path = "../models/sqnet_res.net004.net",
 	net004_model_path = "../models/sqnet_res.net004.data";
 	}
+	else if(name == "gnetv3"){
+	caffe_net_path = "../caffe_models/deploy_inception-v3.prototxt",
+	caffe_model_path = "../caffe_models/inception-v3.caffemodel",
+	net004_net_path = "../models/gnetv3.net004.net",
+	net004_model_path = "../models/gnetv3.net004.data";
+	}
+	else if(name == "gnetv4"){
+	caffe_net_path = "../caffe_models/deploy_inception-v4.prototxt",
+	caffe_model_path = "../caffe_models/inception-v4.caffemodel",
+	net004_net_path = "../models/gnetv4.net004.net",
+	net004_model_path = "../models/gnetv4.net004.data";
+	}
 	else{
 		printf("no such net: %s\n",name.c_str());
 		return;

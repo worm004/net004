@@ -168,10 +168,10 @@ int main(int argc, char** argv){
 	google::SetCommandLineOption("GLOG_minloglevel", "2");
 
 	// cifar10
-	//int label = 8;
-	//float mean_r = 127 ,mean_g = 127 ,mean_b = 127;
-	//string net_path = "../caffe_models/cifar10_quick_train_test.prototxt",
-	//       model_path = "../caffe_models/cifar10_quick_iter_5000.caffemodel.h5";
+	int label = 8;
+	float mean_r = 127 ,mean_g = 127 ,mean_b = 127;
+	string net_path = "../caffe_models/cifar10_quick_train_test.prototxt",
+	       model_path = "../caffe_models/cifar10_quick_iter_5000.caffemodel.h5";
 	
 	// vgg16
 	//int label = 628;
@@ -192,10 +192,15 @@ int main(int argc, char** argv){
 	//       model_path = "../caffe_models/bvlc_googlenet.caffemodel";
 
 	// resnet
-	int label = 628;
-	float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
-	string net_path = "../caffe_models/ResNet-50-deploy.prototxt",
-	       model_path = "../caffe_models/ResNet-50-model.caffemodel";
+	//int label = 628;
+	//float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
+	//string net_path = "../caffe_models/ResNet-50-deploy.prototxt",
+	//       model_path = "../caffe_models/ResNet-50-model.caffemodel";
+
+	//int label = 628;
+	//float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
+	//string net_path = "../caffe_models/deploy_inception-v3.prototxt",
+	//       model_path = "../caffe_models/inception-v3.caffemodel";
 
 	string model_text_path = "model.txt",
 	       forward_text_path = "forward.txt",

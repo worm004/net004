@@ -12,10 +12,37 @@ ConvLayer::ConvLayer(
 	int group,
 	bool is_bias,
 	const std::string& activity):
-		kernel(kernel), 
+		kernel_h(kernel), 
+		kernel_w(kernel), 
 		filters(filters), 
-		padding(padding), 
-		stride(stride), 
+		padding_h(padding), 
+		padding_w(padding), 
+		stride_h(stride), 
+		stride_w(stride), 
+		activity(activity), 
+		group(group),
+		is_bias(is_bias),
+		Layer(name,"conv"){
+}
+ConvLayer::ConvLayer(
+	const std::string&name, 
+	int filters, 
+	int kernel_h, 
+	int kernel_w, 
+	int stride_h, 
+	int stride_w, 
+	int padding_h,
+	int padding_w,
+	int group,
+	bool is_bias,
+	const std::string& activity):
+		kernel_h(kernel_h), 
+		kernel_w(kernel_w), 
+		filters(filters), 
+		padding_h(padding_h), 
+		padding_w(padding_w), 
+		stride_h(stride_h), 
+		stride_w(stride_w), 
 		activity(activity), 
 		group(group),
 		is_bias(is_bias),
@@ -26,14 +53,14 @@ ConvLayer::~ConvLayer(){
 }
 
 void ConvLayer::forward(){
-	//printf("forward: %s %s\n",type.c_str(), name.c_str());
+	printf("forward: %s %s\n",type.c_str(), name.c_str());
 	Blob &input = inputs[0], 
 	     &output = outputs[0];
 
 	int batch_size = input.n,
 	    istep = input.chw(), 
-	    ncol = kernel * kernel * output.hw() * input.c,
-	    w = kernel * kernel * input.c, 
+	    ncol = kernel_h * kernel_w * output.hw() * input.c,
+	    w = kernel_h * kernel_w * input.c, 
 	    nloc = output.hw();
 	float * idata = input.data, 
 	      * odata = output.data,
@@ -54,7 +81,7 @@ void ConvLayer::forward(){
 		//		odata, nloc);
 		
 		for(int g=0;g<group;++g){
-			im2col2(idata + input.chw()/group*g, table, col_data + ncol/group * g, kernel * kernel * outputs[0].hw() * inputs[0].c/group);
+			im2col2(idata + input.chw()/group*g, table, col_data + ncol/group * g, kernel_h * kernel_w * outputs[0].hw() * inputs[0].c/group);
 
 			cblas_sgemm(CblasRowMajor, 
 					CblasNoTrans, CblasTrans, 
@@ -68,6 +95,7 @@ void ConvLayer::forward(){
 		}
 
 		if(is_bias){
+			//printf("bias\n");
 			for(int i = 0; i < filters; ++i)
 			for(int j = 0; j < nloc; ++j)
 				odata[i*nloc +j] += bias_data[i];
@@ -106,10 +134,10 @@ void ConvLayer::backward(){
 }
 
 void ConvLayer::show()const {
-	printf("[%s%s%s] name: %s, filters: %d, kernel: %d, stride: %d, padding: %d, group: %d\n",
+	printf("[%s%s%s] name: %s, filters: %d, kernel: %dx%d, stride: %dx%d, padding: %dx%d, group: %d\n",
 		type.c_str(),activity.empty()?"":("+"+activity).c_str(),bias.data?"+bias":"",
 		name.c_str(),
-		filters,kernel,stride,padding,group);
+		filters,kernel_h,kernel_w,stride_h,stride_w,padding_h,padding_w,group);
 
 	if(inputs.size() == 1){
 		printf("\tinput: ");
@@ -141,11 +169,11 @@ void ConvLayer::setup_shape(){
 		exit(0);
 	}
 	const Blob& ib = inputs[0];
-	weight.set_shape(filters,ib.c/group, kernel, kernel);
+	weight.set_shape(filters,ib.c/group, kernel_h, kernel_w);
 	if(is_bias) bias.set_shape(filters,1,1,1);
 	outputs.resize(1);
-	int oh = Layer::i2o_floor(ib.h,kernel,stride,padding),
-	    ow = Layer::i2o_floor(ib.w,kernel,stride,padding);
+	int oh = Layer::i2o_floor(ib.h,kernel_h,stride_h,padding_h),
+	    ow = Layer::i2o_floor(ib.w,kernel_w,stride_w,padding_w);
 	outputs[0].set_shape(ib.n, filters, oh, ow);
 }
 void ConvLayer::setup_dif_shape(){
@@ -165,13 +193,13 @@ void ConvLayer::setup_data(){
 	}
 
 	// col
-	int ncol = kernel * kernel * outputs[0].hw() * inputs[0].c * inputs[0].n;
+	int ncol = kernel_h * kernel_w * outputs[0].hw() * inputs[0].c * inputs[0].n;
 	col = new float[ncol];
 	memset(col, 0, sizeof(float) * ncol);
 
 	table = new int[ncol/inputs[0].n/group];
 	memset(table, 0, sizeof(int) * ncol / inputs[0].n/group);
-	generate_table(inputs[0].c/group, inputs[0].h, inputs[0].w, table, kernel, stride, padding);
+	generate_table(inputs[0].c/group, inputs[0].h, inputs[0].w, table, kernel_h,kernel_w, stride_h,stride_w, padding_h,padding_w);
 
 	// weight, bias and output
 	weight.alloc();

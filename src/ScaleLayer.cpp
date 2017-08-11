@@ -7,7 +7,7 @@ ScaleLayer::ScaleLayer(const std::string& name, bool is_bias):
 ScaleLayer::~ScaleLayer(){
 }
 void ScaleLayer::forward(){
-	//printf("forward: %s %s\n",type.c_str(), name.c_str());
+	printf("forward: %s %s\n",type.c_str(), name.c_str());
 
 	float *weight_data = weight.data, *bias_data = bias.data;
 
@@ -17,6 +17,7 @@ void ScaleLayer::forward(){
 
 	//show_inputs();
 	if(is_bias){
+		//printf("bias\n");
 		for(int i=0;i<n;++i){
 			for(int j=0;j<c;++j){
 				float s = weight_data[j];

@@ -1,0 +1,2045 @@
+Inception-v4
+Layer: data data
+1 3 299 299 image
+Layer: data label
+1 1 1 1 label
+Layer: conv conv1_3x3_s2
+3 3 32 0 0 2 2 1 0 none
+Layer: batchnorm conv1_3x3_s2_bn
+
+Layer: scale conv1_3x3_s2_scale
+1
+Layer: activity conv1_3x3_s2_relu
+relu
+Layer: conv conv2_3x3_s1
+3 3 32 0 0 1 1 1 0 none
+Layer: batchnorm conv2_3x3_s1_bn
+
+Layer: scale conv2_3x3_s1_scale
+1
+Layer: activity conv2_3x3_s1_relu
+relu
+Layer: conv conv3_3x3_s1
+3 3 64 1 1 1 1 1 0 none
+Layer: batchnorm conv3_3x3_s1_bn
+
+Layer: scale conv3_3x3_s1_scale
+1
+Layer: activity conv3_3x3_s1_relu
+relu
+Layer: split conv3_3x3_s1_conv3_3x3_s1_relu_0_split
+
+Layer: conv inception_stem1_3x3_s2
+3 3 96 0 0 2 2 1 0 none
+Layer: batchnorm inception_stem1_3x3_s2_bn
+
+Layer: scale inception_stem1_3x3_s2_scale
+1
+Layer: activity inception_stem1_3x3_s2_relu
+relu
+Layer: pool inception_stem1_pool
+3 0 2 max
+Layer: concat inception_stem1
+channel
+Layer: split inception_stem1_inception_stem1_0_split
+
+Layer: conv inception_stem2_3x3_reduce
+1 1 64 0 0 1 1 1 0 none
+Layer: batchnorm inception_stem2_3x3_reduce_bn
+
+Layer: scale inception_stem2_3x3_reduce_scale
+1
+Layer: activity inception_stem2_3x3_reduce_relu
+relu
+Layer: conv inception_stem2_3x3
+3 3 96 0 0 1 1 1 0 none
+Layer: batchnorm inception_stem2_3x3_bn
+
+Layer: scale inception_stem2_3x3_scale
+1
+Layer: activity inception_stem2_3x3_relu
+relu
+Layer: conv inception_stem2_1x7_reduce
+1 1 64 0 0 1 1 1 0 none
+Layer: batchnorm inception_stem2_1x7_reduce_bn
+
+Layer: scale inception_stem2_1x7_reduce_scale
+1
+Layer: activity inception_stem2_1x7_reduce_relu
+relu
+Layer: conv inception_stem2_1x7
+1 7 64 0 3 1 1 1 0 none
+Layer: batchnorm inception_stem2_1x7_bn
+
+Layer: scale inception_stem2_1x7_scale
+1
+Layer: activity inception_stem2_1x7_relu
+relu
+Layer: conv inception_stem2_7x1
+7 1 64 3 0 1 1 1 0 none
+Layer: batchnorm inception_stem2_7x1_bn
+
+Layer: scale inception_stem2_7x1_scale
+1
+Layer: activity inception_stem2_7x1_relu
+relu
+Layer: conv inception_stem2_3x3_2
+3 3 96 0 0 1 1 1 0 none
+Layer: batchnorm inception_stem2_3x3_2_bn
+
+Layer: scale inception_stem2_3x3_2_scale
+1
+Layer: activity inception_stem2_3x3_2_relu
+relu
+Layer: concat inception_stem2
+channel
+Layer: split inception_stem2_inception_stem2_0_split
+
+Layer: conv inception_stem3_3x3_s2
+3 3 192 0 0 2 2 1 0 none
+Layer: batchnorm inception_stem3_3x3_s2_bn
+
+Layer: scale inception_stem3_3x3_s2_scale
+1
+Layer: activity inception_stem3_3x3_s2_relu
+relu
+Layer: pool inception_stem3_pool
+3 0 2 max
+Layer: concat inception_stem3
+channel
+Layer: split inception_stem3_inception_stem3_0_split
+
+Layer: conv inception_a1_1x1_2
+1 1 96 0 0 1 1 1 0 none
+Layer: batchnorm inception_a1_1x1_2_bn
+
+Layer: scale inception_a1_1x1_2_scale
+1
+Layer: activity inception_a1_1x1_2_relu
+relu
+Layer: conv inception_a1_3x3_reduce
+1 1 64 0 0 1 1 1 0 none
+Layer: batchnorm inception_a1_3x3_reduce_bn
+
+Layer: scale inception_a1_3x3_reduce_scale
+1
+Layer: activity inception_a1_3x3_reduce_relu
+relu
+Layer: conv inception_a1_3x3
+3 3 96 1 1 1 1 1 0 none
+Layer: batchnorm inception_a1_3x3_bn
+
+Layer: scale inception_a1_3x3_scale
+1
+Layer: activity inception_a1_3x3_relu
+relu
+Layer: conv inception_a1_3x3_2_reduce
+1 1 64 0 0 1 1 1 0 none
+Layer: batchnorm inception_a1_3x3_2_reduce_bn
+
+Layer: scale inception_a1_3x3_2_reduce_scale
+1
+Layer: activity inception_a1_3x3_2_reduce_relu
+relu
+Layer: conv inception_a1_3x3_2
+3 3 96 1 1 1 1 1 0 none
+Layer: batchnorm inception_a1_3x3_2_bn
+
+Layer: scale inception_a1_3x3_2_scale
+1
+Layer: activity inception_a1_3x3_2_relu
+relu
+Layer: conv inception_a1_3x3_3
+3 3 96 1 1 1 1 1 0 none
+Layer: batchnorm inception_a1_3x3_3_bn
+
+Layer: scale inception_a1_3x3_3_scale
+1
+Layer: activity inception_a1_3x3_3_relu
+relu
+Layer: pool inception_a1_pool_ave
+3 1 1 avg
+Layer: conv inception_a1_1x1
+1 1 96 0 0 1 1 1 0 none
+Layer: batchnorm inception_a1_1x1_bn
+
+Layer: scale inception_a1_1x1_scale
+1
+Layer: activity inception_a1_1x1_relu
+relu
+Layer: concat inception_a1_concat
+channel
+Layer: split inception_a1_concat_inception_a1_concat_0_split
+
+Layer: conv inception_a2_1x1_2
+1 1 96 0 0 1 1 1 0 none
+Layer: batchnorm inception_a2_1x1_2_bn
+
+Layer: scale inception_a2_1x1_2_scale
+1
+Layer: activity inception_a2_1x1_2_relu
+relu
+Layer: conv inception_a2_3x3_reduce
+1 1 64 0 0 1 1 1 0 none
+Layer: batchnorm inception_a2_3x3_reduce_bn
+
+Layer: scale inception_a2_3x3_reduce_scale
+1
+Layer: activity inception_a2_3x3_reduce_relu
+relu
+Layer: conv inception_a2_3x3
+3 3 96 1 1 1 1 1 0 none
+Layer: batchnorm inception_a2_3x3_bn
+
+Layer: scale inception_a2_3x3_scale
+1
+Layer: activity inception_a2_3x3_relu
+relu
+Layer: conv inception_a2_3x3_2_reduce
+1 1 64 0 0 1 1 1 0 none
+Layer: batchnorm inception_a2_3x3_2_reduce_bn
+
+Layer: scale inception_a2_3x3_2_reduce_scale
+1
+Layer: activity inception_a2_3x3_2_reduce_relu
+relu
+Layer: conv inception_a2_3x3_2
+3 3 96 1 1 1 1 1 0 none
+Layer: batchnorm inception_a2_3x3_2_bn
+
+Layer: scale inception_a2_3x3_2_scale
+1
+Layer: activity inception_a2_3x3_2_relu
+relu
+Layer: conv inception_a2_3x3_3
+3 3 96 1 1 1 1 1 0 none
+Layer: batchnorm inception_a2_3x3_3_bn
+
+Layer: scale inception_a2_3x3_3_scale
+1
+Layer: activity inception_a2_3x3_3_relu
+relu
+Layer: pool inception_a2_pool_ave
+3 1 1 avg
+Layer: conv inception_a2_1x1
+1 1 96 0 0 1 1 1 0 none
+Layer: batchnorm inception_a2_1x1_bn
+
+Layer: scale inception_a2_1x1_scale
+1
+Layer: activity inception_a2_1x1_relu
+relu
+Layer: concat inception_a2_concat
+channel
+Layer: split inception_a2_concat_inception_a2_concat_0_split
+
+Layer: conv inception_a3_1x1_2
+1 1 96 0 0 1 1 1 0 none
+Layer: batchnorm inception_a3_1x1_2_bn
+
+Layer: scale inception_a3_1x1_2_scale
+1
+Layer: activity inception_a3_1x1_2_relu
+relu
+Layer: conv inception_a3_3x3_reduce
+1 1 64 0 0 1 1 1 0 none
+Layer: batchnorm inception_a3_3x3_reduce_bn
+
+Layer: scale inception_a3_3x3_reduce_scale
+1
+Layer: activity inception_a3_3x3_reduce_relu
+relu
+Layer: conv inception_a3_3x3
+3 3 96 1 1 1 1 1 0 none
+Layer: batchnorm inception_a3_3x3_bn
+
+Layer: scale inception_a3_3x3_scale
+1
+Layer: activity inception_a3_3x3_relu
+relu
+Layer: conv inception_a3_3x3_2_reduce
+1 1 64 0 0 1 1 1 0 none
+Layer: batchnorm inception_a3_3x3_2_reduce_bn
+
+Layer: scale inception_a3_3x3_2_reduce_scale
+1
+Layer: activity inception_a3_3x3_2_reduce_relu
+relu
+Layer: conv inception_a3_3x3_2
+3 3 96 1 1 1 1 1 0 none
+Layer: batchnorm inception_a3_3x3_2_bn
+
+Layer: scale inception_a3_3x3_2_scale
+1
+Layer: activity inception_a3_3x3_2_relu
+relu
+Layer: conv inception_a3_3x3_3
+3 3 96 1 1 1 1 1 0 none
+Layer: batchnorm inception_a3_3x3_3_bn
+
+Layer: scale inception_a3_3x3_3_scale
+1
+Layer: activity inception_a3_3x3_3_relu
+relu
+Layer: pool inception_a3_pool_ave
+3 1 1 avg
+Layer: conv inception_a3_1x1
+1 1 96 0 0 1 1 1 0 none
+Layer: batchnorm inception_a3_1x1_bn
+
+Layer: scale inception_a3_1x1_scale
+1
+Layer: activity inception_a3_1x1_relu
+relu
+Layer: concat inception_a3_concat
+channel
+Layer: split inception_a3_concat_inception_a3_concat_0_split
+
+Layer: conv inception_a4_1x1_2
+1 1 96 0 0 1 1 1 0 none
+Layer: batchnorm inception_a4_1x1_2_bn
+
+Layer: scale inception_a4_1x1_2_scale
+1
+Layer: activity inception_a4_1x1_2_relu
+relu
+Layer: conv inception_a4_3x3_reduce
+1 1 64 0 0 1 1 1 0 none
+Layer: batchnorm inception_a4_3x3_reduce_bn
+
+Layer: scale inception_a4_3x3_reduce_scale
+1
+Layer: activity inception_a4_3x3_reduce_relu
+relu
+Layer: conv inception_a4_3x3
+3 3 96 1 1 1 1 1 0 none
+Layer: batchnorm inception_a4_3x3_bn
+
+Layer: scale inception_a4_3x3_scale
+1
+Layer: activity inception_a4_3x3_relu
+relu
+Layer: conv inception_a4_3x3_2_reduce
+1 1 64 0 0 1 1 1 0 none
+Layer: batchnorm inception_a4_3x3_2_reduce_bn
+
+Layer: scale inception_a4_3x3_2_reduce_scale
+1
+Layer: activity inception_a4_3x3_2_reduce_relu
+relu
+Layer: conv inception_a4_3x3_2
+3 3 96 1 1 1 1 1 0 none
+Layer: batchnorm inception_a4_3x3_2_bn
+
+Layer: scale inception_a4_3x3_2_scale
+1
+Layer: activity inception_a4_3x3_2_relu
+relu
+Layer: conv inception_a4_3x3_3
+3 3 96 1 1 1 1 1 0 none
+Layer: batchnorm inception_a4_3x3_3_bn
+
+Layer: scale inception_a4_3x3_3_scale
+1
+Layer: activity inception_a4_3x3_3_relu
+relu
+Layer: pool inception_a4_pool_ave
+3 1 1 avg
+Layer: conv inception_a4_1x1
+1 1 96 0 0 1 1 1 0 none
+Layer: batchnorm inception_a4_1x1_bn
+
+Layer: scale inception_a4_1x1_scale
+1
+Layer: activity inception_a4_1x1_relu
+relu
+Layer: concat inception_a4_concat
+channel
+Layer: split inception_a4_concat_inception_a4_concat_0_split
+
+Layer: conv reduction_a_3x3
+3 3 384 0 0 2 2 1 0 none
+Layer: batchnorm reduction_a_3x3_bn
+
+Layer: scale reduction_a_3x3_scale
+1
+Layer: activity reduction_a_3x3_relu
+relu
+Layer: conv reduction_a_3x3_2_reduce
+1 1 192 0 0 1 1 1 0 none
+Layer: batchnorm reduction_a_3x3_2_reduce_bn
+
+Layer: scale reduction_a_3x3_2_reduce_scale
+1
+Layer: activity reduction_a_3x3_2_reduce_relu
+relu
+Layer: conv reduction_a_3x3_2
+3 3 224 1 1 1 1 1 0 none
+Layer: batchnorm reduction_a_3x3_2_bn
+
+Layer: scale reduction_a_3x3_2_scale
+1
+Layer: activity reduction_a_3x3_2_relu
+relu
+Layer: conv reduction_a_3x3_3
+3 3 256 0 0 2 2 1 0 none
+Layer: batchnorm reduction_a_3x3_3_bn
+
+Layer: scale reduction_a_3x3_3_scale
+1
+Layer: activity reduction_a_3x3_3_relu
+relu
+Layer: pool reduction_a_pool
+3 0 2 max
+Layer: concat reduction_a_concat
+channel
+Layer: split reduction_a_concat_reduction_a_concat_0_split
+
+Layer: conv inception_b1_1x1_2
+1 1 384 0 0 1 1 1 0 none
+Layer: batchnorm inception_b1_1x1_2_bn
+
+Layer: scale inception_b1_1x1_2_scale
+1
+Layer: activity inception_b1_1x1_2_relu
+relu
+Layer: conv inception_b1_1x7_reduce
+1 1 192 0 0 1 1 1 0 none
+Layer: batchnorm inception_b1_1x7_reduce_bn
+
+Layer: scale inception_b1_1x7_reduce_scale
+1
+Layer: activity inception_b1_1x7_reduce_relu
+relu
+Layer: conv inception_b1_1x7
+1 7 224 0 3 1 1 1 0 none
+Layer: batchnorm inception_b1_1x7_bn
+
+Layer: scale inception_b1_1x7_scale
+1
+Layer: activity inception_b1_1x7_relu
+relu
+Layer: conv inception_b1_7x1
+7 1 256 3 0 1 1 1 0 none
+Layer: batchnorm inception_b1_7x1_bn
+
+Layer: scale inception_b1_7x1_scale
+1
+Layer: activity inception_b1_7x1_relu
+relu
+Layer: conv inception_b1_7x1_2_reduce
+1 1 192 0 0 1 1 1 0 none
+Layer: batchnorm inception_b1_7x1_2_reduce_bn
+
+Layer: scale inception_b1_7x1_2_reduce_scale
+1
+Layer: activity inception_b1_7x1_2_reduce_relu
+relu
+Layer: conv inception_b1_7x1_2
+7 1 192 3 0 1 1 1 0 none
+Layer: batchnorm inception_b1_7x1_2_bn
+
+Layer: scale inception_b1_7x1_2_scale
+1
+Layer: activity inception_b1_7x1_2_relu
+relu
+Layer: conv inception_b1_1x7_2
+1 7 224 0 3 1 1 1 0 none
+Layer: batchnorm inception_b1_1x7_2_bn
+
+Layer: scale inception_b1_1x7_2_scale
+1
+Layer: activity inception_b1_1x7_2_relu
+relu
+Layer: conv inception_b1_7x1_3
+7 1 224 3 0 1 1 1 0 none
+Layer: batchnorm inception_b1_7x1_3_bn
+
+Layer: scale inception_b1_7x1_3_scale
+1
+Layer: activity inception_b1_7x1_3_relu
+relu
+Layer: conv inception_b1_1x7_3
+1 7 256 0 3 1 1 1 0 none
+Layer: batchnorm inception_b1_1x7_3_bn
+
+Layer: scale inception_b1_1x7_3_scale
+1
+Layer: activity inception_b1_1x7_3_relu
+relu
+Layer: pool inception_b1_pool_ave
+3 1 1 avg
+Layer: conv inception_b1_1x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm inception_b1_1x1_bn
+
+Layer: scale inception_b1_1x1_scale
+1
+Layer: activity inception_b1_1x1_relu
+relu
+Layer: concat inception_b1_concat
+channel
+Layer: split inception_b1_concat_inception_b1_concat_0_split
+
+Layer: conv inception_b2_1x1_2
+1 1 384 0 0 1 1 1 0 none
+Layer: batchnorm inception_b2_1x1_2_bn
+
+Layer: scale inception_b2_1x1_2_scale
+1
+Layer: activity inception_b2_1x1_2_relu
+relu
+Layer: conv inception_b2_1x7_reduce
+1 1 192 0 0 1 1 1 0 none
+Layer: batchnorm inception_b2_1x7_reduce_bn
+
+Layer: scale inception_b2_1x7_reduce_scale
+1
+Layer: activity inception_b2_1x7_reduce_relu
+relu
+Layer: conv inception_b2_1x7
+1 7 224 0 3 1 1 1 0 none
+Layer: batchnorm inception_b2_1x7_bn
+
+Layer: scale inception_b2_1x7_scale
+1
+Layer: activity inception_b2_1x7_relu
+relu
+Layer: conv inception_b2_7x1
+7 1 256 3 0 1 1 1 0 none
+Layer: batchnorm inception_b2_7x1_bn
+
+Layer: scale inception_b2_7x1_scale
+1
+Layer: activity inception_b2_7x1_relu
+relu
+Layer: conv inception_b2_7x1_2_reduce
+1 1 192 0 0 1 1 1 0 none
+Layer: batchnorm inception_b2_7x1_2_reduce_bn
+
+Layer: scale inception_b2_7x1_2_reduce_scale
+1
+Layer: activity inception_b2_7x1_2_reduce_relu
+relu
+Layer: conv inception_b2_7x1_2
+7 1 192 3 0 1 1 1 0 none
+Layer: batchnorm inception_b2_7x1_2_bn
+
+Layer: scale inception_b2_7x1_2_scale
+1
+Layer: activity inception_b2_7x1_2_relu
+relu
+Layer: conv inception_b2_1x7_2
+1 7 224 0 3 1 1 1 0 none
+Layer: batchnorm inception_b2_1x7_2_bn
+
+Layer: scale inception_b2_1x7_2_scale
+1
+Layer: activity inception_b2_1x7_2_relu
+relu
+Layer: conv inception_b2_7x1_3
+7 1 224 3 0 1 1 1 0 none
+Layer: batchnorm inception_b2_7x1_3_bn
+
+Layer: scale inception_b2_7x1_3_scale
+1
+Layer: activity inception_b2_7x1_3_relu
+relu
+Layer: conv inception_b2_1x7_3
+1 7 256 0 3 1 1 1 0 none
+Layer: batchnorm inception_b2_1x7_3_bn
+
+Layer: scale inception_b2_1x7_3_scale
+1
+Layer: activity inception_b2_1x7_3_relu
+relu
+Layer: pool inception_b2_pool_ave
+3 1 1 avg
+Layer: conv inception_b2_1x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm inception_b2_1x1_bn
+
+Layer: scale inception_b2_1x1_scale
+1
+Layer: activity inception_b2_1x1_relu
+relu
+Layer: concat inception_b2_concat
+channel
+Layer: split inception_b2_concat_inception_b2_concat_0_split
+
+Layer: conv inception_b3_1x1_2
+1 1 384 0 0 1 1 1 0 none
+Layer: batchnorm inception_b3_1x1_2_bn
+
+Layer: scale inception_b3_1x1_2_scale
+1
+Layer: activity inception_b3_1x1_2_relu
+relu
+Layer: conv inception_b3_1x7_reduce
+1 1 192 0 0 1 1 1 0 none
+Layer: batchnorm inception_b3_1x7_reduce_bn
+
+Layer: scale inception_b3_1x7_reduce_scale
+1
+Layer: activity inception_b3_1x7_reduce_relu
+relu
+Layer: conv inception_b3_1x7
+1 7 224 0 3 1 1 1 0 none
+Layer: batchnorm inception_b3_1x7_bn
+
+Layer: scale inception_b3_1x7_scale
+1
+Layer: activity inception_b3_1x7_relu
+relu
+Layer: conv inception_b3_7x1
+7 1 256 3 0 1 1 1 0 none
+Layer: batchnorm inception_b3_7x1_bn
+
+Layer: scale inception_b3_7x1_scale
+1
+Layer: activity inception_b3_7x1_relu
+relu
+Layer: conv inception_b3_7x1_2_reduce
+1 1 192 0 0 1 1 1 0 none
+Layer: batchnorm inception_b3_7x1_2_reduce_bn
+
+Layer: scale inception_b3_7x1_2_reduce_scale
+1
+Layer: activity inception_b3_7x1_2_reduce_relu
+relu
+Layer: conv inception_b3_7x1_2
+7 1 192 3 0 1 1 1 0 none
+Layer: batchnorm inception_b3_7x1_2_bn
+
+Layer: scale inception_b3_7x1_2_scale
+1
+Layer: activity inception_b3_7x1_2_relu
+relu
+Layer: conv inception_b3_1x7_2
+1 7 224 0 3 1 1 1 0 none
+Layer: batchnorm inception_b3_1x7_2_bn
+
+Layer: scale inception_b3_1x7_2_scale
+1
+Layer: activity inception_b3_1x7_2_relu
+relu
+Layer: conv inception_b3_7x1_3
+7 1 224 3 0 1 1 1 0 none
+Layer: batchnorm inception_b3_7x1_3_bn
+
+Layer: scale inception_b3_7x1_3_scale
+1
+Layer: activity inception_b3_7x1_3_relu
+relu
+Layer: conv inception_b3_1x7_3
+1 7 256 0 3 1 1 1 0 none
+Layer: batchnorm inception_b3_1x7_3_bn
+
+Layer: scale inception_b3_1x7_3_scale
+1
+Layer: activity inception_b3_1x7_3_relu
+relu
+Layer: pool inception_b3_pool_ave
+3 1 1 avg
+Layer: conv inception_b3_1x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm inception_b3_1x1_bn
+
+Layer: scale inception_b3_1x1_scale
+1
+Layer: activity inception_b3_1x1_relu
+relu
+Layer: concat inception_b3_concat
+channel
+Layer: split inception_b3_concat_inception_b3_concat_0_split
+
+Layer: conv inception_b4_1x1_2
+1 1 384 0 0 1 1 1 0 none
+Layer: batchnorm inception_b4_1x1_2_bn
+
+Layer: scale inception_b4_1x1_2_scale
+1
+Layer: activity inception_b4_1x1_2_relu
+relu
+Layer: conv inception_b4_1x7_reduce
+1 1 192 0 0 1 1 1 0 none
+Layer: batchnorm inception_b4_1x7_reduce_bn
+
+Layer: scale inception_b4_1x7_reduce_scale
+1
+Layer: activity inception_b4_1x7_reduce_relu
+relu
+Layer: conv inception_b4_1x7
+1 7 224 0 3 1 1 1 0 none
+Layer: batchnorm inception_b4_1x7_bn
+
+Layer: scale inception_b4_1x7_scale
+1
+Layer: activity inception_b4_1x7_relu
+relu
+Layer: conv inception_b4_7x1
+7 1 256 3 0 1 1 1 0 none
+Layer: batchnorm inception_b4_7x1_bn
+
+Layer: scale inception_b4_7x1_scale
+1
+Layer: activity inception_b4_7x1_relu
+relu
+Layer: conv inception_b4_7x1_2_reduce
+1 1 192 0 0 1 1 1 0 none
+Layer: batchnorm inception_b4_7x1_2_reduce_bn
+
+Layer: scale inception_b4_7x1_2_reduce_scale
+1
+Layer: activity inception_b4_7x1_2_reduce_relu
+relu
+Layer: conv inception_b4_7x1_2
+7 1 192 3 0 1 1 1 0 none
+Layer: batchnorm inception_b4_7x1_2_bn
+
+Layer: scale inception_b4_7x1_2_scale
+1
+Layer: activity inception_b4_7x1_2_relu
+relu
+Layer: conv inception_b4_1x7_2
+1 7 224 0 3 1 1 1 0 none
+Layer: batchnorm inception_b4_1x7_2_bn
+
+Layer: scale inception_b4_1x7_2_scale
+1
+Layer: activity inception_b4_1x7_2_relu
+relu
+Layer: conv inception_b4_7x1_3
+7 1 224 3 0 1 1 1 0 none
+Layer: batchnorm inception_b4_7x1_3_bn
+
+Layer: scale inception_b4_7x1_3_scale
+1
+Layer: activity inception_b4_7x1_3_relu
+relu
+Layer: conv inception_b4_1x7_3
+1 7 256 0 3 1 1 1 0 none
+Layer: batchnorm inception_b4_1x7_3_bn
+
+Layer: scale inception_b4_1x7_3_scale
+1
+Layer: activity inception_b4_1x7_3_relu
+relu
+Layer: pool inception_b4_pool_ave
+3 1 1 avg
+Layer: conv inception_b4_1x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm inception_b4_1x1_bn
+
+Layer: scale inception_b4_1x1_scale
+1
+Layer: activity inception_b4_1x1_relu
+relu
+Layer: concat inception_b4_concat
+channel
+Layer: split inception_b4_concat_inception_b4_concat_0_split
+
+Layer: conv inception_b5_1x1_2
+1 1 384 0 0 1 1 1 0 none
+Layer: batchnorm inception_b5_1x1_2_bn
+
+Layer: scale inception_b5_1x1_2_scale
+1
+Layer: activity inception_b5_1x1_2_relu
+relu
+Layer: conv inception_b5_1x7_reduce
+1 1 192 0 0 1 1 1 0 none
+Layer: batchnorm inception_b5_1x7_reduce_bn
+
+Layer: scale inception_b5_1x7_reduce_scale
+1
+Layer: activity inception_b5_1x7_reduce_relu
+relu
+Layer: conv inception_b5_1x7
+1 7 224 0 3 1 1 1 0 none
+Layer: batchnorm inception_b5_1x7_bn
+
+Layer: scale inception_b5_1x7_scale
+1
+Layer: activity inception_b5_1x7_relu
+relu
+Layer: conv inception_b5_7x1
+7 1 256 3 0 1 1 1 0 none
+Layer: batchnorm inception_b5_7x1_bn
+
+Layer: scale inception_b5_7x1_scale
+1
+Layer: activity inception_b5_7x1_relu
+relu
+Layer: conv inception_b5_7x1_2_reduce
+1 1 192 0 0 1 1 1 0 none
+Layer: batchnorm inception_b5_7x1_2_reduce_bn
+
+Layer: scale inception_b5_7x1_2_reduce_scale
+1
+Layer: activity inception_b5_7x1_2_reduce_relu
+relu
+Layer: conv inception_b5_7x1_2
+7 1 192 3 0 1 1 1 0 none
+Layer: batchnorm inception_b5_7x1_2_bn
+
+Layer: scale inception_b5_7x1_2_scale
+1
+Layer: activity inception_b5_7x1_2_relu
+relu
+Layer: conv inception_b5_1x7_2
+1 7 224 0 3 1 1 1 0 none
+Layer: batchnorm inception_b5_1x7_2_bn
+
+Layer: scale inception_b5_1x7_2_scale
+1
+Layer: activity inception_b5_1x7_2_relu
+relu
+Layer: conv inception_b5_7x1_3
+7 1 224 3 0 1 1 1 0 none
+Layer: batchnorm inception_b5_7x1_3_bn
+
+Layer: scale inception_b5_7x1_3_scale
+1
+Layer: activity inception_b5_7x1_3_relu
+relu
+Layer: conv inception_b5_1x7_3
+1 7 256 0 3 1 1 1 0 none
+Layer: batchnorm inception_b5_1x7_3_bn
+
+Layer: scale inception_b5_1x7_3_scale
+1
+Layer: activity inception_b5_1x7_3_relu
+relu
+Layer: pool inception_b5_pool_ave
+3 1 1 avg
+Layer: conv inception_b5_1x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm inception_b5_1x1_bn
+
+Layer: scale inception_b5_1x1_scale
+1
+Layer: activity inception_b5_1x1_relu
+relu
+Layer: concat inception_b5_concat
+channel
+Layer: split inception_b5_concat_inception_b5_concat_0_split
+
+Layer: conv inception_b6_1x1_2
+1 1 384 0 0 1 1 1 0 none
+Layer: batchnorm inception_b6_1x1_2_bn
+
+Layer: scale inception_b6_1x1_2_scale
+1
+Layer: activity inception_b6_1x1_2_relu
+relu
+Layer: conv inception_b6_1x7_reduce
+1 1 192 0 0 1 1 1 0 none
+Layer: batchnorm inception_b6_1x7_reduce_bn
+
+Layer: scale inception_b6_1x7_reduce_scale
+1
+Layer: activity inception_b6_1x7_reduce_relu
+relu
+Layer: conv inception_b6_1x7
+1 7 224 0 3 1 1 1 0 none
+Layer: batchnorm inception_b6_1x7_bn
+
+Layer: scale inception_b6_1x7_scale
+1
+Layer: activity inception_b6_1x7_relu
+relu
+Layer: conv inception_b6_7x1
+7 1 256 3 0 1 1 1 0 none
+Layer: batchnorm inception_b6_7x1_bn
+
+Layer: scale inception_b6_7x1_scale
+1
+Layer: activity inception_b6_7x1_relu
+relu
+Layer: conv inception_b6_7x1_2_reduce
+1 1 192 0 0 1 1 1 0 none
+Layer: batchnorm inception_b6_7x1_2_reduce_bn
+
+Layer: scale inception_b6_7x1_2_reduce_scale
+1
+Layer: activity inception_b6_7x1_2_reduce_relu
+relu
+Layer: conv inception_b6_7x1_2
+7 1 192 3 0 1 1 1 0 none
+Layer: batchnorm inception_b6_7x1_2_bn
+
+Layer: scale inception_b6_7x1_2_scale
+1
+Layer: activity inception_b6_7x1_2_relu
+relu
+Layer: conv inception_b6_1x7_2
+1 7 224 0 3 1 1 1 0 none
+Layer: batchnorm inception_b6_1x7_2_bn
+
+Layer: scale inception_b6_1x7_2_scale
+1
+Layer: activity inception_b6_1x7_2_relu
+relu
+Layer: conv inception_b6_7x1_3
+7 1 224 3 0 1 1 1 0 none
+Layer: batchnorm inception_b6_7x1_3_bn
+
+Layer: scale inception_b6_7x1_3_scale
+1
+Layer: activity inception_b6_7x1_3_relu
+relu
+Layer: conv inception_b6_1x7_3
+1 7 256 0 3 1 1 1 0 none
+Layer: batchnorm inception_b6_1x7_3_bn
+
+Layer: scale inception_b6_1x7_3_scale
+1
+Layer: activity inception_b6_1x7_3_relu
+relu
+Layer: pool inception_b6_pool_ave
+3 1 1 avg
+Layer: conv inception_b6_1x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm inception_b6_1x1_bn
+
+Layer: scale inception_b6_1x1_scale
+1
+Layer: activity inception_b6_1x1_relu
+relu
+Layer: concat inception_b6_concat
+channel
+Layer: split inception_b6_concat_inception_b6_concat_0_split
+
+Layer: conv inception_b7_1x1_2
+1 1 384 0 0 1 1 1 0 none
+Layer: batchnorm inception_b7_1x1_2_bn
+
+Layer: scale inception_b7_1x1_2_scale
+1
+Layer: activity inception_b7_1x1_2_relu
+relu
+Layer: conv inception_b7_1x7_reduce
+1 1 192 0 0 1 1 1 0 none
+Layer: batchnorm inception_b7_1x7_reduce_bn
+
+Layer: scale inception_b7_1x7_reduce_scale
+1
+Layer: activity inception_b7_1x7_reduce_relu
+relu
+Layer: conv inception_b7_1x7
+1 7 224 0 3 1 1 1 0 none
+Layer: batchnorm inception_b7_1x7_bn
+
+Layer: scale inception_b7_1x7_scale
+1
+Layer: activity inception_b7_1x7_relu
+relu
+Layer: conv inception_b7_7x1
+7 1 256 3 0 1 1 1 0 none
+Layer: batchnorm inception_b7_7x1_bn
+
+Layer: scale inception_b7_7x1_scale
+1
+Layer: activity inception_b7_7x1_relu
+relu
+Layer: conv inception_b7_7x1_2_reduce
+1 1 192 0 0 1 1 1 0 none
+Layer: batchnorm inception_b7_7x1_2_reduce_bn
+
+Layer: scale inception_b7_7x1_2_reduce_scale
+1
+Layer: activity inception_b7_7x1_2_reduce_relu
+relu
+Layer: conv inception_b7_7x1_2
+7 1 192 3 0 1 1 1 0 none
+Layer: batchnorm inception_b7_7x1_2_bn
+
+Layer: scale inception_b7_7x1_2_scale
+1
+Layer: activity inception_b7_7x1_2_relu
+relu
+Layer: conv inception_b7_1x7_2
+1 7 224 0 3 1 1 1 0 none
+Layer: batchnorm inception_b7_1x7_2_bn
+
+Layer: scale inception_b7_1x7_2_scale
+1
+Layer: activity inception_b7_1x7_2_relu
+relu
+Layer: conv inception_b7_7x1_3
+7 1 224 3 0 1 1 1 0 none
+Layer: batchnorm inception_b7_7x1_3_bn
+
+Layer: scale inception_b7_7x1_3_scale
+1
+Layer: activity inception_b7_7x1_3_relu
+relu
+Layer: conv inception_b7_1x7_3
+1 7 256 0 3 1 1 1 0 none
+Layer: batchnorm inception_b7_1x7_3_bn
+
+Layer: scale inception_b7_1x7_3_scale
+1
+Layer: activity inception_b7_1x7_3_relu
+relu
+Layer: pool inception_b7_pool_ave
+3 1 1 avg
+Layer: conv inception_b7_1x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm inception_b7_1x1_bn
+
+Layer: scale inception_b7_1x1_scale
+1
+Layer: activity inception_b7_1x1_relu
+relu
+Layer: concat inception_b7_concat
+channel
+Layer: split inception_b7_concat_inception_b7_concat_0_split
+
+Layer: conv reduction_b_3x3_reduce
+1 1 192 0 0 1 1 1 0 none
+Layer: batchnorm reduction_b_3x3_reduce_bn
+
+Layer: scale reduction_b_3x3_reduce_scale
+1
+Layer: activity reduction_b_3x3_reduce_relu
+relu
+Layer: conv reduction_b_3x3
+3 3 192 0 0 2 2 1 0 none
+Layer: batchnorm reduction_b_3x3_bn
+
+Layer: scale reduction_b_3x3_scale
+1
+Layer: activity reduction_b_3x3_relu
+relu
+Layer: conv reduction_b_1x7_reduce
+1 1 256 0 0 1 1 1 0 none
+Layer: batchnorm reduction_b_1x7_reduce_bn
+
+Layer: scale reduction_b_1x7_reduce_scale
+1
+Layer: activity reduction_b_1x7_reduce_relu
+relu
+Layer: conv reduction_b_1x7
+1 7 256 0 3 1 1 1 0 none
+Layer: batchnorm reduction_b_1x7_bn
+
+Layer: scale reduction_b_1x7_scale
+1
+Layer: activity reduction_b_1x7_relu
+relu
+Layer: conv reduction_b_7x1
+7 1 320 3 0 1 1 1 0 none
+Layer: batchnorm reduction_b_7x1_bn
+
+Layer: scale reduction_b_7x1_scale
+1
+Layer: activity reduction_b_7x1_relu
+relu
+Layer: conv reduction_b_3x3_2
+3 3 320 0 0 2 2 1 0 none
+Layer: batchnorm reduction_b_3x3_2_bn
+
+Layer: scale reduction_b_3x3_2_scale
+1
+Layer: activity reduction_b_3x3_2_relu
+relu
+Layer: pool reduction_b_pool
+3 0 2 max
+Layer: concat reduction_b_concat
+channel
+Layer: split reduction_b_concat_reduction_b_concat_0_split
+
+Layer: conv inception_c1_1x1_2
+1 1 256 0 0 1 1 1 0 none
+Layer: batchnorm inception_c1_1x1_2_bn
+
+Layer: scale inception_c1_1x1_2_scale
+1
+Layer: activity inception_c1_1x1_2_relu
+relu
+Layer: conv inception_c1_1x1_3
+1 1 384 0 0 1 1 1 0 none
+Layer: batchnorm inception_c1_1x1_3_bn
+
+Layer: scale inception_c1_1x1_3_scale
+1
+Layer: activity inception_c1_1x1_3_relu
+relu
+Layer: split inception_c1_1x1_3_inception_c1_1x1_3_relu_0_split
+
+Layer: conv inception_c1_1x3
+1 3 256 0 1 1 1 1 0 none
+Layer: batchnorm inception_c1_1x3_bn
+
+Layer: scale inception_c1_1x3_scale
+1
+Layer: activity inception_c1_1x3_relu
+relu
+Layer: conv inception_c1_3x1
+3 1 256 1 0 1 1 1 0 none
+Layer: batchnorm inception_c1_3x1_bn
+
+Layer: scale inception_c1_3x1_scale
+1
+Layer: activity inception_c1_3x1_relu
+relu
+Layer: conv inception_c1_1x1_4
+1 1 384 0 0 1 1 1 0 none
+Layer: batchnorm inception_c1_1x1_4_bn
+
+Layer: scale inception_c1_1x1_4_scale
+1
+Layer: activity inception_c1_1x1_4_relu
+relu
+Layer: conv inception_c1_3x1_2
+3 1 448 1 0 1 1 1 0 none
+Layer: batchnorm inception_c1_3x1_2_bn
+
+Layer: scale inception_c1_3x1_2_scale
+1
+Layer: activity inception_c1_3x1_2_relu
+relu
+Layer: conv inception_c1_1x3_2
+1 3 512 0 1 1 1 1 0 none
+Layer: batchnorm inception_c1_1x3_2_bn
+
+Layer: scale inception_c1_1x3_2_scale
+1
+Layer: activity inception_c1_1x3_2_relu
+relu
+Layer: split inception_c1_1x3_2_inception_c1_1x3_2_relu_0_split
+
+Layer: conv inception_c1_1x3_3
+1 3 256 0 1 1 1 1 0 none
+Layer: batchnorm inception_c1_1x3_3_bn
+
+Layer: scale inception_c1_1x3_3_scale
+1
+Layer: activity inception_c1_1x3_3_relu
+relu
+Layer: conv inception_c1_3x1_3
+3 1 256 1 0 1 1 1 0 none
+Layer: batchnorm inception_c1_3x1_3_bn
+
+Layer: scale inception_c1_3x1_3_scale
+1
+Layer: activity inception_c1_3x1_3_relu
+relu
+Layer: pool inception_c1_pool_ave
+3 1 1 avg
+Layer: conv inception_c1_1x1
+1 1 256 0 0 1 1 1 0 none
+Layer: batchnorm inception_c1_1x1_bn
+
+Layer: scale inception_c1_1x1_scale
+1
+Layer: activity inception_c1_1x1_relu
+relu
+Layer: concat inception_c1_concat
+channel
+Layer: split inception_c1_concat_inception_c1_concat_0_split
+
+Layer: conv inception_c2_1x1_2
+1 1 256 0 0 1 1 1 0 none
+Layer: batchnorm inception_c2_1x1_2_bn
+
+Layer: scale inception_c2_1x1_2_scale
+1
+Layer: activity inception_c2_1x1_2_relu
+relu
+Layer: conv inception_c2_1x1_3
+1 1 384 0 0 1 1 1 0 none
+Layer: batchnorm inception_c2_1x1_3_bn
+
+Layer: scale inception_c2_1x1_3_scale
+1
+Layer: activity inception_c2_1x1_3_relu
+relu
+Layer: split inception_c2_1x1_3_inception_c2_1x1_3_relu_0_split
+
+Layer: conv inception_c2_1x3
+1 3 256 0 1 1 1 1 0 none
+Layer: batchnorm inception_c2_1x3_bn
+
+Layer: scale inception_c2_1x3_scale
+1
+Layer: activity inception_c2_1x3_relu
+relu
+Layer: conv inception_c2_3x1
+3 1 256 1 0 1 1 1 0 none
+Layer: batchnorm inception_c2_3x1_bn
+
+Layer: scale inception_c2_3x1_scale
+1
+Layer: activity inception_c2_3x1_relu
+relu
+Layer: conv inception_c2_1x1_4
+1 1 384 0 0 1 1 1 0 none
+Layer: batchnorm inception_c2_1x1_4_bn
+
+Layer: scale inception_c2_1x1_4_scale
+1
+Layer: activity inception_c2_1x1_4_relu
+relu
+Layer: conv inception_c2_3x1_2
+3 1 448 1 0 1 1 1 0 none
+Layer: batchnorm inception_c2_3x1_2_bn
+
+Layer: scale inception_c2_3x1_2_scale
+1
+Layer: activity inception_c2_3x1_2_relu
+relu
+Layer: conv inception_c2_1x3_2
+1 3 512 0 1 1 1 1 0 none
+Layer: batchnorm inception_c2_1x3_2_bn
+
+Layer: scale inception_c2_1x3_2_scale
+1
+Layer: activity inception_c2_1x3_2_relu
+relu
+Layer: split inception_c2_1x3_2_inception_c2_1x3_2_relu_0_split
+
+Layer: conv inception_c2_1x3_3
+1 3 256 0 1 1 1 1 0 none
+Layer: batchnorm inception_c2_1x3_3_bn
+
+Layer: scale inception_c2_1x3_3_scale
+1
+Layer: activity inception_c2_1x3_3_relu
+relu
+Layer: conv inception_c2_3x1_3
+3 1 256 1 0 1 1 1 0 none
+Layer: batchnorm inception_c2_3x1_3_bn
+
+Layer: scale inception_c2_3x1_3_scale
+1
+Layer: activity inception_c2_3x1_3_relu
+relu
+Layer: pool inception_c2_pool_ave
+3 1 1 avg
+Layer: conv inception_c2_1x1
+1 1 256 0 0 1 1 1 0 none
+Layer: batchnorm inception_c2_1x1_bn
+
+Layer: scale inception_c2_1x1_scale
+1
+Layer: activity inception_c2_1x1_relu
+relu
+Layer: concat inception_c2_concat
+channel
+Layer: split inception_c2_concat_inception_c2_concat_0_split
+
+Layer: conv inception_c3_1x1_2
+1 1 256 0 0 1 1 1 0 none
+Layer: batchnorm inception_c3_1x1_2_bn
+
+Layer: scale inception_c3_1x1_2_scale
+1
+Layer: activity inception_c3_1x1_2_relu
+relu
+Layer: conv inception_c3_1x1_3
+1 1 384 0 0 1 1 1 0 none
+Layer: batchnorm inception_c3_1x1_3_bn
+
+Layer: scale inception_c3_1x1_3_scale
+1
+Layer: activity inception_c3_1x1_3_relu
+relu
+Layer: split inception_c3_1x1_3_inception_c3_1x1_3_relu_0_split
+
+Layer: conv inception_c3_1x3
+1 3 256 0 1 1 1 1 0 none
+Layer: batchnorm inception_c3_1x3_bn
+
+Layer: scale inception_c3_1x3_scale
+1
+Layer: activity inception_c3_1x3_relu
+relu
+Layer: conv inception_c3_3x1
+3 1 256 1 0 1 1 1 0 none
+Layer: batchnorm inception_c3_3x1_bn
+
+Layer: scale inception_c3_3x1_scale
+1
+Layer: activity inception_c3_3x1_relu
+relu
+Layer: conv inception_c3_1x1_4
+1 1 384 0 0 1 1 1 0 none
+Layer: batchnorm inception_c3_1x1_4_bn
+
+Layer: scale inception_c3_1x1_4_scale
+1
+Layer: activity inception_c3_1x1_4_relu
+relu
+Layer: conv inception_c3_3x1_2
+3 1 448 1 0 1 1 1 0 none
+Layer: batchnorm inception_c3_3x1_2_bn
+
+Layer: scale inception_c3_3x1_2_scale
+1
+Layer: activity inception_c3_3x1_2_relu
+relu
+Layer: conv inception_c3_1x3_2
+1 3 512 0 1 1 1 1 0 none
+Layer: batchnorm inception_c3_1x3_2_bn
+
+Layer: scale inception_c3_1x3_2_scale
+1
+Layer: activity inception_c3_1x3_2_relu
+relu
+Layer: split inception_c3_1x3_2_inception_c3_1x3_2_relu_0_split
+
+Layer: conv inception_c3_1x3_3
+1 3 256 0 1 1 1 1 0 none
+Layer: batchnorm inception_c3_1x3_3_bn
+
+Layer: scale inception_c3_1x3_3_scale
+1
+Layer: activity inception_c3_1x3_3_relu
+relu
+Layer: conv inception_c3_3x1_3
+3 1 256 1 0 1 1 1 0 none
+Layer: batchnorm inception_c3_3x1_3_bn
+
+Layer: scale inception_c3_3x1_3_scale
+1
+Layer: activity inception_c3_3x1_3_relu
+relu
+Layer: pool inception_c3_pool_ave
+3 1 1 avg
+Layer: conv inception_c3_1x1
+1 1 256 0 0 1 1 1 0 none
+Layer: batchnorm inception_c3_1x1_bn
+
+Layer: scale inception_c3_1x1_scale
+1
+Layer: activity inception_c3_1x1_relu
+relu
+Layer: concat inception_c3_concat
+channel
+Layer: pool pool_8x8_s1
+-1 0 1 avg
+Layer: fc classifier
+1000 1 none
+Layer: loss loss
+softmax
+Connections:
+data conv1_3x3_s2
+conv1_3x3_s2 conv1_3x3_s2_bn
+conv1_3x3_s2_bn conv1_3x3_s2_scale
+conv1_3x3_s2_scale conv1_3x3_s2_relu
+conv1_3x3_s2_relu conv2_3x3_s1
+conv2_3x3_s1 conv2_3x3_s1_bn
+conv2_3x3_s1_bn conv2_3x3_s1_scale
+conv2_3x3_s1_scale conv2_3x3_s1_relu
+conv2_3x3_s1_relu conv3_3x3_s1
+conv3_3x3_s1 conv3_3x3_s1_bn
+conv3_3x3_s1_bn conv3_3x3_s1_scale
+conv3_3x3_s1_scale conv3_3x3_s1_relu
+conv3_3x3_s1_relu conv3_3x3_s1_conv3_3x3_s1_relu_0_split
+conv3_3x3_s1_conv3_3x3_s1_relu_0_split inception_stem1_3x3_s2
+inception_stem1_3x3_s2 inception_stem1_3x3_s2_bn
+inception_stem1_3x3_s2_bn inception_stem1_3x3_s2_scale
+inception_stem1_3x3_s2_scale inception_stem1_3x3_s2_relu
+conv3_3x3_s1_conv3_3x3_s1_relu_0_split inception_stem1_pool
+inception_stem1_pool inception_stem1
+inception_stem1_3x3_s2_relu inception_stem1
+inception_stem1 inception_stem1_inception_stem1_0_split
+inception_stem1_inception_stem1_0_split inception_stem2_3x3_reduce
+inception_stem2_3x3_reduce inception_stem2_3x3_reduce_bn
+inception_stem2_3x3_reduce_bn inception_stem2_3x3_reduce_scale
+inception_stem2_3x3_reduce_scale inception_stem2_3x3_reduce_relu
+inception_stem2_3x3_reduce_relu inception_stem2_3x3
+inception_stem2_3x3 inception_stem2_3x3_bn
+inception_stem2_3x3_bn inception_stem2_3x3_scale
+inception_stem2_3x3_scale inception_stem2_3x3_relu
+inception_stem1_inception_stem1_0_split inception_stem2_1x7_reduce
+inception_stem2_1x7_reduce inception_stem2_1x7_reduce_bn
+inception_stem2_1x7_reduce_bn inception_stem2_1x7_reduce_scale
+inception_stem2_1x7_reduce_scale inception_stem2_1x7_reduce_relu
+inception_stem2_1x7_reduce_relu inception_stem2_1x7
+inception_stem2_1x7 inception_stem2_1x7_bn
+inception_stem2_1x7_bn inception_stem2_1x7_scale
+inception_stem2_1x7_scale inception_stem2_1x7_relu
+inception_stem2_1x7_relu inception_stem2_7x1
+inception_stem2_7x1 inception_stem2_7x1_bn
+inception_stem2_7x1_bn inception_stem2_7x1_scale
+inception_stem2_7x1_scale inception_stem2_7x1_relu
+inception_stem2_7x1_relu inception_stem2_3x3_2
+inception_stem2_3x3_2 inception_stem2_3x3_2_bn
+inception_stem2_3x3_2_bn inception_stem2_3x3_2_scale
+inception_stem2_3x3_2_scale inception_stem2_3x3_2_relu
+inception_stem2_3x3_relu inception_stem2
+inception_stem2_3x3_2_relu inception_stem2
+inception_stem2 inception_stem2_inception_stem2_0_split
+inception_stem2_inception_stem2_0_split inception_stem3_3x3_s2
+inception_stem3_3x3_s2 inception_stem3_3x3_s2_bn
+inception_stem3_3x3_s2_bn inception_stem3_3x3_s2_scale
+inception_stem3_3x3_s2_scale inception_stem3_3x3_s2_relu
+inception_stem2_inception_stem2_0_split inception_stem3_pool
+inception_stem3_3x3_s2_relu inception_stem3
+inception_stem3_pool inception_stem3
+inception_stem3 inception_stem3_inception_stem3_0_split
+inception_stem3_inception_stem3_0_split inception_a1_1x1_2
+inception_a1_1x1_2 inception_a1_1x1_2_bn
+inception_a1_1x1_2_bn inception_a1_1x1_2_scale
+inception_a1_1x1_2_scale inception_a1_1x1_2_relu
+inception_stem3_inception_stem3_0_split inception_a1_3x3_reduce
+inception_a1_3x3_reduce inception_a1_3x3_reduce_bn
+inception_a1_3x3_reduce_bn inception_a1_3x3_reduce_scale
+inception_a1_3x3_reduce_scale inception_a1_3x3_reduce_relu
+inception_a1_3x3_reduce_relu inception_a1_3x3
+inception_a1_3x3 inception_a1_3x3_bn
+inception_a1_3x3_bn inception_a1_3x3_scale
+inception_a1_3x3_scale inception_a1_3x3_relu
+inception_stem3_inception_stem3_0_split inception_a1_3x3_2_reduce
+inception_a1_3x3_2_reduce inception_a1_3x3_2_reduce_bn
+inception_a1_3x3_2_reduce_bn inception_a1_3x3_2_reduce_scale
+inception_a1_3x3_2_reduce_scale inception_a1_3x3_2_reduce_relu
+inception_a1_3x3_2_reduce_relu inception_a1_3x3_2
+inception_a1_3x3_2 inception_a1_3x3_2_bn
+inception_a1_3x3_2_bn inception_a1_3x3_2_scale
+inception_a1_3x3_2_scale inception_a1_3x3_2_relu
+inception_a1_3x3_2_relu inception_a1_3x3_3
+inception_a1_3x3_3 inception_a1_3x3_3_bn
+inception_a1_3x3_3_bn inception_a1_3x3_3_scale
+inception_a1_3x3_3_scale inception_a1_3x3_3_relu
+inception_stem3_inception_stem3_0_split inception_a1_pool_ave
+inception_a1_pool_ave inception_a1_1x1
+inception_a1_1x1 inception_a1_1x1_bn
+inception_a1_1x1_bn inception_a1_1x1_scale
+inception_a1_1x1_scale inception_a1_1x1_relu
+inception_a1_1x1_2_relu inception_a1_concat
+inception_a1_3x3_relu inception_a1_concat
+inception_a1_3x3_3_relu inception_a1_concat
+inception_a1_1x1_relu inception_a1_concat
+inception_a1_concat inception_a1_concat_inception_a1_concat_0_split
+inception_a1_concat_inception_a1_concat_0_split inception_a2_1x1_2
+inception_a2_1x1_2 inception_a2_1x1_2_bn
+inception_a2_1x1_2_bn inception_a2_1x1_2_scale
+inception_a2_1x1_2_scale inception_a2_1x1_2_relu
+inception_a1_concat_inception_a1_concat_0_split inception_a2_3x3_reduce
+inception_a2_3x3_reduce inception_a2_3x3_reduce_bn
+inception_a2_3x3_reduce_bn inception_a2_3x3_reduce_scale
+inception_a2_3x3_reduce_scale inception_a2_3x3_reduce_relu
+inception_a2_3x3_reduce_relu inception_a2_3x3
+inception_a2_3x3 inception_a2_3x3_bn
+inception_a2_3x3_bn inception_a2_3x3_scale
+inception_a2_3x3_scale inception_a2_3x3_relu
+inception_a1_concat_inception_a1_concat_0_split inception_a2_3x3_2_reduce
+inception_a2_3x3_2_reduce inception_a2_3x3_2_reduce_bn
+inception_a2_3x3_2_reduce_bn inception_a2_3x3_2_reduce_scale
+inception_a2_3x3_2_reduce_scale inception_a2_3x3_2_reduce_relu
+inception_a2_3x3_2_reduce_relu inception_a2_3x3_2
+inception_a2_3x3_2 inception_a2_3x3_2_bn
+inception_a2_3x3_2_bn inception_a2_3x3_2_scale
+inception_a2_3x3_2_scale inception_a2_3x3_2_relu
+inception_a2_3x3_2_relu inception_a2_3x3_3
+inception_a2_3x3_3 inception_a2_3x3_3_bn
+inception_a2_3x3_3_bn inception_a2_3x3_3_scale
+inception_a2_3x3_3_scale inception_a2_3x3_3_relu
+inception_a1_concat_inception_a1_concat_0_split inception_a2_pool_ave
+inception_a2_pool_ave inception_a2_1x1
+inception_a2_1x1 inception_a2_1x1_bn
+inception_a2_1x1_bn inception_a2_1x1_scale
+inception_a2_1x1_scale inception_a2_1x1_relu
+inception_a2_1x1_2_relu inception_a2_concat
+inception_a2_3x3_relu inception_a2_concat
+inception_a2_3x3_3_relu inception_a2_concat
+inception_a2_1x1_relu inception_a2_concat
+inception_a2_concat inception_a2_concat_inception_a2_concat_0_split
+inception_a2_concat_inception_a2_concat_0_split inception_a3_1x1_2
+inception_a3_1x1_2 inception_a3_1x1_2_bn
+inception_a3_1x1_2_bn inception_a3_1x1_2_scale
+inception_a3_1x1_2_scale inception_a3_1x1_2_relu
+inception_a2_concat_inception_a2_concat_0_split inception_a3_3x3_reduce
+inception_a3_3x3_reduce inception_a3_3x3_reduce_bn
+inception_a3_3x3_reduce_bn inception_a3_3x3_reduce_scale
+inception_a3_3x3_reduce_scale inception_a3_3x3_reduce_relu
+inception_a3_3x3_reduce_relu inception_a3_3x3
+inception_a3_3x3 inception_a3_3x3_bn
+inception_a3_3x3_bn inception_a3_3x3_scale
+inception_a3_3x3_scale inception_a3_3x3_relu
+inception_a2_concat_inception_a2_concat_0_split inception_a3_3x3_2_reduce
+inception_a3_3x3_2_reduce inception_a3_3x3_2_reduce_bn
+inception_a3_3x3_2_reduce_bn inception_a3_3x3_2_reduce_scale
+inception_a3_3x3_2_reduce_scale inception_a3_3x3_2_reduce_relu
+inception_a3_3x3_2_reduce_relu inception_a3_3x3_2
+inception_a3_3x3_2 inception_a3_3x3_2_bn
+inception_a3_3x3_2_bn inception_a3_3x3_2_scale
+inception_a3_3x3_2_scale inception_a3_3x3_2_relu
+inception_a3_3x3_2_relu inception_a3_3x3_3
+inception_a3_3x3_3 inception_a3_3x3_3_bn
+inception_a3_3x3_3_bn inception_a3_3x3_3_scale
+inception_a3_3x3_3_scale inception_a3_3x3_3_relu
+inception_a2_concat_inception_a2_concat_0_split inception_a3_pool_ave
+inception_a3_pool_ave inception_a3_1x1
+inception_a3_1x1 inception_a3_1x1_bn
+inception_a3_1x1_bn inception_a3_1x1_scale
+inception_a3_1x1_scale inception_a3_1x1_relu
+inception_a3_1x1_2_relu inception_a3_concat
+inception_a3_3x3_relu inception_a3_concat
+inception_a3_3x3_3_relu inception_a3_concat
+inception_a3_1x1_relu inception_a3_concat
+inception_a3_concat inception_a3_concat_inception_a3_concat_0_split
+inception_a3_concat_inception_a3_concat_0_split inception_a4_1x1_2
+inception_a4_1x1_2 inception_a4_1x1_2_bn
+inception_a4_1x1_2_bn inception_a4_1x1_2_scale
+inception_a4_1x1_2_scale inception_a4_1x1_2_relu
+inception_a3_concat_inception_a3_concat_0_split inception_a4_3x3_reduce
+inception_a4_3x3_reduce inception_a4_3x3_reduce_bn
+inception_a4_3x3_reduce_bn inception_a4_3x3_reduce_scale
+inception_a4_3x3_reduce_scale inception_a4_3x3_reduce_relu
+inception_a4_3x3_reduce_relu inception_a4_3x3
+inception_a4_3x3 inception_a4_3x3_bn
+inception_a4_3x3_bn inception_a4_3x3_scale
+inception_a4_3x3_scale inception_a4_3x3_relu
+inception_a3_concat_inception_a3_concat_0_split inception_a4_3x3_2_reduce
+inception_a4_3x3_2_reduce inception_a4_3x3_2_reduce_bn
+inception_a4_3x3_2_reduce_bn inception_a4_3x3_2_reduce_scale
+inception_a4_3x3_2_reduce_scale inception_a4_3x3_2_reduce_relu
+inception_a4_3x3_2_reduce_relu inception_a4_3x3_2
+inception_a4_3x3_2 inception_a4_3x3_2_bn
+inception_a4_3x3_2_bn inception_a4_3x3_2_scale
+inception_a4_3x3_2_scale inception_a4_3x3_2_relu
+inception_a4_3x3_2_relu inception_a4_3x3_3
+inception_a4_3x3_3 inception_a4_3x3_3_bn
+inception_a4_3x3_3_bn inception_a4_3x3_3_scale
+inception_a4_3x3_3_scale inception_a4_3x3_3_relu
+inception_a3_concat_inception_a3_concat_0_split inception_a4_pool_ave
+inception_a4_pool_ave inception_a4_1x1
+inception_a4_1x1 inception_a4_1x1_bn
+inception_a4_1x1_bn inception_a4_1x1_scale
+inception_a4_1x1_scale inception_a4_1x1_relu
+inception_a4_1x1_2_relu inception_a4_concat
+inception_a4_3x3_relu inception_a4_concat
+inception_a4_3x3_3_relu inception_a4_concat
+inception_a4_1x1_relu inception_a4_concat
+inception_a4_concat inception_a4_concat_inception_a4_concat_0_split
+inception_a4_concat_inception_a4_concat_0_split reduction_a_3x3
+reduction_a_3x3 reduction_a_3x3_bn
+reduction_a_3x3_bn reduction_a_3x3_scale
+reduction_a_3x3_scale reduction_a_3x3_relu
+inception_a4_concat_inception_a4_concat_0_split reduction_a_3x3_2_reduce
+reduction_a_3x3_2_reduce reduction_a_3x3_2_reduce_bn
+reduction_a_3x3_2_reduce_bn reduction_a_3x3_2_reduce_scale
+reduction_a_3x3_2_reduce_scale reduction_a_3x3_2_reduce_relu
+reduction_a_3x3_2_reduce_relu reduction_a_3x3_2
+reduction_a_3x3_2 reduction_a_3x3_2_bn
+reduction_a_3x3_2_bn reduction_a_3x3_2_scale
+reduction_a_3x3_2_scale reduction_a_3x3_2_relu
+reduction_a_3x3_2_relu reduction_a_3x3_3
+reduction_a_3x3_3 reduction_a_3x3_3_bn
+reduction_a_3x3_3_bn reduction_a_3x3_3_scale
+reduction_a_3x3_3_scale reduction_a_3x3_3_relu
+inception_a4_concat_inception_a4_concat_0_split reduction_a_pool
+reduction_a_3x3_relu reduction_a_concat
+reduction_a_3x3_3_relu reduction_a_concat
+reduction_a_pool reduction_a_concat
+reduction_a_concat reduction_a_concat_reduction_a_concat_0_split
+reduction_a_concat_reduction_a_concat_0_split inception_b1_1x1_2
+inception_b1_1x1_2 inception_b1_1x1_2_bn
+inception_b1_1x1_2_bn inception_b1_1x1_2_scale
+inception_b1_1x1_2_scale inception_b1_1x1_2_relu
+reduction_a_concat_reduction_a_concat_0_split inception_b1_1x7_reduce
+inception_b1_1x7_reduce inception_b1_1x7_reduce_bn
+inception_b1_1x7_reduce_bn inception_b1_1x7_reduce_scale
+inception_b1_1x7_reduce_scale inception_b1_1x7_reduce_relu
+inception_b1_1x7_reduce_relu inception_b1_1x7
+inception_b1_1x7 inception_b1_1x7_bn
+inception_b1_1x7_bn inception_b1_1x7_scale
+inception_b1_1x7_scale inception_b1_1x7_relu
+inception_b1_1x7_relu inception_b1_7x1
+inception_b1_7x1 inception_b1_7x1_bn
+inception_b1_7x1_bn inception_b1_7x1_scale
+inception_b1_7x1_scale inception_b1_7x1_relu
+reduction_a_concat_reduction_a_concat_0_split inception_b1_7x1_2_reduce
+inception_b1_7x1_2_reduce inception_b1_7x1_2_reduce_bn
+inception_b1_7x1_2_reduce_bn inception_b1_7x1_2_reduce_scale
+inception_b1_7x1_2_reduce_scale inception_b1_7x1_2_reduce_relu
+inception_b1_7x1_2_reduce_relu inception_b1_7x1_2
+inception_b1_7x1_2 inception_b1_7x1_2_bn
+inception_b1_7x1_2_bn inception_b1_7x1_2_scale
+inception_b1_7x1_2_scale inception_b1_7x1_2_relu
+inception_b1_7x1_2_relu inception_b1_1x7_2
+inception_b1_1x7_2 inception_b1_1x7_2_bn
+inception_b1_1x7_2_bn inception_b1_1x7_2_scale
+inception_b1_1x7_2_scale inception_b1_1x7_2_relu
+inception_b1_1x7_2_relu inception_b1_7x1_3
+inception_b1_7x1_3 inception_b1_7x1_3_bn
+inception_b1_7x1_3_bn inception_b1_7x1_3_scale
+inception_b1_7x1_3_scale inception_b1_7x1_3_relu
+inception_b1_7x1_3_relu inception_b1_1x7_3
+inception_b1_1x7_3 inception_b1_1x7_3_bn
+inception_b1_1x7_3_bn inception_b1_1x7_3_scale
+inception_b1_1x7_3_scale inception_b1_1x7_3_relu
+reduction_a_concat_reduction_a_concat_0_split inception_b1_pool_ave
+inception_b1_pool_ave inception_b1_1x1
+inception_b1_1x1 inception_b1_1x1_bn
+inception_b1_1x1_bn inception_b1_1x1_scale
+inception_b1_1x1_scale inception_b1_1x1_relu
+inception_b1_1x1_2_relu inception_b1_concat
+inception_b1_7x1_relu inception_b1_concat
+inception_b1_1x7_3_relu inception_b1_concat
+inception_b1_1x1_relu inception_b1_concat
+inception_b1_concat inception_b1_concat_inception_b1_concat_0_split
+inception_b1_concat_inception_b1_concat_0_split inception_b2_1x1_2
+inception_b2_1x1_2 inception_b2_1x1_2_bn
+inception_b2_1x1_2_bn inception_b2_1x1_2_scale
+inception_b2_1x1_2_scale inception_b2_1x1_2_relu
+inception_b1_concat_inception_b1_concat_0_split inception_b2_1x7_reduce
+inception_b2_1x7_reduce inception_b2_1x7_reduce_bn
+inception_b2_1x7_reduce_bn inception_b2_1x7_reduce_scale
+inception_b2_1x7_reduce_scale inception_b2_1x7_reduce_relu
+inception_b2_1x7_reduce_relu inception_b2_1x7
+inception_b2_1x7 inception_b2_1x7_bn
+inception_b2_1x7_bn inception_b2_1x7_scale
+inception_b2_1x7_scale inception_b2_1x7_relu
+inception_b2_1x7_relu inception_b2_7x1
+inception_b2_7x1 inception_b2_7x1_bn
+inception_b2_7x1_bn inception_b2_7x1_scale
+inception_b2_7x1_scale inception_b2_7x1_relu
+inception_b1_concat_inception_b1_concat_0_split inception_b2_7x1_2_reduce
+inception_b2_7x1_2_reduce inception_b2_7x1_2_reduce_bn
+inception_b2_7x1_2_reduce_bn inception_b2_7x1_2_reduce_scale
+inception_b2_7x1_2_reduce_scale inception_b2_7x1_2_reduce_relu
+inception_b2_7x1_2_reduce_relu inception_b2_7x1_2
+inception_b2_7x1_2 inception_b2_7x1_2_bn
+inception_b2_7x1_2_bn inception_b2_7x1_2_scale
+inception_b2_7x1_2_scale inception_b2_7x1_2_relu
+inception_b2_7x1_2_relu inception_b2_1x7_2
+inception_b2_1x7_2 inception_b2_1x7_2_bn
+inception_b2_1x7_2_bn inception_b2_1x7_2_scale
+inception_b2_1x7_2_scale inception_b2_1x7_2_relu
+inception_b2_1x7_2_relu inception_b2_7x1_3
+inception_b2_7x1_3 inception_b2_7x1_3_bn
+inception_b2_7x1_3_bn inception_b2_7x1_3_scale
+inception_b2_7x1_3_scale inception_b2_7x1_3_relu
+inception_b2_7x1_3_relu inception_b2_1x7_3
+inception_b2_1x7_3 inception_b2_1x7_3_bn
+inception_b2_1x7_3_bn inception_b2_1x7_3_scale
+inception_b2_1x7_3_scale inception_b2_1x7_3_relu
+inception_b1_concat_inception_b1_concat_0_split inception_b2_pool_ave
+inception_b2_pool_ave inception_b2_1x1
+inception_b2_1x1 inception_b2_1x1_bn
+inception_b2_1x1_bn inception_b2_1x1_scale
+inception_b2_1x1_scale inception_b2_1x1_relu
+inception_b2_1x1_2_relu inception_b2_concat
+inception_b2_7x1_relu inception_b2_concat
+inception_b2_1x7_3_relu inception_b2_concat
+inception_b2_1x1_relu inception_b2_concat
+inception_b2_concat inception_b2_concat_inception_b2_concat_0_split
+inception_b2_concat_inception_b2_concat_0_split inception_b3_1x1_2
+inception_b3_1x1_2 inception_b3_1x1_2_bn
+inception_b3_1x1_2_bn inception_b3_1x1_2_scale
+inception_b3_1x1_2_scale inception_b3_1x1_2_relu
+inception_b2_concat_inception_b2_concat_0_split inception_b3_1x7_reduce
+inception_b3_1x7_reduce inception_b3_1x7_reduce_bn
+inception_b3_1x7_reduce_bn inception_b3_1x7_reduce_scale
+inception_b3_1x7_reduce_scale inception_b3_1x7_reduce_relu
+inception_b3_1x7_reduce_relu inception_b3_1x7
+inception_b3_1x7 inception_b3_1x7_bn
+inception_b3_1x7_bn inception_b3_1x7_scale
+inception_b3_1x7_scale inception_b3_1x7_relu
+inception_b3_1x7_relu inception_b3_7x1
+inception_b3_7x1 inception_b3_7x1_bn
+inception_b3_7x1_bn inception_b3_7x1_scale
+inception_b3_7x1_scale inception_b3_7x1_relu
+inception_b2_concat_inception_b2_concat_0_split inception_b3_7x1_2_reduce
+inception_b3_7x1_2_reduce inception_b3_7x1_2_reduce_bn
+inception_b3_7x1_2_reduce_bn inception_b3_7x1_2_reduce_scale
+inception_b3_7x1_2_reduce_scale inception_b3_7x1_2_reduce_relu
+inception_b3_7x1_2_reduce_relu inception_b3_7x1_2
+inception_b3_7x1_2 inception_b3_7x1_2_bn
+inception_b3_7x1_2_bn inception_b3_7x1_2_scale
+inception_b3_7x1_2_scale inception_b3_7x1_2_relu
+inception_b3_7x1_2_relu inception_b3_1x7_2
+inception_b3_1x7_2 inception_b3_1x7_2_bn
+inception_b3_1x7_2_bn inception_b3_1x7_2_scale
+inception_b3_1x7_2_scale inception_b3_1x7_2_relu
+inception_b3_1x7_2_relu inception_b3_7x1_3
+inception_b3_7x1_3 inception_b3_7x1_3_bn
+inception_b3_7x1_3_bn inception_b3_7x1_3_scale
+inception_b3_7x1_3_scale inception_b3_7x1_3_relu
+inception_b3_7x1_3_relu inception_b3_1x7_3
+inception_b3_1x7_3 inception_b3_1x7_3_bn
+inception_b3_1x7_3_bn inception_b3_1x7_3_scale
+inception_b3_1x7_3_scale inception_b3_1x7_3_relu
+inception_b2_concat_inception_b2_concat_0_split inception_b3_pool_ave
+inception_b3_pool_ave inception_b3_1x1
+inception_b3_1x1 inception_b3_1x1_bn
+inception_b3_1x1_bn inception_b3_1x1_scale
+inception_b3_1x1_scale inception_b3_1x1_relu
+inception_b3_1x1_2_relu inception_b3_concat
+inception_b3_7x1_relu inception_b3_concat
+inception_b3_1x7_3_relu inception_b3_concat
+inception_b3_1x1_relu inception_b3_concat
+inception_b3_concat inception_b3_concat_inception_b3_concat_0_split
+inception_b3_concat_inception_b3_concat_0_split inception_b4_1x1_2
+inception_b4_1x1_2 inception_b4_1x1_2_bn
+inception_b4_1x1_2_bn inception_b4_1x1_2_scale
+inception_b4_1x1_2_scale inception_b4_1x1_2_relu
+inception_b3_concat_inception_b3_concat_0_split inception_b4_1x7_reduce
+inception_b4_1x7_reduce inception_b4_1x7_reduce_bn
+inception_b4_1x7_reduce_bn inception_b4_1x7_reduce_scale
+inception_b4_1x7_reduce_scale inception_b4_1x7_reduce_relu
+inception_b4_1x7_reduce_relu inception_b4_1x7
+inception_b4_1x7 inception_b4_1x7_bn
+inception_b4_1x7_bn inception_b4_1x7_scale
+inception_b4_1x7_scale inception_b4_1x7_relu
+inception_b4_1x7_relu inception_b4_7x1
+inception_b4_7x1 inception_b4_7x1_bn
+inception_b4_7x1_bn inception_b4_7x1_scale
+inception_b4_7x1_scale inception_b4_7x1_relu
+inception_b3_concat_inception_b3_concat_0_split inception_b4_7x1_2_reduce
+inception_b4_7x1_2_reduce inception_b4_7x1_2_reduce_bn
+inception_b4_7x1_2_reduce_bn inception_b4_7x1_2_reduce_scale
+inception_b4_7x1_2_reduce_scale inception_b4_7x1_2_reduce_relu
+inception_b4_7x1_2_reduce_relu inception_b4_7x1_2
+inception_b4_7x1_2 inception_b4_7x1_2_bn
+inception_b4_7x1_2_bn inception_b4_7x1_2_scale
+inception_b4_7x1_2_scale inception_b4_7x1_2_relu
+inception_b4_7x1_2_relu inception_b4_1x7_2
+inception_b4_1x7_2 inception_b4_1x7_2_bn
+inception_b4_1x7_2_bn inception_b4_1x7_2_scale
+inception_b4_1x7_2_scale inception_b4_1x7_2_relu
+inception_b4_1x7_2_relu inception_b4_7x1_3
+inception_b4_7x1_3 inception_b4_7x1_3_bn
+inception_b4_7x1_3_bn inception_b4_7x1_3_scale
+inception_b4_7x1_3_scale inception_b4_7x1_3_relu
+inception_b4_7x1_3_relu inception_b4_1x7_3
+inception_b4_1x7_3 inception_b4_1x7_3_bn
+inception_b4_1x7_3_bn inception_b4_1x7_3_scale
+inception_b4_1x7_3_scale inception_b4_1x7_3_relu
+inception_b3_concat_inception_b3_concat_0_split inception_b4_pool_ave
+inception_b4_pool_ave inception_b4_1x1
+inception_b4_1x1 inception_b4_1x1_bn
+inception_b4_1x1_bn inception_b4_1x1_scale
+inception_b4_1x1_scale inception_b4_1x1_relu
+inception_b4_1x1_2_relu inception_b4_concat
+inception_b4_7x1_relu inception_b4_concat
+inception_b4_1x7_3_relu inception_b4_concat
+inception_b4_1x1_relu inception_b4_concat
+inception_b4_concat inception_b4_concat_inception_b4_concat_0_split
+inception_b4_concat_inception_b4_concat_0_split inception_b5_1x1_2
+inception_b5_1x1_2 inception_b5_1x1_2_bn
+inception_b5_1x1_2_bn inception_b5_1x1_2_scale
+inception_b5_1x1_2_scale inception_b5_1x1_2_relu
+inception_b4_concat_inception_b4_concat_0_split inception_b5_1x7_reduce
+inception_b5_1x7_reduce inception_b5_1x7_reduce_bn
+inception_b5_1x7_reduce_bn inception_b5_1x7_reduce_scale
+inception_b5_1x7_reduce_scale inception_b5_1x7_reduce_relu
+inception_b5_1x7_reduce_relu inception_b5_1x7
+inception_b5_1x7 inception_b5_1x7_bn
+inception_b5_1x7_bn inception_b5_1x7_scale
+inception_b5_1x7_scale inception_b5_1x7_relu
+inception_b5_1x7_relu inception_b5_7x1
+inception_b5_7x1 inception_b5_7x1_bn
+inception_b5_7x1_bn inception_b5_7x1_scale
+inception_b5_7x1_scale inception_b5_7x1_relu
+inception_b4_concat_inception_b4_concat_0_split inception_b5_7x1_2_reduce
+inception_b5_7x1_2_reduce inception_b5_7x1_2_reduce_bn
+inception_b5_7x1_2_reduce_bn inception_b5_7x1_2_reduce_scale
+inception_b5_7x1_2_reduce_scale inception_b5_7x1_2_reduce_relu
+inception_b5_7x1_2_reduce_relu inception_b5_7x1_2
+inception_b5_7x1_2 inception_b5_7x1_2_bn
+inception_b5_7x1_2_bn inception_b5_7x1_2_scale
+inception_b5_7x1_2_scale inception_b5_7x1_2_relu
+inception_b5_7x1_2_relu inception_b5_1x7_2
+inception_b5_1x7_2 inception_b5_1x7_2_bn
+inception_b5_1x7_2_bn inception_b5_1x7_2_scale
+inception_b5_1x7_2_scale inception_b5_1x7_2_relu
+inception_b5_1x7_2_relu inception_b5_7x1_3
+inception_b5_7x1_3 inception_b5_7x1_3_bn
+inception_b5_7x1_3_bn inception_b5_7x1_3_scale
+inception_b5_7x1_3_scale inception_b5_7x1_3_relu
+inception_b5_7x1_3_relu inception_b5_1x7_3
+inception_b5_1x7_3 inception_b5_1x7_3_bn
+inception_b5_1x7_3_bn inception_b5_1x7_3_scale
+inception_b5_1x7_3_scale inception_b5_1x7_3_relu
+inception_b4_concat_inception_b4_concat_0_split inception_b5_pool_ave
+inception_b5_pool_ave inception_b5_1x1
+inception_b5_1x1 inception_b5_1x1_bn
+inception_b5_1x1_bn inception_b5_1x1_scale
+inception_b5_1x1_scale inception_b5_1x1_relu
+inception_b5_1x1_2_relu inception_b5_concat
+inception_b5_7x1_relu inception_b5_concat
+inception_b5_1x7_3_relu inception_b5_concat
+inception_b5_1x1_relu inception_b5_concat
+inception_b5_concat inception_b5_concat_inception_b5_concat_0_split
+inception_b5_concat_inception_b5_concat_0_split inception_b6_1x1_2
+inception_b6_1x1_2 inception_b6_1x1_2_bn
+inception_b6_1x1_2_bn inception_b6_1x1_2_scale
+inception_b6_1x1_2_scale inception_b6_1x1_2_relu
+inception_b5_concat_inception_b5_concat_0_split inception_b6_1x7_reduce
+inception_b6_1x7_reduce inception_b6_1x7_reduce_bn
+inception_b6_1x7_reduce_bn inception_b6_1x7_reduce_scale
+inception_b6_1x7_reduce_scale inception_b6_1x7_reduce_relu
+inception_b6_1x7_reduce_relu inception_b6_1x7
+inception_b6_1x7 inception_b6_1x7_bn
+inception_b6_1x7_bn inception_b6_1x7_scale
+inception_b6_1x7_scale inception_b6_1x7_relu
+inception_b6_1x7_relu inception_b6_7x1
+inception_b6_7x1 inception_b6_7x1_bn
+inception_b6_7x1_bn inception_b6_7x1_scale
+inception_b6_7x1_scale inception_b6_7x1_relu
+inception_b5_concat_inception_b5_concat_0_split inception_b6_7x1_2_reduce
+inception_b6_7x1_2_reduce inception_b6_7x1_2_reduce_bn
+inception_b6_7x1_2_reduce_bn inception_b6_7x1_2_reduce_scale
+inception_b6_7x1_2_reduce_scale inception_b6_7x1_2_reduce_relu
+inception_b6_7x1_2_reduce_relu inception_b6_7x1_2
+inception_b6_7x1_2 inception_b6_7x1_2_bn
+inception_b6_7x1_2_bn inception_b6_7x1_2_scale
+inception_b6_7x1_2_scale inception_b6_7x1_2_relu
+inception_b6_7x1_2_relu inception_b6_1x7_2
+inception_b6_1x7_2 inception_b6_1x7_2_bn
+inception_b6_1x7_2_bn inception_b6_1x7_2_scale
+inception_b6_1x7_2_scale inception_b6_1x7_2_relu
+inception_b6_1x7_2_relu inception_b6_7x1_3
+inception_b6_7x1_3 inception_b6_7x1_3_bn
+inception_b6_7x1_3_bn inception_b6_7x1_3_scale
+inception_b6_7x1_3_scale inception_b6_7x1_3_relu
+inception_b6_7x1_3_relu inception_b6_1x7_3
+inception_b6_1x7_3 inception_b6_1x7_3_bn
+inception_b6_1x7_3_bn inception_b6_1x7_3_scale
+inception_b6_1x7_3_scale inception_b6_1x7_3_relu
+inception_b5_concat_inception_b5_concat_0_split inception_b6_pool_ave
+inception_b6_pool_ave inception_b6_1x1
+inception_b6_1x1 inception_b6_1x1_bn
+inception_b6_1x1_bn inception_b6_1x1_scale
+inception_b6_1x1_scale inception_b6_1x1_relu
+inception_b6_1x1_2_relu inception_b6_concat
+inception_b6_7x1_relu inception_b6_concat
+inception_b6_1x7_3_relu inception_b6_concat
+inception_b6_1x1_relu inception_b6_concat
+inception_b6_concat inception_b6_concat_inception_b6_concat_0_split
+inception_b6_concat_inception_b6_concat_0_split inception_b7_1x1_2
+inception_b7_1x1_2 inception_b7_1x1_2_bn
+inception_b7_1x1_2_bn inception_b7_1x1_2_scale
+inception_b7_1x1_2_scale inception_b7_1x1_2_relu
+inception_b6_concat_inception_b6_concat_0_split inception_b7_1x7_reduce
+inception_b7_1x7_reduce inception_b7_1x7_reduce_bn
+inception_b7_1x7_reduce_bn inception_b7_1x7_reduce_scale
+inception_b7_1x7_reduce_scale inception_b7_1x7_reduce_relu
+inception_b7_1x7_reduce_relu inception_b7_1x7
+inception_b7_1x7 inception_b7_1x7_bn
+inception_b7_1x7_bn inception_b7_1x7_scale
+inception_b7_1x7_scale inception_b7_1x7_relu
+inception_b7_1x7_relu inception_b7_7x1
+inception_b7_7x1 inception_b7_7x1_bn
+inception_b7_7x1_bn inception_b7_7x1_scale
+inception_b7_7x1_scale inception_b7_7x1_relu
+inception_b6_concat_inception_b6_concat_0_split inception_b7_7x1_2_reduce
+inception_b7_7x1_2_reduce inception_b7_7x1_2_reduce_bn
+inception_b7_7x1_2_reduce_bn inception_b7_7x1_2_reduce_scale
+inception_b7_7x1_2_reduce_scale inception_b7_7x1_2_reduce_relu
+inception_b7_7x1_2_reduce_relu inception_b7_7x1_2
+inception_b7_7x1_2 inception_b7_7x1_2_bn
+inception_b7_7x1_2_bn inception_b7_7x1_2_scale
+inception_b7_7x1_2_scale inception_b7_7x1_2_relu
+inception_b7_7x1_2_relu inception_b7_1x7_2
+inception_b7_1x7_2 inception_b7_1x7_2_bn
+inception_b7_1x7_2_bn inception_b7_1x7_2_scale
+inception_b7_1x7_2_scale inception_b7_1x7_2_relu
+inception_b7_1x7_2_relu inception_b7_7x1_3
+inception_b7_7x1_3 inception_b7_7x1_3_bn
+inception_b7_7x1_3_bn inception_b7_7x1_3_scale
+inception_b7_7x1_3_scale inception_b7_7x1_3_relu
+inception_b7_7x1_3_relu inception_b7_1x7_3
+inception_b7_1x7_3 inception_b7_1x7_3_bn
+inception_b7_1x7_3_bn inception_b7_1x7_3_scale
+inception_b7_1x7_3_scale inception_b7_1x7_3_relu
+inception_b6_concat_inception_b6_concat_0_split inception_b7_pool_ave
+inception_b7_pool_ave inception_b7_1x1
+inception_b7_1x1 inception_b7_1x1_bn
+inception_b7_1x1_bn inception_b7_1x1_scale
+inception_b7_1x1_scale inception_b7_1x1_relu
+inception_b7_1x1_2_relu inception_b7_concat
+inception_b7_7x1_relu inception_b7_concat
+inception_b7_1x7_3_relu inception_b7_concat
+inception_b7_1x1_relu inception_b7_concat
+inception_b7_concat inception_b7_concat_inception_b7_concat_0_split
+inception_b7_concat_inception_b7_concat_0_split reduction_b_3x3_reduce
+reduction_b_3x3_reduce reduction_b_3x3_reduce_bn
+reduction_b_3x3_reduce_bn reduction_b_3x3_reduce_scale
+reduction_b_3x3_reduce_scale reduction_b_3x3_reduce_relu
+reduction_b_3x3_reduce_relu reduction_b_3x3
+reduction_b_3x3 reduction_b_3x3_bn
+reduction_b_3x3_bn reduction_b_3x3_scale
+reduction_b_3x3_scale reduction_b_3x3_relu
+inception_b7_concat_inception_b7_concat_0_split reduction_b_1x7_reduce
+reduction_b_1x7_reduce reduction_b_1x7_reduce_bn
+reduction_b_1x7_reduce_bn reduction_b_1x7_reduce_scale
+reduction_b_1x7_reduce_scale reduction_b_1x7_reduce_relu
+reduction_b_1x7_reduce_relu reduction_b_1x7
+reduction_b_1x7 reduction_b_1x7_bn
+reduction_b_1x7_bn reduction_b_1x7_scale
+reduction_b_1x7_scale reduction_b_1x7_relu
+reduction_b_1x7_relu reduction_b_7x1
+reduction_b_7x1 reduction_b_7x1_bn
+reduction_b_7x1_bn reduction_b_7x1_scale
+reduction_b_7x1_scale reduction_b_7x1_relu
+reduction_b_7x1_relu reduction_b_3x3_2
+reduction_b_3x3_2 reduction_b_3x3_2_bn
+reduction_b_3x3_2_bn reduction_b_3x3_2_scale
+reduction_b_3x3_2_scale reduction_b_3x3_2_relu
+inception_b7_concat_inception_b7_concat_0_split reduction_b_pool
+reduction_b_3x3_relu reduction_b_concat
+reduction_b_3x3_2_relu reduction_b_concat
+reduction_b_pool reduction_b_concat
+reduction_b_concat reduction_b_concat_reduction_b_concat_0_split
+reduction_b_concat_reduction_b_concat_0_split inception_c1_1x1_2
+inception_c1_1x1_2 inception_c1_1x1_2_bn
+inception_c1_1x1_2_bn inception_c1_1x1_2_scale
+inception_c1_1x1_2_scale inception_c1_1x1_2_relu
+reduction_b_concat_reduction_b_concat_0_split inception_c1_1x1_3
+inception_c1_1x1_3 inception_c1_1x1_3_bn
+inception_c1_1x1_3_bn inception_c1_1x1_3_scale
+inception_c1_1x1_3_scale inception_c1_1x1_3_relu
+inception_c1_1x1_3_relu inception_c1_1x1_3_inception_c1_1x1_3_relu_0_split
+inception_c1_1x1_3_inception_c1_1x1_3_relu_0_split inception_c1_1x3
+inception_c1_1x3 inception_c1_1x3_bn
+inception_c1_1x3_bn inception_c1_1x3_scale
+inception_c1_1x3_scale inception_c1_1x3_relu
+inception_c1_1x1_3_inception_c1_1x1_3_relu_0_split inception_c1_3x1
+inception_c1_3x1 inception_c1_3x1_bn
+inception_c1_3x1_bn inception_c1_3x1_scale
+inception_c1_3x1_scale inception_c1_3x1_relu
+reduction_b_concat_reduction_b_concat_0_split inception_c1_1x1_4
+inception_c1_1x1_4 inception_c1_1x1_4_bn
+inception_c1_1x1_4_bn inception_c1_1x1_4_scale
+inception_c1_1x1_4_scale inception_c1_1x1_4_relu
+inception_c1_1x1_4_relu inception_c1_3x1_2
+inception_c1_3x1_2 inception_c1_3x1_2_bn
+inception_c1_3x1_2_bn inception_c1_3x1_2_scale
+inception_c1_3x1_2_scale inception_c1_3x1_2_relu
+inception_c1_3x1_2_relu inception_c1_1x3_2
+inception_c1_1x3_2 inception_c1_1x3_2_bn
+inception_c1_1x3_2_bn inception_c1_1x3_2_scale
+inception_c1_1x3_2_scale inception_c1_1x3_2_relu
+inception_c1_1x3_2_relu inception_c1_1x3_2_inception_c1_1x3_2_relu_0_split
+inception_c1_1x3_2_inception_c1_1x3_2_relu_0_split inception_c1_1x3_3
+inception_c1_1x3_3 inception_c1_1x3_3_bn
+inception_c1_1x3_3_bn inception_c1_1x3_3_scale
+inception_c1_1x3_3_scale inception_c1_1x3_3_relu
+inception_c1_1x3_2_inception_c1_1x3_2_relu_0_split inception_c1_3x1_3
+inception_c1_3x1_3 inception_c1_3x1_3_bn
+inception_c1_3x1_3_bn inception_c1_3x1_3_scale
+inception_c1_3x1_3_scale inception_c1_3x1_3_relu
+reduction_b_concat_reduction_b_concat_0_split inception_c1_pool_ave
+inception_c1_pool_ave inception_c1_1x1
+inception_c1_1x1 inception_c1_1x1_bn
+inception_c1_1x1_bn inception_c1_1x1_scale
+inception_c1_1x1_scale inception_c1_1x1_relu
+inception_c1_1x1_2_relu inception_c1_concat
+inception_c1_1x3_relu inception_c1_concat
+inception_c1_3x1_relu inception_c1_concat
+inception_c1_1x3_3_relu inception_c1_concat
+inception_c1_3x1_3_relu inception_c1_concat
+inception_c1_1x1_relu inception_c1_concat
+inception_c1_concat inception_c1_concat_inception_c1_concat_0_split
+inception_c1_concat_inception_c1_concat_0_split inception_c2_1x1_2
+inception_c2_1x1_2 inception_c2_1x1_2_bn
+inception_c2_1x1_2_bn inception_c2_1x1_2_scale
+inception_c2_1x1_2_scale inception_c2_1x1_2_relu
+inception_c1_concat_inception_c1_concat_0_split inception_c2_1x1_3
+inception_c2_1x1_3 inception_c2_1x1_3_bn
+inception_c2_1x1_3_bn inception_c2_1x1_3_scale
+inception_c2_1x1_3_scale inception_c2_1x1_3_relu
+inception_c2_1x1_3_relu inception_c2_1x1_3_inception_c2_1x1_3_relu_0_split
+inception_c2_1x1_3_inception_c2_1x1_3_relu_0_split inception_c2_1x3
+inception_c2_1x3 inception_c2_1x3_bn
+inception_c2_1x3_bn inception_c2_1x3_scale
+inception_c2_1x3_scale inception_c2_1x3_relu
+inception_c2_1x1_3_inception_c2_1x1_3_relu_0_split inception_c2_3x1
+inception_c2_3x1 inception_c2_3x1_bn
+inception_c2_3x1_bn inception_c2_3x1_scale
+inception_c2_3x1_scale inception_c2_3x1_relu
+inception_c1_concat_inception_c1_concat_0_split inception_c2_1x1_4
+inception_c2_1x1_4 inception_c2_1x1_4_bn
+inception_c2_1x1_4_bn inception_c2_1x1_4_scale
+inception_c2_1x1_4_scale inception_c2_1x1_4_relu
+inception_c2_1x1_4_relu inception_c2_3x1_2
+inception_c2_3x1_2 inception_c2_3x1_2_bn
+inception_c2_3x1_2_bn inception_c2_3x1_2_scale
+inception_c2_3x1_2_scale inception_c2_3x1_2_relu
+inception_c2_3x1_2_relu inception_c2_1x3_2
+inception_c2_1x3_2 inception_c2_1x3_2_bn
+inception_c2_1x3_2_bn inception_c2_1x3_2_scale
+inception_c2_1x3_2_scale inception_c2_1x3_2_relu
+inception_c2_1x3_2_relu inception_c2_1x3_2_inception_c2_1x3_2_relu_0_split
+inception_c2_1x3_2_inception_c2_1x3_2_relu_0_split inception_c2_1x3_3
+inception_c2_1x3_3 inception_c2_1x3_3_bn
+inception_c2_1x3_3_bn inception_c2_1x3_3_scale
+inception_c2_1x3_3_scale inception_c2_1x3_3_relu
+inception_c2_1x3_2_inception_c2_1x3_2_relu_0_split inception_c2_3x1_3
+inception_c2_3x1_3 inception_c2_3x1_3_bn
+inception_c2_3x1_3_bn inception_c2_3x1_3_scale
+inception_c2_3x1_3_scale inception_c2_3x1_3_relu
+inception_c1_concat_inception_c1_concat_0_split inception_c2_pool_ave
+inception_c2_pool_ave inception_c2_1x1
+inception_c2_1x1 inception_c2_1x1_bn
+inception_c2_1x1_bn inception_c2_1x1_scale
+inception_c2_1x1_scale inception_c2_1x1_relu
+inception_c2_1x1_2_relu inception_c2_concat
+inception_c2_1x3_relu inception_c2_concat
+inception_c2_3x1_relu inception_c2_concat
+inception_c2_1x3_3_relu inception_c2_concat
+inception_c2_3x1_3_relu inception_c2_concat
+inception_c2_1x1_relu inception_c2_concat
+inception_c2_concat inception_c2_concat_inception_c2_concat_0_split
+inception_c2_concat_inception_c2_concat_0_split inception_c3_1x1_2
+inception_c3_1x1_2 inception_c3_1x1_2_bn
+inception_c3_1x1_2_bn inception_c3_1x1_2_scale
+inception_c3_1x1_2_scale inception_c3_1x1_2_relu
+inception_c2_concat_inception_c2_concat_0_split inception_c3_1x1_3
+inception_c3_1x1_3 inception_c3_1x1_3_bn
+inception_c3_1x1_3_bn inception_c3_1x1_3_scale
+inception_c3_1x1_3_scale inception_c3_1x1_3_relu
+inception_c3_1x1_3_relu inception_c3_1x1_3_inception_c3_1x1_3_relu_0_split
+inception_c3_1x1_3_inception_c3_1x1_3_relu_0_split inception_c3_1x3
+inception_c3_1x3 inception_c3_1x3_bn
+inception_c3_1x3_bn inception_c3_1x3_scale
+inception_c3_1x3_scale inception_c3_1x3_relu
+inception_c3_1x1_3_inception_c3_1x1_3_relu_0_split inception_c3_3x1
+inception_c3_3x1 inception_c3_3x1_bn
+inception_c3_3x1_bn inception_c3_3x1_scale
+inception_c3_3x1_scale inception_c3_3x1_relu
+inception_c2_concat_inception_c2_concat_0_split inception_c3_1x1_4
+inception_c3_1x1_4 inception_c3_1x1_4_bn
+inception_c3_1x1_4_bn inception_c3_1x1_4_scale
+inception_c3_1x1_4_scale inception_c3_1x1_4_relu
+inception_c3_1x1_4_relu inception_c3_3x1_2
+inception_c3_3x1_2 inception_c3_3x1_2_bn
+inception_c3_3x1_2_bn inception_c3_3x1_2_scale
+inception_c3_3x1_2_scale inception_c3_3x1_2_relu
+inception_c3_3x1_2_relu inception_c3_1x3_2
+inception_c3_1x3_2 inception_c3_1x3_2_bn
+inception_c3_1x3_2_bn inception_c3_1x3_2_scale
+inception_c3_1x3_2_scale inception_c3_1x3_2_relu
+inception_c3_1x3_2_relu inception_c3_1x3_2_inception_c3_1x3_2_relu_0_split
+inception_c3_1x3_2_inception_c3_1x3_2_relu_0_split inception_c3_1x3_3
+inception_c3_1x3_3 inception_c3_1x3_3_bn
+inception_c3_1x3_3_bn inception_c3_1x3_3_scale
+inception_c3_1x3_3_scale inception_c3_1x3_3_relu
+inception_c3_1x3_2_inception_c3_1x3_2_relu_0_split inception_c3_3x1_3
+inception_c3_3x1_3 inception_c3_3x1_3_bn
+inception_c3_3x1_3_bn inception_c3_3x1_3_scale
+inception_c3_3x1_3_scale inception_c3_3x1_3_relu
+inception_c2_concat_inception_c2_concat_0_split inception_c3_pool_ave
+inception_c3_pool_ave inception_c3_1x1
+inception_c3_1x1 inception_c3_1x1_bn
+inception_c3_1x1_bn inception_c3_1x1_scale
+inception_c3_1x1_scale inception_c3_1x1_relu
+inception_c3_1x1_2_relu inception_c3_concat
+inception_c3_1x3_relu inception_c3_concat
+inception_c3_3x1_relu inception_c3_concat
+inception_c3_1x3_3_relu inception_c3_concat
+inception_c3_3x1_3_relu inception_c3_concat
+inception_c3_1x1_relu inception_c3_concat
+inception_c3_concat pool_8x8_s1
+pool_8x8_s1 classifier
+classifier loss
+label loss

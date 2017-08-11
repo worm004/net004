@@ -41,7 +41,7 @@ float net004_forward(const std::string& img_path, int label){
 	       model_path = "../models/cifar.net004.data";
 	Net004 net;
 	Parser parser;
-	parser.batch_size = 10;
+	parser.batch_size = 1;
 	parser.read(net_path, model_path, &net);
 	Layers & ls = net.ls;
 	DataLayer* l = (DataLayer*)ls["data"];

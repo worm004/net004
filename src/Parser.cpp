@@ -1,3 +1,4 @@
+#include <sstream>
 #include <vector>
 #include <set>
 #include "Parser.h"
@@ -106,7 +107,7 @@ void Parser::write_net_conv(Layer* layer, std::ofstream& ofile){
 	ConvLayer *l = (ConvLayer*)layer;
 	string activity = l->get_activity();
 	if(activity.size()==0) activity = "none";
-	ofile<<l->get_kernel()<<" "<<l->get_filters()<<" "<<l->get_padding()<<" "<<l->get_stride()<<" "<<activity<<endl;
+	ofile<<l->get_kernel_h()<<" "<<l->get_kernel_w()<<" "<<l->get_filters()<<" "<<l->get_padding_h()<<" "<<l->get_padding_w()<<" "<<l->get_stride_h()<<" "<<l->get_stride_w()<<" "<<activity<<endl;
 }
 void Parser::write_connections(Net004* net, std::ofstream& ofile){
 	Connections &cs = net->cs;
@@ -277,11 +278,11 @@ void Parser::read_net_lrn(const std::string& line, const std::string& name, Laye
 }
 void Parser::read_net_conv(const std::string& line, const std::string& name, Layers* ls){
 	char activity[100];
-	int kernel, filters, padding, stride, group;
+	int kernel_h,kernel_w, filters, padding_h,padding_w, stride_h,stride_w, group;
 	int bias = 0; 
-	sscanf(line.c_str(),"%d %d %d %d %d %d %s",&kernel, &filters, &padding, &stride, &group, &bias, activity);
-	if (activity == string("none")) ls->add_conv(name,{filters,kernel,stride,padding,group},bias!=0,"");
-	else ls->add_conv(name,{filters,kernel,stride,padding,group},bias!=0,activity);
+	sscanf(line.c_str(),"%d %d %d %d %d %d %d %d %d %s",&kernel_h,&kernel_w, &filters, &padding_h,&padding_w, &stride_h,&stride_w, &group, &bias, activity);
+	if (activity == string("none")) ls->add_conv(name,{filters,kernel_h,kernel_w,stride_h,stride_w,padding_h,padding_w,group},bias!=0,"");
+	else ls->add_conv(name,{filters,kernel_h,kernel_w,stride_h,stride_w,padding_h,padding_w,group},bias!=0,activity);
 }
 void Parser::read_net_pool(const std::string& line, const std::string& name, Layers* ls){
 	char method[100];
@@ -307,12 +308,23 @@ void Parser::read_net_loss(const std::string& line, const std::string& name, Lay
 	ls->add_loss(name, method);
 }
 void Parser::read_net_concat(const std::string& line, const std::string& name, Layers* ls){
+	istringstream iss(line);
 	char method[100];
-	sscanf(line.c_str(),"%s",method);
-	ls->add_concat(name, method);
+	int n;
+	iss>>method>>n;
+	std::vector<std::string> names;
+	for(int i=0;i<n;++i){
+		string t;
+		iss>>t;
+		names.push_back(t);
+	}
+
+	ls->add_concat(name, names, method);
 }
 void Parser::read_net_bn(const std::string& line, const std::string& name, Layers* ls){
-	ls->add_bn(name);
+	float eps = 1e-5;
+	sscanf(line.c_str(),"%f",&eps);
+	ls->add_bn(name,eps);
 }
 void Parser::read_net_scale(const std::string& line, const std::string& name, Layers* ls){
 	int bias=0;

@@ -19,8 +19,9 @@ void PoolLayer::forward_avgpool(){
 	int h = inputs[0].h,
 	    w = inputs[0].w,
 	    bc = inputs[0].n * inputs[0].c,
-	    bottom = (h + padding * 2 - kernel)%kernel + h + padding - kernel,
-	    right = (w + padding * 2 - kernel)%kernel + w + padding - kernel;
+	    bottom = ((h + padding * 2 - kernel+stride-1)/stride + 1)*stride - padding-1,
+	    right = ((w + padding * 2 - kernel+stride-1)/stride + 1)*stride - padding-1;
+
 	float *idata = inputs[0].data,
 	      *odata = outputs[0].data;
 
@@ -28,15 +29,16 @@ void PoolLayer::forward_avgpool(){
 	for(int i=-padding;i<=bottom;i+=stride)
 	for(int j=-padding;j<=right;j+=stride){
 		float val = 0.0f;
-		int n = 0;
+		int n=0;
 		for(int ik = 0;ik<kernel;++ik)
 		for(int jk = 0;jk<kernel;++jk){
 			int y = i + ik, x = j + jk;
+			if((y>=-padding) && (x >= -padding) && (y < h+padding) && (x < w + padding)) ++n;
 			if((y < 0) || (x < 0) || (y >= h) || (x >= w))
 				continue;
 			val += idata[w*y + x];
-			++n;
 		}
+
 		if(n == 0) odata[cur++] = 0.0f;
 		else odata[cur++] = val/n;
 	}
@@ -106,7 +108,7 @@ void PoolLayer::forward_maxpool(){
 	}
 }
 void PoolLayer::forward(){
-	//printf("forward: %s %s %s\n",type.c_str(), name.c_str(), method.c_str());
+	printf("forward: %s %s %s\n",type.c_str(), name.c_str(), method.c_str());
 	//show_inputs();
 	if(method == "max") forward_maxpool();
 	else if(method == "avg") forward_avgpool();

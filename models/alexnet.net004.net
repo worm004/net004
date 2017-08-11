@@ -4,7 +4,7 @@ Layer: data data
 Layer: data label
 1 1 1 1 label
 Layer: conv conv1
-11 96 0 4 1 1 none
+11 11 96 0 0 4 4 1 1 none
 Layer: activity relu1
 relu
 Layer: lrn norm1
@@ -12,7 +12,7 @@ Layer: lrn norm1
 Layer: pool pool1
 3 0 2 max
 Layer: conv conv2
-5 256 2 1 2 1 none
+5 5 256 2 2 1 1 2 1 none
 Layer: activity relu2
 relu
 Layer: lrn norm2
@@ -20,15 +20,15 @@ Layer: lrn norm2
 Layer: pool pool2
 3 0 2 max
 Layer: conv conv3
-3 384 1 1 1 1 none
+3 3 384 1 1 1 1 1 1 none
 Layer: activity relu3
 relu
 Layer: conv conv4
-3 384 1 1 2 1 none
+3 3 384 1 1 1 1 2 1 none
 Layer: activity relu4
 relu
 Layer: conv conv5
-3 256 1 1 2 1 none
+3 3 256 1 1 1 1 2 1 none
 Layer: activity relu5
 relu
 Layer: pool pool5

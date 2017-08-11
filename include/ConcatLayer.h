@@ -1,9 +1,10 @@
 #ifndef CONCATLAYER_H
 #define CONCATLAYER_H
 #include "BaseLayer.h"
+#include <vector>
 class ConcatLayer: public Layer{
 	public:
-	ConcatLayer(const std::string&name, const std::string& method);
+	ConcatLayer(const std::string&name, const std::vector<std::string>& names, const std::string& method);
 	virtual ~ConcatLayer();
 	virtual void forward();
 	virtual void backward();

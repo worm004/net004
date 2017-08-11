@@ -111,6 +111,7 @@ void CaffeModelParser::write_net(const std::string& net_path){
 	const vector<boost::shared_ptr<caffe::Layer<float> >> layers = net->layers();
 	const vector<string>& layer_names = net->layer_names(), &blob_names = net->blob_names();
 	const vector<vector<caffe::Blob<float> *> >& tops = net->top_vecs();
+	const vector<vector<caffe::Blob<float> *> >& bottoms = net->bottom_vecs();
 	ofstream ofile(net_path);
 	ofile<<net->name()<<endl;
 	for(int i=0;i<layers.size();++i){
@@ -133,7 +134,14 @@ void CaffeModelParser::write_net(const std::string& net_path){
 		else if(layer_type == "SoftmaxWithLoss") write_net_softmaxloss(layer_name, param, ofile);
 		else if(layer_type == "LRN") write_net_lrn(layer_name, param, ofile);
 		else if(layer_type == "Split") write_net_split(layer_name, ofile);
-		else if(layer_type == "Concat") write_net_concat(layer_name, ofile);
+		else if(layer_type == "Concat") {
+			const vector<int> bottom_ids = net->bottom_ids(i);
+			vector<string> names;
+			for(int j=0;j<bottom_ids.size();++j)
+				names.push_back(blob_names[bottom_ids[j]]);
+
+			write_net_concat(layer_name, names, ofile);
+		}
 		else if(layer_type == "BatchNorm") write_net_bn(layer_name,param,ofile);
 		else if(layer_type == "Scale") write_net_scale(layer_name,param,ofile);
 		else if(layer_type == "Eltwise") write_net_eltwise(layer_name,param,ofile);
@@ -170,11 +178,14 @@ void CaffeModelParser::write_net_scale(const std::string& layer_name, const caff
 }
 void CaffeModelParser::write_net_bn(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
 	ofile<<"Layer: batchnorm "<<layer_name<<endl;
-	ofile<<endl;
+	ofile<<param.batch_norm_param().eps()<<endl;
 }
-void CaffeModelParser::write_net_concat(const std::string& layer_name, std::ofstream& ofile){
+void CaffeModelParser::write_net_concat(const std::string& layer_name, const std::vector<std::string>& names, std::ofstream& ofile){
 	ofile<<"Layer: concat "<<layer_name<<endl;
-	ofile<<"channel"<<endl;
+	ofile<<"channel "<<names.size();
+	for(int i=0;i<names.size();++i)
+		ofile<<" "<<names[i];
+	ofile<<endl;
 }
 void CaffeModelParser::write_net_split(const std::string& layer_name, std::ofstream& ofile){
 	ofile<<"Layer: split "<<layer_name<<endl;
@@ -189,7 +200,15 @@ void CaffeModelParser::write_net_conv(const std::string& layer_name, const caffe
 	int group = conv_param.group();
 	bool is_bias = conv_param.bias_term();
 
-	ofile<<kernel_size<<" "<<conv_param.num_output()<<" "<<pad<<" "<<stride<<" "<<group<<" "<<is_bias<<" none"<<endl;
+	int kernel_size_h = conv_param.has_kernel_h()?conv_param.kernel_h():kernel_size, 
+		kernel_size_w = conv_param.has_kernel_w()?conv_param.kernel_w():kernel_size, 
+		pad_h = conv_param.has_pad_h()?conv_param.pad_h():pad, 
+		pad_w = conv_param.has_pad_w()?conv_param.pad_w():pad, 
+		stride_h = conv_param.has_stride_h()?conv_param.stride_h():stride,
+		stride_w = conv_param.has_stride_w()?conv_param.stride_w():stride;
+
+	ofile<<kernel_size_h<<" "<<kernel_size_w<<" "<<conv_param.num_output()<<" "
+		<<pad_h<<" "<<pad_w<<" "<<stride_h<<" "<<stride_w<<" "<<group<<" "<<is_bias<<" none"<<endl;
 }
 void CaffeModelParser::write_net_pool(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
 	const caffe::PoolingParameter& pool_param = param.pooling_param();

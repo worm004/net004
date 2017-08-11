@@ -86,8 +86,8 @@ void Layers::add_data(const std::string& name, int n, int c, int h, int w, const
 	Layer* l = new DataLayer(name, n,c,h,w, method);
 	add(name, &l);
 }
-void Layers::add_conv(const std::string&name, const std::vector<int>& p5, bool is_bias, const std::string& activity){
-	Layer* l = new ConvLayer(name,p5[0],p5[1],p5[2],p5[3],p5[4],is_bias,activity);
+void Layers::add_conv(const std::string&name, const std::vector<int>& p8, bool is_bias, const std::string& activity){
+	Layer* l = new ConvLayer(name,p8[0],p8[1],p8[2],p8[3],p8[4],p8[5],p8[6],p8[7],is_bias,activity);
 	add(name, &l);
 }
 void Layers::add_pool(const std::string&name, const std::vector<int>& p3, const std::string& method){
@@ -106,16 +106,16 @@ void Layers::add_loss(const std::string&name, const std::string& method){
 	Layer* l = new LossLayer(name,method);
 	add(name, &l);
 }
-void Layers::add_concat(const std::string& name, const std::string& method){
-	Layer* l = new ConcatLayer(name, method);
+void Layers::add_concat(const std::string& name, const std::vector<std::string>& names, const std::string& method){
+	Layer* l = new ConcatLayer(name, names, method);
 	add(name, &l);
 }
 void Layers::add_split(const std::string& name){
 	Layer* l = new SplitLayer(name);
 	add(name, &l);
 }
-void Layers::add_bn(const std::string& name){
-	Layer* l = new BNLayer(name);
+void Layers::add_bn(const std::string& name,float eps){
+	Layer* l = new BNLayer(name, eps);
 	add(name, &l);
 }
 void Layers::add_scale(const std::string& name,bool is_bias){

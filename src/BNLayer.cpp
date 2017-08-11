@@ -1,12 +1,12 @@
 #include "stdlib.h"
 #include "BNLayer.h"
 
-BNLayer::BNLayer(const std::string& name):Layer(name,"bn"){
+BNLayer::BNLayer(const std::string& name, float eps):Layer(name,"bn"),eps(eps){
 }
 BNLayer::~BNLayer(){
 }
 void BNLayer::forward(){
-	//printf("forward: %s %s\n",type.c_str(), name.c_str());
+	printf("forward: %s %s\n",type.c_str(), name.c_str());
 
 	//show_inputs();
 	// this should be done before forward
@@ -21,7 +21,6 @@ void BNLayer::forward(){
 		}
 		s = 0;
 	}
-	float eps = 1e-5;
 	int n = inputs[0].n, c = inputs[0].c, hw = inputs[0].hw();
 	float *input_data = inputs[0].data, *output_data = outputs[0].data;
 	for(int i=0;i<n;++i){
