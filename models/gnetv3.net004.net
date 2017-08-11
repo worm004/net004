@@ -108,7 +108,7 @@ Layer: scale inception_a1_pool_proj_scale
 Layer: activity inception_a1_pool_proj_relu
 relu
 Layer: concat inception_a1_output
-channel 4 inception_a1_1x1 inception_a1_5x5 inception_a1_3x3_2 inception_a1_pool_proj
+channel 4 inception_a1_1x1_relu inception_a1_5x5_relu inception_a1_3x3_2_relu inception_a1_pool_proj_relu
 Layer: split inception_a1_output_inception_a1_output_0_split
 
 Layer: conv inception_a2_1x1
@@ -170,7 +170,7 @@ Layer: scale inception_a2_pool_proj_scale
 Layer: activity inception_a2_pool_proj_relu
 relu
 Layer: concat inception_a2_output
-channel 4 inception_a2_1x1 inception_a2_5x5 inception_a2_3x3_2 inception_a2_pool_proj
+channel 4 inception_a2_1x1_relu inception_a2_5x5_relu inception_a2_3x3_2_relu inception_a2_pool_proj_relu
 Layer: split inception_a2_output_inception_a2_output_0_split
 
 Layer: conv inception_a3_1x1
@@ -232,7 +232,7 @@ Layer: scale inception_a3_pool_proj_scale
 Layer: activity inception_a3_pool_proj_relu
 relu
 Layer: concat inception_a3_output
-channel 4 inception_a3_1x1 inception_a3_5x5 inception_a3_3x3_2 inception_a3_pool_proj
+channel 4 inception_a3_1x1_relu inception_a3_5x5_relu inception_a3_3x3_2_relu inception_a3_pool_proj_relu
 Layer: split inception_a3_output_inception_a3_output_0_split
 
 Layer: conv reduction_a_3x3
@@ -270,7 +270,7 @@ relu
 Layer: pool reduction_a_pool
 3 0 2 max
 Layer: concat reduction_a_concat
-channel 3 reduction_a_3x3 reduction_a_3x3_3 reduction_a_pool
+channel 3 reduction_a_3x3_relu reduction_a_3x3_3_relu reduction_a_pool
 Layer: split reduction_a_concat_reduction_a_concat_0_split
 
 Layer: conv inception_b1_1x1_2
@@ -356,7 +356,7 @@ Layer: scale inception_b1_1x1_scale
 Layer: activity inception_b1_1x1_relu
 relu
 Layer: concat inception_b1_concat
-channel 4 inception_b1_1x1_2 inception_b1_7x1 inception_b1_1x7_3 inception_b1_1x1
+channel 4 inception_b1_1x1_2_relu inception_b1_7x1_relu inception_b1_1x7_3_relu inception_b1_1x1_relu
 Layer: split inception_b1_concat_inception_b1_concat_0_split
 
 Layer: conv inception_b2_1x1_2
@@ -442,7 +442,7 @@ Layer: scale inception_b2_1x1_scale
 Layer: activity inception_b2_1x1_relu
 relu
 Layer: concat inception_b2_concat
-channel 4 inception_b2_1x1_2 inception_b2_7x1 inception_b2_1x7_3 inception_b2_1x1
+channel 4 inception_b2_1x1_2_relu inception_b2_7x1_relu inception_b2_1x7_3_relu inception_b2_1x1_relu
 Layer: split inception_b2_concat_inception_b2_concat_0_split
 
 Layer: conv inception_b3_1x1_2
@@ -528,7 +528,7 @@ Layer: scale inception_b3_1x1_scale
 Layer: activity inception_b3_1x1_relu
 relu
 Layer: concat inception_b3_concat
-channel 4 inception_b3_1x1_2 inception_b3_7x1 inception_b3_1x7_3 inception_b3_1x1
+channel 4 inception_b3_1x1_2_relu inception_b3_7x1_relu inception_b3_1x7_3_relu inception_b3_1x1_relu
 Layer: split inception_b3_concat_inception_b3_concat_0_split
 
 Layer: conv inception_b4_1x1_2
@@ -614,7 +614,7 @@ Layer: scale inception_b4_1x1_scale
 Layer: activity inception_b4_1x1_relu
 relu
 Layer: concat inception_b4_concat
-channel 4 inception_b4_1x1_2 inception_b4_7x1 inception_b4_1x7_3 inception_b4_1x1
+channel 4 inception_b4_1x1_2_relu inception_b4_7x1_relu inception_b4_1x7_3_relu inception_b4_1x1_relu
 Layer: split inception_b4_concat_inception_b4_concat_0_split
 
 Layer: conv reduction_b_3x3_reduce
@@ -668,7 +668,7 @@ relu
 Layer: pool reduction_b_pool
 3 0 2 max
 Layer: concat reduction_b_concat
-channel 3 reduction_b_3x3 reduction_b_3x3_2 reduction_b_pool
+channel 3 reduction_b_3x3_relu reduction_b_3x3_2_relu reduction_b_pool
 Layer: split reduction_b_concat_reduction_b_concat_0_split
 
 Layer: conv inception_c1_1x1_2
@@ -750,7 +750,7 @@ Layer: scale inception_c1_1x1_scale
 Layer: activity inception_c1_1x1_relu
 relu
 Layer: concat inception_c1_concat
-channel 6 inception_c1_1x1_2 inception_c1_1x3 inception_c1_3x1 inception_c1_1x3_2 inception_c1_3x1_2 inception_c1_1x1
+channel 6 inception_c1_1x1_2_relu inception_c1_1x3_relu inception_c1_3x1_relu inception_c1_1x3_2_relu inception_c1_3x1_2_relu inception_c1_1x1_relu
 Layer: split inception_c1_concat_inception_c1_concat_0_split
 
 Layer: conv inception_c2_1x1_2
@@ -832,7 +832,7 @@ Layer: scale inception_c2_1x1_scale
 Layer: activity inception_c2_1x1_relu
 relu
 Layer: concat inception_c2_concat
-channel 6 inception_c2_1x1_2 inception_c2_1x3 inception_c2_3x1 inception_c2_1x3_2 inception_c2_3x1_2 inception_c2_1x1
+channel 6 inception_c2_1x1_2_relu inception_c2_1x3_relu inception_c2_3x1_relu inception_c2_1x3_2_relu inception_c2_3x1_2_relu inception_c2_1x1_relu
 Layer: pool pool_8x8_s1
 -1 0 1 avg
 Layer: fc classifier

@@ -1,6 +1,7 @@
 #ifndef BASELAYER_H
 #define BASELAYER_H
 #include <cmath>
+#include <map>
 #include <string>
 #include <vector>
 #include "Blob.h"
@@ -36,5 +37,6 @@ class Layer{
 	std::vector<Blob> inputs, input_difs, outputs, output_difs;
 	std::string type, name;
 	bool is_train = false;
+	std::map<std::string, int> order;
 };
 #endif

@@ -1,6 +1,11 @@
 #include "stdlib.h"
 #include "ConcatLayer.h"
 ConcatLayer::ConcatLayer(const std::string&name, const std::vector<std::string>& names, const std::string& method):Layer(name,"concat"), method(method){
+	for(int i=0;i<names.size();++i)
+		order[names[i]] = i;
+
+	if(is_train) input_difs.resize(names.size());
+	inputs.resize(names.size());
 }
 ConcatLayer::~ConcatLayer(){
 }

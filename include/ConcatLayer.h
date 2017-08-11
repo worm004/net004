@@ -1,7 +1,6 @@
 #ifndef CONCATLAYER_H
 #define CONCATLAYER_H
 #include "BaseLayer.h"
-#include <vector>
 class ConcatLayer: public Layer{
 	public:
 	ConcatLayer(const std::string&name, const std::vector<std::string>& names, const std::string& method);

@@ -1,5 +1,7 @@
 #include "stdlib.h"
 #include "BaseLayer.h"
+#include "ConcatLayer.h"
+
 Layer::Layer(
 	const std::string& name, 
 	const std::string& type):
@@ -38,20 +40,46 @@ void Layer::connect2(Layer& l){
 		printf("error: connnect2: %s output blob number should be 1 (now %lu)\n",name.c_str(),outputs.size());
 		exit(0);
 	}
-	l.inputs.push_back(Blob());
-	l.inputs.back().set_shape(outputs[0]);
-	l.inputs.back().set_data(outputs[0].data);
-	l.inputs.back().type = outputs[0].type;
+	if(l.type == "concat"){
+		if(l.order.find(this->name) == l.order.end()){
+			printf("error: connect2: concat(%s) cannot find name: %s\n",l.name.c_str(), this->name.c_str());
+			for(auto i:l.order){
+				printf("%s %d\n",i.first.c_str(),i.second);
+			}
+			exit(0);
+		}
+		int index = l.order[this->name];
+		l.inputs[index].set_shape(outputs[0]);
+		l.inputs[index].set_data(outputs[0].data);
+		l.inputs[index].type = outputs[0].type;
+	}
+	else{
+		l.inputs.push_back(Blob());
+		l.inputs.back().set_shape(outputs[0]);
+		l.inputs.back().set_data(outputs[0].data);
+		l.inputs.back().type = outputs[0].type;
+	}
 
 	if(is_train){
 		if(output_difs.size()!=1){
 			printf("error: connnect2: %s output blob number should be 1 (now %lu)\n",name.c_str(),outputs.size());
 			exit(0);
 		}
-		l.input_difs.push_back(Blob());
-		l.input_difs.back().set_shape(outputs[0]);
-		l.input_difs.back().set_data(output_difs[0].data);
+		if(l.type == "concat"){
+			if(l.order.find(this->name) == l.order.end()){
+				printf("error: connect2: concat(%s) cannot find name: %s\n",l.name.c_str(), this->name.c_str());
+				exit(0);
+			}
+			int index = l.order[this->name];
+			l.input_difs[index].set_shape(outputs[0]);
+			l.input_difs[index].set_data(output_difs[0].data);
+		}else{
+			l.input_difs.push_back(Blob());
+			l.input_difs.back().set_shape(outputs[0]);
+			l.input_difs.back().set_data(output_difs[0].data);
+		}
 	}
+
 }
 int Layer::parameter_number(){
 	return 0;

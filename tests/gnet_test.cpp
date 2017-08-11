@@ -130,7 +130,7 @@ int main(int argc, char **argv){
 	string img_path = "../imgs/westerdam-ship-size.jpg";
 	int label = 628;
 	
-	for(int i=0;i<1;++i){
+	for(int i=1;i<2;++i){
 		float caffe_score = caffe_forward(img_path, label, names[i]);
 		float net004_score = net004_forward(img_path, label, names[i]);
 

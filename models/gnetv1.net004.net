@@ -52,7 +52,7 @@ Layer: conv inception_3a/pool_proj
 Layer: activity inception_3a/relu_pool_proj
 relu
 Layer: concat inception_3a/output
-channel 4 inception_3a/1x1 inception_3a/3x3 inception_3a/5x5 inception_3a/pool_proj
+channel 4 inception_3a/relu_1x1 inception_3a/relu_3x3 inception_3a/relu_5x5 inception_3a/relu_pool_proj
 Layer: split inception_3a/output_inception_3a/output_0_split
 
 Layer: conv inception_3b/1x1
@@ -82,7 +82,7 @@ Layer: conv inception_3b/pool_proj
 Layer: activity inception_3b/relu_pool_proj
 relu
 Layer: concat inception_3b/output
-channel 4 inception_3b/1x1 inception_3b/3x3 inception_3b/5x5 inception_3b/pool_proj
+channel 4 inception_3b/relu_1x1 inception_3b/relu_3x3 inception_3b/relu_5x5 inception_3b/relu_pool_proj
 Layer: pool pool3/3x3_s2
 3 0 2 max
 Layer: split pool3/3x3_s2_pool3/3x3_s2_0_split
@@ -114,7 +114,7 @@ Layer: conv inception_4a/pool_proj
 Layer: activity inception_4a/relu_pool_proj
 relu
 Layer: concat inception_4a/output
-channel 4 inception_4a/1x1 inception_4a/3x3 inception_4a/5x5 inception_4a/pool_proj
+channel 4 inception_4a/relu_1x1 inception_4a/relu_3x3 inception_4a/relu_5x5 inception_4a/relu_pool_proj
 Layer: split inception_4a/output_inception_4a/output_0_split
 
 Layer: conv inception_4b/1x1
@@ -144,7 +144,7 @@ Layer: conv inception_4b/pool_proj
 Layer: activity inception_4b/relu_pool_proj
 relu
 Layer: concat inception_4b/output
-channel 4 inception_4b/1x1 inception_4b/3x3 inception_4b/5x5 inception_4b/pool_proj
+channel 4 inception_4b/relu_1x1 inception_4b/relu_3x3 inception_4b/relu_5x5 inception_4b/relu_pool_proj
 Layer: split inception_4b/output_inception_4b/output_0_split
 
 Layer: conv inception_4c/1x1
@@ -174,7 +174,7 @@ Layer: conv inception_4c/pool_proj
 Layer: activity inception_4c/relu_pool_proj
 relu
 Layer: concat inception_4c/output
-channel 4 inception_4c/1x1 inception_4c/3x3 inception_4c/5x5 inception_4c/pool_proj
+channel 4 inception_4c/relu_1x1 inception_4c/relu_3x3 inception_4c/relu_5x5 inception_4c/relu_pool_proj
 Layer: split inception_4c/output_inception_4c/output_0_split
 
 Layer: conv inception_4d/1x1
@@ -204,7 +204,7 @@ Layer: conv inception_4d/pool_proj
 Layer: activity inception_4d/relu_pool_proj
 relu
 Layer: concat inception_4d/output
-channel 4 inception_4d/1x1 inception_4d/3x3 inception_4d/5x5 inception_4d/pool_proj
+channel 4 inception_4d/relu_1x1 inception_4d/relu_3x3 inception_4d/relu_5x5 inception_4d/relu_pool_proj
 Layer: split inception_4d/output_inception_4d/output_0_split
 
 Layer: conv inception_4e/1x1
@@ -234,7 +234,7 @@ Layer: conv inception_4e/pool_proj
 Layer: activity inception_4e/relu_pool_proj
 relu
 Layer: concat inception_4e/output
-channel 4 inception_4e/1x1 inception_4e/3x3 inception_4e/5x5 inception_4e/pool_proj
+channel 4 inception_4e/relu_1x1 inception_4e/relu_3x3 inception_4e/relu_5x5 inception_4e/relu_pool_proj
 Layer: pool pool4/3x3_s2
 3 0 2 max
 Layer: split pool4/3x3_s2_pool4/3x3_s2_0_split
@@ -266,7 +266,7 @@ Layer: conv inception_5a/pool_proj
 Layer: activity inception_5a/relu_pool_proj
 relu
 Layer: concat inception_5a/output
-channel 4 inception_5a/1x1 inception_5a/3x3 inception_5a/5x5 inception_5a/pool_proj
+channel 4 inception_5a/relu_1x1 inception_5a/relu_3x3 inception_5a/relu_5x5 inception_5a/relu_pool_proj
 Layer: split inception_5a/output_inception_5a/output_0_split
 
 Layer: conv inception_5b/1x1
@@ -296,7 +296,7 @@ Layer: conv inception_5b/pool_proj
 Layer: activity inception_5b/relu_pool_proj
 relu
 Layer: concat inception_5b/output
-channel 4 inception_5b/1x1 inception_5b/3x3 inception_5b/5x5 inception_5b/pool_proj
+channel 4 inception_5b/relu_1x1 inception_5b/relu_3x3 inception_5b/relu_5x5 inception_5b/relu_pool_proj
 Layer: pool pool5/7x7_s1
 7 0 1 avg
 Layer: fc loss3/classifier

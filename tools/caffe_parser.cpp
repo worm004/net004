@@ -137,8 +137,28 @@ void CaffeModelParser::write_net(const std::string& net_path){
 		else if(layer_type == "Concat") {
 			const vector<int> bottom_ids = net->bottom_ids(i);
 			vector<string> names;
-			for(int j=0;j<bottom_ids.size();++j)
-				names.push_back(blob_names[bottom_ids[j]]);
+			for(int j=0;j<bottom_ids.size();++j){
+				string bname = blob_names[bottom_ids[j]];
+				//printf("concat bottom: %s\n",bname.c_str());
+
+				for(int ii=i-1;ii>=0;--ii){
+					const vector<int> top_ids = net->top_ids(ii);
+					string lname = layer_names[ii];
+					bool found = false;
+					for(int jj = 0;jj<top_ids.size();++jj){
+						string tname = blob_names[top_ids[jj]];
+						//printf("top: %s\n",tname.c_str());
+						if(tname == bname){
+							found = true;
+							break;
+						}
+					}
+					if(found){
+						names.push_back(lname);
+						break;
+					}
+				}
+			}
 
 			write_net_concat(layer_name, names, ofile);
 		}
