@@ -15,7 +15,7 @@ FCLayer::FCLayer(
 FCLayer::~FCLayer(){
 }
 void FCLayer::forward(){
-	printf("forward: %s %s\n",type.c_str(), name.c_str());
+	//printf("forward: %s %s\n",type.c_str(), name.c_str());
 
 	float * idata = inputs[0].data,
 		* odata = outputs[0].data;

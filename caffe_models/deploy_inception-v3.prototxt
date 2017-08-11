@@ -13,7 +13,6 @@ input_shape {
   dim: 1
   dim: 1
 }
-
 layer {
   name: "conv1_3x3_s2"
   type: "Convolution"
@@ -4674,6 +4673,15 @@ layer {
     global_pooling: true
   }
 }
+#layer {
+#  name: "pool_8x8_s1_drop"
+#  type: "Dropout"
+#  bottom: "pool_8x8_s1"
+#  top: "pool_8x8_s1_drop"
+#  dropout_param {
+#    dropout_ratio: 0.2
+#  }
+#}
 layer {
   name: "classifier"
   type: "InnerProduct"
@@ -4705,3 +4713,4 @@ layer {
   bottom: "label"
   top: "loss"
 }
+

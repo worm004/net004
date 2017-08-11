@@ -35,7 +35,7 @@ void DataLayer::show() const{
 		type.c_str(), name.c_str(),
 		ob.n,ob.c,ob.h,ob.w);
 }
-void DataLayer::add_image(unsigned char* data, int index, float mean_r, float mean_g, float mean_b){
+void DataLayer::add_image(unsigned char* data, int index, float mean_r, float mean_g, float mean_b, float std_r, float std_g, float std_b){
 	if(outputs.size() == 0) {
 		printf("datalayer has not been setup (outputs.size() == 0)\n");
 		return ;
@@ -44,9 +44,9 @@ void DataLayer::add_image(unsigned char* data, int index, float mean_r, float me
 	float *odata = outputs[0].data + index * w * h * c;
 	for(int i=0;i<h;++i)
 	for(int j=0;j<w;++j){
-		odata[(i*w+j) + w*h*0] = data[(i*w+j)*c+(c-0-1)] - mean_r;
-		odata[(i*w+j) + w*h*1] = data[(i*w+j)*c+(c-1-1)] - mean_g;
-		odata[(i*w+j) + w*h*2] = data[(i*w+j)*c+(c-2-1)] - mean_b;
+		odata[(i*w+j) + w*h*0] = (data[(i*w+j)*c+(c-0-1)] - mean_r)/std_r;
+		odata[(i*w+j) + w*h*1] = (data[(i*w+j)*c+(c-1-1)] - mean_g)/std_g;
+		odata[(i*w+j) + w*h*2] = (data[(i*w+j)*c+(c-2-1)] - mean_b)/std_b;
 	}
 	//for(int k=0;k<c;++k)
 	//	odata[(i*w+j) + w*h*k] = data[(i*w+j)*c+(c-k-1)] - 127;

@@ -1,0 +1,1883 @@
+DENSENET_121
+Layer: data data
+1 3 224 224 image
+Layer: data label
+1 1 1 1 label
+Layer: conv conv1
+7 7 64 3 3 2 2 1 0 none
+Layer: batchnorm conv1/bn
+1e-05
+Layer: scale conv1/scale
+1
+Layer: activity relu1
+relu
+Layer: pool pool1
+3 1 2 max
+Layer: split pool1_pool1_0_split
+
+Layer: batchnorm conv2_1/x1/bn
+1e-05
+Layer: scale conv2_1/x1/scale
+1
+Layer: activity relu2_1/x1
+relu
+Layer: conv conv2_1/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv2_1/x2/bn
+1e-05
+Layer: scale conv2_1/x2/scale
+1
+Layer: activity relu2_1/x2
+relu
+Layer: conv conv2_1/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_2_1
+channel 2 pool1_pool1_0_split conv2_1/x2
+Layer: split concat_2_1_concat_2_1_0_split
+
+Layer: batchnorm conv2_2/x1/bn
+1e-05
+Layer: scale conv2_2/x1/scale
+1
+Layer: activity relu2_2/x1
+relu
+Layer: conv conv2_2/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv2_2/x2/bn
+1e-05
+Layer: scale conv2_2/x2/scale
+1
+Layer: activity relu2_2/x2
+relu
+Layer: conv conv2_2/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_2_2
+channel 2 concat_2_1_concat_2_1_0_split conv2_2/x2
+Layer: split concat_2_2_concat_2_2_0_split
+
+Layer: batchnorm conv2_3/x1/bn
+1e-05
+Layer: scale conv2_3/x1/scale
+1
+Layer: activity relu2_3/x1
+relu
+Layer: conv conv2_3/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv2_3/x2/bn
+1e-05
+Layer: scale conv2_3/x2/scale
+1
+Layer: activity relu2_3/x2
+relu
+Layer: conv conv2_3/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_2_3
+channel 2 concat_2_2_concat_2_2_0_split conv2_3/x2
+Layer: split concat_2_3_concat_2_3_0_split
+
+Layer: batchnorm conv2_4/x1/bn
+1e-05
+Layer: scale conv2_4/x1/scale
+1
+Layer: activity relu2_4/x1
+relu
+Layer: conv conv2_4/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv2_4/x2/bn
+1e-05
+Layer: scale conv2_4/x2/scale
+1
+Layer: activity relu2_4/x2
+relu
+Layer: conv conv2_4/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_2_4
+channel 2 concat_2_3_concat_2_3_0_split conv2_4/x2
+Layer: split concat_2_4_concat_2_4_0_split
+
+Layer: batchnorm conv2_5/x1/bn
+1e-05
+Layer: scale conv2_5/x1/scale
+1
+Layer: activity relu2_5/x1
+relu
+Layer: conv conv2_5/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv2_5/x2/bn
+1e-05
+Layer: scale conv2_5/x2/scale
+1
+Layer: activity relu2_5/x2
+relu
+Layer: conv conv2_5/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_2_5
+channel 2 concat_2_4_concat_2_4_0_split conv2_5/x2
+Layer: split concat_2_5_concat_2_5_0_split
+
+Layer: batchnorm conv2_6/x1/bn
+1e-05
+Layer: scale conv2_6/x1/scale
+1
+Layer: activity relu2_6/x1
+relu
+Layer: conv conv2_6/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv2_6/x2/bn
+1e-05
+Layer: scale conv2_6/x2/scale
+1
+Layer: activity relu2_6/x2
+relu
+Layer: conv conv2_6/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_2_6
+channel 2 concat_2_5_concat_2_5_0_split conv2_6/x2
+Layer: batchnorm conv2_blk/bn
+1e-05
+Layer: scale conv2_blk/scale
+1
+Layer: activity relu2_blk
+relu
+Layer: conv conv2_blk
+1 1 128 0 0 1 1 1 0 none
+Layer: pool pool2
+2 0 2 avg
+Layer: split pool2_pool2_0_split
+
+Layer: batchnorm conv3_1/x1/bn
+1e-05
+Layer: scale conv3_1/x1/scale
+1
+Layer: activity relu3_1/x1
+relu
+Layer: conv conv3_1/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv3_1/x2/bn
+1e-05
+Layer: scale conv3_1/x2/scale
+1
+Layer: activity relu3_1/x2
+relu
+Layer: conv conv3_1/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_3_1
+channel 2 pool2_pool2_0_split conv3_1/x2
+Layer: split concat_3_1_concat_3_1_0_split
+
+Layer: batchnorm conv3_2/x1/bn
+1e-05
+Layer: scale conv3_2/x1/scale
+1
+Layer: activity relu3_2/x1
+relu
+Layer: conv conv3_2/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv3_2/x2/bn
+1e-05
+Layer: scale conv3_2/x2/scale
+1
+Layer: activity relu3_2/x2
+relu
+Layer: conv conv3_2/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_3_2
+channel 2 concat_3_1_concat_3_1_0_split conv3_2/x2
+Layer: split concat_3_2_concat_3_2_0_split
+
+Layer: batchnorm conv3_3/x1/bn
+1e-05
+Layer: scale conv3_3/x1/scale
+1
+Layer: activity relu3_3/x1
+relu
+Layer: conv conv3_3/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv3_3/x2/bn
+1e-05
+Layer: scale conv3_3/x2/scale
+1
+Layer: activity relu3_3/x2
+relu
+Layer: conv conv3_3/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_3_3
+channel 2 concat_3_2_concat_3_2_0_split conv3_3/x2
+Layer: split concat_3_3_concat_3_3_0_split
+
+Layer: batchnorm conv3_4/x1/bn
+1e-05
+Layer: scale conv3_4/x1/scale
+1
+Layer: activity relu3_4/x1
+relu
+Layer: conv conv3_4/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv3_4/x2/bn
+1e-05
+Layer: scale conv3_4/x2/scale
+1
+Layer: activity relu3_4/x2
+relu
+Layer: conv conv3_4/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_3_4
+channel 2 concat_3_3_concat_3_3_0_split conv3_4/x2
+Layer: split concat_3_4_concat_3_4_0_split
+
+Layer: batchnorm conv3_5/x1/bn
+1e-05
+Layer: scale conv3_5/x1/scale
+1
+Layer: activity relu3_5/x1
+relu
+Layer: conv conv3_5/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv3_5/x2/bn
+1e-05
+Layer: scale conv3_5/x2/scale
+1
+Layer: activity relu3_5/x2
+relu
+Layer: conv conv3_5/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_3_5
+channel 2 concat_3_4_concat_3_4_0_split conv3_5/x2
+Layer: split concat_3_5_concat_3_5_0_split
+
+Layer: batchnorm conv3_6/x1/bn
+1e-05
+Layer: scale conv3_6/x1/scale
+1
+Layer: activity relu3_6/x1
+relu
+Layer: conv conv3_6/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv3_6/x2/bn
+1e-05
+Layer: scale conv3_6/x2/scale
+1
+Layer: activity relu3_6/x2
+relu
+Layer: conv conv3_6/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_3_6
+channel 2 concat_3_5_concat_3_5_0_split conv3_6/x2
+Layer: split concat_3_6_concat_3_6_0_split
+
+Layer: batchnorm conv3_7/x1/bn
+1e-05
+Layer: scale conv3_7/x1/scale
+1
+Layer: activity relu3_7/x1
+relu
+Layer: conv conv3_7/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv3_7/x2/bn
+1e-05
+Layer: scale conv3_7/x2/scale
+1
+Layer: activity relu3_7/x2
+relu
+Layer: conv conv3_7/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_3_7
+channel 2 concat_3_6_concat_3_6_0_split conv3_7/x2
+Layer: split concat_3_7_concat_3_7_0_split
+
+Layer: batchnorm conv3_8/x1/bn
+1e-05
+Layer: scale conv3_8/x1/scale
+1
+Layer: activity relu3_8/x1
+relu
+Layer: conv conv3_8/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv3_8/x2/bn
+1e-05
+Layer: scale conv3_8/x2/scale
+1
+Layer: activity relu3_8/x2
+relu
+Layer: conv conv3_8/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_3_8
+channel 2 concat_3_7_concat_3_7_0_split conv3_8/x2
+Layer: split concat_3_8_concat_3_8_0_split
+
+Layer: batchnorm conv3_9/x1/bn
+1e-05
+Layer: scale conv3_9/x1/scale
+1
+Layer: activity relu3_9/x1
+relu
+Layer: conv conv3_9/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv3_9/x2/bn
+1e-05
+Layer: scale conv3_9/x2/scale
+1
+Layer: activity relu3_9/x2
+relu
+Layer: conv conv3_9/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_3_9
+channel 2 concat_3_8_concat_3_8_0_split conv3_9/x2
+Layer: split concat_3_9_concat_3_9_0_split
+
+Layer: batchnorm conv3_10/x1/bn
+1e-05
+Layer: scale conv3_10/x1/scale
+1
+Layer: activity relu3_10/x1
+relu
+Layer: conv conv3_10/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv3_10/x2/bn
+1e-05
+Layer: scale conv3_10/x2/scale
+1
+Layer: activity relu3_10/x2
+relu
+Layer: conv conv3_10/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_3_10
+channel 2 concat_3_9_concat_3_9_0_split conv3_10/x2
+Layer: split concat_3_10_concat_3_10_0_split
+
+Layer: batchnorm conv3_11/x1/bn
+1e-05
+Layer: scale conv3_11/x1/scale
+1
+Layer: activity relu3_11/x1
+relu
+Layer: conv conv3_11/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv3_11/x2/bn
+1e-05
+Layer: scale conv3_11/x2/scale
+1
+Layer: activity relu3_11/x2
+relu
+Layer: conv conv3_11/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_3_11
+channel 2 concat_3_10_concat_3_10_0_split conv3_11/x2
+Layer: split concat_3_11_concat_3_11_0_split
+
+Layer: batchnorm conv3_12/x1/bn
+1e-05
+Layer: scale conv3_12/x1/scale
+1
+Layer: activity relu3_12/x1
+relu
+Layer: conv conv3_12/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv3_12/x2/bn
+1e-05
+Layer: scale conv3_12/x2/scale
+1
+Layer: activity relu3_12/x2
+relu
+Layer: conv conv3_12/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_3_12
+channel 2 concat_3_11_concat_3_11_0_split conv3_12/x2
+Layer: batchnorm conv3_blk/bn
+1e-05
+Layer: scale conv3_blk/scale
+1
+Layer: activity relu3_blk
+relu
+Layer: conv conv3_blk
+1 1 256 0 0 1 1 1 0 none
+Layer: pool pool3
+2 0 2 avg
+Layer: split pool3_pool3_0_split
+
+Layer: batchnorm conv4_1/x1/bn
+1e-05
+Layer: scale conv4_1/x1/scale
+1
+Layer: activity relu4_1/x1
+relu
+Layer: conv conv4_1/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv4_1/x2/bn
+1e-05
+Layer: scale conv4_1/x2/scale
+1
+Layer: activity relu4_1/x2
+relu
+Layer: conv conv4_1/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_4_1
+channel 2 pool3_pool3_0_split conv4_1/x2
+Layer: split concat_4_1_concat_4_1_0_split
+
+Layer: batchnorm conv4_2/x1/bn
+1e-05
+Layer: scale conv4_2/x1/scale
+1
+Layer: activity relu4_2/x1
+relu
+Layer: conv conv4_2/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv4_2/x2/bn
+1e-05
+Layer: scale conv4_2/x2/scale
+1
+Layer: activity relu4_2/x2
+relu
+Layer: conv conv4_2/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_4_2
+channel 2 concat_4_1_concat_4_1_0_split conv4_2/x2
+Layer: split concat_4_2_concat_4_2_0_split
+
+Layer: batchnorm conv4_3/x1/bn
+1e-05
+Layer: scale conv4_3/x1/scale
+1
+Layer: activity relu4_3/x1
+relu
+Layer: conv conv4_3/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv4_3/x2/bn
+1e-05
+Layer: scale conv4_3/x2/scale
+1
+Layer: activity relu4_3/x2
+relu
+Layer: conv conv4_3/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_4_3
+channel 2 concat_4_2_concat_4_2_0_split conv4_3/x2
+Layer: split concat_4_3_concat_4_3_0_split
+
+Layer: batchnorm conv4_4/x1/bn
+1e-05
+Layer: scale conv4_4/x1/scale
+1
+Layer: activity relu4_4/x1
+relu
+Layer: conv conv4_4/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv4_4/x2/bn
+1e-05
+Layer: scale conv4_4/x2/scale
+1
+Layer: activity relu4_4/x2
+relu
+Layer: conv conv4_4/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_4_4
+channel 2 concat_4_3_concat_4_3_0_split conv4_4/x2
+Layer: split concat_4_4_concat_4_4_0_split
+
+Layer: batchnorm conv4_5/x1/bn
+1e-05
+Layer: scale conv4_5/x1/scale
+1
+Layer: activity relu4_5/x1
+relu
+Layer: conv conv4_5/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv4_5/x2/bn
+1e-05
+Layer: scale conv4_5/x2/scale
+1
+Layer: activity relu4_5/x2
+relu
+Layer: conv conv4_5/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_4_5
+channel 2 concat_4_4_concat_4_4_0_split conv4_5/x2
+Layer: split concat_4_5_concat_4_5_0_split
+
+Layer: batchnorm conv4_6/x1/bn
+1e-05
+Layer: scale conv4_6/x1/scale
+1
+Layer: activity relu4_6/x1
+relu
+Layer: conv conv4_6/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv4_6/x2/bn
+1e-05
+Layer: scale conv4_6/x2/scale
+1
+Layer: activity relu4_6/x2
+relu
+Layer: conv conv4_6/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_4_6
+channel 2 concat_4_5_concat_4_5_0_split conv4_6/x2
+Layer: split concat_4_6_concat_4_6_0_split
+
+Layer: batchnorm conv4_7/x1/bn
+1e-05
+Layer: scale conv4_7/x1/scale
+1
+Layer: activity relu4_7/x1
+relu
+Layer: conv conv4_7/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv4_7/x2/bn
+1e-05
+Layer: scale conv4_7/x2/scale
+1
+Layer: activity relu4_7/x2
+relu
+Layer: conv conv4_7/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_4_7
+channel 2 concat_4_6_concat_4_6_0_split conv4_7/x2
+Layer: split concat_4_7_concat_4_7_0_split
+
+Layer: batchnorm conv4_8/x1/bn
+1e-05
+Layer: scale conv4_8/x1/scale
+1
+Layer: activity relu4_8/x1
+relu
+Layer: conv conv4_8/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv4_8/x2/bn
+1e-05
+Layer: scale conv4_8/x2/scale
+1
+Layer: activity relu4_8/x2
+relu
+Layer: conv conv4_8/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_4_8
+channel 2 concat_4_7_concat_4_7_0_split conv4_8/x2
+Layer: split concat_4_8_concat_4_8_0_split
+
+Layer: batchnorm conv4_9/x1/bn
+1e-05
+Layer: scale conv4_9/x1/scale
+1
+Layer: activity relu4_9/x1
+relu
+Layer: conv conv4_9/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv4_9/x2/bn
+1e-05
+Layer: scale conv4_9/x2/scale
+1
+Layer: activity relu4_9/x2
+relu
+Layer: conv conv4_9/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_4_9
+channel 2 concat_4_8_concat_4_8_0_split conv4_9/x2
+Layer: split concat_4_9_concat_4_9_0_split
+
+Layer: batchnorm conv4_10/x1/bn
+1e-05
+Layer: scale conv4_10/x1/scale
+1
+Layer: activity relu4_10/x1
+relu
+Layer: conv conv4_10/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv4_10/x2/bn
+1e-05
+Layer: scale conv4_10/x2/scale
+1
+Layer: activity relu4_10/x2
+relu
+Layer: conv conv4_10/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_4_10
+channel 2 concat_4_9_concat_4_9_0_split conv4_10/x2
+Layer: split concat_4_10_concat_4_10_0_split
+
+Layer: batchnorm conv4_11/x1/bn
+1e-05
+Layer: scale conv4_11/x1/scale
+1
+Layer: activity relu4_11/x1
+relu
+Layer: conv conv4_11/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv4_11/x2/bn
+1e-05
+Layer: scale conv4_11/x2/scale
+1
+Layer: activity relu4_11/x2
+relu
+Layer: conv conv4_11/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_4_11
+channel 2 concat_4_10_concat_4_10_0_split conv4_11/x2
+Layer: split concat_4_11_concat_4_11_0_split
+
+Layer: batchnorm conv4_12/x1/bn
+1e-05
+Layer: scale conv4_12/x1/scale
+1
+Layer: activity relu4_12/x1
+relu
+Layer: conv conv4_12/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv4_12/x2/bn
+1e-05
+Layer: scale conv4_12/x2/scale
+1
+Layer: activity relu4_12/x2
+relu
+Layer: conv conv4_12/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_4_12
+channel 2 concat_4_11_concat_4_11_0_split conv4_12/x2
+Layer: split concat_4_12_concat_4_12_0_split
+
+Layer: batchnorm conv4_13/x1/bn
+1e-05
+Layer: scale conv4_13/x1/scale
+1
+Layer: activity relu4_13/x1
+relu
+Layer: conv conv4_13/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv4_13/x2/bn
+1e-05
+Layer: scale conv4_13/x2/scale
+1
+Layer: activity relu4_13/x2
+relu
+Layer: conv conv4_13/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_4_13
+channel 2 concat_4_12_concat_4_12_0_split conv4_13/x2
+Layer: split concat_4_13_concat_4_13_0_split
+
+Layer: batchnorm conv4_14/x1/bn
+1e-05
+Layer: scale conv4_14/x1/scale
+1
+Layer: activity relu4_14/x1
+relu
+Layer: conv conv4_14/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv4_14/x2/bn
+1e-05
+Layer: scale conv4_14/x2/scale
+1
+Layer: activity relu4_14/x2
+relu
+Layer: conv conv4_14/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_4_14
+channel 2 concat_4_13_concat_4_13_0_split conv4_14/x2
+Layer: split concat_4_14_concat_4_14_0_split
+
+Layer: batchnorm conv4_15/x1/bn
+1e-05
+Layer: scale conv4_15/x1/scale
+1
+Layer: activity relu4_15/x1
+relu
+Layer: conv conv4_15/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv4_15/x2/bn
+1e-05
+Layer: scale conv4_15/x2/scale
+1
+Layer: activity relu4_15/x2
+relu
+Layer: conv conv4_15/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_4_15
+channel 2 concat_4_14_concat_4_14_0_split conv4_15/x2
+Layer: split concat_4_15_concat_4_15_0_split
+
+Layer: batchnorm conv4_16/x1/bn
+1e-05
+Layer: scale conv4_16/x1/scale
+1
+Layer: activity relu4_16/x1
+relu
+Layer: conv conv4_16/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv4_16/x2/bn
+1e-05
+Layer: scale conv4_16/x2/scale
+1
+Layer: activity relu4_16/x2
+relu
+Layer: conv conv4_16/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_4_16
+channel 2 concat_4_15_concat_4_15_0_split conv4_16/x2
+Layer: split concat_4_16_concat_4_16_0_split
+
+Layer: batchnorm conv4_17/x1/bn
+1e-05
+Layer: scale conv4_17/x1/scale
+1
+Layer: activity relu4_17/x1
+relu
+Layer: conv conv4_17/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv4_17/x2/bn
+1e-05
+Layer: scale conv4_17/x2/scale
+1
+Layer: activity relu4_17/x2
+relu
+Layer: conv conv4_17/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_4_17
+channel 2 concat_4_16_concat_4_16_0_split conv4_17/x2
+Layer: split concat_4_17_concat_4_17_0_split
+
+Layer: batchnorm conv4_18/x1/bn
+1e-05
+Layer: scale conv4_18/x1/scale
+1
+Layer: activity relu4_18/x1
+relu
+Layer: conv conv4_18/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv4_18/x2/bn
+1e-05
+Layer: scale conv4_18/x2/scale
+1
+Layer: activity relu4_18/x2
+relu
+Layer: conv conv4_18/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_4_18
+channel 2 concat_4_17_concat_4_17_0_split conv4_18/x2
+Layer: split concat_4_18_concat_4_18_0_split
+
+Layer: batchnorm conv4_19/x1/bn
+1e-05
+Layer: scale conv4_19/x1/scale
+1
+Layer: activity relu4_19/x1
+relu
+Layer: conv conv4_19/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv4_19/x2/bn
+1e-05
+Layer: scale conv4_19/x2/scale
+1
+Layer: activity relu4_19/x2
+relu
+Layer: conv conv4_19/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_4_19
+channel 2 concat_4_18_concat_4_18_0_split conv4_19/x2
+Layer: split concat_4_19_concat_4_19_0_split
+
+Layer: batchnorm conv4_20/x1/bn
+1e-05
+Layer: scale conv4_20/x1/scale
+1
+Layer: activity relu4_20/x1
+relu
+Layer: conv conv4_20/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv4_20/x2/bn
+1e-05
+Layer: scale conv4_20/x2/scale
+1
+Layer: activity relu4_20/x2
+relu
+Layer: conv conv4_20/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_4_20
+channel 2 concat_4_19_concat_4_19_0_split conv4_20/x2
+Layer: split concat_4_20_concat_4_20_0_split
+
+Layer: batchnorm conv4_21/x1/bn
+1e-05
+Layer: scale conv4_21/x1/scale
+1
+Layer: activity relu4_21/x1
+relu
+Layer: conv conv4_21/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv4_21/x2/bn
+1e-05
+Layer: scale conv4_21/x2/scale
+1
+Layer: activity relu4_21/x2
+relu
+Layer: conv conv4_21/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_4_21
+channel 2 concat_4_20_concat_4_20_0_split conv4_21/x2
+Layer: split concat_4_21_concat_4_21_0_split
+
+Layer: batchnorm conv4_22/x1/bn
+1e-05
+Layer: scale conv4_22/x1/scale
+1
+Layer: activity relu4_22/x1
+relu
+Layer: conv conv4_22/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv4_22/x2/bn
+1e-05
+Layer: scale conv4_22/x2/scale
+1
+Layer: activity relu4_22/x2
+relu
+Layer: conv conv4_22/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_4_22
+channel 2 concat_4_21_concat_4_21_0_split conv4_22/x2
+Layer: split concat_4_22_concat_4_22_0_split
+
+Layer: batchnorm conv4_23/x1/bn
+1e-05
+Layer: scale conv4_23/x1/scale
+1
+Layer: activity relu4_23/x1
+relu
+Layer: conv conv4_23/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv4_23/x2/bn
+1e-05
+Layer: scale conv4_23/x2/scale
+1
+Layer: activity relu4_23/x2
+relu
+Layer: conv conv4_23/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_4_23
+channel 2 concat_4_22_concat_4_22_0_split conv4_23/x2
+Layer: split concat_4_23_concat_4_23_0_split
+
+Layer: batchnorm conv4_24/x1/bn
+1e-05
+Layer: scale conv4_24/x1/scale
+1
+Layer: activity relu4_24/x1
+relu
+Layer: conv conv4_24/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv4_24/x2/bn
+1e-05
+Layer: scale conv4_24/x2/scale
+1
+Layer: activity relu4_24/x2
+relu
+Layer: conv conv4_24/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_4_24
+channel 2 concat_4_23_concat_4_23_0_split conv4_24/x2
+Layer: batchnorm conv4_blk/bn
+1e-05
+Layer: scale conv4_blk/scale
+1
+Layer: activity relu4_blk
+relu
+Layer: conv conv4_blk
+1 1 512 0 0 1 1 1 0 none
+Layer: pool pool4
+2 0 2 avg
+Layer: split pool4_pool4_0_split
+
+Layer: batchnorm conv5_1/x1/bn
+1e-05
+Layer: scale conv5_1/x1/scale
+1
+Layer: activity relu5_1/x1
+relu
+Layer: conv conv5_1/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv5_1/x2/bn
+1e-05
+Layer: scale conv5_1/x2/scale
+1
+Layer: activity relu5_1/x2
+relu
+Layer: conv conv5_1/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_5_1
+channel 2 pool4_pool4_0_split conv5_1/x2
+Layer: split concat_5_1_concat_5_1_0_split
+
+Layer: batchnorm conv5_2/x1/bn
+1e-05
+Layer: scale conv5_2/x1/scale
+1
+Layer: activity relu5_2/x1
+relu
+Layer: conv conv5_2/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv5_2/x2/bn
+1e-05
+Layer: scale conv5_2/x2/scale
+1
+Layer: activity relu5_2/x2
+relu
+Layer: conv conv5_2/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_5_2
+channel 2 concat_5_1_concat_5_1_0_split conv5_2/x2
+Layer: split concat_5_2_concat_5_2_0_split
+
+Layer: batchnorm conv5_3/x1/bn
+1e-05
+Layer: scale conv5_3/x1/scale
+1
+Layer: activity relu5_3/x1
+relu
+Layer: conv conv5_3/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv5_3/x2/bn
+1e-05
+Layer: scale conv5_3/x2/scale
+1
+Layer: activity relu5_3/x2
+relu
+Layer: conv conv5_3/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_5_3
+channel 2 concat_5_2_concat_5_2_0_split conv5_3/x2
+Layer: split concat_5_3_concat_5_3_0_split
+
+Layer: batchnorm conv5_4/x1/bn
+1e-05
+Layer: scale conv5_4/x1/scale
+1
+Layer: activity relu5_4/x1
+relu
+Layer: conv conv5_4/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv5_4/x2/bn
+1e-05
+Layer: scale conv5_4/x2/scale
+1
+Layer: activity relu5_4/x2
+relu
+Layer: conv conv5_4/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_5_4
+channel 2 concat_5_3_concat_5_3_0_split conv5_4/x2
+Layer: split concat_5_4_concat_5_4_0_split
+
+Layer: batchnorm conv5_5/x1/bn
+1e-05
+Layer: scale conv5_5/x1/scale
+1
+Layer: activity relu5_5/x1
+relu
+Layer: conv conv5_5/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv5_5/x2/bn
+1e-05
+Layer: scale conv5_5/x2/scale
+1
+Layer: activity relu5_5/x2
+relu
+Layer: conv conv5_5/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_5_5
+channel 2 concat_5_4_concat_5_4_0_split conv5_5/x2
+Layer: split concat_5_5_concat_5_5_0_split
+
+Layer: batchnorm conv5_6/x1/bn
+1e-05
+Layer: scale conv5_6/x1/scale
+1
+Layer: activity relu5_6/x1
+relu
+Layer: conv conv5_6/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv5_6/x2/bn
+1e-05
+Layer: scale conv5_6/x2/scale
+1
+Layer: activity relu5_6/x2
+relu
+Layer: conv conv5_6/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_5_6
+channel 2 concat_5_5_concat_5_5_0_split conv5_6/x2
+Layer: split concat_5_6_concat_5_6_0_split
+
+Layer: batchnorm conv5_7/x1/bn
+1e-05
+Layer: scale conv5_7/x1/scale
+1
+Layer: activity relu5_7/x1
+relu
+Layer: conv conv5_7/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv5_7/x2/bn
+1e-05
+Layer: scale conv5_7/x2/scale
+1
+Layer: activity relu5_7/x2
+relu
+Layer: conv conv5_7/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_5_7
+channel 2 concat_5_6_concat_5_6_0_split conv5_7/x2
+Layer: split concat_5_7_concat_5_7_0_split
+
+Layer: batchnorm conv5_8/x1/bn
+1e-05
+Layer: scale conv5_8/x1/scale
+1
+Layer: activity relu5_8/x1
+relu
+Layer: conv conv5_8/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv5_8/x2/bn
+1e-05
+Layer: scale conv5_8/x2/scale
+1
+Layer: activity relu5_8/x2
+relu
+Layer: conv conv5_8/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_5_8
+channel 2 concat_5_7_concat_5_7_0_split conv5_8/x2
+Layer: split concat_5_8_concat_5_8_0_split
+
+Layer: batchnorm conv5_9/x1/bn
+1e-05
+Layer: scale conv5_9/x1/scale
+1
+Layer: activity relu5_9/x1
+relu
+Layer: conv conv5_9/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv5_9/x2/bn
+1e-05
+Layer: scale conv5_9/x2/scale
+1
+Layer: activity relu5_9/x2
+relu
+Layer: conv conv5_9/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_5_9
+channel 2 concat_5_8_concat_5_8_0_split conv5_9/x2
+Layer: split concat_5_9_concat_5_9_0_split
+
+Layer: batchnorm conv5_10/x1/bn
+1e-05
+Layer: scale conv5_10/x1/scale
+1
+Layer: activity relu5_10/x1
+relu
+Layer: conv conv5_10/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv5_10/x2/bn
+1e-05
+Layer: scale conv5_10/x2/scale
+1
+Layer: activity relu5_10/x2
+relu
+Layer: conv conv5_10/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_5_10
+channel 2 concat_5_9_concat_5_9_0_split conv5_10/x2
+Layer: split concat_5_10_concat_5_10_0_split
+
+Layer: batchnorm conv5_11/x1/bn
+1e-05
+Layer: scale conv5_11/x1/scale
+1
+Layer: activity relu5_11/x1
+relu
+Layer: conv conv5_11/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv5_11/x2/bn
+1e-05
+Layer: scale conv5_11/x2/scale
+1
+Layer: activity relu5_11/x2
+relu
+Layer: conv conv5_11/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_5_11
+channel 2 concat_5_10_concat_5_10_0_split conv5_11/x2
+Layer: split concat_5_11_concat_5_11_0_split
+
+Layer: batchnorm conv5_12/x1/bn
+1e-05
+Layer: scale conv5_12/x1/scale
+1
+Layer: activity relu5_12/x1
+relu
+Layer: conv conv5_12/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv5_12/x2/bn
+1e-05
+Layer: scale conv5_12/x2/scale
+1
+Layer: activity relu5_12/x2
+relu
+Layer: conv conv5_12/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_5_12
+channel 2 concat_5_11_concat_5_11_0_split conv5_12/x2
+Layer: split concat_5_12_concat_5_12_0_split
+
+Layer: batchnorm conv5_13/x1/bn
+1e-05
+Layer: scale conv5_13/x1/scale
+1
+Layer: activity relu5_13/x1
+relu
+Layer: conv conv5_13/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv5_13/x2/bn
+1e-05
+Layer: scale conv5_13/x2/scale
+1
+Layer: activity relu5_13/x2
+relu
+Layer: conv conv5_13/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_5_13
+channel 2 concat_5_12_concat_5_12_0_split conv5_13/x2
+Layer: split concat_5_13_concat_5_13_0_split
+
+Layer: batchnorm conv5_14/x1/bn
+1e-05
+Layer: scale conv5_14/x1/scale
+1
+Layer: activity relu5_14/x1
+relu
+Layer: conv conv5_14/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv5_14/x2/bn
+1e-05
+Layer: scale conv5_14/x2/scale
+1
+Layer: activity relu5_14/x2
+relu
+Layer: conv conv5_14/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_5_14
+channel 2 concat_5_13_concat_5_13_0_split conv5_14/x2
+Layer: split concat_5_14_concat_5_14_0_split
+
+Layer: batchnorm conv5_15/x1/bn
+1e-05
+Layer: scale conv5_15/x1/scale
+1
+Layer: activity relu5_15/x1
+relu
+Layer: conv conv5_15/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv5_15/x2/bn
+1e-05
+Layer: scale conv5_15/x2/scale
+1
+Layer: activity relu5_15/x2
+relu
+Layer: conv conv5_15/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_5_15
+channel 2 concat_5_14_concat_5_14_0_split conv5_15/x2
+Layer: split concat_5_15_concat_5_15_0_split
+
+Layer: batchnorm conv5_16/x1/bn
+1e-05
+Layer: scale conv5_16/x1/scale
+1
+Layer: activity relu5_16/x1
+relu
+Layer: conv conv5_16/x1
+1 1 128 0 0 1 1 1 0 none
+Layer: batchnorm conv5_16/x2/bn
+1e-05
+Layer: scale conv5_16/x2/scale
+1
+Layer: activity relu5_16/x2
+relu
+Layer: conv conv5_16/x2
+3 3 32 1 1 1 1 1 0 none
+Layer: concat concat_5_16
+channel 2 concat_5_15_concat_5_15_0_split conv5_16/x2
+Layer: batchnorm conv5_blk/bn
+1e-05
+Layer: scale conv5_blk/scale
+1
+Layer: activity relu5_blk
+relu
+Layer: pool pool5
+-1 0 1 avg
+Layer: conv fc6
+1 1 1000 0 0 1 1 1 1 none
+Layer: loss loss
+softmax
+Connections:
+data conv1
+conv1 conv1/bn
+conv1/bn conv1/scale
+conv1/scale relu1
+relu1 pool1
+pool1 pool1_pool1_0_split
+pool1_pool1_0_split conv2_1/x1/bn
+conv2_1/x1/bn conv2_1/x1/scale
+conv2_1/x1/scale relu2_1/x1
+relu2_1/x1 conv2_1/x1
+conv2_1/x1 conv2_1/x2/bn
+conv2_1/x2/bn conv2_1/x2/scale
+conv2_1/x2/scale relu2_1/x2
+relu2_1/x2 conv2_1/x2
+pool1_pool1_0_split concat_2_1
+conv2_1/x2 concat_2_1
+concat_2_1 concat_2_1_concat_2_1_0_split
+concat_2_1_concat_2_1_0_split conv2_2/x1/bn
+conv2_2/x1/bn conv2_2/x1/scale
+conv2_2/x1/scale relu2_2/x1
+relu2_2/x1 conv2_2/x1
+conv2_2/x1 conv2_2/x2/bn
+conv2_2/x2/bn conv2_2/x2/scale
+conv2_2/x2/scale relu2_2/x2
+relu2_2/x2 conv2_2/x2
+concat_2_1_concat_2_1_0_split concat_2_2
+conv2_2/x2 concat_2_2
+concat_2_2 concat_2_2_concat_2_2_0_split
+concat_2_2_concat_2_2_0_split conv2_3/x1/bn
+conv2_3/x1/bn conv2_3/x1/scale
+conv2_3/x1/scale relu2_3/x1
+relu2_3/x1 conv2_3/x1
+conv2_3/x1 conv2_3/x2/bn
+conv2_3/x2/bn conv2_3/x2/scale
+conv2_3/x2/scale relu2_3/x2
+relu2_3/x2 conv2_3/x2
+concat_2_2_concat_2_2_0_split concat_2_3
+conv2_3/x2 concat_2_3
+concat_2_3 concat_2_3_concat_2_3_0_split
+concat_2_3_concat_2_3_0_split conv2_4/x1/bn
+conv2_4/x1/bn conv2_4/x1/scale
+conv2_4/x1/scale relu2_4/x1
+relu2_4/x1 conv2_4/x1
+conv2_4/x1 conv2_4/x2/bn
+conv2_4/x2/bn conv2_4/x2/scale
+conv2_4/x2/scale relu2_4/x2
+relu2_4/x2 conv2_4/x2
+concat_2_3_concat_2_3_0_split concat_2_4
+conv2_4/x2 concat_2_4
+concat_2_4 concat_2_4_concat_2_4_0_split
+concat_2_4_concat_2_4_0_split conv2_5/x1/bn
+conv2_5/x1/bn conv2_5/x1/scale
+conv2_5/x1/scale relu2_5/x1
+relu2_5/x1 conv2_5/x1
+conv2_5/x1 conv2_5/x2/bn
+conv2_5/x2/bn conv2_5/x2/scale
+conv2_5/x2/scale relu2_5/x2
+relu2_5/x2 conv2_5/x2
+concat_2_4_concat_2_4_0_split concat_2_5
+conv2_5/x2 concat_2_5
+concat_2_5 concat_2_5_concat_2_5_0_split
+concat_2_5_concat_2_5_0_split conv2_6/x1/bn
+conv2_6/x1/bn conv2_6/x1/scale
+conv2_6/x1/scale relu2_6/x1
+relu2_6/x1 conv2_6/x1
+conv2_6/x1 conv2_6/x2/bn
+conv2_6/x2/bn conv2_6/x2/scale
+conv2_6/x2/scale relu2_6/x2
+relu2_6/x2 conv2_6/x2
+concat_2_5_concat_2_5_0_split concat_2_6
+conv2_6/x2 concat_2_6
+concat_2_6 conv2_blk/bn
+conv2_blk/bn conv2_blk/scale
+conv2_blk/scale relu2_blk
+relu2_blk conv2_blk
+conv2_blk pool2
+pool2 pool2_pool2_0_split
+pool2_pool2_0_split conv3_1/x1/bn
+conv3_1/x1/bn conv3_1/x1/scale
+conv3_1/x1/scale relu3_1/x1
+relu3_1/x1 conv3_1/x1
+conv3_1/x1 conv3_1/x2/bn
+conv3_1/x2/bn conv3_1/x2/scale
+conv3_1/x2/scale relu3_1/x2
+relu3_1/x2 conv3_1/x2
+pool2_pool2_0_split concat_3_1
+conv3_1/x2 concat_3_1
+concat_3_1 concat_3_1_concat_3_1_0_split
+concat_3_1_concat_3_1_0_split conv3_2/x1/bn
+conv3_2/x1/bn conv3_2/x1/scale
+conv3_2/x1/scale relu3_2/x1
+relu3_2/x1 conv3_2/x1
+conv3_2/x1 conv3_2/x2/bn
+conv3_2/x2/bn conv3_2/x2/scale
+conv3_2/x2/scale relu3_2/x2
+relu3_2/x2 conv3_2/x2
+concat_3_1_concat_3_1_0_split concat_3_2
+conv3_2/x2 concat_3_2
+concat_3_2 concat_3_2_concat_3_2_0_split
+concat_3_2_concat_3_2_0_split conv3_3/x1/bn
+conv3_3/x1/bn conv3_3/x1/scale
+conv3_3/x1/scale relu3_3/x1
+relu3_3/x1 conv3_3/x1
+conv3_3/x1 conv3_3/x2/bn
+conv3_3/x2/bn conv3_3/x2/scale
+conv3_3/x2/scale relu3_3/x2
+relu3_3/x2 conv3_3/x2
+concat_3_2_concat_3_2_0_split concat_3_3
+conv3_3/x2 concat_3_3
+concat_3_3 concat_3_3_concat_3_3_0_split
+concat_3_3_concat_3_3_0_split conv3_4/x1/bn
+conv3_4/x1/bn conv3_4/x1/scale
+conv3_4/x1/scale relu3_4/x1
+relu3_4/x1 conv3_4/x1
+conv3_4/x1 conv3_4/x2/bn
+conv3_4/x2/bn conv3_4/x2/scale
+conv3_4/x2/scale relu3_4/x2
+relu3_4/x2 conv3_4/x2
+concat_3_3_concat_3_3_0_split concat_3_4
+conv3_4/x2 concat_3_4
+concat_3_4 concat_3_4_concat_3_4_0_split
+concat_3_4_concat_3_4_0_split conv3_5/x1/bn
+conv3_5/x1/bn conv3_5/x1/scale
+conv3_5/x1/scale relu3_5/x1
+relu3_5/x1 conv3_5/x1
+conv3_5/x1 conv3_5/x2/bn
+conv3_5/x2/bn conv3_5/x2/scale
+conv3_5/x2/scale relu3_5/x2
+relu3_5/x2 conv3_5/x2
+concat_3_4_concat_3_4_0_split concat_3_5
+conv3_5/x2 concat_3_5
+concat_3_5 concat_3_5_concat_3_5_0_split
+concat_3_5_concat_3_5_0_split conv3_6/x1/bn
+conv3_6/x1/bn conv3_6/x1/scale
+conv3_6/x1/scale relu3_6/x1
+relu3_6/x1 conv3_6/x1
+conv3_6/x1 conv3_6/x2/bn
+conv3_6/x2/bn conv3_6/x2/scale
+conv3_6/x2/scale relu3_6/x2
+relu3_6/x2 conv3_6/x2
+concat_3_5_concat_3_5_0_split concat_3_6
+conv3_6/x2 concat_3_6
+concat_3_6 concat_3_6_concat_3_6_0_split
+concat_3_6_concat_3_6_0_split conv3_7/x1/bn
+conv3_7/x1/bn conv3_7/x1/scale
+conv3_7/x1/scale relu3_7/x1
+relu3_7/x1 conv3_7/x1
+conv3_7/x1 conv3_7/x2/bn
+conv3_7/x2/bn conv3_7/x2/scale
+conv3_7/x2/scale relu3_7/x2
+relu3_7/x2 conv3_7/x2
+concat_3_6_concat_3_6_0_split concat_3_7
+conv3_7/x2 concat_3_7
+concat_3_7 concat_3_7_concat_3_7_0_split
+concat_3_7_concat_3_7_0_split conv3_8/x1/bn
+conv3_8/x1/bn conv3_8/x1/scale
+conv3_8/x1/scale relu3_8/x1
+relu3_8/x1 conv3_8/x1
+conv3_8/x1 conv3_8/x2/bn
+conv3_8/x2/bn conv3_8/x2/scale
+conv3_8/x2/scale relu3_8/x2
+relu3_8/x2 conv3_8/x2
+concat_3_7_concat_3_7_0_split concat_3_8
+conv3_8/x2 concat_3_8
+concat_3_8 concat_3_8_concat_3_8_0_split
+concat_3_8_concat_3_8_0_split conv3_9/x1/bn
+conv3_9/x1/bn conv3_9/x1/scale
+conv3_9/x1/scale relu3_9/x1
+relu3_9/x1 conv3_9/x1
+conv3_9/x1 conv3_9/x2/bn
+conv3_9/x2/bn conv3_9/x2/scale
+conv3_9/x2/scale relu3_9/x2
+relu3_9/x2 conv3_9/x2
+concat_3_8_concat_3_8_0_split concat_3_9
+conv3_9/x2 concat_3_9
+concat_3_9 concat_3_9_concat_3_9_0_split
+concat_3_9_concat_3_9_0_split conv3_10/x1/bn
+conv3_10/x1/bn conv3_10/x1/scale
+conv3_10/x1/scale relu3_10/x1
+relu3_10/x1 conv3_10/x1
+conv3_10/x1 conv3_10/x2/bn
+conv3_10/x2/bn conv3_10/x2/scale
+conv3_10/x2/scale relu3_10/x2
+relu3_10/x2 conv3_10/x2
+concat_3_9_concat_3_9_0_split concat_3_10
+conv3_10/x2 concat_3_10
+concat_3_10 concat_3_10_concat_3_10_0_split
+concat_3_10_concat_3_10_0_split conv3_11/x1/bn
+conv3_11/x1/bn conv3_11/x1/scale
+conv3_11/x1/scale relu3_11/x1
+relu3_11/x1 conv3_11/x1
+conv3_11/x1 conv3_11/x2/bn
+conv3_11/x2/bn conv3_11/x2/scale
+conv3_11/x2/scale relu3_11/x2
+relu3_11/x2 conv3_11/x2
+concat_3_10_concat_3_10_0_split concat_3_11
+conv3_11/x2 concat_3_11
+concat_3_11 concat_3_11_concat_3_11_0_split
+concat_3_11_concat_3_11_0_split conv3_12/x1/bn
+conv3_12/x1/bn conv3_12/x1/scale
+conv3_12/x1/scale relu3_12/x1
+relu3_12/x1 conv3_12/x1
+conv3_12/x1 conv3_12/x2/bn
+conv3_12/x2/bn conv3_12/x2/scale
+conv3_12/x2/scale relu3_12/x2
+relu3_12/x2 conv3_12/x2
+concat_3_11_concat_3_11_0_split concat_3_12
+conv3_12/x2 concat_3_12
+concat_3_12 conv3_blk/bn
+conv3_blk/bn conv3_blk/scale
+conv3_blk/scale relu3_blk
+relu3_blk conv3_blk
+conv3_blk pool3
+pool3 pool3_pool3_0_split
+pool3_pool3_0_split conv4_1/x1/bn
+conv4_1/x1/bn conv4_1/x1/scale
+conv4_1/x1/scale relu4_1/x1
+relu4_1/x1 conv4_1/x1
+conv4_1/x1 conv4_1/x2/bn
+conv4_1/x2/bn conv4_1/x2/scale
+conv4_1/x2/scale relu4_1/x2
+relu4_1/x2 conv4_1/x2
+pool3_pool3_0_split concat_4_1
+conv4_1/x2 concat_4_1
+concat_4_1 concat_4_1_concat_4_1_0_split
+concat_4_1_concat_4_1_0_split conv4_2/x1/bn
+conv4_2/x1/bn conv4_2/x1/scale
+conv4_2/x1/scale relu4_2/x1
+relu4_2/x1 conv4_2/x1
+conv4_2/x1 conv4_2/x2/bn
+conv4_2/x2/bn conv4_2/x2/scale
+conv4_2/x2/scale relu4_2/x2
+relu4_2/x2 conv4_2/x2
+concat_4_1_concat_4_1_0_split concat_4_2
+conv4_2/x2 concat_4_2
+concat_4_2 concat_4_2_concat_4_2_0_split
+concat_4_2_concat_4_2_0_split conv4_3/x1/bn
+conv4_3/x1/bn conv4_3/x1/scale
+conv4_3/x1/scale relu4_3/x1
+relu4_3/x1 conv4_3/x1
+conv4_3/x1 conv4_3/x2/bn
+conv4_3/x2/bn conv4_3/x2/scale
+conv4_3/x2/scale relu4_3/x2
+relu4_3/x2 conv4_3/x2
+concat_4_2_concat_4_2_0_split concat_4_3
+conv4_3/x2 concat_4_3
+concat_4_3 concat_4_3_concat_4_3_0_split
+concat_4_3_concat_4_3_0_split conv4_4/x1/bn
+conv4_4/x1/bn conv4_4/x1/scale
+conv4_4/x1/scale relu4_4/x1
+relu4_4/x1 conv4_4/x1
+conv4_4/x1 conv4_4/x2/bn
+conv4_4/x2/bn conv4_4/x2/scale
+conv4_4/x2/scale relu4_4/x2
+relu4_4/x2 conv4_4/x2
+concat_4_3_concat_4_3_0_split concat_4_4
+conv4_4/x2 concat_4_4
+concat_4_4 concat_4_4_concat_4_4_0_split
+concat_4_4_concat_4_4_0_split conv4_5/x1/bn
+conv4_5/x1/bn conv4_5/x1/scale
+conv4_5/x1/scale relu4_5/x1
+relu4_5/x1 conv4_5/x1
+conv4_5/x1 conv4_5/x2/bn
+conv4_5/x2/bn conv4_5/x2/scale
+conv4_5/x2/scale relu4_5/x2
+relu4_5/x2 conv4_5/x2
+concat_4_4_concat_4_4_0_split concat_4_5
+conv4_5/x2 concat_4_5
+concat_4_5 concat_4_5_concat_4_5_0_split
+concat_4_5_concat_4_5_0_split conv4_6/x1/bn
+conv4_6/x1/bn conv4_6/x1/scale
+conv4_6/x1/scale relu4_6/x1
+relu4_6/x1 conv4_6/x1
+conv4_6/x1 conv4_6/x2/bn
+conv4_6/x2/bn conv4_6/x2/scale
+conv4_6/x2/scale relu4_6/x2
+relu4_6/x2 conv4_6/x2
+concat_4_5_concat_4_5_0_split concat_4_6
+conv4_6/x2 concat_4_6
+concat_4_6 concat_4_6_concat_4_6_0_split
+concat_4_6_concat_4_6_0_split conv4_7/x1/bn
+conv4_7/x1/bn conv4_7/x1/scale
+conv4_7/x1/scale relu4_7/x1
+relu4_7/x1 conv4_7/x1
+conv4_7/x1 conv4_7/x2/bn
+conv4_7/x2/bn conv4_7/x2/scale
+conv4_7/x2/scale relu4_7/x2
+relu4_7/x2 conv4_7/x2
+concat_4_6_concat_4_6_0_split concat_4_7
+conv4_7/x2 concat_4_7
+concat_4_7 concat_4_7_concat_4_7_0_split
+concat_4_7_concat_4_7_0_split conv4_8/x1/bn
+conv4_8/x1/bn conv4_8/x1/scale
+conv4_8/x1/scale relu4_8/x1
+relu4_8/x1 conv4_8/x1
+conv4_8/x1 conv4_8/x2/bn
+conv4_8/x2/bn conv4_8/x2/scale
+conv4_8/x2/scale relu4_8/x2
+relu4_8/x2 conv4_8/x2
+concat_4_7_concat_4_7_0_split concat_4_8
+conv4_8/x2 concat_4_8
+concat_4_8 concat_4_8_concat_4_8_0_split
+concat_4_8_concat_4_8_0_split conv4_9/x1/bn
+conv4_9/x1/bn conv4_9/x1/scale
+conv4_9/x1/scale relu4_9/x1
+relu4_9/x1 conv4_9/x1
+conv4_9/x1 conv4_9/x2/bn
+conv4_9/x2/bn conv4_9/x2/scale
+conv4_9/x2/scale relu4_9/x2
+relu4_9/x2 conv4_9/x2
+concat_4_8_concat_4_8_0_split concat_4_9
+conv4_9/x2 concat_4_9
+concat_4_9 concat_4_9_concat_4_9_0_split
+concat_4_9_concat_4_9_0_split conv4_10/x1/bn
+conv4_10/x1/bn conv4_10/x1/scale
+conv4_10/x1/scale relu4_10/x1
+relu4_10/x1 conv4_10/x1
+conv4_10/x1 conv4_10/x2/bn
+conv4_10/x2/bn conv4_10/x2/scale
+conv4_10/x2/scale relu4_10/x2
+relu4_10/x2 conv4_10/x2
+concat_4_9_concat_4_9_0_split concat_4_10
+conv4_10/x2 concat_4_10
+concat_4_10 concat_4_10_concat_4_10_0_split
+concat_4_10_concat_4_10_0_split conv4_11/x1/bn
+conv4_11/x1/bn conv4_11/x1/scale
+conv4_11/x1/scale relu4_11/x1
+relu4_11/x1 conv4_11/x1
+conv4_11/x1 conv4_11/x2/bn
+conv4_11/x2/bn conv4_11/x2/scale
+conv4_11/x2/scale relu4_11/x2
+relu4_11/x2 conv4_11/x2
+concat_4_10_concat_4_10_0_split concat_4_11
+conv4_11/x2 concat_4_11
+concat_4_11 concat_4_11_concat_4_11_0_split
+concat_4_11_concat_4_11_0_split conv4_12/x1/bn
+conv4_12/x1/bn conv4_12/x1/scale
+conv4_12/x1/scale relu4_12/x1
+relu4_12/x1 conv4_12/x1
+conv4_12/x1 conv4_12/x2/bn
+conv4_12/x2/bn conv4_12/x2/scale
+conv4_12/x2/scale relu4_12/x2
+relu4_12/x2 conv4_12/x2
+concat_4_11_concat_4_11_0_split concat_4_12
+conv4_12/x2 concat_4_12
+concat_4_12 concat_4_12_concat_4_12_0_split
+concat_4_12_concat_4_12_0_split conv4_13/x1/bn
+conv4_13/x1/bn conv4_13/x1/scale
+conv4_13/x1/scale relu4_13/x1
+relu4_13/x1 conv4_13/x1
+conv4_13/x1 conv4_13/x2/bn
+conv4_13/x2/bn conv4_13/x2/scale
+conv4_13/x2/scale relu4_13/x2
+relu4_13/x2 conv4_13/x2
+concat_4_12_concat_4_12_0_split concat_4_13
+conv4_13/x2 concat_4_13
+concat_4_13 concat_4_13_concat_4_13_0_split
+concat_4_13_concat_4_13_0_split conv4_14/x1/bn
+conv4_14/x1/bn conv4_14/x1/scale
+conv4_14/x1/scale relu4_14/x1
+relu4_14/x1 conv4_14/x1
+conv4_14/x1 conv4_14/x2/bn
+conv4_14/x2/bn conv4_14/x2/scale
+conv4_14/x2/scale relu4_14/x2
+relu4_14/x2 conv4_14/x2
+concat_4_13_concat_4_13_0_split concat_4_14
+conv4_14/x2 concat_4_14
+concat_4_14 concat_4_14_concat_4_14_0_split
+concat_4_14_concat_4_14_0_split conv4_15/x1/bn
+conv4_15/x1/bn conv4_15/x1/scale
+conv4_15/x1/scale relu4_15/x1
+relu4_15/x1 conv4_15/x1
+conv4_15/x1 conv4_15/x2/bn
+conv4_15/x2/bn conv4_15/x2/scale
+conv4_15/x2/scale relu4_15/x2
+relu4_15/x2 conv4_15/x2
+concat_4_14_concat_4_14_0_split concat_4_15
+conv4_15/x2 concat_4_15
+concat_4_15 concat_4_15_concat_4_15_0_split
+concat_4_15_concat_4_15_0_split conv4_16/x1/bn
+conv4_16/x1/bn conv4_16/x1/scale
+conv4_16/x1/scale relu4_16/x1
+relu4_16/x1 conv4_16/x1
+conv4_16/x1 conv4_16/x2/bn
+conv4_16/x2/bn conv4_16/x2/scale
+conv4_16/x2/scale relu4_16/x2
+relu4_16/x2 conv4_16/x2
+concat_4_15_concat_4_15_0_split concat_4_16
+conv4_16/x2 concat_4_16
+concat_4_16 concat_4_16_concat_4_16_0_split
+concat_4_16_concat_4_16_0_split conv4_17/x1/bn
+conv4_17/x1/bn conv4_17/x1/scale
+conv4_17/x1/scale relu4_17/x1
+relu4_17/x1 conv4_17/x1
+conv4_17/x1 conv4_17/x2/bn
+conv4_17/x2/bn conv4_17/x2/scale
+conv4_17/x2/scale relu4_17/x2
+relu4_17/x2 conv4_17/x2
+concat_4_16_concat_4_16_0_split concat_4_17
+conv4_17/x2 concat_4_17
+concat_4_17 concat_4_17_concat_4_17_0_split
+concat_4_17_concat_4_17_0_split conv4_18/x1/bn
+conv4_18/x1/bn conv4_18/x1/scale
+conv4_18/x1/scale relu4_18/x1
+relu4_18/x1 conv4_18/x1
+conv4_18/x1 conv4_18/x2/bn
+conv4_18/x2/bn conv4_18/x2/scale
+conv4_18/x2/scale relu4_18/x2
+relu4_18/x2 conv4_18/x2
+concat_4_17_concat_4_17_0_split concat_4_18
+conv4_18/x2 concat_4_18
+concat_4_18 concat_4_18_concat_4_18_0_split
+concat_4_18_concat_4_18_0_split conv4_19/x1/bn
+conv4_19/x1/bn conv4_19/x1/scale
+conv4_19/x1/scale relu4_19/x1
+relu4_19/x1 conv4_19/x1
+conv4_19/x1 conv4_19/x2/bn
+conv4_19/x2/bn conv4_19/x2/scale
+conv4_19/x2/scale relu4_19/x2
+relu4_19/x2 conv4_19/x2
+concat_4_18_concat_4_18_0_split concat_4_19
+conv4_19/x2 concat_4_19
+concat_4_19 concat_4_19_concat_4_19_0_split
+concat_4_19_concat_4_19_0_split conv4_20/x1/bn
+conv4_20/x1/bn conv4_20/x1/scale
+conv4_20/x1/scale relu4_20/x1
+relu4_20/x1 conv4_20/x1
+conv4_20/x1 conv4_20/x2/bn
+conv4_20/x2/bn conv4_20/x2/scale
+conv4_20/x2/scale relu4_20/x2
+relu4_20/x2 conv4_20/x2
+concat_4_19_concat_4_19_0_split concat_4_20
+conv4_20/x2 concat_4_20
+concat_4_20 concat_4_20_concat_4_20_0_split
+concat_4_20_concat_4_20_0_split conv4_21/x1/bn
+conv4_21/x1/bn conv4_21/x1/scale
+conv4_21/x1/scale relu4_21/x1
+relu4_21/x1 conv4_21/x1
+conv4_21/x1 conv4_21/x2/bn
+conv4_21/x2/bn conv4_21/x2/scale
+conv4_21/x2/scale relu4_21/x2
+relu4_21/x2 conv4_21/x2
+concat_4_20_concat_4_20_0_split concat_4_21
+conv4_21/x2 concat_4_21
+concat_4_21 concat_4_21_concat_4_21_0_split
+concat_4_21_concat_4_21_0_split conv4_22/x1/bn
+conv4_22/x1/bn conv4_22/x1/scale
+conv4_22/x1/scale relu4_22/x1
+relu4_22/x1 conv4_22/x1
+conv4_22/x1 conv4_22/x2/bn
+conv4_22/x2/bn conv4_22/x2/scale
+conv4_22/x2/scale relu4_22/x2
+relu4_22/x2 conv4_22/x2
+concat_4_21_concat_4_21_0_split concat_4_22
+conv4_22/x2 concat_4_22
+concat_4_22 concat_4_22_concat_4_22_0_split
+concat_4_22_concat_4_22_0_split conv4_23/x1/bn
+conv4_23/x1/bn conv4_23/x1/scale
+conv4_23/x1/scale relu4_23/x1
+relu4_23/x1 conv4_23/x1
+conv4_23/x1 conv4_23/x2/bn
+conv4_23/x2/bn conv4_23/x2/scale
+conv4_23/x2/scale relu4_23/x2
+relu4_23/x2 conv4_23/x2
+concat_4_22_concat_4_22_0_split concat_4_23
+conv4_23/x2 concat_4_23
+concat_4_23 concat_4_23_concat_4_23_0_split
+concat_4_23_concat_4_23_0_split conv4_24/x1/bn
+conv4_24/x1/bn conv4_24/x1/scale
+conv4_24/x1/scale relu4_24/x1
+relu4_24/x1 conv4_24/x1
+conv4_24/x1 conv4_24/x2/bn
+conv4_24/x2/bn conv4_24/x2/scale
+conv4_24/x2/scale relu4_24/x2
+relu4_24/x2 conv4_24/x2
+concat_4_23_concat_4_23_0_split concat_4_24
+conv4_24/x2 concat_4_24
+concat_4_24 conv4_blk/bn
+conv4_blk/bn conv4_blk/scale
+conv4_blk/scale relu4_blk
+relu4_blk conv4_blk
+conv4_blk pool4
+pool4 pool4_pool4_0_split
+pool4_pool4_0_split conv5_1/x1/bn
+conv5_1/x1/bn conv5_1/x1/scale
+conv5_1/x1/scale relu5_1/x1
+relu5_1/x1 conv5_1/x1
+conv5_1/x1 conv5_1/x2/bn
+conv5_1/x2/bn conv5_1/x2/scale
+conv5_1/x2/scale relu5_1/x2
+relu5_1/x2 conv5_1/x2
+pool4_pool4_0_split concat_5_1
+conv5_1/x2 concat_5_1
+concat_5_1 concat_5_1_concat_5_1_0_split
+concat_5_1_concat_5_1_0_split conv5_2/x1/bn
+conv5_2/x1/bn conv5_2/x1/scale
+conv5_2/x1/scale relu5_2/x1
+relu5_2/x1 conv5_2/x1
+conv5_2/x1 conv5_2/x2/bn
+conv5_2/x2/bn conv5_2/x2/scale
+conv5_2/x2/scale relu5_2/x2
+relu5_2/x2 conv5_2/x2
+concat_5_1_concat_5_1_0_split concat_5_2
+conv5_2/x2 concat_5_2
+concat_5_2 concat_5_2_concat_5_2_0_split
+concat_5_2_concat_5_2_0_split conv5_3/x1/bn
+conv5_3/x1/bn conv5_3/x1/scale
+conv5_3/x1/scale relu5_3/x1
+relu5_3/x1 conv5_3/x1
+conv5_3/x1 conv5_3/x2/bn
+conv5_3/x2/bn conv5_3/x2/scale
+conv5_3/x2/scale relu5_3/x2
+relu5_3/x2 conv5_3/x2
+concat_5_2_concat_5_2_0_split concat_5_3
+conv5_3/x2 concat_5_3
+concat_5_3 concat_5_3_concat_5_3_0_split
+concat_5_3_concat_5_3_0_split conv5_4/x1/bn
+conv5_4/x1/bn conv5_4/x1/scale
+conv5_4/x1/scale relu5_4/x1
+relu5_4/x1 conv5_4/x1
+conv5_4/x1 conv5_4/x2/bn
+conv5_4/x2/bn conv5_4/x2/scale
+conv5_4/x2/scale relu5_4/x2
+relu5_4/x2 conv5_4/x2
+concat_5_3_concat_5_3_0_split concat_5_4
+conv5_4/x2 concat_5_4
+concat_5_4 concat_5_4_concat_5_4_0_split
+concat_5_4_concat_5_4_0_split conv5_5/x1/bn
+conv5_5/x1/bn conv5_5/x1/scale
+conv5_5/x1/scale relu5_5/x1
+relu5_5/x1 conv5_5/x1
+conv5_5/x1 conv5_5/x2/bn
+conv5_5/x2/bn conv5_5/x2/scale
+conv5_5/x2/scale relu5_5/x2
+relu5_5/x2 conv5_5/x2
+concat_5_4_concat_5_4_0_split concat_5_5
+conv5_5/x2 concat_5_5
+concat_5_5 concat_5_5_concat_5_5_0_split
+concat_5_5_concat_5_5_0_split conv5_6/x1/bn
+conv5_6/x1/bn conv5_6/x1/scale
+conv5_6/x1/scale relu5_6/x1
+relu5_6/x1 conv5_6/x1
+conv5_6/x1 conv5_6/x2/bn
+conv5_6/x2/bn conv5_6/x2/scale
+conv5_6/x2/scale relu5_6/x2
+relu5_6/x2 conv5_6/x2
+concat_5_5_concat_5_5_0_split concat_5_6
+conv5_6/x2 concat_5_6
+concat_5_6 concat_5_6_concat_5_6_0_split
+concat_5_6_concat_5_6_0_split conv5_7/x1/bn
+conv5_7/x1/bn conv5_7/x1/scale
+conv5_7/x1/scale relu5_7/x1
+relu5_7/x1 conv5_7/x1
+conv5_7/x1 conv5_7/x2/bn
+conv5_7/x2/bn conv5_7/x2/scale
+conv5_7/x2/scale relu5_7/x2
+relu5_7/x2 conv5_7/x2
+concat_5_6_concat_5_6_0_split concat_5_7
+conv5_7/x2 concat_5_7
+concat_5_7 concat_5_7_concat_5_7_0_split
+concat_5_7_concat_5_7_0_split conv5_8/x1/bn
+conv5_8/x1/bn conv5_8/x1/scale
+conv5_8/x1/scale relu5_8/x1
+relu5_8/x1 conv5_8/x1
+conv5_8/x1 conv5_8/x2/bn
+conv5_8/x2/bn conv5_8/x2/scale
+conv5_8/x2/scale relu5_8/x2
+relu5_8/x2 conv5_8/x2
+concat_5_7_concat_5_7_0_split concat_5_8
+conv5_8/x2 concat_5_8
+concat_5_8 concat_5_8_concat_5_8_0_split
+concat_5_8_concat_5_8_0_split conv5_9/x1/bn
+conv5_9/x1/bn conv5_9/x1/scale
+conv5_9/x1/scale relu5_9/x1
+relu5_9/x1 conv5_9/x1
+conv5_9/x1 conv5_9/x2/bn
+conv5_9/x2/bn conv5_9/x2/scale
+conv5_9/x2/scale relu5_9/x2
+relu5_9/x2 conv5_9/x2
+concat_5_8_concat_5_8_0_split concat_5_9
+conv5_9/x2 concat_5_9
+concat_5_9 concat_5_9_concat_5_9_0_split
+concat_5_9_concat_5_9_0_split conv5_10/x1/bn
+conv5_10/x1/bn conv5_10/x1/scale
+conv5_10/x1/scale relu5_10/x1
+relu5_10/x1 conv5_10/x1
+conv5_10/x1 conv5_10/x2/bn
+conv5_10/x2/bn conv5_10/x2/scale
+conv5_10/x2/scale relu5_10/x2
+relu5_10/x2 conv5_10/x2
+concat_5_9_concat_5_9_0_split concat_5_10
+conv5_10/x2 concat_5_10
+concat_5_10 concat_5_10_concat_5_10_0_split
+concat_5_10_concat_5_10_0_split conv5_11/x1/bn
+conv5_11/x1/bn conv5_11/x1/scale
+conv5_11/x1/scale relu5_11/x1
+relu5_11/x1 conv5_11/x1
+conv5_11/x1 conv5_11/x2/bn
+conv5_11/x2/bn conv5_11/x2/scale
+conv5_11/x2/scale relu5_11/x2
+relu5_11/x2 conv5_11/x2
+concat_5_10_concat_5_10_0_split concat_5_11
+conv5_11/x2 concat_5_11
+concat_5_11 concat_5_11_concat_5_11_0_split
+concat_5_11_concat_5_11_0_split conv5_12/x1/bn
+conv5_12/x1/bn conv5_12/x1/scale
+conv5_12/x1/scale relu5_12/x1
+relu5_12/x1 conv5_12/x1
+conv5_12/x1 conv5_12/x2/bn
+conv5_12/x2/bn conv5_12/x2/scale
+conv5_12/x2/scale relu5_12/x2
+relu5_12/x2 conv5_12/x2
+concat_5_11_concat_5_11_0_split concat_5_12
+conv5_12/x2 concat_5_12
+concat_5_12 concat_5_12_concat_5_12_0_split
+concat_5_12_concat_5_12_0_split conv5_13/x1/bn
+conv5_13/x1/bn conv5_13/x1/scale
+conv5_13/x1/scale relu5_13/x1
+relu5_13/x1 conv5_13/x1
+conv5_13/x1 conv5_13/x2/bn
+conv5_13/x2/bn conv5_13/x2/scale
+conv5_13/x2/scale relu5_13/x2
+relu5_13/x2 conv5_13/x2
+concat_5_12_concat_5_12_0_split concat_5_13
+conv5_13/x2 concat_5_13
+concat_5_13 concat_5_13_concat_5_13_0_split
+concat_5_13_concat_5_13_0_split conv5_14/x1/bn
+conv5_14/x1/bn conv5_14/x1/scale
+conv5_14/x1/scale relu5_14/x1
+relu5_14/x1 conv5_14/x1
+conv5_14/x1 conv5_14/x2/bn
+conv5_14/x2/bn conv5_14/x2/scale
+conv5_14/x2/scale relu5_14/x2
+relu5_14/x2 conv5_14/x2
+concat_5_13_concat_5_13_0_split concat_5_14
+conv5_14/x2 concat_5_14
+concat_5_14 concat_5_14_concat_5_14_0_split
+concat_5_14_concat_5_14_0_split conv5_15/x1/bn
+conv5_15/x1/bn conv5_15/x1/scale
+conv5_15/x1/scale relu5_15/x1
+relu5_15/x1 conv5_15/x1
+conv5_15/x1 conv5_15/x2/bn
+conv5_15/x2/bn conv5_15/x2/scale
+conv5_15/x2/scale relu5_15/x2
+relu5_15/x2 conv5_15/x2
+concat_5_14_concat_5_14_0_split concat_5_15
+conv5_15/x2 concat_5_15
+concat_5_15 concat_5_15_concat_5_15_0_split
+concat_5_15_concat_5_15_0_split conv5_16/x1/bn
+conv5_16/x1/bn conv5_16/x1/scale
+conv5_16/x1/scale relu5_16/x1
+relu5_16/x1 conv5_16/x1
+conv5_16/x1 conv5_16/x2/bn
+conv5_16/x2/bn conv5_16/x2/scale
+conv5_16/x2/scale relu5_16/x2
+relu5_16/x2 conv5_16/x2
+concat_5_15_concat_5_15_0_split concat_5_16
+conv5_16/x2 concat_5_16
+concat_5_16 conv5_blk/bn
+conv5_blk/bn conv5_blk/scale
+conv5_blk/scale relu5_blk
+relu5_blk pool5
+pool5 fc6
+fc6 loss
+label loss
