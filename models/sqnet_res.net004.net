@@ -44,7 +44,7 @@ relu
 Layer: concat fire3/concat
 channel 2 fire3/relu_expand1x1 fire3/relu_expand3x3
 Layer: eltwise bypass_23
-sum
+fire2/concat_fire2/concat_0_split fire3/concat sum 1 1
 Layer: conv fire4/squeeze1x1
 1 1 32 0 0 1 1 1 1 none
 Layer: activity fire4/relu_squeeze1x1
@@ -82,7 +82,7 @@ relu
 Layer: concat fire5/concat
 channel 2 fire5/relu_expand1x1 fire5/relu_expand3x3
 Layer: eltwise bypass_45
-sum
+pool4_pool4_0_split fire5/concat sum 1 1
 Layer: conv fire6/squeeze1x1
 1 1 48 0 0 1 1 1 1 none
 Layer: activity fire6/relu_squeeze1x1
@@ -118,7 +118,7 @@ relu
 Layer: concat fire7/concat
 channel 2 fire7/relu_expand1x1 fire7/relu_expand3x3
 Layer: eltwise bypass_67
-sum
+fire6/concat_fire6/concat_0_split fire7/concat sum 1 1
 Layer: conv fire8/squeeze1x1
 1 1 64 0 0 1 1 1 1 none
 Layer: activity fire8/relu_squeeze1x1
@@ -156,7 +156,7 @@ relu
 Layer: concat fire9/concat
 channel 2 fire9/relu_expand1x1 fire9/relu_expand3x3
 Layer: eltwise bypass_89
-sum
+pool8_pool8_0_split fire9/concat sum 1 1
 Layer: conv conv10
 1 1 1000 1 1 1 1 1 1 none
 Layer: activity relu_conv10

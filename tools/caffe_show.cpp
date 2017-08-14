@@ -206,11 +206,17 @@ int main(int argc, char** argv){
 	//string net_path = "../caffe_models/deploy_inception-v3.prototxt",
 	//       model_path = "../caffe_models/inception-v3.caffemodel";
 
+	//int label = 628;
+	//float mean_r = 128, mean_g = 128, mean_b = 128;
+	//float std_r = 128, std_g = 128, std_b = 128;
+	//string net_path = "../caffe_models/deploy_inception-resnet-v2.prototxt",
+	//       model_path = "../caffe_models/inception-resnet-v2.caffemodel";
+
 	int label = 628;
 	float mean_r = 128, mean_g = 128, mean_b = 128;
 	float std_r = 128, std_g = 128, std_b = 128;
-	string net_path = "../caffe_models/deploy_inception-resnet-v2.prototxt",
-	       model_path = "../caffe_models/inception-resnet-v2.caffemodel";
+	string net_path = "../caffe_models/DenseNet_121.prototxt",
+	       model_path = "../caffe_models/DenseNet_121.caffemodel";
 	string model_text_path = "model.txt",
 	       forward_text_path = "forward.txt",
 	       backward_text_path = "backward.txt";
