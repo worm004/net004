@@ -16,7 +16,7 @@ class Layers{
 	void add_split(const std::string& name);
 	void add_bn(const std::string& name,float eps);
 	void add_scale(const std::string& name, bool is_bias);
-	void add_eltwise(const std::string& name, const std::string& method);
+	void add_eltwise(const std::string& name, const std::string&l0, const std::string& l1, const std::string& method, float f0, float f1);
 	void add(const std::string& name, Layer** p);
 
 	void show();

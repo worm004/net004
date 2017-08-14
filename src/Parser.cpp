@@ -332,7 +332,11 @@ void Parser::read_net_scale(const std::string& line, const std::string& name, La
 	ls->add_scale(name,bias!=0);
 }
 void Parser::read_net_eltwise(const std::string& line, const std::string& name, Layers* ls){
+
 	char method[100];
-	sscanf(line.c_str(),"%s",method);
-	ls->add_eltwise(name,method);
+	float f0 = 1.0f, f1 = 1.1f;
+	istringstream iss(line);
+	std::string l0,l1;
+	iss>>l0>>l1>>method>>f0>>f1;
+	ls->add_eltwise(name,l0,l1,method,f0,f1);
 }

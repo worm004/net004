@@ -134,13 +134,16 @@ float net004_forward(const std::string& img_path, const TestParameter& param, bo
 	resize(img,img,Size(l->outputs[0].h, l->outputs[0].w));
 	l->add_image((uchar*)img.data,0, param.mean_r, param.mean_g, param.mean_b,param.std_r,param.std_g,param.std_b);
 	((DataLayer*)ls["label"])->add_label(label,0);
-	//net.show();
+
 	//getchar();
 
 	t1 = now();
 	net.forward();
 	t2 = now();
-	if(show) cout<<"forward: "<<cal_duration(t1,t2)<<endl;
+	if(show){
+		cout<<"forward: "<<cal_duration(t1,t2)<<endl;
+		//net.show();
+	}
 	if(show) show_ret_net004(net,param.list_path,param.nlabel,param.nshow);
 	return net.ls["loss"]->outputs[0].data[0];
 }
@@ -284,6 +287,16 @@ int main(int argc, char **argv){
 	       128,128,128,
 	       1000,5, 628
 	);
+	maps["in-res-v2"] = TestParameter(
+	       "../caffe_models/inception-resnet-v2.caffemodel",
+	       "../caffe_models/deploy_inception-resnet-v2.prototxt",
+	       "../models/inception-res-v2.net004.data",
+	       "../models/inception-res-v2.net004.net",
+	       "../caffe_models/imagenet2012.list",
+	       128,128,128,
+	       128,128,128,
+	       1000,5, 628
+	);
 
 	bool show = atoi(argv[2]);
 	string img_path = "../imgs/westerdam-ship-size.jpg";
@@ -310,7 +323,7 @@ int main(int argc, char **argv){
 		if(show){
 			printf("caffe score: %f\nnet004 score: %f\n",caffe_score,net004_score);
 		}
-		printf("[TEST] [result] %s\n",ret?"sucessful":"failed");
+		printf("[TEST] [result] %s\n",ret?"sucessful":"\x1B[31mfailed"); // red failed
 	}
 	else {
 		printf("no such net: %s\n",argv[1]);

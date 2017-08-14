@@ -23,7 +23,7 @@ private:
 	void write_net_concat(const std::string& layer_name, const std::vector<std::string>& names, std::ofstream& ofile);
 	void write_net_bn(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile);
 	void write_net_scale(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile);
-	void write_net_eltwise(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile);
+	void write_net_eltwise(const std::string& layer_name, const caffe::LayerParameter& param, const std::vector<std::string>& names, std::ofstream& ofile);
 	void write_net(const std::string& net_path);
 	void write_model(const std::string& model_path);
 	void write_model2(const std::string& model_path);

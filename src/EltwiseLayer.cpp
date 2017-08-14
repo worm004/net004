@@ -1,6 +1,13 @@
 #include "stdlib.h"
 #include "EltwiseLayer.h"
-EltwiseLayer::EltwiseLayer(const std::string& name, const std::string& method):method(method),Layer(name,"eltwise"){
+EltwiseLayer::EltwiseLayer(
+	const std::string& name, const std::string&l0, const std::string& l1, 
+	const std::string& method,float f0, float f1):
+		method(method),Layer(name,"eltwise"){
+	order[l0] = 0;
+	order[l1] = 1;
+	this->f0 = f0;
+	this->f1 = f1;
 }
 EltwiseLayer::~EltwiseLayer(){
 }
@@ -11,7 +18,7 @@ void EltwiseLayer::forward(){
 		int nchw = outputs[0].nchw();
 		float *b0 = inputs[0].data, *b1 = inputs[1].data, *output_data = outputs[0].data;
 		for(int i=0;i<nchw;++i)
-			output_data[i] = b0[i] + b1[i];
+			output_data[i] = b0[i]*f0 + b1[i]*f1;
 	}
 	//show_outputs();
 }

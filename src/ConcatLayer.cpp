@@ -11,7 +11,7 @@ ConcatLayer::~ConcatLayer(){
 }
 void ConcatLayer::forward(){
 	//printf("forward: %s %s\n",type.c_str(), name.c_str());
-		//show_inputs();
+	//show_inputs();
 
 	if(method == "channel"){
 		forward_channel();
@@ -20,7 +20,7 @@ void ConcatLayer::forward(){
 		printf("no such method: %s in concat layer\n",method.c_str());
 		exit(0);
 	}
-		//show_outputs();
+	//show_outputs();
 }
 void ConcatLayer::forward_channel(){
 	int n = inputs[0].n;

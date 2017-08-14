@@ -164,7 +164,33 @@ void CaffeModelParser::write_net(const std::string& net_path){
 		}
 		else if(layer_type == "BatchNorm") write_net_bn(layer_name,param,ofile);
 		else if(layer_type == "Scale") write_net_scale(layer_name,param,ofile);
-		else if(layer_type == "Eltwise") write_net_eltwise(layer_name,param,ofile);
+		else if(layer_type == "Eltwise") {
+			const vector<int> bottom_ids = net->bottom_ids(i);
+			vector<string> names;
+			for(int j=0;j<bottom_ids.size();++j){
+				string bname = blob_names[bottom_ids[j]];
+				//printf("concat bottom: %s\n",bname.c_str());
+
+				for(int ii=i-1;ii>=0;--ii){
+					const vector<int> top_ids = net->top_ids(ii);
+					string lname = layer_names[ii];
+					bool found = false;
+					for(int jj = 0;jj<top_ids.size();++jj){
+						string tname = blob_names[top_ids[jj]];
+						//printf("top: %s\n",tname.c_str());
+						if(tname == bname){
+							found = true;
+							break;
+						}
+					}
+					if(found){
+						names.push_back(lname);
+						break;
+					}
+				}
+			}
+			write_net_eltwise(layer_name,param,names,ofile);
+		}
 		else{
 			printf("unknown layer: %s\n",layer_type.c_str());
 			exit(0);
@@ -174,11 +200,22 @@ void CaffeModelParser::write_net(const std::string& net_path){
 	for(auto i:connections) ofile<<i.first<<" "<<i.second<<endl;
 	ofile.close();
 }
-void CaffeModelParser::write_net_eltwise(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
+void CaffeModelParser::write_net_eltwise(const std::string& layer_name, const caffe::LayerParameter& param, const std::vector<std::string>& names, std::ofstream& ofile){
 	ofile<<"Layer: eltwise "<<layer_name<<endl;
+
+	for(int i=0;i<names.size();++i)
+		ofile<<names[i]<<" ";
+
 	const caffe::EltwiseParameter& eltwise_param = param.eltwise_param();
 	if(eltwise_param.operation() == caffe::EltwiseParameter_EltwiseOp_SUM){
-		ofile<<"sum"<<endl;
+		ofile<<"sum ";
+		float coeff0 = 1.0f;
+		float coeff1 = 1.0f;
+		if(eltwise_param.coeff().size()){
+			coeff0 = eltwise_param.coeff()[0];
+			coeff1 = eltwise_param.coeff()[1];
+		}
+		ofile<<coeff0<<" "<<coeff1<<endl;
 	}
 	else if(eltwise_param.operation() == caffe::EltwiseParameter_EltwiseOp_MAX){
 		ofile<<"max"<<endl;

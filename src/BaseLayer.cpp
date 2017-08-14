@@ -53,6 +53,20 @@ void Layer::connect2(Layer& l){
 		l.inputs[index].set_data(outputs[0].data);
 		l.inputs[index].type = outputs[0].type;
 	}
+	else if(l.type == "eltwise"){
+		if(l.order.find(this->name) == l.order.end()){
+			printf("error: connect2: eltwise(%s) cannot find name: %s\n",l.name.c_str(), this->name.c_str());
+			for(auto i:l.order){
+				printf("%s %d\n",i.first.c_str(),i.second);
+			}
+			exit(0);
+		}
+		l.inputs.resize(2);
+		int index = l.order[this->name];
+		l.inputs[index].set_shape(outputs[0]);
+		l.inputs[index].set_data(outputs[0].data);
+		l.inputs[index].type = outputs[0].type;
+	}
 	else{
 		l.inputs.push_back(Blob());
 		l.inputs.back().set_shape(outputs[0]);

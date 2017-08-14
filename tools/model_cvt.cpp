@@ -91,6 +91,12 @@ void cvt_caffe_model(const std::string& name){
 	net004_model_path = "../models/dense121.net004.data";
 	maps["dense121"] = {caffe_net_path, caffe_model_path,net004_net_path,net004_model_path};
 
+	caffe_net_path = "../caffe_models/deploy_inception-resnet-v2.prototxt";
+	caffe_model_path = "../caffe_models/inception-resnet-v2.caffemodel";
+	net004_net_path = "../models/inception-res-v2.net004.net";
+	net004_model_path = "../models/inception-res-v2.net004.data";
+	maps["in-res-v2"] = {caffe_net_path, caffe_model_path,net004_net_path,net004_model_path};
+
 	if(name == "all"){
 		for(auto i:maps){
 			printf("convert caffe model:\n");

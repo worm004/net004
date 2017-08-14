@@ -122,7 +122,7 @@ void Layers::add_scale(const std::string& name,bool is_bias){
 	Layer* l = new ScaleLayer(name,is_bias);
 	add(name, &l);
 }
-void Layers::add_eltwise(const std::string& name, const std::string& method){
-	Layer* l = new EltwiseLayer(name, method);
+void Layers::add_eltwise(const std::string& name, const std::string&l0, const std::string& l1, const std::string& method, float f0, float f1){
+	Layer* l = new EltwiseLayer(name, l0, l1, method, f0, f1);
 	add(name, &l);
 }

@@ -3,7 +3,7 @@
 #include "BaseLayer.h"
 class EltwiseLayer: public Layer{
 	public:
-	EltwiseLayer(const std::string& name, const std::string& method);
+	EltwiseLayer(const std::string& name, const std::string&l0, const std::string& l1, const std::string& method,float f0, float f1);
 	virtual ~EltwiseLayer();
 	virtual void forward();
 	virtual void backward();
@@ -15,6 +15,7 @@ class EltwiseLayer: public Layer{
 	virtual int parameter_number();
 	
 	std::string method;
+	float f0 = 1.0f, f1 = 1.0f;
 };
 
 #endif

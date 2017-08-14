@@ -47,7 +47,8 @@ void show_model(const std::shared_ptr<caffe::Net<float> >& net, const std::strin
 	}
 	ofile.close();
 }
-void load_img(const std::shared_ptr<caffe::Net<float> >& net, const std::string& img_path, int label, float mean_r, float mean_g, float mean_b){
+void load_img(const std::shared_ptr<caffe::Net<float> >& net, const std::string& img_path, int label, float mean_r, float mean_g, float mean_b,
+		float std_r, float std_g, float std_b){
 	int c = net->input_blobs()[0]->channels(),
 	    h = net->input_blobs()[0]->height(), 
 	    w = net->input_blobs()[0]->width();
@@ -64,9 +65,9 @@ void load_img(const std::shared_ptr<caffe::Net<float> >& net, const std::string&
 	uchar* data = (uchar*)img.data;
 	for(int i=0;i<h;++i){
 		for(int j=0;j<w;++j){
-			input[(i*w+j) + w*h*0] = data[(i*w+j)*3+2] - mean_r;
-			input[(i*w+j) + w*h*1] = data[(i*w+j)*3+1] - mean_g;
-			input[(i*w+j) + w*h*2] = data[(i*w+j)*3+0] - mean_b;
+			input[(i*w+j) + w*h*0] = (data[(i*w+j)*3+2] - mean_r)/std_r;
+			input[(i*w+j) + w*h*1] = (data[(i*w+j)*3+1] - mean_g)/std_g;
+			input[(i*w+j) + w*h*2] = (data[(i*w+j)*3+0] - mean_b)/std_b;
 		}
 	}
 }
@@ -106,6 +107,9 @@ void show_forward(const std::shared_ptr<caffe::Net<float> >& net, const std::str
 
 	for(int i=0;i<layers.size();++i){
 		ofile<<layers[i]->type()<<" "<<bottoms[i].size()<<" "<<tops[i].size()<<endl;
+		if((layers[i]->type() == string("BatchNorm")) || (layers[i]->type() == string("Scale")) || (layers[i]->type() == string("ReLU")))
+			continue;
+
 		//printf("%s %lu %lu\n",layers[i]->type(), bottoms[i].size(), tops[i].size());
 		for(int j=0;j<bottoms[i].size();++j){
 			caffe::Blob<float> *b = bottoms[i][j];
@@ -197,11 +201,16 @@ int main(int argc, char** argv){
 	//string net_path = "../caffe_models/ResNet-50-deploy.prototxt",
 	//       model_path = "../caffe_models/ResNet-50-model.caffemodel";
 
-	int label = 628;
-	float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
-	string net_path = "../caffe_models/deploy_inception-v3.prototxt",
-	       model_path = "../caffe_models/inception-v3.caffemodel";
+	//int label = 628;
+	//float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
+	//string net_path = "../caffe_models/deploy_inception-v3.prototxt",
+	//       model_path = "../caffe_models/inception-v3.caffemodel";
 
+	int label = 628;
+	float mean_r = 128, mean_g = 128, mean_b = 128;
+	float std_r = 128, std_g = 128, std_b = 128;
+	string net_path = "../caffe_models/deploy_inception-resnet-v2.prototxt",
+	       model_path = "../caffe_models/inception-resnet-v2.caffemodel";
 	string model_text_path = "model.txt",
 	       forward_text_path = "forward.txt",
 	       backward_text_path = "backward.txt";
@@ -213,7 +222,7 @@ int main(int argc, char** argv){
 	//show_model(net, model_text_path);
 
 	string img_path = "../imgs/westerdam-ship-size.jpg";
-	load_img(net,img_path,label,mean_r,mean_g,mean_b);
+	load_img(net,img_path,label,mean_r,mean_g,mean_b,std_r,std_g,std_b);
 	net->Forward();
 	show_forward(net, forward_text_path);
 	//net->Backward();
