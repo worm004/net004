@@ -65,7 +65,8 @@ void BNLayer::setup_data(){
 	variance.alloc();
 	scale.alloc();
 	// output
-	outputs[0].set_data(inputs[0].data);
+	outputs[0].alloc();
+	//outputs[0].set_data(inputs[0].data);
 
 }
 void BNLayer::setup_dif_shape(){
