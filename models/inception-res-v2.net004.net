@@ -10,7 +10,7 @@ Layer: batchnorm conv1_3x3_s2_bn
 Layer: scale conv1_3x3_s2_scale
 1
 Layer: activity conv1_3x3_relu
-relu
+relu 0
 Layer: conv conv2_3x3_s1
 3 3 32 0 0 1 1 1 0 none
 Layer: batchnorm conv2_3x3_s1_bn
@@ -18,7 +18,7 @@ Layer: batchnorm conv2_3x3_s1_bn
 Layer: scale conv2_3x3_s1_scale
 1
 Layer: activity conv2_3x3_relu
-relu
+relu 0
 Layer: conv conv3_3x3_s1
 3 3 64 1 1 1 1 1 0 none
 Layer: batchnorm conv3_3x3_s1_bn
@@ -26,7 +26,7 @@ Layer: batchnorm conv3_3x3_s1_bn
 Layer: scale conv3_3x3_s1_scale
 1
 Layer: activity conv3_3x3_relu
-relu
+relu 0
 Layer: pool pool1_3x3_s2
 3 0 2 max
 Layer: conv conv4_3x3_reduce
@@ -36,7 +36,7 @@ Layer: batchnorm conv4_3x3_reduce_bn
 Layer: scale conv4_3x3_reduce_scale
 1
 Layer: activity conv4_3x3_reduce_relu
-relu
+relu 0
 Layer: conv conv4_3x3
 3 3 192 0 0 1 1 1 0 none
 Layer: batchnorm conv4_3x3_bn
@@ -44,7 +44,7 @@ Layer: batchnorm conv4_3x3_bn
 Layer: scale conv4_3x3_scale
 1
 Layer: activity conv4_relu_3x3
-relu
+relu 0
 Layer: pool pool2_3x3_s2
 3 0 2 max
 Layer: split pool2_3x3_s2_pool2_3x3_s2_0_split
@@ -56,7 +56,7 @@ Layer: batchnorm conv5_1x1_bn
 Layer: scale conv5_1x1_scale
 1
 Layer: activity conv5_1x1_relu
-relu
+relu 0
 Layer: conv conv5_5x5_reduce
 1 1 48 0 0 1 1 1 0 none
 Layer: batchnorm conv5_5x5_reduce_bn
@@ -64,7 +64,7 @@ Layer: batchnorm conv5_5x5_reduce_bn
 Layer: scale conv5_5x5_reduce_scale
 1
 Layer: activity conv5_5x5_reduce_relu
-relu
+relu 0
 Layer: conv conv5_5x5
 5 5 64 2 2 1 1 1 0 none
 Layer: batchnorm conv5_5x5_bn
@@ -72,7 +72,7 @@ Layer: batchnorm conv5_5x5_bn
 Layer: scale conv5_5x5_scale
 1
 Layer: activity conv5_5x5_relu
-relu
+relu 0
 Layer: conv conv5_3x3_reduce
 1 1 64 0 0 1 1 1 0 none
 Layer: batchnorm conv5_3x3_reduce_bn
@@ -80,7 +80,7 @@ Layer: batchnorm conv5_3x3_reduce_bn
 Layer: scale conv5_3x3_reduce_scale
 1
 Layer: activity conv5_3x3_reduce_relu
-relu
+relu 0
 Layer: conv conv5_3x3
 3 3 96 1 1 1 1 1 0 none
 Layer: batchnorm conv5_3x3_bn
@@ -88,7 +88,7 @@ Layer: batchnorm conv5_3x3_bn
 Layer: scale conv5_3x3_scale
 1
 Layer: activity conv5_3x3_relu
-relu
+relu 0
 Layer: conv conv5_3x3_2
 3 3 96 1 1 1 1 1 0 none
 Layer: batchnorm conv5_3x3_2_bn
@@ -96,7 +96,7 @@ Layer: batchnorm conv5_3x3_2_bn
 Layer: scale conv5_3x3_2_scale
 1
 Layer: activity conv5_3x3_2_relu
-relu
+relu 0
 Layer: pool ave_pool
 3 1 1 avg
 Layer: conv conv5_1x1_ave
@@ -106,7 +106,7 @@ Layer: batchnorm conv5_1x1_ave_bn
 Layer: scale conv5_1x1_ave_scale
 1
 Layer: activity conv5_1x1_ave_relu
-relu
+relu 0
 Layer: concat stem_concat
 channel 4 conv5_1x1_relu conv5_5x5_relu conv5_3x3_2_relu conv5_1x1_ave_relu
 Layer: split stem_concat_stem_concat_0_split
@@ -118,7 +118,7 @@ Layer: batchnorm inception_resnet_v2_a1_1x1_bn
 Layer: scale inception_resnet_v2_a1_1x1_scale
 1
 Layer: activity inception_resnet_v2_a1_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a1_3x3_reduce
 1 1 32 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a1_3x3_reduce_bn
@@ -126,7 +126,7 @@ Layer: batchnorm inception_resnet_v2_a1_3x3_reduce_bn
 Layer: scale inception_resnet_v2_a1_3x3_reduce_scale
 1
 Layer: activity inception_resnet_v2_a1_3x3_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a1_3x3
 3 3 32 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a1_3x3_bn
@@ -134,7 +134,7 @@ Layer: batchnorm inception_resnet_v2_a1_3x3_bn
 Layer: scale inception_resnet_v2_a1_3x3_scale
 1
 Layer: activity inception_resnet_v2_a1_3x3_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a1_3x3_2_reduce
 1 1 32 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a1_3x3_2_reduce_bn
@@ -142,7 +142,7 @@ Layer: batchnorm inception_resnet_v2_a1_3x3_2_reduce_bn
 Layer: scale inception_resnet_v2_a1_3x3_2_reduce_scale
 1
 Layer: activity inception_resnet_v2_a1_3x3_2_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a1_3x3_2
 3 3 48 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a1_3x3_2_bn
@@ -150,7 +150,7 @@ Layer: batchnorm inception_resnet_v2_a1_3x3_2_bn
 Layer: scale inception_resnet_v2_a1_3x3_2_scale
 1
 Layer: activity inception_resnet_v2_a1_3x3_2_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a1_3x3_3
 3 3 64 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a1_3x3_3_bn
@@ -158,7 +158,7 @@ Layer: batchnorm inception_resnet_v2_a1_3x3_3_bn
 Layer: scale inception_resnet_v2_a1_3x3_3_scale
 1
 Layer: activity inception_resnet_v2_a1_3x3_3_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_a1_concat
 channel 3 inception_resnet_v2_a1_1x1_relu inception_resnet_v2_a1_3x3_relu inception_resnet_v2_a1_3x3_3_relu
 Layer: conv inception_resnet_v2_a1_up
@@ -166,7 +166,7 @@ Layer: conv inception_resnet_v2_a1_up
 Layer: eltwise inception_resnet_v2_a1_residual_eltwise
 stem_concat_stem_concat_0_split inception_resnet_v2_a1_up sum 1 0.17
 Layer: activity inception_resnet_v2_a1_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_a1_residual_eltwise_inception_resnet_v2_a1_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_a2_1x1
@@ -176,7 +176,7 @@ Layer: batchnorm inception_resnet_v2_a2_1x1_bn
 Layer: scale inception_resnet_v2_a2_1x1_scale
 1
 Layer: activity inception_resnet_v2_a2_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a2_3x3_reduce
 1 1 32 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a2_3x3_reduce_bn
@@ -184,7 +184,7 @@ Layer: batchnorm inception_resnet_v2_a2_3x3_reduce_bn
 Layer: scale inception_resnet_v2_a2_3x3_reduce_scale
 1
 Layer: activity inception_resnet_v2_a2_3x3_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a2_3x3
 3 3 32 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a2_3x3_bn
@@ -192,7 +192,7 @@ Layer: batchnorm inception_resnet_v2_a2_3x3_bn
 Layer: scale inception_resnet_v2_a2_3x3_scale
 1
 Layer: activity inception_resnet_v2_a2_3x3_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a2_3x3_2_reduce
 1 1 32 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a2_3x3_2_reduce_bn
@@ -200,7 +200,7 @@ Layer: batchnorm inception_resnet_v2_a2_3x3_2_reduce_bn
 Layer: scale inception_resnet_v2_a2_3x3_2_reduce_scale
 1
 Layer: activity inception_resnet_v2_a2_3x3_2_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a2_3x3_2
 3 3 48 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a2_3x3_2_bn
@@ -208,7 +208,7 @@ Layer: batchnorm inception_resnet_v2_a2_3x3_2_bn
 Layer: scale inception_resnet_v2_a2_3x3_2_scale
 1
 Layer: activity inception_resnet_v2_a2_3x3_2_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a2_3x3_3
 3 3 64 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a2_3x3_3_bn
@@ -216,7 +216,7 @@ Layer: batchnorm inception_resnet_v2_a2_3x3_3_bn
 Layer: scale inception_resnet_v2_a2_3x3_3_scale
 1
 Layer: activity inception_resnet_v2_a2_3x3_3_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_a2_concat
 channel 3 inception_resnet_v2_a2_1x1_relu inception_resnet_v2_a2_3x3_relu inception_resnet_v2_a2_3x3_3_relu
 Layer: conv inception_resnet_v2_a2_up
@@ -224,7 +224,7 @@ Layer: conv inception_resnet_v2_a2_up
 Layer: eltwise inception_resnet_v2_a2_residual_eltwise
 inception_resnet_v2_a1_residual_eltwise_inception_resnet_v2_a1_residual_eltwise_relu_0_split inception_resnet_v2_a2_up sum 1 0.17
 Layer: activity inception_resnet_v2_a2_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_a2_residual_eltwise_inception_resnet_v2_a2_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_a3_1x1
@@ -234,7 +234,7 @@ Layer: batchnorm inception_resnet_v2_a3_1x1_bn
 Layer: scale inception_resnet_v2_a3_1x1_scale
 1
 Layer: activity inception_resnet_v2_a3_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a3_3x3_reduce
 1 1 32 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a3_3x3_reduce_bn
@@ -242,7 +242,7 @@ Layer: batchnorm inception_resnet_v2_a3_3x3_reduce_bn
 Layer: scale inception_resnet_v2_a3_3x3_reduce_scale
 1
 Layer: activity inception_resnet_v2_a3_3x3_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a3_3x3
 3 3 32 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a3_3x3_bn
@@ -250,7 +250,7 @@ Layer: batchnorm inception_resnet_v2_a3_3x3_bn
 Layer: scale inception_resnet_v2_a3_3x3_scale
 1
 Layer: activity inception_resnet_v2_a3_3x3_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a3_3x3_2_reduce
 1 1 32 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a3_3x3_2_reduce_bn
@@ -258,7 +258,7 @@ Layer: batchnorm inception_resnet_v2_a3_3x3_2_reduce_bn
 Layer: scale inception_resnet_v2_a3_3x3_2_reduce_scale
 1
 Layer: activity inception_resnet_v2_a3_3x3_2_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a3_3x3_2
 3 3 48 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a3_3x3_2_bn
@@ -266,7 +266,7 @@ Layer: batchnorm inception_resnet_v2_a3_3x3_2_bn
 Layer: scale inception_resnet_v2_a3_3x3_2_scale
 1
 Layer: activity inception_resnet_v2_a3_3x3_2_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a3_3x3_3
 3 3 64 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a3_3x3_3_bn
@@ -274,7 +274,7 @@ Layer: batchnorm inception_resnet_v2_a3_3x3_3_bn
 Layer: scale inception_resnet_v2_a3_3x3_3_scale
 1
 Layer: activity inception_resnet_v2_a3_3x3_3_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_a3_concat
 channel 3 inception_resnet_v2_a3_1x1_relu inception_resnet_v2_a3_3x3_relu inception_resnet_v2_a3_3x3_3_relu
 Layer: conv inception_resnet_v2_a3_up
@@ -282,7 +282,7 @@ Layer: conv inception_resnet_v2_a3_up
 Layer: eltwise inception_resnet_v2_a3_residual_eltwise
 inception_resnet_v2_a2_residual_eltwise_inception_resnet_v2_a2_residual_eltwise_relu_0_split inception_resnet_v2_a3_up sum 1 0.17
 Layer: activity inception_resnet_v2_a3_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_a3_residual_eltwise_inception_resnet_v2_a3_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_a4_1x1
@@ -292,7 +292,7 @@ Layer: batchnorm inception_resnet_v2_a4_1x1_bn
 Layer: scale inception_resnet_v2_a4_1x1_scale
 1
 Layer: activity inception_resnet_v2_a4_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a4_3x3_reduce
 1 1 32 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a4_3x3_reduce_bn
@@ -300,7 +300,7 @@ Layer: batchnorm inception_resnet_v2_a4_3x3_reduce_bn
 Layer: scale inception_resnet_v2_a4_3x3_reduce_scale
 1
 Layer: activity inception_resnet_v2_a4_3x3_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a4_3x3
 3 3 32 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a4_3x3_bn
@@ -308,7 +308,7 @@ Layer: batchnorm inception_resnet_v2_a4_3x3_bn
 Layer: scale inception_resnet_v2_a4_3x3_scale
 1
 Layer: activity inception_resnet_v2_a4_3x3_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a4_3x3_2_reduce
 1 1 32 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a4_3x3_2_reduce_bn
@@ -316,7 +316,7 @@ Layer: batchnorm inception_resnet_v2_a4_3x3_2_reduce_bn
 Layer: scale inception_resnet_v2_a4_3x3_2_reduce_scale
 1
 Layer: activity inception_resnet_v2_a4_3x3_2_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a4_3x3_2
 3 3 48 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a4_3x3_2_bn
@@ -324,7 +324,7 @@ Layer: batchnorm inception_resnet_v2_a4_3x3_2_bn
 Layer: scale inception_resnet_v2_a4_3x3_2_scale
 1
 Layer: activity inception_resnet_v2_a4_3x3_2_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a4_3x3_3
 3 3 64 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a4_3x3_3_bn
@@ -332,7 +332,7 @@ Layer: batchnorm inception_resnet_v2_a4_3x3_3_bn
 Layer: scale inception_resnet_v2_a4_3x3_3_scale
 1
 Layer: activity inception_resnet_v2_a4_3x3_3_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_a4_concat
 channel 3 inception_resnet_v2_a4_1x1_relu inception_resnet_v2_a4_3x3_relu inception_resnet_v2_a4_3x3_3_relu
 Layer: conv inception_resnet_v2_a4_up
@@ -340,7 +340,7 @@ Layer: conv inception_resnet_v2_a4_up
 Layer: eltwise inception_resnet_v2_a4_residual_eltwise
 inception_resnet_v2_a3_residual_eltwise_inception_resnet_v2_a3_residual_eltwise_relu_0_split inception_resnet_v2_a4_up sum 1 0.17
 Layer: activity inception_resnet_v2_a4_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_a4_residual_eltwise_inception_resnet_v2_a4_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_a5_1x1
@@ -350,7 +350,7 @@ Layer: batchnorm inception_resnet_v2_a5_1x1_bn
 Layer: scale inception_resnet_v2_a5_1x1_scale
 1
 Layer: activity inception_resnet_v2_a5_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a5_3x3_reduce
 1 1 32 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a5_3x3_reduce_bn
@@ -358,7 +358,7 @@ Layer: batchnorm inception_resnet_v2_a5_3x3_reduce_bn
 Layer: scale inception_resnet_v2_a5_3x3_reduce_scale
 1
 Layer: activity inception_resnet_v2_a5_3x3_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a5_3x3
 3 3 32 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a5_3x3_bn
@@ -366,7 +366,7 @@ Layer: batchnorm inception_resnet_v2_a5_3x3_bn
 Layer: scale inception_resnet_v2_a5_3x3_scale
 1
 Layer: activity inception_resnet_v2_a5_3x3_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a5_3x3_2_reduce
 1 1 32 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a5_3x3_2_reduce_bn
@@ -374,7 +374,7 @@ Layer: batchnorm inception_resnet_v2_a5_3x3_2_reduce_bn
 Layer: scale inception_resnet_v2_a5_3x3_2_reduce_scale
 1
 Layer: activity inception_resnet_v2_a5_3x3_2_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a5_3x3_2
 3 3 48 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a5_3x3_2_bn
@@ -382,7 +382,7 @@ Layer: batchnorm inception_resnet_v2_a5_3x3_2_bn
 Layer: scale inception_resnet_v2_a5_3x3_2_scale
 1
 Layer: activity inception_resnet_v2_a5_3x3_2_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a5_3x3_3
 3 3 64 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a5_3x3_3_bn
@@ -390,7 +390,7 @@ Layer: batchnorm inception_resnet_v2_a5_3x3_3_bn
 Layer: scale inception_resnet_v2_a5_3x3_3_scale
 1
 Layer: activity inception_resnet_v2_a5_3x3_3_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_a5_concat
 channel 3 inception_resnet_v2_a5_1x1_relu inception_resnet_v2_a5_3x3_relu inception_resnet_v2_a5_3x3_3_relu
 Layer: conv inception_resnet_v2_a5_up
@@ -398,7 +398,7 @@ Layer: conv inception_resnet_v2_a5_up
 Layer: eltwise inception_resnet_v2_a5_residual_eltwise
 inception_resnet_v2_a4_residual_eltwise_inception_resnet_v2_a4_residual_eltwise_relu_0_split inception_resnet_v2_a5_up sum 1 0.17
 Layer: activity inception_resnet_v2_a5_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_a5_residual_eltwise_inception_resnet_v2_a5_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_a6_1x1
@@ -408,7 +408,7 @@ Layer: batchnorm inception_resnet_v2_a6_1x1_bn
 Layer: scale inception_resnet_v2_a6_1x1_scale
 1
 Layer: activity inception_resnet_v2_a6_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a6_3x3_reduce
 1 1 32 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a6_3x3_reduce_bn
@@ -416,7 +416,7 @@ Layer: batchnorm inception_resnet_v2_a6_3x3_reduce_bn
 Layer: scale inception_resnet_v2_a6_3x3_reduce_scale
 1
 Layer: activity inception_resnet_v2_a6_3x3_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a6_3x3
 3 3 32 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a6_3x3_bn
@@ -424,7 +424,7 @@ Layer: batchnorm inception_resnet_v2_a6_3x3_bn
 Layer: scale inception_resnet_v2_a6_3x3_scale
 1
 Layer: activity inception_resnet_v2_a6_3x3_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a6_3x3_2_reduce
 1 1 32 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a6_3x3_2_reduce_bn
@@ -432,7 +432,7 @@ Layer: batchnorm inception_resnet_v2_a6_3x3_2_reduce_bn
 Layer: scale inception_resnet_v2_a6_3x3_2_reduce_scale
 1
 Layer: activity inception_resnet_v2_a6_3x3_2_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a6_3x3_2
 3 3 48 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a6_3x3_2_bn
@@ -440,7 +440,7 @@ Layer: batchnorm inception_resnet_v2_a6_3x3_2_bn
 Layer: scale inception_resnet_v2_a6_3x3_2_scale
 1
 Layer: activity inception_resnet_v2_a6_3x3_2_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a6_3x3_3
 3 3 64 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a6_3x3_3_bn
@@ -448,7 +448,7 @@ Layer: batchnorm inception_resnet_v2_a6_3x3_3_bn
 Layer: scale inception_resnet_v2_a6_3x3_3_scale
 1
 Layer: activity inception_resnet_v2_a6_3x3_3_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_a6_concat
 channel 3 inception_resnet_v2_a6_1x1_relu inception_resnet_v2_a6_3x3_relu inception_resnet_v2_a6_3x3_3_relu
 Layer: conv inception_resnet_v2_a6_up
@@ -456,7 +456,7 @@ Layer: conv inception_resnet_v2_a6_up
 Layer: eltwise inception_resnet_v2_a6_residual_eltwise
 inception_resnet_v2_a5_residual_eltwise_inception_resnet_v2_a5_residual_eltwise_relu_0_split inception_resnet_v2_a6_up sum 1 0.17
 Layer: activity inception_resnet_v2_a6_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_a6_residual_eltwise_inception_resnet_v2_a6_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_a7_1x1
@@ -466,7 +466,7 @@ Layer: batchnorm inception_resnet_v2_a7_1x1_bn
 Layer: scale inception_resnet_v2_a7_1x1_scale
 1
 Layer: activity inception_resnet_v2_a7_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a7_3x3_reduce
 1 1 32 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a7_3x3_reduce_bn
@@ -474,7 +474,7 @@ Layer: batchnorm inception_resnet_v2_a7_3x3_reduce_bn
 Layer: scale inception_resnet_v2_a7_3x3_reduce_scale
 1
 Layer: activity inception_resnet_v2_a7_3x3_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a7_3x3
 3 3 32 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a7_3x3_bn
@@ -482,7 +482,7 @@ Layer: batchnorm inception_resnet_v2_a7_3x3_bn
 Layer: scale inception_resnet_v2_a7_3x3_scale
 1
 Layer: activity inception_resnet_v2_a7_3x3_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a7_3x3_2_reduce
 1 1 32 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a7_3x3_2_reduce_bn
@@ -490,7 +490,7 @@ Layer: batchnorm inception_resnet_v2_a7_3x3_2_reduce_bn
 Layer: scale inception_resnet_v2_a7_3x3_2_reduce_scale
 1
 Layer: activity inception_resnet_v2_a7_3x3_2_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a7_3x3_2
 3 3 48 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a7_3x3_2_bn
@@ -498,7 +498,7 @@ Layer: batchnorm inception_resnet_v2_a7_3x3_2_bn
 Layer: scale inception_resnet_v2_a7_3x3_2_scale
 1
 Layer: activity inception_resnet_v2_a7_3x3_2_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a7_3x3_3
 3 3 64 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a7_3x3_3_bn
@@ -506,7 +506,7 @@ Layer: batchnorm inception_resnet_v2_a7_3x3_3_bn
 Layer: scale inception_resnet_v2_a7_3x3_3_scale
 1
 Layer: activity inception_resnet_v2_a7_3x3_3_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_a7_concat
 channel 3 inception_resnet_v2_a7_1x1_relu inception_resnet_v2_a7_3x3_relu inception_resnet_v2_a7_3x3_3_relu
 Layer: conv inception_resnet_v2_a7_up
@@ -514,7 +514,7 @@ Layer: conv inception_resnet_v2_a7_up
 Layer: eltwise inception_resnet_v2_a7_residual_eltwise
 inception_resnet_v2_a6_residual_eltwise_inception_resnet_v2_a6_residual_eltwise_relu_0_split inception_resnet_v2_a7_up sum 1 0.17
 Layer: activity inception_resnet_v2_a7_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_a7_residual_eltwise_inception_resnet_v2_a7_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_a8_1x1
@@ -524,7 +524,7 @@ Layer: batchnorm inception_resnet_v2_a8_1x1_bn
 Layer: scale inception_resnet_v2_a8_1x1_scale
 1
 Layer: activity inception_resnet_v2_a8_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a8_3x3_reduce
 1 1 32 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a8_3x3_reduce_bn
@@ -532,7 +532,7 @@ Layer: batchnorm inception_resnet_v2_a8_3x3_reduce_bn
 Layer: scale inception_resnet_v2_a8_3x3_reduce_scale
 1
 Layer: activity inception_resnet_v2_a8_3x3_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a8_3x3
 3 3 32 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a8_3x3_bn
@@ -540,7 +540,7 @@ Layer: batchnorm inception_resnet_v2_a8_3x3_bn
 Layer: scale inception_resnet_v2_a8_3x3_scale
 1
 Layer: activity inception_resnet_v2_a8_3x3_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a8_3x3_2_reduce
 1 1 32 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a8_3x3_2_reduce_bn
@@ -548,7 +548,7 @@ Layer: batchnorm inception_resnet_v2_a8_3x3_2_reduce_bn
 Layer: scale inception_resnet_v2_a8_3x3_2_reduce_scale
 1
 Layer: activity inception_resnet_v2_a8_3x3_2_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a8_3x3_2
 3 3 48 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a8_3x3_2_bn
@@ -556,7 +556,7 @@ Layer: batchnorm inception_resnet_v2_a8_3x3_2_bn
 Layer: scale inception_resnet_v2_a8_3x3_2_scale
 1
 Layer: activity inception_resnet_v2_a8_3x3_2_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a8_3x3_3
 3 3 64 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a8_3x3_3_bn
@@ -564,7 +564,7 @@ Layer: batchnorm inception_resnet_v2_a8_3x3_3_bn
 Layer: scale inception_resnet_v2_a8_3x3_3_scale
 1
 Layer: activity inception_resnet_v2_a8_3x3_3_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_a8_concat
 channel 3 inception_resnet_v2_a8_1x1_relu inception_resnet_v2_a8_3x3_relu inception_resnet_v2_a8_3x3_3_relu
 Layer: conv inception_resnet_v2_a8_up
@@ -572,7 +572,7 @@ Layer: conv inception_resnet_v2_a8_up
 Layer: eltwise inception_resnet_v2_a8_residual_eltwise
 inception_resnet_v2_a7_residual_eltwise_inception_resnet_v2_a7_residual_eltwise_relu_0_split inception_resnet_v2_a8_up sum 1 0.17
 Layer: activity inception_resnet_v2_a8_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_a8_residual_eltwise_inception_resnet_v2_a8_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_a9_1x1
@@ -582,7 +582,7 @@ Layer: batchnorm inception_resnet_v2_a9_1x1_bn
 Layer: scale inception_resnet_v2_a9_1x1_scale
 1
 Layer: activity inception_resnet_v2_a9_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a9_3x3_reduce
 1 1 32 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a9_3x3_reduce_bn
@@ -590,7 +590,7 @@ Layer: batchnorm inception_resnet_v2_a9_3x3_reduce_bn
 Layer: scale inception_resnet_v2_a9_3x3_reduce_scale
 1
 Layer: activity inception_resnet_v2_a9_3x3_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a9_3x3
 3 3 32 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a9_3x3_bn
@@ -598,7 +598,7 @@ Layer: batchnorm inception_resnet_v2_a9_3x3_bn
 Layer: scale inception_resnet_v2_a9_3x3_scale
 1
 Layer: activity inception_resnet_v2_a9_3x3_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a9_3x3_2_reduce
 1 1 32 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a9_3x3_2_reduce_bn
@@ -606,7 +606,7 @@ Layer: batchnorm inception_resnet_v2_a9_3x3_2_reduce_bn
 Layer: scale inception_resnet_v2_a9_3x3_2_reduce_scale
 1
 Layer: activity inception_resnet_v2_a9_3x3_2_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a9_3x3_2
 3 3 48 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a9_3x3_2_bn
@@ -614,7 +614,7 @@ Layer: batchnorm inception_resnet_v2_a9_3x3_2_bn
 Layer: scale inception_resnet_v2_a9_3x3_2_scale
 1
 Layer: activity inception_resnet_v2_a9_3x3_2_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a9_3x3_3
 3 3 64 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a9_3x3_3_bn
@@ -622,7 +622,7 @@ Layer: batchnorm inception_resnet_v2_a9_3x3_3_bn
 Layer: scale inception_resnet_v2_a9_3x3_3_scale
 1
 Layer: activity inception_resnet_v2_a9_3x3_3_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_a9_concat
 channel 3 inception_resnet_v2_a9_1x1_relu inception_resnet_v2_a9_3x3_relu inception_resnet_v2_a9_3x3_3_relu
 Layer: conv inception_resnet_v2_a9_up
@@ -630,7 +630,7 @@ Layer: conv inception_resnet_v2_a9_up
 Layer: eltwise inception_resnet_v2_a9_residual_eltwise
 inception_resnet_v2_a8_residual_eltwise_inception_resnet_v2_a8_residual_eltwise_relu_0_split inception_resnet_v2_a9_up sum 1 0.17
 Layer: activity inception_resnet_v2_a9_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_a9_residual_eltwise_inception_resnet_v2_a9_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_a10_1x1
@@ -640,7 +640,7 @@ Layer: batchnorm inception_resnet_v2_a10_1x1_bn
 Layer: scale inception_resnet_v2_a10_1x1_scale
 1
 Layer: activity inception_resnet_v2_a10_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a10_3x3_reduce
 1 1 32 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a10_3x3_reduce_bn
@@ -648,7 +648,7 @@ Layer: batchnorm inception_resnet_v2_a10_3x3_reduce_bn
 Layer: scale inception_resnet_v2_a10_3x3_reduce_scale
 1
 Layer: activity inception_resnet_v2_a10_3x3_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a10_3x3
 3 3 32 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a10_3x3_bn
@@ -656,7 +656,7 @@ Layer: batchnorm inception_resnet_v2_a10_3x3_bn
 Layer: scale inception_resnet_v2_a10_3x3_scale
 1
 Layer: activity inception_resnet_v2_a10_3x3_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a10_3x3_2_reduce
 1 1 32 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a10_3x3_2_reduce_bn
@@ -664,7 +664,7 @@ Layer: batchnorm inception_resnet_v2_a10_3x3_2_reduce_bn
 Layer: scale inception_resnet_v2_a10_3x3_2_reduce_scale
 1
 Layer: activity inception_resnet_v2_a10_3x3_2_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a10_3x3_2
 3 3 48 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a10_3x3_2_bn
@@ -672,7 +672,7 @@ Layer: batchnorm inception_resnet_v2_a10_3x3_2_bn
 Layer: scale inception_resnet_v2_a10_3x3_2_scale
 1
 Layer: activity inception_resnet_v2_a10_3x3_2_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_a10_3x3_3
 3 3 64 1 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_a10_3x3_3_bn
@@ -680,7 +680,7 @@ Layer: batchnorm inception_resnet_v2_a10_3x3_3_bn
 Layer: scale inception_resnet_v2_a10_3x3_3_scale
 1
 Layer: activity inception_resnet_v2_a10_3x3_3_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_a10_concat
 channel 3 inception_resnet_v2_a10_1x1_relu inception_resnet_v2_a10_3x3_relu inception_resnet_v2_a10_3x3_3_relu
 Layer: conv inception_resnet_v2_a10_up
@@ -688,7 +688,7 @@ Layer: conv inception_resnet_v2_a10_up
 Layer: eltwise inception_resnet_v2_a10_residual_eltwise
 inception_resnet_v2_a9_residual_eltwise_inception_resnet_v2_a9_residual_eltwise_relu_0_split inception_resnet_v2_a10_up sum 1 0.17
 Layer: activity inception_resnet_v2_a10_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_a10_residual_eltwise_inception_resnet_v2_a10_residual_eltwise_relu_0_split
 
 Layer: conv reduction_a_3x3
@@ -698,7 +698,7 @@ Layer: batchnorm reduction_a_3x3_bn
 Layer: scale reduction_a_3x3_scale
 1
 Layer: activity reduction_a_3x3_relu
-relu
+relu 0
 Layer: conv reduction_a_3x3_2_reduce
 1 1 256 0 0 1 1 1 0 none
 Layer: batchnorm reduction_a_3x3_2_reduce_bn
@@ -706,7 +706,7 @@ Layer: batchnorm reduction_a_3x3_2_reduce_bn
 Layer: scale reduction_a_3x3_2_reduce_scale
 1
 Layer: activity reduction_a_3x3_2_reduce_relu
-relu
+relu 0
 Layer: conv reduction_a_3x3_2
 3 3 256 1 1 1 1 1 0 none
 Layer: batchnorm reduction_a_3x3_2_bn
@@ -714,7 +714,7 @@ Layer: batchnorm reduction_a_3x3_2_bn
 Layer: scale reduction_a_3x3_2_scale
 1
 Layer: activity reduction_a_3x3_2_relu
-relu
+relu 0
 Layer: conv reduction_a_3x3_3
 3 3 384 0 0 2 2 1 0 none
 Layer: batchnorm reduction_a_3x3_3_bn
@@ -722,7 +722,7 @@ Layer: batchnorm reduction_a_3x3_3_bn
 Layer: scale reduction_a_3x3_3_scale
 1
 Layer: activity reduction_a_3x3_3_relu
-relu
+relu 0
 Layer: pool reduction_a_pool
 3 0 2 max
 Layer: concat reduction_a_concat
@@ -736,7 +736,7 @@ Layer: batchnorm inception_resnet_v2_b1_1x1_bn
 Layer: scale inception_resnet_v2_b1_1x1_scale
 1
 Layer: activity inception_resnet_v2_b1_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b1_1x7_reduce
 1 1 128 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b1_1x7_reduce_bn
@@ -744,7 +744,7 @@ Layer: batchnorm inception_resnet_v2_b1_1x7_reduce_bn
 Layer: scale inception_resnet_v2_b1_1x7_reduce_scale
 1
 Layer: activity inception_resnet_v2_b1_1x7_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b1_1x7
 1 7 160 0 3 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b1_1x7_bn
@@ -752,7 +752,7 @@ Layer: batchnorm inception_resnet_v2_b1_1x7_bn
 Layer: scale inception_resnet_v2_b1_1x7_scale
 1
 Layer: activity inception_resnet_v2_b1_1x7_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b1_7x1
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b1_7x1_bn
@@ -760,7 +760,7 @@ Layer: batchnorm inception_resnet_v2_b1_7x1_bn
 Layer: scale inception_resnet_v2_b1_7x1_scale
 1
 Layer: activity inception_resnet_v2_b1_7x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_b1_concat
 channel 2 inception_resnet_v2_b1_1x1_relu inception_resnet_v2_b1_7x1_relu
 Layer: conv inception_resnet_v2_b1_up
@@ -768,7 +768,7 @@ Layer: conv inception_resnet_v2_b1_up
 Layer: eltwise inception_resnet_v2_b1_residual_eltwise
 reduction_a_concat_reduction_a_concat_0_split inception_resnet_v2_b1_up sum 1 0.1
 Layer: activity inception_resnet_v2_b1_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_b1_residual_eltwise_inception_resnet_v2_b1_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_b2_1x1
@@ -778,7 +778,7 @@ Layer: batchnorm inception_resnet_v2_b2_1x1_bn
 Layer: scale inception_resnet_v2_b2_1x1_scale
 1
 Layer: activity inception_resnet_v2_b2_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b2_1x7_reduce
 1 1 128 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b2_1x7_reduce_bn
@@ -786,7 +786,7 @@ Layer: batchnorm inception_resnet_v2_b2_1x7_reduce_bn
 Layer: scale inception_resnet_v2_b2_1x7_reduce_scale
 1
 Layer: activity inception_resnet_v2_b2_1x7_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b2_1x7
 1 7 160 0 3 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b2_1x7_bn
@@ -794,7 +794,7 @@ Layer: batchnorm inception_resnet_v2_b2_1x7_bn
 Layer: scale inception_resnet_v2_b2_1x7_scale
 1
 Layer: activity inception_resnet_v2_b2_1x7_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b2_7x1
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b2_7x1_bn
@@ -802,7 +802,7 @@ Layer: batchnorm inception_resnet_v2_b2_7x1_bn
 Layer: scale inception_resnet_v2_b2_7x1_scale
 1
 Layer: activity inception_resnet_v2_b2_7x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_b2_concat
 channel 2 inception_resnet_v2_b2_1x1_relu inception_resnet_v2_b2_7x1_relu
 Layer: conv inception_resnet_v2_b2_up
@@ -810,7 +810,7 @@ Layer: conv inception_resnet_v2_b2_up
 Layer: eltwise inception_resnet_v2_b2_residual_eltwise
 inception_resnet_v2_b1_residual_eltwise_inception_resnet_v2_b1_residual_eltwise_relu_0_split inception_resnet_v2_b2_up sum 1 0.1
 Layer: activity inception_resnet_v2_b2_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_b2_residual_eltwise_inception_resnet_v2_b2_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_b3_1x1
@@ -820,7 +820,7 @@ Layer: batchnorm inception_resnet_v2_b3_1x1_bn
 Layer: scale inception_resnet_v2_b3_1x1_scale
 1
 Layer: activity inception_resnet_v2_b3_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b3_1x7_reduce
 1 1 128 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b3_1x7_reduce_bn
@@ -828,7 +828,7 @@ Layer: batchnorm inception_resnet_v2_b3_1x7_reduce_bn
 Layer: scale inception_resnet_v2_b3_1x7_reduce_scale
 1
 Layer: activity inception_resnet_v2_b3_1x7_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b3_1x7
 1 7 160 0 3 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b3_1x7_bn
@@ -836,7 +836,7 @@ Layer: batchnorm inception_resnet_v2_b3_1x7_bn
 Layer: scale inception_resnet_v2_b3_1x7_scale
 1
 Layer: activity inception_resnet_v2_b3_1x7_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b3_7x1
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b3_7x1_bn
@@ -844,7 +844,7 @@ Layer: batchnorm inception_resnet_v2_b3_7x1_bn
 Layer: scale inception_resnet_v2_b3_7x1_scale
 1
 Layer: activity inception_resnet_v2_b3_7x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_b3_concat
 channel 2 inception_resnet_v2_b3_1x1_relu inception_resnet_v2_b3_7x1_relu
 Layer: conv inception_resnet_v2_b3_up
@@ -852,7 +852,7 @@ Layer: conv inception_resnet_v2_b3_up
 Layer: eltwise inception_resnet_v2_b3_residual_eltwise
 inception_resnet_v2_b2_residual_eltwise_inception_resnet_v2_b2_residual_eltwise_relu_0_split inception_resnet_v2_b3_up sum 1 0.1
 Layer: activity inception_resnet_v2_b3_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_b3_residual_eltwise_inception_resnet_v2_b3_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_b4_1x1
@@ -862,7 +862,7 @@ Layer: batchnorm inception_resnet_v2_b4_1x1_bn
 Layer: scale inception_resnet_v2_b4_1x1_scale
 1
 Layer: activity inception_resnet_v2_b4_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b4_1x7_reduce
 1 1 128 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b4_1x7_reduce_bn
@@ -870,7 +870,7 @@ Layer: batchnorm inception_resnet_v2_b4_1x7_reduce_bn
 Layer: scale inception_resnet_v2_b4_1x7_reduce_scale
 1
 Layer: activity inception_resnet_v2_b4_1x7_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b4_1x7
 1 7 160 0 3 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b4_1x7_bn
@@ -878,7 +878,7 @@ Layer: batchnorm inception_resnet_v2_b4_1x7_bn
 Layer: scale inception_resnet_v2_b4_1x7_scale
 1
 Layer: activity inception_resnet_v2_b4_1x7_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b4_7x1
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b4_7x1_bn
@@ -886,7 +886,7 @@ Layer: batchnorm inception_resnet_v2_b4_7x1_bn
 Layer: scale inception_resnet_v2_b4_7x1_scale
 1
 Layer: activity inception_resnet_v2_b4_7x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_b4_concat
 channel 2 inception_resnet_v2_b4_1x1_relu inception_resnet_v2_b4_7x1_relu
 Layer: conv inception_resnet_v2_b4_up
@@ -894,7 +894,7 @@ Layer: conv inception_resnet_v2_b4_up
 Layer: eltwise inception_resnet_v2_b4_residual_eltwise
 inception_resnet_v2_b3_residual_eltwise_inception_resnet_v2_b3_residual_eltwise_relu_0_split inception_resnet_v2_b4_up sum 1 0.1
 Layer: activity inception_resnet_v2_b4_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_b4_residual_eltwise_inception_resnet_v2_b4_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_b5_1x1
@@ -904,7 +904,7 @@ Layer: batchnorm inception_resnet_v2_b5_1x1_bn
 Layer: scale inception_resnet_v2_b5_1x1_scale
 1
 Layer: activity inception_resnet_v2_b5_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b5_1x7_reduce
 1 1 128 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b5_1x7_reduce_bn
@@ -912,7 +912,7 @@ Layer: batchnorm inception_resnet_v2_b5_1x7_reduce_bn
 Layer: scale inception_resnet_v2_b5_1x7_reduce_scale
 1
 Layer: activity inception_resnet_v2_b5_1x7_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b5_1x7
 1 7 160 0 3 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b5_1x7_bn
@@ -920,7 +920,7 @@ Layer: batchnorm inception_resnet_v2_b5_1x7_bn
 Layer: scale inception_resnet_v2_b5_1x7_scale
 1
 Layer: activity inception_resnet_v2_b5_1x7_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b5_7x1
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b5_7x1_bn
@@ -928,7 +928,7 @@ Layer: batchnorm inception_resnet_v2_b5_7x1_bn
 Layer: scale inception_resnet_v2_b5_7x1_scale
 1
 Layer: activity inception_resnet_v2_b5_7x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_b5_concat
 channel 2 inception_resnet_v2_b5_1x1_relu inception_resnet_v2_b5_7x1_relu
 Layer: conv inception_resnet_v2_b5_up
@@ -936,7 +936,7 @@ Layer: conv inception_resnet_v2_b5_up
 Layer: eltwise inception_resnet_v2_b5_residual_eltwise
 inception_resnet_v2_b4_residual_eltwise_inception_resnet_v2_b4_residual_eltwise_relu_0_split inception_resnet_v2_b5_up sum 1 0.1
 Layer: activity inception_resnet_v2_b5_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_b5_residual_eltwise_inception_resnet_v2_b5_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_b6_1x1
@@ -946,7 +946,7 @@ Layer: batchnorm inception_resnet_v2_b6_1x1_bn
 Layer: scale inception_resnet_v2_b6_1x1_scale
 1
 Layer: activity inception_resnet_v2_b6_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b6_1x7_reduce
 1 1 128 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b6_1x7_reduce_bn
@@ -954,7 +954,7 @@ Layer: batchnorm inception_resnet_v2_b6_1x7_reduce_bn
 Layer: scale inception_resnet_v2_b6_1x7_reduce_scale
 1
 Layer: activity inception_resnet_v2_b6_1x7_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b6_1x7
 1 7 160 0 3 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b6_1x7_bn
@@ -962,7 +962,7 @@ Layer: batchnorm inception_resnet_v2_b6_1x7_bn
 Layer: scale inception_resnet_v2_b6_1x7_scale
 1
 Layer: activity inception_resnet_v2_b6_1x7_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b6_7x1
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b6_7x1_bn
@@ -970,7 +970,7 @@ Layer: batchnorm inception_resnet_v2_b6_7x1_bn
 Layer: scale inception_resnet_v2_b6_7x1_scale
 1
 Layer: activity inception_resnet_v2_b6_7x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_b6_concat
 channel 2 inception_resnet_v2_b6_1x1_relu inception_resnet_v2_b6_7x1_relu
 Layer: conv inception_resnet_v2_b6_up
@@ -978,7 +978,7 @@ Layer: conv inception_resnet_v2_b6_up
 Layer: eltwise inception_resnet_v2_b6_residual_eltwise
 inception_resnet_v2_b5_residual_eltwise_inception_resnet_v2_b5_residual_eltwise_relu_0_split inception_resnet_v2_b6_up sum 1 0.1
 Layer: activity inception_resnet_v2_b6_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_b6_residual_eltwise_inception_resnet_v2_b6_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_b7_1x1
@@ -988,7 +988,7 @@ Layer: batchnorm inception_resnet_v2_b7_1x1_bn
 Layer: scale inception_resnet_v2_b7_1x1_scale
 1
 Layer: activity inception_resnet_v2_b7_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b7_1x7_reduce
 1 1 128 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b7_1x7_reduce_bn
@@ -996,7 +996,7 @@ Layer: batchnorm inception_resnet_v2_b7_1x7_reduce_bn
 Layer: scale inception_resnet_v2_b7_1x7_reduce_scale
 1
 Layer: activity inception_resnet_v2_b7_1x7_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b7_1x7
 1 7 160 0 3 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b7_1x7_bn
@@ -1004,7 +1004,7 @@ Layer: batchnorm inception_resnet_v2_b7_1x7_bn
 Layer: scale inception_resnet_v2_b7_1x7_scale
 1
 Layer: activity inception_resnet_v2_b7_1x7_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b7_7x1
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b7_7x1_bn
@@ -1012,7 +1012,7 @@ Layer: batchnorm inception_resnet_v2_b7_7x1_bn
 Layer: scale inception_resnet_v2_b7_7x1_scale
 1
 Layer: activity inception_resnet_v2_b7_7x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_b7_concat
 channel 2 inception_resnet_v2_b7_1x1_relu inception_resnet_v2_b7_7x1_relu
 Layer: conv inception_resnet_v2_b7_up
@@ -1020,7 +1020,7 @@ Layer: conv inception_resnet_v2_b7_up
 Layer: eltwise inception_resnet_v2_b7_residual_eltwise
 inception_resnet_v2_b6_residual_eltwise_inception_resnet_v2_b6_residual_eltwise_relu_0_split inception_resnet_v2_b7_up sum 1 0.1
 Layer: activity inception_resnet_v2_b7_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_b7_residual_eltwise_inception_resnet_v2_b7_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_b8_1x1
@@ -1030,7 +1030,7 @@ Layer: batchnorm inception_resnet_v2_b8_1x1_bn
 Layer: scale inception_resnet_v2_b8_1x1_scale
 1
 Layer: activity inception_resnet_v2_b8_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b8_1x7_reduce
 1 1 128 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b8_1x7_reduce_bn
@@ -1038,7 +1038,7 @@ Layer: batchnorm inception_resnet_v2_b8_1x7_reduce_bn
 Layer: scale inception_resnet_v2_b8_1x7_reduce_scale
 1
 Layer: activity inception_resnet_v2_b8_1x7_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b8_1x7
 1 7 160 0 3 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b8_1x7_bn
@@ -1046,7 +1046,7 @@ Layer: batchnorm inception_resnet_v2_b8_1x7_bn
 Layer: scale inception_resnet_v2_b8_1x7_scale
 1
 Layer: activity inception_resnet_v2_b8_1x7_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b8_7x1
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b8_7x1_bn
@@ -1054,7 +1054,7 @@ Layer: batchnorm inception_resnet_v2_b8_7x1_bn
 Layer: scale inception_resnet_v2_b8_7x1_scale
 1
 Layer: activity inception_resnet_v2_b8_7x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_b8_concat
 channel 2 inception_resnet_v2_b8_1x1_relu inception_resnet_v2_b8_7x1_relu
 Layer: conv inception_resnet_v2_b8_up
@@ -1062,7 +1062,7 @@ Layer: conv inception_resnet_v2_b8_up
 Layer: eltwise inception_resnet_v2_b8_residual_eltwise
 inception_resnet_v2_b7_residual_eltwise_inception_resnet_v2_b7_residual_eltwise_relu_0_split inception_resnet_v2_b8_up sum 1 0.1
 Layer: activity inception_resnet_v2_b8_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_b8_residual_eltwise_inception_resnet_v2_b8_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_b9_1x1
@@ -1072,7 +1072,7 @@ Layer: batchnorm inception_resnet_v2_b9_1x1_bn
 Layer: scale inception_resnet_v2_b9_1x1_scale
 1
 Layer: activity inception_resnet_v2_b9_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b9_1x7_reduce
 1 1 128 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b9_1x7_reduce_bn
@@ -1080,7 +1080,7 @@ Layer: batchnorm inception_resnet_v2_b9_1x7_reduce_bn
 Layer: scale inception_resnet_v2_b9_1x7_reduce_scale
 1
 Layer: activity inception_resnet_v2_b9_1x7_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b9_1x7
 1 7 160 0 3 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b9_1x7_bn
@@ -1088,7 +1088,7 @@ Layer: batchnorm inception_resnet_v2_b9_1x7_bn
 Layer: scale inception_resnet_v2_b9_1x7_scale
 1
 Layer: activity inception_resnet_v2_b9_1x7_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b9_7x1
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b9_7x1_bn
@@ -1096,7 +1096,7 @@ Layer: batchnorm inception_resnet_v2_b9_7x1_bn
 Layer: scale inception_resnet_v2_b9_7x1_scale
 1
 Layer: activity inception_resnet_v2_b9_7x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_b9_concat
 channel 2 inception_resnet_v2_b9_1x1_relu inception_resnet_v2_b9_7x1_relu
 Layer: conv inception_resnet_v2_b9_up
@@ -1104,7 +1104,7 @@ Layer: conv inception_resnet_v2_b9_up
 Layer: eltwise inception_resnet_v2_b9_residual_eltwise
 inception_resnet_v2_b8_residual_eltwise_inception_resnet_v2_b8_residual_eltwise_relu_0_split inception_resnet_v2_b9_up sum 1 0.1
 Layer: activity inception_resnet_v2_b9_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_b9_residual_eltwise_inception_resnet_v2_b9_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_b10_1x1
@@ -1114,7 +1114,7 @@ Layer: batchnorm inception_resnet_v2_b10_1x1_bn
 Layer: scale inception_resnet_v2_b10_1x1_scale
 1
 Layer: activity inception_resnet_v2_b10_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b10_1x7_reduce
 1 1 128 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b10_1x7_reduce_bn
@@ -1122,7 +1122,7 @@ Layer: batchnorm inception_resnet_v2_b10_1x7_reduce_bn
 Layer: scale inception_resnet_v2_b10_1x7_reduce_scale
 1
 Layer: activity inception_resnet_v2_b10_1x7_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b10_1x7
 1 7 160 0 3 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b10_1x7_bn
@@ -1130,7 +1130,7 @@ Layer: batchnorm inception_resnet_v2_b10_1x7_bn
 Layer: scale inception_resnet_v2_b10_1x7_scale
 1
 Layer: activity inception_resnet_v2_b10_1x7_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b10_7x1
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b10_7x1_bn
@@ -1138,7 +1138,7 @@ Layer: batchnorm inception_resnet_v2_b10_7x1_bn
 Layer: scale inception_resnet_v2_b10_7x1_scale
 1
 Layer: activity inception_resnet_v2_b10_7x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_b10_concat
 channel 2 inception_resnet_v2_b10_1x1_relu inception_resnet_v2_b10_7x1_relu
 Layer: conv inception_resnet_v2_b10_up
@@ -1146,7 +1146,7 @@ Layer: conv inception_resnet_v2_b10_up
 Layer: eltwise inception_resnet_v2_b10_residual_eltwise
 inception_resnet_v2_b9_residual_eltwise_inception_resnet_v2_b9_residual_eltwise_relu_0_split inception_resnet_v2_b10_up sum 1 0.1
 Layer: activity inception_resnet_v2_b10_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_b10_residual_eltwise_inception_resnet_v2_b10_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_b11_1x1
@@ -1156,7 +1156,7 @@ Layer: batchnorm inception_resnet_v2_b11_1x1_bn
 Layer: scale inception_resnet_v2_b11_1x1_scale
 1
 Layer: activity inception_resnet_v2_b11_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b11_1x7_reduce
 1 1 128 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b11_1x7_reduce_bn
@@ -1164,7 +1164,7 @@ Layer: batchnorm inception_resnet_v2_b11_1x7_reduce_bn
 Layer: scale inception_resnet_v2_b11_1x7_reduce_scale
 1
 Layer: activity inception_resnet_v2_b11_1x7_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b11_1x7
 1 7 160 0 3 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b11_1x7_bn
@@ -1172,7 +1172,7 @@ Layer: batchnorm inception_resnet_v2_b11_1x7_bn
 Layer: scale inception_resnet_v2_b11_1x7_scale
 1
 Layer: activity inception_resnet_v2_b11_1x7_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b11_7x1
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b11_7x1_bn
@@ -1180,7 +1180,7 @@ Layer: batchnorm inception_resnet_v2_b11_7x1_bn
 Layer: scale inception_resnet_v2_b11_7x1_scale
 1
 Layer: activity inception_resnet_v2_b11_7x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_b11_concat
 channel 2 inception_resnet_v2_b11_1x1_relu inception_resnet_v2_b11_7x1_relu
 Layer: conv inception_resnet_v2_b11_up
@@ -1188,7 +1188,7 @@ Layer: conv inception_resnet_v2_b11_up
 Layer: eltwise inception_resnet_v2_b11_residual_eltwise
 inception_resnet_v2_b10_residual_eltwise_inception_resnet_v2_b10_residual_eltwise_relu_0_split inception_resnet_v2_b11_up sum 1 0.1
 Layer: activity inception_resnet_v2_b11_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_b11_residual_eltwise_inception_resnet_v2_b11_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_b12_1x1
@@ -1198,7 +1198,7 @@ Layer: batchnorm inception_resnet_v2_b12_1x1_bn
 Layer: scale inception_resnet_v2_b12_1x1_scale
 1
 Layer: activity inception_resnet_v2_b12_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b12_1x7_reduce
 1 1 128 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b12_1x7_reduce_bn
@@ -1206,7 +1206,7 @@ Layer: batchnorm inception_resnet_v2_b12_1x7_reduce_bn
 Layer: scale inception_resnet_v2_b12_1x7_reduce_scale
 1
 Layer: activity inception_resnet_v2_b12_1x7_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b12_1x7
 1 7 160 0 3 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b12_1x7_bn
@@ -1214,7 +1214,7 @@ Layer: batchnorm inception_resnet_v2_b12_1x7_bn
 Layer: scale inception_resnet_v2_b12_1x7_scale
 1
 Layer: activity inception_resnet_v2_b12_1x7_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b12_7x1
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b12_7x1_bn
@@ -1222,7 +1222,7 @@ Layer: batchnorm inception_resnet_v2_b12_7x1_bn
 Layer: scale inception_resnet_v2_b12_7x1_scale
 1
 Layer: activity inception_resnet_v2_b12_7x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_b12_concat
 channel 2 inception_resnet_v2_b12_1x1_relu inception_resnet_v2_b12_7x1_relu
 Layer: conv inception_resnet_v2_b12_up
@@ -1230,7 +1230,7 @@ Layer: conv inception_resnet_v2_b12_up
 Layer: eltwise inception_resnet_v2_b12_residual_eltwise
 inception_resnet_v2_b11_residual_eltwise_inception_resnet_v2_b11_residual_eltwise_relu_0_split inception_resnet_v2_b12_up sum 1 0.1
 Layer: activity inception_resnet_v2_b12_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_b12_residual_eltwise_inception_resnet_v2_b12_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_b13_1x1
@@ -1240,7 +1240,7 @@ Layer: batchnorm inception_resnet_v2_b13_1x1_bn
 Layer: scale inception_resnet_v2_b13_1x1_scale
 1
 Layer: activity inception_resnet_v2_b13_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b13_1x7_reduce
 1 1 128 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b13_1x7_reduce_bn
@@ -1248,7 +1248,7 @@ Layer: batchnorm inception_resnet_v2_b13_1x7_reduce_bn
 Layer: scale inception_resnet_v2_b13_1x7_reduce_scale
 1
 Layer: activity inception_resnet_v2_b13_1x7_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b13_1x7
 1 7 160 0 3 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b13_1x7_bn
@@ -1256,7 +1256,7 @@ Layer: batchnorm inception_resnet_v2_b13_1x7_bn
 Layer: scale inception_resnet_v2_b13_1x7_scale
 1
 Layer: activity inception_resnet_v2_b13_1x7_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b13_7x1
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b13_7x1_bn
@@ -1264,7 +1264,7 @@ Layer: batchnorm inception_resnet_v2_b13_7x1_bn
 Layer: scale inception_resnet_v2_b13_7x1_scale
 1
 Layer: activity inception_resnet_v2_b13_7x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_b13_concat
 channel 2 inception_resnet_v2_b13_1x1_relu inception_resnet_v2_b13_7x1_relu
 Layer: conv inception_resnet_v2_b13_up
@@ -1272,7 +1272,7 @@ Layer: conv inception_resnet_v2_b13_up
 Layer: eltwise inception_resnet_v2_b13_residual_eltwise
 inception_resnet_v2_b12_residual_eltwise_inception_resnet_v2_b12_residual_eltwise_relu_0_split inception_resnet_v2_b13_up sum 1 0.1
 Layer: activity inception_resnet_v2_b13_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_b13_residual_eltwise_inception_resnet_v2_b13_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_b14_1x1
@@ -1282,7 +1282,7 @@ Layer: batchnorm inception_resnet_v2_b14_1x1_bn
 Layer: scale inception_resnet_v2_b14_1x1_scale
 1
 Layer: activity inception_resnet_v2_b14_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b14_1x7_reduce
 1 1 128 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b14_1x7_reduce_bn
@@ -1290,7 +1290,7 @@ Layer: batchnorm inception_resnet_v2_b14_1x7_reduce_bn
 Layer: scale inception_resnet_v2_b14_1x7_reduce_scale
 1
 Layer: activity inception_resnet_v2_b14_1x7_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b14_1x7
 1 7 160 0 3 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b14_1x7_bn
@@ -1298,7 +1298,7 @@ Layer: batchnorm inception_resnet_v2_b14_1x7_bn
 Layer: scale inception_resnet_v2_b14_1x7_scale
 1
 Layer: activity inception_resnet_v2_b14_1x7_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b14_7x1
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b14_7x1_bn
@@ -1306,7 +1306,7 @@ Layer: batchnorm inception_resnet_v2_b14_7x1_bn
 Layer: scale inception_resnet_v2_b14_7x1_scale
 1
 Layer: activity inception_resnet_v2_b14_7x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_b14_concat
 channel 2 inception_resnet_v2_b14_1x1_relu inception_resnet_v2_b14_7x1_relu
 Layer: conv inception_resnet_v2_b14_up
@@ -1314,7 +1314,7 @@ Layer: conv inception_resnet_v2_b14_up
 Layer: eltwise inception_resnet_v2_b14_residual_eltwise
 inception_resnet_v2_b13_residual_eltwise_inception_resnet_v2_b13_residual_eltwise_relu_0_split inception_resnet_v2_b14_up sum 1 0.1
 Layer: activity inception_resnet_v2_b14_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_b14_residual_eltwise_inception_resnet_v2_b14_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_b15_1x1
@@ -1324,7 +1324,7 @@ Layer: batchnorm inception_resnet_v2_b15_1x1_bn
 Layer: scale inception_resnet_v2_b15_1x1_scale
 1
 Layer: activity inception_resnet_v2_b15_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b15_1x7_reduce
 1 1 128 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b15_1x7_reduce_bn
@@ -1332,7 +1332,7 @@ Layer: batchnorm inception_resnet_v2_b15_1x7_reduce_bn
 Layer: scale inception_resnet_v2_b15_1x7_reduce_scale
 1
 Layer: activity inception_resnet_v2_b15_1x7_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b15_1x7
 1 7 160 0 3 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b15_1x7_bn
@@ -1340,7 +1340,7 @@ Layer: batchnorm inception_resnet_v2_b15_1x7_bn
 Layer: scale inception_resnet_v2_b15_1x7_scale
 1
 Layer: activity inception_resnet_v2_b15_1x7_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b15_7x1
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b15_7x1_bn
@@ -1348,7 +1348,7 @@ Layer: batchnorm inception_resnet_v2_b15_7x1_bn
 Layer: scale inception_resnet_v2_b15_7x1_scale
 1
 Layer: activity inception_resnet_v2_b15_7x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_b15_concat
 channel 2 inception_resnet_v2_b15_1x1_relu inception_resnet_v2_b15_7x1_relu
 Layer: conv inception_resnet_v2_b15_up
@@ -1356,7 +1356,7 @@ Layer: conv inception_resnet_v2_b15_up
 Layer: eltwise inception_resnet_v2_b15_residual_eltwise
 inception_resnet_v2_b14_residual_eltwise_inception_resnet_v2_b14_residual_eltwise_relu_0_split inception_resnet_v2_b15_up sum 1 0.1
 Layer: activity inception_resnet_v2_b15_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_b15_residual_eltwise_inception_resnet_v2_b15_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_b16_1x1
@@ -1366,7 +1366,7 @@ Layer: batchnorm inception_resnet_v2_b16_1x1_bn
 Layer: scale inception_resnet_v2_b16_1x1_scale
 1
 Layer: activity inception_resnet_v2_b16_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b16_1x7_reduce
 1 1 128 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b16_1x7_reduce_bn
@@ -1374,7 +1374,7 @@ Layer: batchnorm inception_resnet_v2_b16_1x7_reduce_bn
 Layer: scale inception_resnet_v2_b16_1x7_reduce_scale
 1
 Layer: activity inception_resnet_v2_b16_1x7_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b16_1x7
 1 7 160 0 3 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b16_1x7_bn
@@ -1382,7 +1382,7 @@ Layer: batchnorm inception_resnet_v2_b16_1x7_bn
 Layer: scale inception_resnet_v2_b16_1x7_scale
 1
 Layer: activity inception_resnet_v2_b16_1x7_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b16_7x1
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b16_7x1_bn
@@ -1390,7 +1390,7 @@ Layer: batchnorm inception_resnet_v2_b16_7x1_bn
 Layer: scale inception_resnet_v2_b16_7x1_scale
 1
 Layer: activity inception_resnet_v2_b16_7x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_b16_concat
 channel 2 inception_resnet_v2_b16_1x1_relu inception_resnet_v2_b16_7x1_relu
 Layer: conv inception_resnet_v2_b16_up
@@ -1398,7 +1398,7 @@ Layer: conv inception_resnet_v2_b16_up
 Layer: eltwise inception_resnet_v2_b16_residual_eltwise
 inception_resnet_v2_b15_residual_eltwise_inception_resnet_v2_b15_residual_eltwise_relu_0_split inception_resnet_v2_b16_up sum 1 0.1
 Layer: activity inception_resnet_v2_b16_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_b16_residual_eltwise_inception_resnet_v2_b16_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_b17_1x1
@@ -1408,7 +1408,7 @@ Layer: batchnorm inception_resnet_v2_b17_1x1_bn
 Layer: scale inception_resnet_v2_b17_1x1_scale
 1
 Layer: activity inception_resnet_v2_b17_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b17_1x7_reduce
 1 1 128 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b17_1x7_reduce_bn
@@ -1416,7 +1416,7 @@ Layer: batchnorm inception_resnet_v2_b17_1x7_reduce_bn
 Layer: scale inception_resnet_v2_b17_1x7_reduce_scale
 1
 Layer: activity inception_resnet_v2_b17_1x7_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b17_1x7
 1 7 160 0 3 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b17_1x7_bn
@@ -1424,7 +1424,7 @@ Layer: batchnorm inception_resnet_v2_b17_1x7_bn
 Layer: scale inception_resnet_v2_b17_1x7_scale
 1
 Layer: activity inception_resnet_v2_b17_1x7_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b17_7x1
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b17_7x1_bn
@@ -1432,7 +1432,7 @@ Layer: batchnorm inception_resnet_v2_b17_7x1_bn
 Layer: scale inception_resnet_v2_b17_7x1_scale
 1
 Layer: activity inception_resnet_v2_b17_7x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_b17_concat
 channel 2 inception_resnet_v2_b17_1x1_relu inception_resnet_v2_b17_7x1_relu
 Layer: conv inception_resnet_v2_b17_up
@@ -1440,7 +1440,7 @@ Layer: conv inception_resnet_v2_b17_up
 Layer: eltwise inception_resnet_v2_b17_residual_eltwise
 inception_resnet_v2_b16_residual_eltwise_inception_resnet_v2_b16_residual_eltwise_relu_0_split inception_resnet_v2_b17_up sum 1 0.1
 Layer: activity inception_resnet_v2_b17_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_b17_residual_eltwise_inception_resnet_v2_b17_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_b18_1x1
@@ -1450,7 +1450,7 @@ Layer: batchnorm inception_resnet_v2_b18_1x1_bn
 Layer: scale inception_resnet_v2_b18_1x1_scale
 1
 Layer: activity inception_resnet_v2_b18_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b18_1x7_reduce
 1 1 128 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b18_1x7_reduce_bn
@@ -1458,7 +1458,7 @@ Layer: batchnorm inception_resnet_v2_b18_1x7_reduce_bn
 Layer: scale inception_resnet_v2_b18_1x7_reduce_scale
 1
 Layer: activity inception_resnet_v2_b18_1x7_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b18_1x7
 1 7 160 0 3 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b18_1x7_bn
@@ -1466,7 +1466,7 @@ Layer: batchnorm inception_resnet_v2_b18_1x7_bn
 Layer: scale inception_resnet_v2_b18_1x7_scale
 1
 Layer: activity inception_resnet_v2_b18_1x7_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b18_7x1
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b18_7x1_bn
@@ -1474,7 +1474,7 @@ Layer: batchnorm inception_resnet_v2_b18_7x1_bn
 Layer: scale inception_resnet_v2_b18_7x1_scale
 1
 Layer: activity inception_resnet_v2_b18_7x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_b18_concat
 channel 2 inception_resnet_v2_b18_1x1_relu inception_resnet_v2_b18_7x1_relu
 Layer: conv inception_resnet_v2_b18_up
@@ -1482,7 +1482,7 @@ Layer: conv inception_resnet_v2_b18_up
 Layer: eltwise inception_resnet_v2_b18_residual_eltwise
 inception_resnet_v2_b17_residual_eltwise_inception_resnet_v2_b17_residual_eltwise_relu_0_split inception_resnet_v2_b18_up sum 1 0.1
 Layer: activity inception_resnet_v2_b18_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_b18_residual_eltwise_inception_resnet_v2_b18_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_b19_1x1
@@ -1492,7 +1492,7 @@ Layer: batchnorm inception_resnet_v2_b19_1x1_bn
 Layer: scale inception_resnet_v2_b19_1x1_scale
 1
 Layer: activity inception_resnet_v2_b19_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b19_1x7_reduce
 1 1 128 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b19_1x7_reduce_bn
@@ -1500,7 +1500,7 @@ Layer: batchnorm inception_resnet_v2_b19_1x7_reduce_bn
 Layer: scale inception_resnet_v2_b19_1x7_reduce_scale
 1
 Layer: activity inception_resnet_v2_b19_1x7_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b19_1x7
 1 7 160 0 3 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b19_1x7_bn
@@ -1508,7 +1508,7 @@ Layer: batchnorm inception_resnet_v2_b19_1x7_bn
 Layer: scale inception_resnet_v2_b19_1x7_scale
 1
 Layer: activity inception_resnet_v2_b19_1x7_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b19_7x1
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b19_7x1_bn
@@ -1516,7 +1516,7 @@ Layer: batchnorm inception_resnet_v2_b19_7x1_bn
 Layer: scale inception_resnet_v2_b19_7x1_scale
 1
 Layer: activity inception_resnet_v2_b19_7x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_b19_concat
 channel 2 inception_resnet_v2_b19_1x1_relu inception_resnet_v2_b19_7x1_relu
 Layer: conv inception_resnet_v2_b19_up
@@ -1524,7 +1524,7 @@ Layer: conv inception_resnet_v2_b19_up
 Layer: eltwise inception_resnet_v2_b19_residual_eltwise
 inception_resnet_v2_b18_residual_eltwise_inception_resnet_v2_b18_residual_eltwise_relu_0_split inception_resnet_v2_b19_up sum 1 0.1
 Layer: activity inception_resnet_v2_b19_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_b19_residual_eltwise_inception_resnet_v2_b19_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_b20_1x1
@@ -1534,7 +1534,7 @@ Layer: batchnorm inception_resnet_v2_b20_1x1_bn
 Layer: scale inception_resnet_v2_b20_1x1_scale
 1
 Layer: activity inception_resnet_v2_b20_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b20_1x7_reduce
 1 1 128 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b20_1x7_reduce_bn
@@ -1542,7 +1542,7 @@ Layer: batchnorm inception_resnet_v2_b20_1x7_reduce_bn
 Layer: scale inception_resnet_v2_b20_1x7_reduce_scale
 1
 Layer: activity inception_resnet_v2_b20_1x7_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b20_1x7
 1 7 160 0 3 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b20_1x7_bn
@@ -1550,7 +1550,7 @@ Layer: batchnorm inception_resnet_v2_b20_1x7_bn
 Layer: scale inception_resnet_v2_b20_1x7_scale
 1
 Layer: activity inception_resnet_v2_b20_1x7_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_b20_7x1
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_b20_7x1_bn
@@ -1558,7 +1558,7 @@ Layer: batchnorm inception_resnet_v2_b20_7x1_bn
 Layer: scale inception_resnet_v2_b20_7x1_scale
 1
 Layer: activity inception_resnet_v2_b20_7x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_b20_concat
 channel 2 inception_resnet_v2_b20_1x1_relu inception_resnet_v2_b20_7x1_relu
 Layer: conv inception_resnet_v2_b20_up
@@ -1566,7 +1566,7 @@ Layer: conv inception_resnet_v2_b20_up
 Layer: eltwise inception_resnet_v2_b20_residual_eltwise
 inception_resnet_v2_b19_residual_eltwise_inception_resnet_v2_b19_residual_eltwise_relu_0_split inception_resnet_v2_b20_up sum 1 0.1
 Layer: activity inception_resnet_v2_b20_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_b20_residual_eltwise_inception_resnet_v2_b20_residual_eltwise_relu_0_split
 
 Layer: conv reduction_b_3x3_reduce
@@ -1576,7 +1576,7 @@ Layer: batchnorm reduction_b_3x3_reduce_bn
 Layer: scale reduction_b_3x3_reduce_scale
 1
 Layer: activity reduction_b_3x3_reduce_relu
-relu
+relu 0
 Layer: conv reduction_b_3x3
 3 3 384 0 0 2 2 1 0 none
 Layer: batchnorm reduction_b_3x3_bn
@@ -1584,7 +1584,7 @@ Layer: batchnorm reduction_b_3x3_bn
 Layer: scale reduction_b_3x3_scale
 1
 Layer: activity reduction_b_3x3_relu
-relu
+relu 0
 Layer: conv reduction_b_3x3_2_reduce
 1 1 256 0 0 1 1 1 0 none
 Layer: batchnorm reduction_b_3x3_2_reduce_bn
@@ -1592,7 +1592,7 @@ Layer: batchnorm reduction_b_3x3_2_reduce_bn
 Layer: scale reduction_b_3x3_2_reduce_scale
 1
 Layer: activity reduction_b_3x3_2_reduce_relu
-relu
+relu 0
 Layer: conv reduction_b_3x3_2
 3 3 288 0 0 2 2 1 0 none
 Layer: batchnorm reduction_b_3x3_2_bn
@@ -1600,7 +1600,7 @@ Layer: batchnorm reduction_b_3x3_2_bn
 Layer: scale reduction_b_3x3_2_scale
 1
 Layer: activity reduction_b_3x3_2_relu
-relu
+relu 0
 Layer: conv reduction_b_3x3_3_reduce
 1 1 256 0 0 1 1 1 0 none
 Layer: batchnorm reduction_b_3x3_3_reduce_bn
@@ -1608,7 +1608,7 @@ Layer: batchnorm reduction_b_3x3_3_reduce_bn
 Layer: scale reduction_b_3x3_3_reduce_scale
 1
 Layer: activity reduction_b_3x3_3_reduce_relu
-relu
+relu 0
 Layer: conv reduction_b_3x3_3
 3 3 288 1 1 1 1 1 0 none
 Layer: batchnorm reduction_b_3x3_3_bn
@@ -1616,7 +1616,7 @@ Layer: batchnorm reduction_b_3x3_3_bn
 Layer: scale reduction_b_3x3_3_scale
 1
 Layer: activity reduction_b_3x3_3_relu
-relu
+relu 0
 Layer: conv reduction_b_3x3_4
 3 3 320 0 0 2 2 1 0 none
 Layer: batchnorm reduction_b_3x3_4_bn
@@ -1624,7 +1624,7 @@ Layer: batchnorm reduction_b_3x3_4_bn
 Layer: scale reduction_b_3x3_4_scale
 1
 Layer: activity reduction_b_3x3_4_relu
-relu
+relu 0
 Layer: pool reduction_b_pool
 3 0 2 max
 Layer: concat reduction_b_concat
@@ -1638,7 +1638,7 @@ Layer: batchnorm inception_resnet_v2_c1_1x1_bn
 Layer: scale inception_resnet_v2_c1_1x1_scale
 1
 Layer: activity inception_resnet_v2_c1_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c1_1x3_reduce
 1 1 192 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c1_1x3_reduce_bn
@@ -1646,7 +1646,7 @@ Layer: batchnorm inception_resnet_v2_c1_1x3_reduce_bn
 Layer: scale inception_resnet_v2_c1_1x3_reduce_scale
 1
 Layer: activity inception_resnet_v2_c1_1x3_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c1_1x3
 1 3 224 0 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c1_1x3_bn
@@ -1654,7 +1654,7 @@ Layer: batchnorm inception_resnet_v2_c1_1x3_bn
 Layer: scale inception_resnet_v2_c1_1x3_scale
 1
 Layer: activity inception_resnet_v2_c1_1x3_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c1_3x1
 3 1 256 1 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c1_3x1_bn
@@ -1662,7 +1662,7 @@ Layer: batchnorm inception_resnet_v2_c1_3x1_bn
 Layer: scale inception_resnet_v2_c1_3x1_scale
 1
 Layer: activity inception_resnet_v2_c1_3x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_c1_concat
 channel 2 inception_resnet_v2_c1_1x1_relu inception_resnet_v2_c1_3x1_relu
 Layer: conv inception_resnet_v2_c1_up
@@ -1670,7 +1670,7 @@ Layer: conv inception_resnet_v2_c1_up
 Layer: eltwise inception_resnet_v2_c1_residual_eltwise
 reduction_b_concat_reduction_b_concat_0_split inception_resnet_v2_c1_up sum 1 0.2
 Layer: activity inception_resnet_v2_c1_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_c1_residual_eltwise_inception_resnet_v2_c1_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_c2_1x1
@@ -1680,7 +1680,7 @@ Layer: batchnorm inception_resnet_v2_c2_1x1_bn
 Layer: scale inception_resnet_v2_c2_1x1_scale
 1
 Layer: activity inception_resnet_v2_c2_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c2_1x3_reduce
 1 1 192 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c2_1x3_reduce_bn
@@ -1688,7 +1688,7 @@ Layer: batchnorm inception_resnet_v2_c2_1x3_reduce_bn
 Layer: scale inception_resnet_v2_c2_1x3_reduce_scale
 1
 Layer: activity inception_resnet_v2_c2_1x3_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c2_1x3
 1 3 224 0 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c2_1x3_bn
@@ -1696,7 +1696,7 @@ Layer: batchnorm inception_resnet_v2_c2_1x3_bn
 Layer: scale inception_resnet_v2_c2_1x3_scale
 1
 Layer: activity inception_resnet_v2_c2_1x3_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c2_3x1
 3 1 256 1 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c2_3x1_bn
@@ -1704,7 +1704,7 @@ Layer: batchnorm inception_resnet_v2_c2_3x1_bn
 Layer: scale inception_resnet_v2_c2_3x1_scale
 1
 Layer: activity inception_resnet_v2_c2_3x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_c2_concat
 channel 2 inception_resnet_v2_c2_1x1_relu inception_resnet_v2_c2_3x1_relu
 Layer: conv inception_resnet_v2_c2_up
@@ -1712,7 +1712,7 @@ Layer: conv inception_resnet_v2_c2_up
 Layer: eltwise inception_resnet_v2_c2_residual_eltwise
 inception_resnet_v2_c1_residual_eltwise_inception_resnet_v2_c1_residual_eltwise_relu_0_split inception_resnet_v2_c2_up sum 1 0.2
 Layer: activity inception_resnet_v2_c2_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_c2_residual_eltwise_inception_resnet_v2_c2_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_c3_1x1
@@ -1722,7 +1722,7 @@ Layer: batchnorm inception_resnet_v2_c3_1x1_bn
 Layer: scale inception_resnet_v2_c3_1x1_scale
 1
 Layer: activity inception_resnet_v2_c3_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c3_1x3_reduce
 1 1 192 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c3_1x3_reduce_bn
@@ -1730,7 +1730,7 @@ Layer: batchnorm inception_resnet_v2_c3_1x3_reduce_bn
 Layer: scale inception_resnet_v2_c3_1x3_reduce_scale
 1
 Layer: activity inception_resnet_v2_c3_1x3_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c3_1x3
 1 3 224 0 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c3_1x3_bn
@@ -1738,7 +1738,7 @@ Layer: batchnorm inception_resnet_v2_c3_1x3_bn
 Layer: scale inception_resnet_v2_c3_1x3_scale
 1
 Layer: activity inception_resnet_v2_c3_1x3_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c3_3x1
 3 1 256 1 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c3_3x1_bn
@@ -1746,7 +1746,7 @@ Layer: batchnorm inception_resnet_v2_c3_3x1_bn
 Layer: scale inception_resnet_v2_c3_3x1_scale
 1
 Layer: activity inception_resnet_v2_c3_3x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_c3_concat
 channel 2 inception_resnet_v2_c3_1x1_relu inception_resnet_v2_c3_3x1_relu
 Layer: conv inception_resnet_v2_c3_up
@@ -1754,7 +1754,7 @@ Layer: conv inception_resnet_v2_c3_up
 Layer: eltwise inception_resnet_v2_c3_residual_eltwise
 inception_resnet_v2_c2_residual_eltwise_inception_resnet_v2_c2_residual_eltwise_relu_0_split inception_resnet_v2_c3_up sum 1 0.2
 Layer: activity inception_resnet_v2_c3_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_c3_residual_eltwise_inception_resnet_v2_c3_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_c4_1x1
@@ -1764,7 +1764,7 @@ Layer: batchnorm inception_resnet_v2_c4_1x1_bn
 Layer: scale inception_resnet_v2_c4_1x1_scale
 1
 Layer: activity inception_resnet_v2_c4_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c4_1x3_reduce
 1 1 192 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c4_1x3_reduce_bn
@@ -1772,7 +1772,7 @@ Layer: batchnorm inception_resnet_v2_c4_1x3_reduce_bn
 Layer: scale inception_resnet_v2_c4_1x3_reduce_scale
 1
 Layer: activity inception_resnet_v2_c4_1x3_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c4_1x3
 1 3 224 0 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c4_1x3_bn
@@ -1780,7 +1780,7 @@ Layer: batchnorm inception_resnet_v2_c4_1x3_bn
 Layer: scale inception_resnet_v2_c4_1x3_scale
 1
 Layer: activity inception_resnet_v2_c4_1x3_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c4_3x1
 3 1 256 1 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c4_3x1_bn
@@ -1788,7 +1788,7 @@ Layer: batchnorm inception_resnet_v2_c4_3x1_bn
 Layer: scale inception_resnet_v2_c4_3x1_scale
 1
 Layer: activity inception_resnet_v2_c4_3x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_c4_concat
 channel 2 inception_resnet_v2_c4_1x1_relu inception_resnet_v2_c4_3x1_relu
 Layer: conv inception_resnet_v2_c4_up
@@ -1796,7 +1796,7 @@ Layer: conv inception_resnet_v2_c4_up
 Layer: eltwise inception_resnet_v2_c4_residual_eltwise
 inception_resnet_v2_c3_residual_eltwise_inception_resnet_v2_c3_residual_eltwise_relu_0_split inception_resnet_v2_c4_up sum 1 0.2
 Layer: activity inception_resnet_v2_c4_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_c4_residual_eltwise_inception_resnet_v2_c4_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_c5_1x1
@@ -1806,7 +1806,7 @@ Layer: batchnorm inception_resnet_v2_c5_1x1_bn
 Layer: scale inception_resnet_v2_c5_1x1_scale
 1
 Layer: activity inception_resnet_v2_c5_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c5_1x3_reduce
 1 1 192 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c5_1x3_reduce_bn
@@ -1814,7 +1814,7 @@ Layer: batchnorm inception_resnet_v2_c5_1x3_reduce_bn
 Layer: scale inception_resnet_v2_c5_1x3_reduce_scale
 1
 Layer: activity inception_resnet_v2_c5_1x3_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c5_1x3
 1 3 224 0 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c5_1x3_bn
@@ -1822,7 +1822,7 @@ Layer: batchnorm inception_resnet_v2_c5_1x3_bn
 Layer: scale inception_resnet_v2_c5_1x3_scale
 1
 Layer: activity inception_resnet_v2_c5_1x3_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c5_3x1
 3 1 256 1 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c5_3x1_bn
@@ -1830,7 +1830,7 @@ Layer: batchnorm inception_resnet_v2_c5_3x1_bn
 Layer: scale inception_resnet_v2_c5_3x1_scale
 1
 Layer: activity inception_resnet_v2_c5_3x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_c5_concat
 channel 2 inception_resnet_v2_c5_1x1_relu inception_resnet_v2_c5_3x1_relu
 Layer: conv inception_resnet_v2_c5_up
@@ -1838,7 +1838,7 @@ Layer: conv inception_resnet_v2_c5_up
 Layer: eltwise inception_resnet_v2_c5_residual_eltwise
 inception_resnet_v2_c4_residual_eltwise_inception_resnet_v2_c4_residual_eltwise_relu_0_split inception_resnet_v2_c5_up sum 1 0.2
 Layer: activity inception_resnet_v2_c5_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_c5_residual_eltwise_inception_resnet_v2_c5_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_c6_1x1
@@ -1848,7 +1848,7 @@ Layer: batchnorm inception_resnet_v2_c6_1x1_bn
 Layer: scale inception_resnet_v2_c6_1x1_scale
 1
 Layer: activity inception_resnet_v2_c6_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c6_1x3_reduce
 1 1 192 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c6_1x3_reduce_bn
@@ -1856,7 +1856,7 @@ Layer: batchnorm inception_resnet_v2_c6_1x3_reduce_bn
 Layer: scale inception_resnet_v2_c6_1x3_reduce_scale
 1
 Layer: activity inception_resnet_v2_c6_1x3_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c6_1x3
 1 3 224 0 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c6_1x3_bn
@@ -1864,7 +1864,7 @@ Layer: batchnorm inception_resnet_v2_c6_1x3_bn
 Layer: scale inception_resnet_v2_c6_1x3_scale
 1
 Layer: activity inception_resnet_v2_c6_1x3_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c6_3x1
 3 1 256 1 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c6_3x1_bn
@@ -1872,7 +1872,7 @@ Layer: batchnorm inception_resnet_v2_c6_3x1_bn
 Layer: scale inception_resnet_v2_c6_3x1_scale
 1
 Layer: activity inception_resnet_v2_c6_3x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_c6_concat
 channel 2 inception_resnet_v2_c6_1x1_relu inception_resnet_v2_c6_3x1_relu
 Layer: conv inception_resnet_v2_c6_up
@@ -1880,7 +1880,7 @@ Layer: conv inception_resnet_v2_c6_up
 Layer: eltwise inception_resnet_v2_c6_residual_eltwise
 inception_resnet_v2_c5_residual_eltwise_inception_resnet_v2_c5_residual_eltwise_relu_0_split inception_resnet_v2_c6_up sum 1 0.2
 Layer: activity inception_resnet_v2_c6_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_c6_residual_eltwise_inception_resnet_v2_c6_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_c7_1x1
@@ -1890,7 +1890,7 @@ Layer: batchnorm inception_resnet_v2_c7_1x1_bn
 Layer: scale inception_resnet_v2_c7_1x1_scale
 1
 Layer: activity inception_resnet_v2_c7_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c7_1x3_reduce
 1 1 192 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c7_1x3_reduce_bn
@@ -1898,7 +1898,7 @@ Layer: batchnorm inception_resnet_v2_c7_1x3_reduce_bn
 Layer: scale inception_resnet_v2_c7_1x3_reduce_scale
 1
 Layer: activity inception_resnet_v2_c7_1x3_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c7_1x3
 1 3 224 0 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c7_1x3_bn
@@ -1906,7 +1906,7 @@ Layer: batchnorm inception_resnet_v2_c7_1x3_bn
 Layer: scale inception_resnet_v2_c7_1x3_scale
 1
 Layer: activity inception_resnet_v2_c7_1x3_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c7_3x1
 3 1 256 1 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c7_3x1_bn
@@ -1914,7 +1914,7 @@ Layer: batchnorm inception_resnet_v2_c7_3x1_bn
 Layer: scale inception_resnet_v2_c7_3x1_scale
 1
 Layer: activity inception_resnet_v2_c7_3x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_c7_concat
 channel 2 inception_resnet_v2_c7_1x1_relu inception_resnet_v2_c7_3x1_relu
 Layer: conv inception_resnet_v2_c7_up
@@ -1922,7 +1922,7 @@ Layer: conv inception_resnet_v2_c7_up
 Layer: eltwise inception_resnet_v2_c7_residual_eltwise
 inception_resnet_v2_c6_residual_eltwise_inception_resnet_v2_c6_residual_eltwise_relu_0_split inception_resnet_v2_c7_up sum 1 0.2
 Layer: activity inception_resnet_v2_c7_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_c7_residual_eltwise_inception_resnet_v2_c7_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_c8_1x1
@@ -1932,7 +1932,7 @@ Layer: batchnorm inception_resnet_v2_c8_1x1_bn
 Layer: scale inception_resnet_v2_c8_1x1_scale
 1
 Layer: activity inception_resnet_v2_c8_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c8_1x3_reduce
 1 1 192 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c8_1x3_reduce_bn
@@ -1940,7 +1940,7 @@ Layer: batchnorm inception_resnet_v2_c8_1x3_reduce_bn
 Layer: scale inception_resnet_v2_c8_1x3_reduce_scale
 1
 Layer: activity inception_resnet_v2_c8_1x3_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c8_1x3
 1 3 224 0 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c8_1x3_bn
@@ -1948,7 +1948,7 @@ Layer: batchnorm inception_resnet_v2_c8_1x3_bn
 Layer: scale inception_resnet_v2_c8_1x3_scale
 1
 Layer: activity inception_resnet_v2_c8_1x3_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c8_3x1
 3 1 256 1 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c8_3x1_bn
@@ -1956,7 +1956,7 @@ Layer: batchnorm inception_resnet_v2_c8_3x1_bn
 Layer: scale inception_resnet_v2_c8_3x1_scale
 1
 Layer: activity inception_resnet_v2_c8_3x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_c8_concat
 channel 2 inception_resnet_v2_c8_1x1_relu inception_resnet_v2_c8_3x1_relu
 Layer: conv inception_resnet_v2_c8_up
@@ -1964,7 +1964,7 @@ Layer: conv inception_resnet_v2_c8_up
 Layer: eltwise inception_resnet_v2_c8_residual_eltwise
 inception_resnet_v2_c7_residual_eltwise_inception_resnet_v2_c7_residual_eltwise_relu_0_split inception_resnet_v2_c8_up sum 1 0.2
 Layer: activity inception_resnet_v2_c8_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_c8_residual_eltwise_inception_resnet_v2_c8_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_c9_1x1
@@ -1974,7 +1974,7 @@ Layer: batchnorm inception_resnet_v2_c9_1x1_bn
 Layer: scale inception_resnet_v2_c9_1x1_scale
 1
 Layer: activity inception_resnet_v2_c9_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c9_1x3_reduce
 1 1 192 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c9_1x3_reduce_bn
@@ -1982,7 +1982,7 @@ Layer: batchnorm inception_resnet_v2_c9_1x3_reduce_bn
 Layer: scale inception_resnet_v2_c9_1x3_reduce_scale
 1
 Layer: activity inception_resnet_v2_c9_1x3_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c9_1x3
 1 3 224 0 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c9_1x3_bn
@@ -1990,7 +1990,7 @@ Layer: batchnorm inception_resnet_v2_c9_1x3_bn
 Layer: scale inception_resnet_v2_c9_1x3_scale
 1
 Layer: activity inception_resnet_v2_c9_1x3_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c9_3x1
 3 1 256 1 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c9_3x1_bn
@@ -1998,7 +1998,7 @@ Layer: batchnorm inception_resnet_v2_c9_3x1_bn
 Layer: scale inception_resnet_v2_c9_3x1_scale
 1
 Layer: activity inception_resnet_v2_c9_3x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_c9_concat
 channel 2 inception_resnet_v2_c9_1x1_relu inception_resnet_v2_c9_3x1_relu
 Layer: conv inception_resnet_v2_c9_up
@@ -2006,7 +2006,7 @@ Layer: conv inception_resnet_v2_c9_up
 Layer: eltwise inception_resnet_v2_c9_residual_eltwise
 inception_resnet_v2_c8_residual_eltwise_inception_resnet_v2_c8_residual_eltwise_relu_0_split inception_resnet_v2_c9_up sum 1 0.2
 Layer: activity inception_resnet_v2_c9_residual_eltwise_relu
-relu
+relu 0
 Layer: split inception_resnet_v2_c9_residual_eltwise_inception_resnet_v2_c9_residual_eltwise_relu_0_split
 
 Layer: conv inception_resnet_v2_c10_1x1
@@ -2016,7 +2016,7 @@ Layer: batchnorm inception_resnet_v2_c10_1x1_bn
 Layer: scale inception_resnet_v2_c10_1x1_scale
 1
 Layer: activity inception_resnet_v2_c10_1x1_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c10_1x3_reduce
 1 1 192 0 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c10_1x3_reduce_bn
@@ -2024,7 +2024,7 @@ Layer: batchnorm inception_resnet_v2_c10_1x3_reduce_bn
 Layer: scale inception_resnet_v2_c10_1x3_reduce_scale
 1
 Layer: activity inception_resnet_v2_c10_1x3_reduce_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c10_1x3
 1 3 224 0 1 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c10_1x3_bn
@@ -2032,7 +2032,7 @@ Layer: batchnorm inception_resnet_v2_c10_1x3_bn
 Layer: scale inception_resnet_v2_c10_1x3_scale
 1
 Layer: activity inception_resnet_v2_c10_1x3_relu
-relu
+relu 0
 Layer: conv inception_resnet_v2_c10_3x1
 3 1 256 1 0 1 1 1 0 none
 Layer: batchnorm inception_resnet_v2_c10_3x1_bn
@@ -2040,7 +2040,7 @@ Layer: batchnorm inception_resnet_v2_c10_3x1_bn
 Layer: scale inception_resnet_v2_c10_3x1_scale
 1
 Layer: activity inception_resnet_v2_c10_3x1_relu
-relu
+relu 0
 Layer: concat inception_resnet_v2_c10_concat
 channel 2 inception_resnet_v2_c10_1x1_relu inception_resnet_v2_c10_3x1_relu
 Layer: conv inception_resnet_v2_c10_up
@@ -2054,7 +2054,7 @@ Layer: batchnorm conv6_1x1_bn
 Layer: scale conv6_1x1_scale
 1
 Layer: activity conv6_1x1_relu
-relu
+relu 0
 Layer: pool pool_8x8_s1
 -1 0 1 avg
 Layer: fc classifier

@@ -4,7 +4,7 @@
 
 class ActivityLayer: public Layer{
 	public:
-	ActivityLayer(const std::string& name, const std::string& method);
+	ActivityLayer(const std::string& name, const std::string& method, float negative_slope);
 	virtual ~ActivityLayer();
 	virtual void forward();
 	virtual void backward();
@@ -20,6 +20,7 @@ class ActivityLayer: public Layer{
 	private:
 	std::string method;
 	bool *mask = 0;
+	float negative_slope;
 };
 
 #endif

@@ -8,17 +8,17 @@ Layer: conv conv1
 Layer: pool pool1
 3 0 2 max
 Layer: activity relu1
-relu
+relu 0
 Layer: conv conv2
 5 5 32 2 2 1 1 1 1 none
 Layer: activity relu2
-relu
+relu 0
 Layer: pool pool2
 3 0 2 avg
 Layer: conv conv3
 5 5 64 2 2 1 1 1 1 none
 Layer: activity relu3
-relu
+relu 0
 Layer: pool pool3
 3 0 2 avg
 Layer: fc ip1

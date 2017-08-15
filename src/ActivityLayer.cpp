@@ -3,9 +3,12 @@
 
 ActivityLayer::ActivityLayer(
 	const std::string& name, 
-	const std::string& method):
+	const std::string& method,
+	float negative_slope):
 		method(method),
-		Layer(name,"activity"){
+		Layer(name,"activity"),
+		negative_slope(negative_slope)
+		{
 }
 ActivityLayer::~ActivityLayer(){
 }
@@ -22,14 +25,14 @@ void ActivityLayer::forward_relu(){
 
 		for(int i=0;i<nchw;++i)
 			if (idata[i] < 0.0f){
-				odata[i] = 0.0f;
+				odata[i] = negative_slope * odata[i];
 				mask[i] = 0;
 			}
 	}
 	else{
 		for(int i=0;i<nchw;++i)
 			if (idata[i] < 0.0f)
-				odata[i] = 0.0f;
+				odata[i] = negative_slope * odata[i];
 	}
 }
 

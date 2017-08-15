@@ -293,7 +293,7 @@ void CaffeModelParser::write_net_data(const std::string& layer_name, const std::
 void CaffeModelParser::write_net_relu(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
 	const caffe::ReLUParameter& relu_param = param.relu_param();
 	ofile<<"Layer: activity "<<layer_name<<endl;
-	ofile<<"relu"<<endl;
+	ofile<<"relu "<<relu_param.negative_slope()<<endl;
 }
 void CaffeModelParser::write_net_fc(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
 	const caffe::InnerProductParameter& fc_param = param.inner_product_param();

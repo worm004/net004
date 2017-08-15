@@ -10,7 +10,7 @@ Layer: batchnorm bn_conv1
 Layer: scale scale_conv1
 1
 Layer: activity conv1_relu
-relu
+relu 0
 Layer: pool pool1
 3 0 2 max
 Layer: split pool1_pool1_0_split
@@ -28,7 +28,7 @@ Layer: batchnorm bn2a_branch2a
 Layer: scale scale2a_branch2a
 1
 Layer: activity res2a_branch2a_relu
-relu
+relu 0
 Layer: conv res2a_branch2b
 3 3 64 1 1 1 1 1 0 none
 Layer: batchnorm bn2a_branch2b
@@ -36,7 +36,7 @@ Layer: batchnorm bn2a_branch2b
 Layer: scale scale2a_branch2b
 1
 Layer: activity res2a_branch2b_relu
-relu
+relu 0
 Layer: conv res2a_branch2c
 1 1 256 0 0 1 1 1 0 none
 Layer: batchnorm bn2a_branch2c
@@ -46,7 +46,7 @@ Layer: scale scale2a_branch2c
 Layer: eltwise res2a
 scale2a_branch1 scale2a_branch2c sum 1 1
 Layer: activity res2a_relu
-relu
+relu 0
 Layer: split res2a_res2a_relu_0_split
 
 Layer: conv res2b_branch2a
@@ -56,7 +56,7 @@ Layer: batchnorm bn2b_branch2a
 Layer: scale scale2b_branch2a
 1
 Layer: activity res2b_branch2a_relu
-relu
+relu 0
 Layer: conv res2b_branch2b
 3 3 64 1 1 1 1 1 0 none
 Layer: batchnorm bn2b_branch2b
@@ -64,7 +64,7 @@ Layer: batchnorm bn2b_branch2b
 Layer: scale scale2b_branch2b
 1
 Layer: activity res2b_branch2b_relu
-relu
+relu 0
 Layer: conv res2b_branch2c
 1 1 256 0 0 1 1 1 0 none
 Layer: batchnorm bn2b_branch2c
@@ -74,7 +74,7 @@ Layer: scale scale2b_branch2c
 Layer: eltwise res2b
 res2a_res2a_relu_0_split scale2b_branch2c sum 1 1
 Layer: activity res2b_relu
-relu
+relu 0
 Layer: split res2b_res2b_relu_0_split
 
 Layer: conv res2c_branch2a
@@ -84,7 +84,7 @@ Layer: batchnorm bn2c_branch2a
 Layer: scale scale2c_branch2a
 1
 Layer: activity res2c_branch2a_relu
-relu
+relu 0
 Layer: conv res2c_branch2b
 3 3 64 1 1 1 1 1 0 none
 Layer: batchnorm bn2c_branch2b
@@ -92,7 +92,7 @@ Layer: batchnorm bn2c_branch2b
 Layer: scale scale2c_branch2b
 1
 Layer: activity res2c_branch2b_relu
-relu
+relu 0
 Layer: conv res2c_branch2c
 1 1 256 0 0 1 1 1 0 none
 Layer: batchnorm bn2c_branch2c
@@ -102,7 +102,7 @@ Layer: scale scale2c_branch2c
 Layer: eltwise res2c
 res2b_res2b_relu_0_split scale2c_branch2c sum 1 1
 Layer: activity res2c_relu
-relu
+relu 0
 Layer: split res2c_res2c_relu_0_split
 
 Layer: conv res3a_branch1
@@ -118,7 +118,7 @@ Layer: batchnorm bn3a_branch2a
 Layer: scale scale3a_branch2a
 1
 Layer: activity res3a_branch2a_relu
-relu
+relu 0
 Layer: conv res3a_branch2b
 3 3 128 1 1 1 1 1 0 none
 Layer: batchnorm bn3a_branch2b
@@ -126,7 +126,7 @@ Layer: batchnorm bn3a_branch2b
 Layer: scale scale3a_branch2b
 1
 Layer: activity res3a_branch2b_relu
-relu
+relu 0
 Layer: conv res3a_branch2c
 1 1 512 0 0 1 1 1 0 none
 Layer: batchnorm bn3a_branch2c
@@ -136,7 +136,7 @@ Layer: scale scale3a_branch2c
 Layer: eltwise res3a
 scale3a_branch1 scale3a_branch2c sum 1 1
 Layer: activity res3a_relu
-relu
+relu 0
 Layer: split res3a_res3a_relu_0_split
 
 Layer: conv res3b_branch2a
@@ -146,7 +146,7 @@ Layer: batchnorm bn3b_branch2a
 Layer: scale scale3b_branch2a
 1
 Layer: activity res3b_branch2a_relu
-relu
+relu 0
 Layer: conv res3b_branch2b
 3 3 128 1 1 1 1 1 0 none
 Layer: batchnorm bn3b_branch2b
@@ -154,7 +154,7 @@ Layer: batchnorm bn3b_branch2b
 Layer: scale scale3b_branch2b
 1
 Layer: activity res3b_branch2b_relu
-relu
+relu 0
 Layer: conv res3b_branch2c
 1 1 512 0 0 1 1 1 0 none
 Layer: batchnorm bn3b_branch2c
@@ -164,7 +164,7 @@ Layer: scale scale3b_branch2c
 Layer: eltwise res3b
 res3a_res3a_relu_0_split scale3b_branch2c sum 1 1
 Layer: activity res3b_relu
-relu
+relu 0
 Layer: split res3b_res3b_relu_0_split
 
 Layer: conv res3c_branch2a
@@ -174,7 +174,7 @@ Layer: batchnorm bn3c_branch2a
 Layer: scale scale3c_branch2a
 1
 Layer: activity res3c_branch2a_relu
-relu
+relu 0
 Layer: conv res3c_branch2b
 3 3 128 1 1 1 1 1 0 none
 Layer: batchnorm bn3c_branch2b
@@ -182,7 +182,7 @@ Layer: batchnorm bn3c_branch2b
 Layer: scale scale3c_branch2b
 1
 Layer: activity res3c_branch2b_relu
-relu
+relu 0
 Layer: conv res3c_branch2c
 1 1 512 0 0 1 1 1 0 none
 Layer: batchnorm bn3c_branch2c
@@ -192,7 +192,7 @@ Layer: scale scale3c_branch2c
 Layer: eltwise res3c
 res3b_res3b_relu_0_split scale3c_branch2c sum 1 1
 Layer: activity res3c_relu
-relu
+relu 0
 Layer: split res3c_res3c_relu_0_split
 
 Layer: conv res3d_branch2a
@@ -202,7 +202,7 @@ Layer: batchnorm bn3d_branch2a
 Layer: scale scale3d_branch2a
 1
 Layer: activity res3d_branch2a_relu
-relu
+relu 0
 Layer: conv res3d_branch2b
 3 3 128 1 1 1 1 1 0 none
 Layer: batchnorm bn3d_branch2b
@@ -210,7 +210,7 @@ Layer: batchnorm bn3d_branch2b
 Layer: scale scale3d_branch2b
 1
 Layer: activity res3d_branch2b_relu
-relu
+relu 0
 Layer: conv res3d_branch2c
 1 1 512 0 0 1 1 1 0 none
 Layer: batchnorm bn3d_branch2c
@@ -220,7 +220,7 @@ Layer: scale scale3d_branch2c
 Layer: eltwise res3d
 res3c_res3c_relu_0_split scale3d_branch2c sum 1 1
 Layer: activity res3d_relu
-relu
+relu 0
 Layer: split res3d_res3d_relu_0_split
 
 Layer: conv res4a_branch1
@@ -236,7 +236,7 @@ Layer: batchnorm bn4a_branch2a
 Layer: scale scale4a_branch2a
 1
 Layer: activity res4a_branch2a_relu
-relu
+relu 0
 Layer: conv res4a_branch2b
 3 3 256 1 1 1 1 1 0 none
 Layer: batchnorm bn4a_branch2b
@@ -244,7 +244,7 @@ Layer: batchnorm bn4a_branch2b
 Layer: scale scale4a_branch2b
 1
 Layer: activity res4a_branch2b_relu
-relu
+relu 0
 Layer: conv res4a_branch2c
 1 1 1024 0 0 1 1 1 0 none
 Layer: batchnorm bn4a_branch2c
@@ -254,7 +254,7 @@ Layer: scale scale4a_branch2c
 Layer: eltwise res4a
 scale4a_branch1 scale4a_branch2c sum 1 1
 Layer: activity res4a_relu
-relu
+relu 0
 Layer: split res4a_res4a_relu_0_split
 
 Layer: conv res4b_branch2a
@@ -264,7 +264,7 @@ Layer: batchnorm bn4b_branch2a
 Layer: scale scale4b_branch2a
 1
 Layer: activity res4b_branch2a_relu
-relu
+relu 0
 Layer: conv res4b_branch2b
 3 3 256 1 1 1 1 1 0 none
 Layer: batchnorm bn4b_branch2b
@@ -272,7 +272,7 @@ Layer: batchnorm bn4b_branch2b
 Layer: scale scale4b_branch2b
 1
 Layer: activity res4b_branch2b_relu
-relu
+relu 0
 Layer: conv res4b_branch2c
 1 1 1024 0 0 1 1 1 0 none
 Layer: batchnorm bn4b_branch2c
@@ -282,7 +282,7 @@ Layer: scale scale4b_branch2c
 Layer: eltwise res4b
 res4a_res4a_relu_0_split scale4b_branch2c sum 1 1
 Layer: activity res4b_relu
-relu
+relu 0
 Layer: split res4b_res4b_relu_0_split
 
 Layer: conv res4c_branch2a
@@ -292,7 +292,7 @@ Layer: batchnorm bn4c_branch2a
 Layer: scale scale4c_branch2a
 1
 Layer: activity res4c_branch2a_relu
-relu
+relu 0
 Layer: conv res4c_branch2b
 3 3 256 1 1 1 1 1 0 none
 Layer: batchnorm bn4c_branch2b
@@ -300,7 +300,7 @@ Layer: batchnorm bn4c_branch2b
 Layer: scale scale4c_branch2b
 1
 Layer: activity res4c_branch2b_relu
-relu
+relu 0
 Layer: conv res4c_branch2c
 1 1 1024 0 0 1 1 1 0 none
 Layer: batchnorm bn4c_branch2c
@@ -310,7 +310,7 @@ Layer: scale scale4c_branch2c
 Layer: eltwise res4c
 res4b_res4b_relu_0_split scale4c_branch2c sum 1 1
 Layer: activity res4c_relu
-relu
+relu 0
 Layer: split res4c_res4c_relu_0_split
 
 Layer: conv res4d_branch2a
@@ -320,7 +320,7 @@ Layer: batchnorm bn4d_branch2a
 Layer: scale scale4d_branch2a
 1
 Layer: activity res4d_branch2a_relu
-relu
+relu 0
 Layer: conv res4d_branch2b
 3 3 256 1 1 1 1 1 0 none
 Layer: batchnorm bn4d_branch2b
@@ -328,7 +328,7 @@ Layer: batchnorm bn4d_branch2b
 Layer: scale scale4d_branch2b
 1
 Layer: activity res4d_branch2b_relu
-relu
+relu 0
 Layer: conv res4d_branch2c
 1 1 1024 0 0 1 1 1 0 none
 Layer: batchnorm bn4d_branch2c
@@ -338,7 +338,7 @@ Layer: scale scale4d_branch2c
 Layer: eltwise res4d
 res4c_res4c_relu_0_split scale4d_branch2c sum 1 1
 Layer: activity res4d_relu
-relu
+relu 0
 Layer: split res4d_res4d_relu_0_split
 
 Layer: conv res4e_branch2a
@@ -348,7 +348,7 @@ Layer: batchnorm bn4e_branch2a
 Layer: scale scale4e_branch2a
 1
 Layer: activity res4e_branch2a_relu
-relu
+relu 0
 Layer: conv res4e_branch2b
 3 3 256 1 1 1 1 1 0 none
 Layer: batchnorm bn4e_branch2b
@@ -356,7 +356,7 @@ Layer: batchnorm bn4e_branch2b
 Layer: scale scale4e_branch2b
 1
 Layer: activity res4e_branch2b_relu
-relu
+relu 0
 Layer: conv res4e_branch2c
 1 1 1024 0 0 1 1 1 0 none
 Layer: batchnorm bn4e_branch2c
@@ -366,7 +366,7 @@ Layer: scale scale4e_branch2c
 Layer: eltwise res4e
 res4d_res4d_relu_0_split scale4e_branch2c sum 1 1
 Layer: activity res4e_relu
-relu
+relu 0
 Layer: split res4e_res4e_relu_0_split
 
 Layer: conv res4f_branch2a
@@ -376,7 +376,7 @@ Layer: batchnorm bn4f_branch2a
 Layer: scale scale4f_branch2a
 1
 Layer: activity res4f_branch2a_relu
-relu
+relu 0
 Layer: conv res4f_branch2b
 3 3 256 1 1 1 1 1 0 none
 Layer: batchnorm bn4f_branch2b
@@ -384,7 +384,7 @@ Layer: batchnorm bn4f_branch2b
 Layer: scale scale4f_branch2b
 1
 Layer: activity res4f_branch2b_relu
-relu
+relu 0
 Layer: conv res4f_branch2c
 1 1 1024 0 0 1 1 1 0 none
 Layer: batchnorm bn4f_branch2c
@@ -394,7 +394,7 @@ Layer: scale scale4f_branch2c
 Layer: eltwise res4f
 res4e_res4e_relu_0_split scale4f_branch2c sum 1 1
 Layer: activity res4f_relu
-relu
+relu 0
 Layer: split res4f_res4f_relu_0_split
 
 Layer: conv res5a_branch1
@@ -410,7 +410,7 @@ Layer: batchnorm bn5a_branch2a
 Layer: scale scale5a_branch2a
 1
 Layer: activity res5a_branch2a_relu
-relu
+relu 0
 Layer: conv res5a_branch2b
 3 3 512 1 1 1 1 1 0 none
 Layer: batchnorm bn5a_branch2b
@@ -418,7 +418,7 @@ Layer: batchnorm bn5a_branch2b
 Layer: scale scale5a_branch2b
 1
 Layer: activity res5a_branch2b_relu
-relu
+relu 0
 Layer: conv res5a_branch2c
 1 1 2048 0 0 1 1 1 0 none
 Layer: batchnorm bn5a_branch2c
@@ -428,7 +428,7 @@ Layer: scale scale5a_branch2c
 Layer: eltwise res5a
 scale5a_branch1 scale5a_branch2c sum 1 1
 Layer: activity res5a_relu
-relu
+relu 0
 Layer: split res5a_res5a_relu_0_split
 
 Layer: conv res5b_branch2a
@@ -438,7 +438,7 @@ Layer: batchnorm bn5b_branch2a
 Layer: scale scale5b_branch2a
 1
 Layer: activity res5b_branch2a_relu
-relu
+relu 0
 Layer: conv res5b_branch2b
 3 3 512 1 1 1 1 1 0 none
 Layer: batchnorm bn5b_branch2b
@@ -446,7 +446,7 @@ Layer: batchnorm bn5b_branch2b
 Layer: scale scale5b_branch2b
 1
 Layer: activity res5b_branch2b_relu
-relu
+relu 0
 Layer: conv res5b_branch2c
 1 1 2048 0 0 1 1 1 0 none
 Layer: batchnorm bn5b_branch2c
@@ -456,7 +456,7 @@ Layer: scale scale5b_branch2c
 Layer: eltwise res5b
 res5a_res5a_relu_0_split scale5b_branch2c sum 1 1
 Layer: activity res5b_relu
-relu
+relu 0
 Layer: split res5b_res5b_relu_0_split
 
 Layer: conv res5c_branch2a
@@ -466,7 +466,7 @@ Layer: batchnorm bn5c_branch2a
 Layer: scale scale5c_branch2a
 1
 Layer: activity res5c_branch2a_relu
-relu
+relu 0
 Layer: conv res5c_branch2b
 3 3 512 1 1 1 1 1 0 none
 Layer: batchnorm bn5c_branch2b
@@ -474,7 +474,7 @@ Layer: batchnorm bn5c_branch2b
 Layer: scale scale5c_branch2b
 1
 Layer: activity res5c_branch2b_relu
-relu
+relu 0
 Layer: conv res5c_branch2c
 1 1 2048 0 0 1 1 1 0 none
 Layer: batchnorm bn5c_branch2c
@@ -484,7 +484,7 @@ Layer: scale scale5c_branch2c
 Layer: eltwise res5c
 res5b_res5b_relu_0_split scale5c_branch2c sum 1 1
 Layer: activity res5c_relu
-relu
+relu 0
 Layer: pool pool5
 7 0 1 avg
 Layer: fc fc1000

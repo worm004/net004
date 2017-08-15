@@ -1,8 +1,6 @@
-GoogleNet
+gnet_yolo
 Layer: data data
-1 3 224 224 image
-Layer: data label
-1 1 1 1 label
+1 3 448 448 image
 Layer: conv conv1/7x7_s2
 7 7 64 3 3 2 2 1 1 none
 Layer: activity conv1/relu_7x7
@@ -297,12 +295,20 @@ Layer: activity inception_5b/relu_pool_proj
 relu 0
 Layer: concat inception_5b/output
 channel 4 inception_5b/relu_1x1 inception_5b/relu_3x3 inception_5b/relu_5x5 inception_5b/relu_pool_proj
-Layer: pool pool5/7x7_s1
-7 0 1 avg
-Layer: fc loss3/classifier
-1000 1 none
-Layer: loss loss
-softmax
+Layer: scale scale
+1
+Layer: pool pool5
+3 0 2 max
+Layer: conv add_conv1
+3 3 1024 1 1 1 1 1 1 none
+Layer: activity conv1_relu
+relu 0.1
+Layer: conv add_conv2
+3 3 1024 1 1 1 1 1 1 none
+Layer: activity conv2_relu
+relu 0.1
+Layer: conv conv_reg
+3 3 30 1 1 1 1 1 1 none
 Connections:
 data conv1/7x7_s2
 conv1/7x7_s2 conv1/relu_7x7
@@ -478,7 +484,10 @@ inception_5b/relu_1x1 inception_5b/output
 inception_5b/relu_3x3 inception_5b/output
 inception_5b/relu_5x5 inception_5b/output
 inception_5b/relu_pool_proj inception_5b/output
-inception_5b/output pool5/7x7_s1
-pool5/7x7_s1 loss3/classifier
-loss3/classifier loss
-label loss
+inception_5b/output scale
+scale pool5
+pool5 add_conv1
+add_conv1 conv1_relu
+conv1_relu add_conv2
+add_conv2 conv2_relu
+conv2_relu conv_reg

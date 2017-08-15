@@ -10,7 +10,7 @@ Layer: batchnorm conv1_3x3_s2_bn
 Layer: scale conv1_3x3_s2_scale
 1
 Layer: activity conv1_3x3_relu
-relu
+relu 0
 Layer: conv conv2_3x3_s1
 3 3 32 0 0 1 1 1 0 none
 Layer: batchnorm conv2_3x3_s1_bn
@@ -18,7 +18,7 @@ Layer: batchnorm conv2_3x3_s1_bn
 Layer: scale conv2_3x3_s1_scale
 1
 Layer: activity conv2_3x3_relu
-relu
+relu 0
 Layer: conv conv3_3x3_s1
 3 3 64 1 1 1 1 1 0 none
 Layer: batchnorm conv3_3x3_s1_bn
@@ -26,7 +26,7 @@ Layer: batchnorm conv3_3x3_s1_bn
 Layer: scale conv3_3x3_s1_scale
 1
 Layer: activity conv3_3x3_relu
-relu
+relu 0
 Layer: pool pool1_3x3_s2
 3 0 2 max
 Layer: conv conv4_3x3_reduce
@@ -36,7 +36,7 @@ Layer: batchnorm conv4_3x3_reduce_bn
 Layer: scale conv4_3x3_reduce_scale
 1
 Layer: activity conv4_relu_3x3_reduce
-relu
+relu 0
 Layer: conv conv4_3x3
 3 3 192 0 0 1 1 1 0 none
 Layer: batchnorm conv4_3x3_bn
@@ -44,7 +44,7 @@ Layer: batchnorm conv4_3x3_bn
 Layer: scale conv4_3x3_scale
 1
 Layer: activity conv4_relu_3x3
-relu
+relu 0
 Layer: pool pool2_3x3_s2
 3 0 2 max
 Layer: split pool2_3x3_s2_pool2_3x3_s2_0_split
@@ -56,7 +56,7 @@ Layer: batchnorm inception_a1_1x1_bn
 Layer: scale inception_a1_1x1_scale
 1
 Layer: activity inception_a1_1x1_relu
-relu
+relu 0
 Layer: conv inception_a1_5x5_reduce
 1 1 48 0 0 1 1 1 0 none
 Layer: batchnorm inception_a1_5x5_reduce_bn
@@ -64,7 +64,7 @@ Layer: batchnorm inception_a1_5x5_reduce_bn
 Layer: scale inception_a1_5x5_reduce_scale
 1
 Layer: activity inception_a1_5x5_reduce_relu
-relu
+relu 0
 Layer: conv inception_a1_5x5
 5 5 64 2 2 1 1 1 0 none
 Layer: batchnorm inception_a1_5x5_bn
@@ -72,7 +72,7 @@ Layer: batchnorm inception_a1_5x5_bn
 Layer: scale inception_a1_5x5_scale
 1
 Layer: activity inception_a1_5x5_relu
-relu
+relu 0
 Layer: conv inception_a1_3x3_reduce
 1 1 64 0 0 1 1 1 0 none
 Layer: batchnorm inception_a1_3x3_reduce_bn
@@ -80,7 +80,7 @@ Layer: batchnorm inception_a1_3x3_reduce_bn
 Layer: scale inception_a1_3x3_reduce_scale
 1
 Layer: activity inception_a1_3x3_reduce_relu
-relu
+relu 0
 Layer: conv inception_a1_3x3_1
 3 3 96 1 1 1 1 1 0 none
 Layer: batchnorm inception_a1_3x3_1_bn
@@ -88,7 +88,7 @@ Layer: batchnorm inception_a1_3x3_1_bn
 Layer: scale inception_a1_3x3_1_scale
 1
 Layer: activity inception_a1_3x3_1_relu
-relu
+relu 0
 Layer: conv inception_a1_3x3_2
 3 3 96 1 1 1 1 1 0 none
 Layer: batchnorm inception_a1_3x3_2_bn
@@ -96,7 +96,7 @@ Layer: batchnorm inception_a1_3x3_2_bn
 Layer: scale inception_a1_3x3_2_scale
 1
 Layer: activity inception_a1_3x3_2_relu
-relu
+relu 0
 Layer: pool inception_a1_pool
 3 1 1 avg
 Layer: conv inception_a1_pool_proj
@@ -106,7 +106,7 @@ Layer: batchnorm inception_a1_pool_proj_bn
 Layer: scale inception_a1_pool_proj_scale
 1
 Layer: activity inception_a1_pool_proj_relu
-relu
+relu 0
 Layer: concat inception_a1_output
 channel 4 inception_a1_1x1_relu inception_a1_5x5_relu inception_a1_3x3_2_relu inception_a1_pool_proj_relu
 Layer: split inception_a1_output_inception_a1_output_0_split
@@ -118,7 +118,7 @@ Layer: batchnorm inception_a2_1x1_bn
 Layer: scale inception_a2_1x1_scale
 1
 Layer: activity inception_a2_1x1_relu
-relu
+relu 0
 Layer: conv inception_a2_5x5_reduce
 1 1 48 0 0 1 1 1 0 none
 Layer: batchnorm inception_a2_5x5_reduce_bn
@@ -126,7 +126,7 @@ Layer: batchnorm inception_a2_5x5_reduce_bn
 Layer: scale inception_a2_5x5_reduce_scale
 1
 Layer: activity inception_a2_5x5_reduce_relu
-relu
+relu 0
 Layer: conv inception_a2_5x5
 5 5 64 2 2 1 1 1 0 none
 Layer: batchnorm inception_a2_5x5_bn
@@ -134,7 +134,7 @@ Layer: batchnorm inception_a2_5x5_bn
 Layer: scale inception_a2_5x5_scale
 1
 Layer: activity inception_a2_5x5_relu
-relu
+relu 0
 Layer: conv inception_a2_3x3_reduce
 1 1 64 0 0 1 1 1 0 none
 Layer: batchnorm inception_a2_3x3_reduce_bn
@@ -142,7 +142,7 @@ Layer: batchnorm inception_a2_3x3_reduce_bn
 Layer: scale inception_a2_3x3_reduce_scale
 1
 Layer: activity inception_a2_3x3_reduce_relu
-relu
+relu 0
 Layer: conv inception_a2_3x3_1
 3 3 96 1 1 1 1 1 0 none
 Layer: batchnorm inception_a2_3x3_1_bn
@@ -150,7 +150,7 @@ Layer: batchnorm inception_a2_3x3_1_bn
 Layer: scale inception_a2_3x3_1_scale
 1
 Layer: activity inception_a2_3x3_1_relu
-relu
+relu 0
 Layer: conv inception_a2_3x3_2
 3 3 96 1 1 1 1 1 0 none
 Layer: batchnorm inception_a2_3x3_2_bn
@@ -158,7 +158,7 @@ Layer: batchnorm inception_a2_3x3_2_bn
 Layer: scale inception_a2_3x3_2_scale
 1
 Layer: activity inception_a2_3x3_2_relu
-relu
+relu 0
 Layer: pool inception_a2_pool
 3 1 1 avg
 Layer: conv inception_a2_pool_proj
@@ -168,7 +168,7 @@ Layer: batchnorm inception_a2_pool_proj_bn
 Layer: scale inception_a2_pool_proj_scale
 1
 Layer: activity inception_a2_pool_proj_relu
-relu
+relu 0
 Layer: concat inception_a2_output
 channel 4 inception_a2_1x1_relu inception_a2_5x5_relu inception_a2_3x3_2_relu inception_a2_pool_proj_relu
 Layer: split inception_a2_output_inception_a2_output_0_split
@@ -180,7 +180,7 @@ Layer: batchnorm inception_a3_1x1_bn
 Layer: scale inception_a3_1x1_scale
 1
 Layer: activity inception_a3_1x1_relu
-relu
+relu 0
 Layer: conv inception_a3_5x5_reduce
 1 1 48 0 0 1 1 1 0 none
 Layer: batchnorm inception_a3_5x5_reduce_bn
@@ -188,7 +188,7 @@ Layer: batchnorm inception_a3_5x5_reduce_bn
 Layer: scale inception_a3_5x5_reduce_scale
 1
 Layer: activity inception_a3_5x5_reduce_relu
-relu
+relu 0
 Layer: conv inception_a3_5x5
 5 5 64 2 2 1 1 1 0 none
 Layer: batchnorm inception_a3_5x5_bn
@@ -196,7 +196,7 @@ Layer: batchnorm inception_a3_5x5_bn
 Layer: scale inception_a3_5x5_scale
 1
 Layer: activity inception_a3_5x5_relu
-relu
+relu 0
 Layer: conv inception_a3_3x3_reduce
 1 1 64 0 0 1 1 1 0 none
 Layer: batchnorm inception_a3_3x3_reduce_bn
@@ -204,7 +204,7 @@ Layer: batchnorm inception_a3_3x3_reduce_bn
 Layer: scale inception_a3_3x3_reduce_scale
 1
 Layer: activity inception_a3_3x3_reduce_relu
-relu
+relu 0
 Layer: conv inception_a3_3x3_1
 3 3 96 1 1 1 1 1 0 none
 Layer: batchnorm inception_a3_3x3_1_bn
@@ -212,7 +212,7 @@ Layer: batchnorm inception_a3_3x3_1_bn
 Layer: scale inception_a3_3x3_1_scale
 1
 Layer: activity inception_a3_3x3_1_relu
-relu
+relu 0
 Layer: conv inception_a3_3x3_2
 3 3 96 1 1 1 1 1 0 none
 Layer: batchnorm inception_a3_3x3_2_bn
@@ -220,7 +220,7 @@ Layer: batchnorm inception_a3_3x3_2_bn
 Layer: scale inception_a3_3x3_2_scale
 1
 Layer: activity inception_a3_3x3_2_relu
-relu
+relu 0
 Layer: pool inception_a3_pool
 3 1 1 avg
 Layer: conv inception_a3_pool_proj
@@ -230,7 +230,7 @@ Layer: batchnorm inception_a3_pool_proj_bn
 Layer: scale inception_a3_pool_proj_scale
 1
 Layer: activity inception_a3_pool_proj_relu
-relu
+relu 0
 Layer: concat inception_a3_output
 channel 4 inception_a3_1x1_relu inception_a3_5x5_relu inception_a3_3x3_2_relu inception_a3_pool_proj_relu
 Layer: split inception_a3_output_inception_a3_output_0_split
@@ -242,7 +242,7 @@ Layer: batchnorm reduction_a_3x3_bn
 Layer: scale reduction_a_3x3_scale
 1
 Layer: activity reduction_a_3x3_relu
-relu
+relu 0
 Layer: conv reduction_a_3x3_2_reduce
 1 1 64 0 0 1 1 1 0 none
 Layer: batchnorm reduction_a_3x3_2_reduce_bn
@@ -250,7 +250,7 @@ Layer: batchnorm reduction_a_3x3_2_reduce_bn
 Layer: scale reduction_a_3x3_2_reduce_scale
 1
 Layer: activity reduction_a_3x3_2_reduce_relu
-relu
+relu 0
 Layer: conv reduction_a_3x3_2
 3 3 96 1 1 1 1 1 0 none
 Layer: batchnorm reduction_a_3x3_2_bn
@@ -258,7 +258,7 @@ Layer: batchnorm reduction_a_3x3_2_bn
 Layer: scale reduction_a_3x3_2_scale
 1
 Layer: activity reduction_a_3x3_2_relu
-relu
+relu 0
 Layer: conv reduction_a_3x3_3
 3 3 96 0 0 2 2 1 0 none
 Layer: batchnorm reduction_a_3x3_3_bn
@@ -266,7 +266,7 @@ Layer: batchnorm reduction_a_3x3_3_bn
 Layer: scale reduction_a_3x3_3_scale
 1
 Layer: activity reduction_a_3x3_3_relu
-relu
+relu 0
 Layer: pool reduction_a_pool
 3 0 2 max
 Layer: concat reduction_a_concat
@@ -280,7 +280,7 @@ Layer: batchnorm inception_b1_1x1_2_bn
 Layer: scale inception_b1_1x1_2_scale
 1
 Layer: activity inception_b1_1x1_2_relu
-relu
+relu 0
 Layer: conv inception_b1_1x7_reduce
 1 1 128 0 0 1 1 1 0 none
 Layer: batchnorm inception_b1_1x7_reduce_bn
@@ -288,7 +288,7 @@ Layer: batchnorm inception_b1_1x7_reduce_bn
 Layer: scale inception_b1_1x7_reduce_scale
 1
 Layer: activity inception_b1_1x7_reduce_relu
-relu
+relu 0
 Layer: conv inception_b1_1x7
 1 7 128 0 3 1 1 1 0 none
 Layer: batchnorm inception_b1_1x7_bn
@@ -296,7 +296,7 @@ Layer: batchnorm inception_b1_1x7_bn
 Layer: scale inception_b1_1x7_scale
 1
 Layer: activity inception_b1_1x7_relu
-relu
+relu 0
 Layer: conv inception_b1_7x1
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_b1_7x1_bn
@@ -304,7 +304,7 @@ Layer: batchnorm inception_b1_7x1_bn
 Layer: scale inception_b1_7x1_scale
 1
 Layer: activity inception_b1_7x1_relu
-relu
+relu 0
 Layer: conv inception_b1_7x1_reduce
 1 1 128 0 0 1 1 1 0 none
 Layer: batchnorm inception_b1_7x1_reduce_bn
@@ -312,7 +312,7 @@ Layer: batchnorm inception_b1_7x1_reduce_bn
 Layer: scale inception_b1_7x1_reduce_scale
 1
 Layer: activity inception_b1_7x1_reduce_relu
-relu
+relu 0
 Layer: conv inception_b1_7x1_2
 7 1 128 3 0 1 1 1 0 none
 Layer: batchnorm inception_b1_7x1_2_bn
@@ -320,7 +320,7 @@ Layer: batchnorm inception_b1_7x1_2_bn
 Layer: scale inception_b1_7x1_2_scale
 1
 Layer: activity inception_b1_7x1_2_relu
-relu
+relu 0
 Layer: conv inception_b1_1x7_2
 1 7 128 0 3 1 1 1 0 none
 Layer: batchnorm inception_b1_1x7_2_bn
@@ -328,7 +328,7 @@ Layer: batchnorm inception_b1_1x7_2_bn
 Layer: scale inception_b1_1x7_2_scale
 1
 Layer: activity inception_b1_1x7_2_relu
-relu
+relu 0
 Layer: conv inception_b1_7x1_3
 7 1 128 3 0 1 1 1 0 none
 Layer: batchnorm inception_b1_7x1_3_bn
@@ -336,7 +336,7 @@ Layer: batchnorm inception_b1_7x1_3_bn
 Layer: scale inception_b1_7x1_3_scale
 1
 Layer: activity inception_b1_7x1_3_relu
-relu
+relu 0
 Layer: conv inception_b1_1x7_3
 1 7 192 0 3 1 1 1 0 none
 Layer: batchnorm inception_b1_1x7_3_bn
@@ -344,7 +344,7 @@ Layer: batchnorm inception_b1_1x7_3_bn
 Layer: scale inception_b1_1x7_3_scale
 1
 Layer: activity inception_b1_1x7_3_relu
-relu
+relu 0
 Layer: pool inception_b1_pool_ave
 3 1 1 avg
 Layer: conv inception_b1_1x1
@@ -354,7 +354,7 @@ Layer: batchnorm inception_b1_1x1_bn
 Layer: scale inception_b1_1x1_scale
 1
 Layer: activity inception_b1_1x1_relu
-relu
+relu 0
 Layer: concat inception_b1_concat
 channel 4 inception_b1_1x1_2_relu inception_b1_7x1_relu inception_b1_1x7_3_relu inception_b1_1x1_relu
 Layer: split inception_b1_concat_inception_b1_concat_0_split
@@ -366,7 +366,7 @@ Layer: batchnorm inception_b2_1x1_2_bn
 Layer: scale inception_b2_1x1_2_scale
 1
 Layer: activity inception_b2_1x1_2_relu
-relu
+relu 0
 Layer: conv inception_b2_1x7_reduce
 1 1 160 0 0 1 1 1 0 none
 Layer: batchnorm inception_b2_1x7_reduce_bn
@@ -374,7 +374,7 @@ Layer: batchnorm inception_b2_1x7_reduce_bn
 Layer: scale inception_b2_1x7_reduce_scale
 1
 Layer: activity inception_b2_1x7_reduce_relu
-relu
+relu 0
 Layer: conv inception_b2_1x7
 1 7 160 0 3 1 1 1 0 none
 Layer: batchnorm inception_b2_1x7_bn
@@ -382,7 +382,7 @@ Layer: batchnorm inception_b2_1x7_bn
 Layer: scale inception_b2_1x7_scale
 1
 Layer: activity inception_b2_1x7_relu
-relu
+relu 0
 Layer: conv inception_b2_7x1
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_b2_7x1_bn
@@ -390,7 +390,7 @@ Layer: batchnorm inception_b2_7x1_bn
 Layer: scale inception_b2_7x1_scale
 1
 Layer: activity inception_b2_7x1_relu
-relu
+relu 0
 Layer: conv inception_b2_7x1_reduce
 1 1 160 0 0 1 1 1 0 none
 Layer: batchnorm inception_b2_7x1_reduce_bn
@@ -398,7 +398,7 @@ Layer: batchnorm inception_b2_7x1_reduce_bn
 Layer: scale inception_b2_7x1_reduce_scale
 1
 Layer: activity inception_b2_7x1_reduce_relu
-relu
+relu 0
 Layer: conv inception_b2_7x1_2
 7 1 160 3 0 1 1 1 0 none
 Layer: batchnorm inception_b2_7x1_2_bn
@@ -406,7 +406,7 @@ Layer: batchnorm inception_b2_7x1_2_bn
 Layer: scale inception_b2_7x1_2_scale
 1
 Layer: activity inception_b2_7x1_2_relu
-relu
+relu 0
 Layer: conv inception_b2_1x7_2
 1 7 160 0 3 1 1 1 0 none
 Layer: batchnorm inception_b2_1x7_2_bn
@@ -414,7 +414,7 @@ Layer: batchnorm inception_b2_1x7_2_bn
 Layer: scale inception_b2_1x7_2_scale
 1
 Layer: activity inception_b2_1x7_2_relu
-relu
+relu 0
 Layer: conv inception_b2_7x1_3
 7 1 160 3 0 1 1 1 0 none
 Layer: batchnorm inception_b2_7x1_3_bn
@@ -422,7 +422,7 @@ Layer: batchnorm inception_b2_7x1_3_bn
 Layer: scale inception_b2_7x1_3_scale
 1
 Layer: activity inception_b2_7x1_3_relu
-relu
+relu 0
 Layer: conv inception_b2_1x7_3
 1 7 192 0 3 1 1 1 0 none
 Layer: batchnorm inception_b2_1x7_3_bn
@@ -430,7 +430,7 @@ Layer: batchnorm inception_b2_1x7_3_bn
 Layer: scale inception_b2_1x7_3_scale
 1
 Layer: activity inception_b2_1x7_3_relu
-relu
+relu 0
 Layer: pool inception_b2_pool_ave
 3 1 1 avg
 Layer: conv inception_b2_1x1
@@ -440,7 +440,7 @@ Layer: batchnorm inception_b2_1x1_bn
 Layer: scale inception_b2_1x1_scale
 1
 Layer: activity inception_b2_1x1_relu
-relu
+relu 0
 Layer: concat inception_b2_concat
 channel 4 inception_b2_1x1_2_relu inception_b2_7x1_relu inception_b2_1x7_3_relu inception_b2_1x1_relu
 Layer: split inception_b2_concat_inception_b2_concat_0_split
@@ -452,7 +452,7 @@ Layer: batchnorm inception_b3_1x1_2_bn
 Layer: scale inception_b3_1x1_2_scale
 1
 Layer: activity inception_b3_1x1_2_relu
-relu
+relu 0
 Layer: conv inception_b3_1x7_reduce
 1 1 160 0 0 1 1 1 0 none
 Layer: batchnorm inception_b3_1x7_reduce_bn
@@ -460,7 +460,7 @@ Layer: batchnorm inception_b3_1x7_reduce_bn
 Layer: scale inception_b3_1x7_reduce_scale
 1
 Layer: activity inception_b3_1x7_reduce_relu
-relu
+relu 0
 Layer: conv inception_b3_1x7
 1 7 160 0 3 1 1 1 0 none
 Layer: batchnorm inception_b3_1x7_bn
@@ -468,7 +468,7 @@ Layer: batchnorm inception_b3_1x7_bn
 Layer: scale inception_b3_1x7_scale
 1
 Layer: activity inception_b3_1x7_relu
-relu
+relu 0
 Layer: conv inception_b3_7x1
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_b3_7x1_bn
@@ -476,7 +476,7 @@ Layer: batchnorm inception_b3_7x1_bn
 Layer: scale inception_b3_7x1_scale
 1
 Layer: activity inception_b3_7x1_relu
-relu
+relu 0
 Layer: conv inception_b3_7x1_reduce
 1 1 160 0 0 1 1 1 0 none
 Layer: batchnorm inception_b3_7x1_reduce_bn
@@ -484,7 +484,7 @@ Layer: batchnorm inception_b3_7x1_reduce_bn
 Layer: scale inception_b3_7x1_reduce_scale
 1
 Layer: activity inception_b3_7x1_reduce_relu
-relu
+relu 0
 Layer: conv inception_b3_7x1_2
 7 1 160 3 0 1 1 1 0 none
 Layer: batchnorm inception_b3_7x1_2_bn
@@ -492,7 +492,7 @@ Layer: batchnorm inception_b3_7x1_2_bn
 Layer: scale inception_b3_7x1_2_scale
 1
 Layer: activity inception_b3_7x1_2_relu
-relu
+relu 0
 Layer: conv inception_b3_1x7_2
 1 7 160 0 3 1 1 1 0 none
 Layer: batchnorm inception_b3_1x7_2_bn
@@ -500,7 +500,7 @@ Layer: batchnorm inception_b3_1x7_2_bn
 Layer: scale inception_b3_1x7_2_scale
 1
 Layer: activity inception_b3_1x7_2_relu
-relu
+relu 0
 Layer: conv inception_b3_7x1_3
 7 1 160 3 0 1 1 1 0 none
 Layer: batchnorm inception_b3_7x1_3_bn
@@ -508,7 +508,7 @@ Layer: batchnorm inception_b3_7x1_3_bn
 Layer: scale inception_b3_7x1_3_scale
 1
 Layer: activity inception_b3_7x1_3_relu
-relu
+relu 0
 Layer: conv inception_b3_1x7_3
 1 7 192 0 3 1 1 1 0 none
 Layer: batchnorm inception_b3_1x7_3_bn
@@ -516,7 +516,7 @@ Layer: batchnorm inception_b3_1x7_3_bn
 Layer: scale inception_b3_1x7_3_scale
 1
 Layer: activity inception_b3_1x7_3_relu
-relu
+relu 0
 Layer: pool inception_b3_pool_ave
 3 1 1 avg
 Layer: conv inception_b3_1x1
@@ -526,7 +526,7 @@ Layer: batchnorm inception_b3_1x1_bn
 Layer: scale inception_b3_1x1_scale
 1
 Layer: activity inception_b3_1x1_relu
-relu
+relu 0
 Layer: concat inception_b3_concat
 channel 4 inception_b3_1x1_2_relu inception_b3_7x1_relu inception_b3_1x7_3_relu inception_b3_1x1_relu
 Layer: split inception_b3_concat_inception_b3_concat_0_split
@@ -538,7 +538,7 @@ Layer: batchnorm inception_b4_1x1_2_bn
 Layer: scale inception_b4_1x1_2_scale
 1
 Layer: activity inception_b4_1x1_2_relu
-relu
+relu 0
 Layer: conv inception_b4_1x7_reduce
 1 1 192 0 0 1 1 1 0 none
 Layer: batchnorm inception_b4_1x7_reduce_bn
@@ -546,7 +546,7 @@ Layer: batchnorm inception_b4_1x7_reduce_bn
 Layer: scale inception_b4_1x7_reduce_scale
 1
 Layer: activity inception_b4_1x7_reduce_relu
-relu
+relu 0
 Layer: conv inception_b4_1x7
 1 7 192 0 3 1 1 1 0 none
 Layer: batchnorm inception_b4_1x7_bn
@@ -554,7 +554,7 @@ Layer: batchnorm inception_b4_1x7_bn
 Layer: scale inception_b4_1x7_scale
 1
 Layer: activity inception_b4_1x7_relu
-relu
+relu 0
 Layer: conv inception_b4_7x1
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_b4_7x1_bn
@@ -562,7 +562,7 @@ Layer: batchnorm inception_b4_7x1_bn
 Layer: scale inception_b4_7x1_scale
 1
 Layer: activity inception_b4_7x1_relu
-relu
+relu 0
 Layer: conv inception_b4_7x1_reduce
 1 1 192 0 0 1 1 1 0 none
 Layer: batchnorm inception_b4_7x1_reduce_bn
@@ -570,7 +570,7 @@ Layer: batchnorm inception_b4_7x1_reduce_bn
 Layer: scale inception_b4_7x1_reduce_scale
 1
 Layer: activity inception_b4_7x1_reduce_relu
-relu
+relu 0
 Layer: conv inception_b4_7x1_2
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_b4_7x1_2_bn
@@ -578,7 +578,7 @@ Layer: batchnorm inception_b4_7x1_2_bn
 Layer: scale inception_b4_7x1_2_scale
 1
 Layer: activity inception_b4_7x1_2_relu
-relu
+relu 0
 Layer: conv inception_b4_1x7_2
 1 7 192 0 3 1 1 1 0 none
 Layer: batchnorm inception_b4_1x7_2_bn
@@ -586,7 +586,7 @@ Layer: batchnorm inception_b4_1x7_2_bn
 Layer: scale inception_b4_1x7_2_scale
 1
 Layer: activity inception_b4_1x7_2_relu
-relu
+relu 0
 Layer: conv inception_b4_7x1_3
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm inception_b4_7x1_3_bn
@@ -594,7 +594,7 @@ Layer: batchnorm inception_b4_7x1_3_bn
 Layer: scale inception_b4_7x1_3_scale
 1
 Layer: activity inception_b4_7x1_3_relu
-relu
+relu 0
 Layer: conv inception_b4_1x7_3
 1 7 192 0 3 1 1 1 0 none
 Layer: batchnorm inception_b4_1x7_3_bn
@@ -602,7 +602,7 @@ Layer: batchnorm inception_b4_1x7_3_bn
 Layer: scale inception_b4_1x7_3_scale
 1
 Layer: activity inception_b4_1x7_3_relu
-relu
+relu 0
 Layer: pool inception_b4_pool_ave
 3 1 1 avg
 Layer: conv inception_b4_1x1
@@ -612,7 +612,7 @@ Layer: batchnorm inception_b4_1x1_bn
 Layer: scale inception_b4_1x1_scale
 1
 Layer: activity inception_b4_1x1_relu
-relu
+relu 0
 Layer: concat inception_b4_concat
 channel 4 inception_b4_1x1_2_relu inception_b4_7x1_relu inception_b4_1x7_3_relu inception_b4_1x1_relu
 Layer: split inception_b4_concat_inception_b4_concat_0_split
@@ -624,7 +624,7 @@ Layer: batchnorm reduction_b_3x3_reduce_bn
 Layer: scale reduction_b_3x3_reduce_scale
 1
 Layer: activity reduction_b_3x3_reduce_relu
-relu
+relu 0
 Layer: conv reduction_b_3x3
 3 3 320 0 0 2 2 1 0 none
 Layer: batchnorm reduction_b_3x3_bn
@@ -632,7 +632,7 @@ Layer: batchnorm reduction_b_3x3_bn
 Layer: scale reduction_b_3x3_scale
 1
 Layer: activity reduction_b_3x3_relu
-relu
+relu 0
 Layer: conv reduction_b_1x7_reduce
 1 1 192 0 0 1 1 1 0 none
 Layer: batchnorm reduction_b_1x7_reduce_bn
@@ -640,7 +640,7 @@ Layer: batchnorm reduction_b_1x7_reduce_bn
 Layer: scale reduction_b_1x7_reduce_scale
 1
 Layer: activity reduction_b_1x7_reduce_relu
-relu
+relu 0
 Layer: conv reduction_b_1x7
 1 7 192 0 3 1 1 1 0 none
 Layer: batchnorm reduction_b_1x7_bn
@@ -648,7 +648,7 @@ Layer: batchnorm reduction_b_1x7_bn
 Layer: scale reduction_b_1x7_scale
 1
 Layer: activity reduction_b_1x7_relu
-relu
+relu 0
 Layer: conv reduction_b_7x1
 7 1 192 3 0 1 1 1 0 none
 Layer: batchnorm reduction_b_7x1_bn
@@ -656,7 +656,7 @@ Layer: batchnorm reduction_b_7x1_bn
 Layer: scale reduction_b_7x1_scale
 1
 Layer: activity reduction_b_7x1_relu
-relu
+relu 0
 Layer: conv reduction_b_3x3_2
 3 3 192 0 0 2 2 1 0 none
 Layer: batchnorm reduction_b_3x3_2_bn
@@ -664,7 +664,7 @@ Layer: batchnorm reduction_b_3x3_2_bn
 Layer: scale reduction_b_3x3_2_scale
 1
 Layer: activity reduction_b_3x3_2_relu
-relu
+relu 0
 Layer: pool reduction_b_pool
 3 0 2 max
 Layer: concat reduction_b_concat
@@ -678,7 +678,7 @@ Layer: batchnorm inception_c1_1x1_2_bn
 Layer: scale inception_c1_1x1_2_scale
 1
 Layer: activity inception_c1_1x1_2_relu
-relu
+relu 0
 Layer: conv inception_c1_1x3_reduce
 1 1 384 0 0 1 1 1 0 none
 Layer: batchnorm inception_c1_1x3_reduce_bn
@@ -686,7 +686,7 @@ Layer: batchnorm inception_c1_1x3_reduce_bn
 Layer: scale inception_c1_1x3_reduce_scale
 1
 Layer: activity inception_c1_1x3_reduce_relu
-relu
+relu 0
 Layer: split inception_c1_1x3_reduce_inception_c1_1x3_reduce_relu_0_split
 
 Layer: conv inception_c1_1x3
@@ -696,7 +696,7 @@ Layer: batchnorm inception_c1_1x3_bn
 Layer: scale inception_c1_1x3_scale
 1
 Layer: activity inception_c1_1x3_relu
-relu
+relu 0
 Layer: conv inception_c1_3x1
 3 1 384 1 0 1 1 1 0 none
 Layer: batchnorm inception_c1_3x1_bn
@@ -704,7 +704,7 @@ Layer: batchnorm inception_c1_3x1_bn
 Layer: scale inception_c1_3x1_scale
 1
 Layer: activity inception_c1_3x1_relu
-relu
+relu 0
 Layer: conv inception_c1_3x3_reduce
 1 1 448 0 0 1 1 1 0 none
 Layer: batchnorm inception_c1_3x3_reduce_bn
@@ -712,7 +712,7 @@ Layer: batchnorm inception_c1_3x3_reduce_bn
 Layer: scale inception_c1_3x3_reduce_scale
 1
 Layer: activity inception_c1_3x3_reduce_relu
-relu
+relu 0
 Layer: conv inception_c1_3x3
 3 3 384 1 1 1 1 1 0 none
 Layer: batchnorm inception_c1_3x3_bn
@@ -720,7 +720,7 @@ Layer: batchnorm inception_c1_3x3_bn
 Layer: scale inception_c1_3x3_scale
 1
 Layer: activity inception_c1_3x3_relu
-relu
+relu 0
 Layer: split inception_c1_3x3_inception_c1_3x3_relu_0_split
 
 Layer: conv inception_c1_1x3_2
@@ -730,7 +730,7 @@ Layer: batchnorm inception_c1_1x3_2_bn
 Layer: scale inception_c1_1x3_2_scale
 1
 Layer: activity inception_c1_1x3_2_relu
-relu
+relu 0
 Layer: conv inception_c1_3x1_2
 3 1 384 1 0 1 1 1 0 none
 Layer: batchnorm inception_c1_3x1_2_bn
@@ -738,7 +738,7 @@ Layer: batchnorm inception_c1_3x1_2_bn
 Layer: scale inception_c1_3x1_2_scale
 1
 Layer: activity inception_c1_3x1_2_relu
-relu
+relu 0
 Layer: pool inception_c1_pool
 3 1 1 avg
 Layer: conv inception_c1_1x1
@@ -748,7 +748,7 @@ Layer: batchnorm inception_c1_1x1_bn
 Layer: scale inception_c1_1x1_scale
 1
 Layer: activity inception_c1_1x1_relu
-relu
+relu 0
 Layer: concat inception_c1_concat
 channel 6 inception_c1_1x1_2_relu inception_c1_1x3_relu inception_c1_3x1_relu inception_c1_1x3_2_relu inception_c1_3x1_2_relu inception_c1_1x1_relu
 Layer: split inception_c1_concat_inception_c1_concat_0_split
@@ -760,7 +760,7 @@ Layer: batchnorm inception_c2_1x1_2_bn
 Layer: scale inception_c2_1x1_2_scale
 1
 Layer: activity inception_c2_1x1_2_relu
-relu
+relu 0
 Layer: conv inception_c2_1x3_reduce
 1 1 384 0 0 1 1 1 0 none
 Layer: batchnorm inception_c2_1x3_reduce_bn
@@ -768,7 +768,7 @@ Layer: batchnorm inception_c2_1x3_reduce_bn
 Layer: scale inception_c2_1x3_reduce_scale
 1
 Layer: activity inception_c2_1x3_reduce_relu
-relu
+relu 0
 Layer: split inception_c2_1x3_reduce_inception_c2_1x3_reduce_relu_0_split
 
 Layer: conv inception_c2_1x3
@@ -778,7 +778,7 @@ Layer: batchnorm inception_c2_1x3_bn
 Layer: scale inception_c2_1x3_scale
 1
 Layer: activity inception_c2_1x3_relu
-relu
+relu 0
 Layer: conv inception_c2_3x1
 3 1 384 1 0 1 1 1 0 none
 Layer: batchnorm inception_c2_3x1_bn
@@ -786,7 +786,7 @@ Layer: batchnorm inception_c2_3x1_bn
 Layer: scale inception_c2_3x1_scale
 1
 Layer: activity inception_c2_3x1_relu
-relu
+relu 0
 Layer: conv inception_c2_3x3_reduce
 1 1 448 0 0 1 1 1 0 none
 Layer: batchnorm inception_c2_3x3_reduce_bn
@@ -794,7 +794,7 @@ Layer: batchnorm inception_c2_3x3_reduce_bn
 Layer: scale inception_c2_3x3_reduce_scale
 1
 Layer: activity inception_c2_3x3_reduce_relu
-relu
+relu 0
 Layer: conv inception_c2_3x3
 3 3 384 1 1 1 1 1 0 none
 Layer: batchnorm inception_c2_3x3_bn
@@ -802,7 +802,7 @@ Layer: batchnorm inception_c2_3x3_bn
 Layer: scale inception_c2_3x3_scale
 1
 Layer: activity inception_c2_3x3_relu
-relu
+relu 0
 Layer: split inception_c2_3x3_inception_c2_3x3_relu_0_split
 
 Layer: conv inception_c2_1x3_2
@@ -812,7 +812,7 @@ Layer: batchnorm inception_c2_1x3_2_bn
 Layer: scale inception_c2_1x3_2_scale
 1
 Layer: activity inception_c2_1x3_2_relu
-relu
+relu 0
 Layer: conv inception_c2_3x1_2
 3 1 384 1 0 1 1 1 0 none
 Layer: batchnorm inception_c2_3x1_2_bn
@@ -820,7 +820,7 @@ Layer: batchnorm inception_c2_3x1_2_bn
 Layer: scale inception_c2_3x1_2_scale
 1
 Layer: activity inception_c2_3x1_2_relu
-relu
+relu 0
 Layer: pool inception_c2_pool
 3 1 1 max
 Layer: conv inception_c2_1x1
@@ -830,7 +830,7 @@ Layer: batchnorm inception_c2_1x1_bn
 Layer: scale inception_c2_1x1_scale
 1
 Layer: activity inception_c2_1x1_relu
-relu
+relu 0
 Layer: concat inception_c2_concat
 channel 6 inception_c2_1x1_2_relu inception_c2_1x3_relu inception_c2_3x1_relu inception_c2_1x3_2_relu inception_c2_3x1_2_relu inception_c2_1x1_relu
 Layer: pool pool_8x8_s1

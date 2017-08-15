@@ -12,7 +12,7 @@ class Layers{
 	void add_fc(const std::string& name, int n, bool is_bias, const std::string& activity);
 	void add_loss(const std::string& name, const std::string& method);
 	void add_concat(const std::string& name, const std::vector<std::string>& names, const std::string& method = "channel");
-	void add_activity(const std::string& name, const std::string& method);
+	void add_activity(const std::string& name, const std::string& method, float negative_slope);
 	void add_split(const std::string& name);
 	void add_bn(const std::string& name,float eps);
 	void add_scale(const std::string& name, bool is_bias);

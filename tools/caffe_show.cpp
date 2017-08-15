@@ -47,6 +47,29 @@ void show_model(const std::shared_ptr<caffe::Net<float> >& net, const std::strin
 	}
 	ofile.close();
 }
+void load_det_img(const std::shared_ptr<caffe::Net<float> >& net, const std::string& img_path, float mean_r, float mean_g, float mean_b,
+		float std_r, float std_g, float std_b){
+
+	int c = net->input_blobs()[0]->channels(),
+	    h = net->input_blobs()[0]->height(), 
+	    w = net->input_blobs()[0]->width();
+
+	net->input_blobs()[0]->Reshape(1, c, h, w);
+	net->Reshape();
+	float * input = net->input_blobs()[0]->mutable_cpu_data();
+
+	Mat img = imread(img_path);
+	resize(img,img,Size(h,w));
+	uchar* data = (uchar*)img.data;
+	for(int i=0;i<h;++i){
+		for(int j=0;j<w;++j){
+			input[(i*w+j) + w*h*0] = (data[(i*w+j)*3+2] - mean_r)/std_r;
+			input[(i*w+j) + w*h*1] = (data[(i*w+j)*3+1] - mean_g)/std_g;
+			input[(i*w+j) + w*h*2] = (data[(i*w+j)*3+0] - mean_b)/std_b;
+		}
+	}
+}
+
 void load_img(const std::shared_ptr<caffe::Net<float> >& net, const std::string& img_path, int label, float mean_r, float mean_g, float mean_b,
 		float std_r, float std_g, float std_b){
 	int c = net->input_blobs()[0]->channels(),
@@ -201,22 +224,24 @@ int main(int argc, char** argv){
 	//string net_path = "../caffe_models/ResNet-50-deploy.prototxt",
 	//       model_path = "../caffe_models/ResNet-50-model.caffemodel";
 
+	// inception v3
 	//int label = 628;
 	//float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
 	//string net_path = "../caffe_models/deploy_inception-v3.prototxt",
 	//       model_path = "../caffe_models/inception-v3.caffemodel";
 
+	// inception-resnet-v2
 	//int label = 628;
 	//float mean_r = 128, mean_g = 128, mean_b = 128;
 	//float std_r = 128, std_g = 128, std_b = 128;
 	//string net_path = "../caffe_models/deploy_inception-resnet-v2.prototxt",
 	//       model_path = "../caffe_models/inception-resnet-v2.caffemodel";
 
-	int label = 628;
+	// yolo
 	float mean_r = 128, mean_g = 128, mean_b = 128;
-	float std_r = 128, std_g = 128, std_b = 128;
-	string net_path = "../caffe_models/DenseNet_121.prototxt",
-	       model_path = "../caffe_models/DenseNet_121.caffemodel";
+	float std_r = 1, std_g = 1, std_b = 1;
+	string net_path = "../caffe_models/detection/gnet_deploy.prototxt",
+	       model_path = "../caffe_models/detection/gnet_yolo_iter_32000.caffemodel";
 	string model_text_path = "model.txt",
 	       forward_text_path = "forward.txt",
 	       backward_text_path = "backward.txt";
@@ -227,8 +252,10 @@ int main(int argc, char** argv){
 	net->CopyTrainedLayersFrom(model_path);
 	//show_model(net, model_text_path);
 
-	string img_path = "../imgs/westerdam-ship-size.jpg";
-	load_img(net,img_path,label,mean_r,mean_g,mean_b,std_r,std_g,std_b);
+	//string img_path = "../imgs/westerdam-ship-size.jpg";// for classification
+	string img_path = "../imgs/person.jpg";//for detection
+	//load_img(net,img_path,label,mean_r,mean_g,mean_b,std_r,std_g,std_b);//for classification
+	load_det_img(net,img_path,mean_r,mean_g,mean_b,std_r,std_g,std_b);// for detection
 	net->Forward();
 	show_forward(net, forward_text_path);
 	//net->Backward();

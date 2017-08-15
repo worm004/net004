@@ -292,8 +292,9 @@ void Parser::read_net_pool(const std::string& line, const std::string& name, Lay
 }
 void Parser::read_net_activity(const std::string& line, const std::string& name, Layers* ls){
 	char method[100];
-	sscanf(line.c_str(),"%s",method);
-	ls->add_activity(name, method);
+	float negative_slope;
+	sscanf(line.c_str(),"%s %f",method,&negative_slope);
+	ls->add_activity(name, method,negative_slope);
 }
 void Parser::read_net_fc(const std::string& line, const std::string& name, Layers* ls){
 	char activity[100];

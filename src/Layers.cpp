@@ -78,8 +78,8 @@ void Layers::show(){
 }
 
 // different types of layers
-void Layers::add_activity(const std::string& name, const std::string& method){
-	Layer* l = new ActivityLayer(name,method);
+void Layers::add_activity(const std::string& name, const std::string& method, float negative_slope){
+	Layer* l = new ActivityLayer(name,method,negative_slope);
 	add(name, &l);
 }
 void Layers::add_data(const std::string& name, int n, int c, int h, int w, const std::string& method){

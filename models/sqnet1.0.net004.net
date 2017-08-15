@@ -6,55 +6,55 @@ Layer: data label
 Layer: conv conv1
 7 7 96 0 0 2 2 1 1 none
 Layer: activity relu_conv1
-relu
+relu 0
 Layer: pool pool1
 3 0 2 max
 Layer: conv fire2/squeeze1x1
 1 1 16 0 0 1 1 1 1 none
 Layer: activity fire2/relu_squeeze1x1
-relu
+relu 0
 Layer: split fire2/squeeze1x1_fire2/relu_squeeze1x1_0_split
 
 Layer: conv fire2/expand1x1
 1 1 64 0 0 1 1 1 1 none
 Layer: activity fire2/relu_expand1x1
-relu
+relu 0
 Layer: conv fire2/expand3x3
 3 3 64 1 1 1 1 1 1 none
 Layer: activity fire2/relu_expand3x3
-relu
+relu 0
 Layer: concat fire2/concat
 channel 2 fire2/relu_expand1x1 fire2/relu_expand3x3
 Layer: conv fire3/squeeze1x1
 1 1 16 0 0 1 1 1 1 none
 Layer: activity fire3/relu_squeeze1x1
-relu
+relu 0
 Layer: split fire3/squeeze1x1_fire3/relu_squeeze1x1_0_split
 
 Layer: conv fire3/expand1x1
 1 1 64 0 0 1 1 1 1 none
 Layer: activity fire3/relu_expand1x1
-relu
+relu 0
 Layer: conv fire3/expand3x3
 3 3 64 1 1 1 1 1 1 none
 Layer: activity fire3/relu_expand3x3
-relu
+relu 0
 Layer: concat fire3/concat
 channel 2 fire3/relu_expand1x1 fire3/relu_expand3x3
 Layer: conv fire4/squeeze1x1
 1 1 32 0 0 1 1 1 1 none
 Layer: activity fire4/relu_squeeze1x1
-relu
+relu 0
 Layer: split fire4/squeeze1x1_fire4/relu_squeeze1x1_0_split
 
 Layer: conv fire4/expand1x1
 1 1 128 0 0 1 1 1 1 none
 Layer: activity fire4/relu_expand1x1
-relu
+relu 0
 Layer: conv fire4/expand3x3
 3 3 128 1 1 1 1 1 1 none
 Layer: activity fire4/relu_expand3x3
-relu
+relu 0
 Layer: concat fire4/concat
 channel 2 fire4/relu_expand1x1 fire4/relu_expand3x3
 Layer: pool pool4
@@ -62,65 +62,65 @@ Layer: pool pool4
 Layer: conv fire5/squeeze1x1
 1 1 32 0 0 1 1 1 1 none
 Layer: activity fire5/relu_squeeze1x1
-relu
+relu 0
 Layer: split fire5/squeeze1x1_fire5/relu_squeeze1x1_0_split
 
 Layer: conv fire5/expand1x1
 1 1 128 0 0 1 1 1 1 none
 Layer: activity fire5/relu_expand1x1
-relu
+relu 0
 Layer: conv fire5/expand3x3
 3 3 128 1 1 1 1 1 1 none
 Layer: activity fire5/relu_expand3x3
-relu
+relu 0
 Layer: concat fire5/concat
 channel 2 fire5/relu_expand1x1 fire5/relu_expand3x3
 Layer: conv fire6/squeeze1x1
 1 1 48 0 0 1 1 1 1 none
 Layer: activity fire6/relu_squeeze1x1
-relu
+relu 0
 Layer: split fire6/squeeze1x1_fire6/relu_squeeze1x1_0_split
 
 Layer: conv fire6/expand1x1
 1 1 192 0 0 1 1 1 1 none
 Layer: activity fire6/relu_expand1x1
-relu
+relu 0
 Layer: conv fire6/expand3x3
 3 3 192 1 1 1 1 1 1 none
 Layer: activity fire6/relu_expand3x3
-relu
+relu 0
 Layer: concat fire6/concat
 channel 2 fire6/relu_expand1x1 fire6/relu_expand3x3
 Layer: conv fire7/squeeze1x1
 1 1 48 0 0 1 1 1 1 none
 Layer: activity fire7/relu_squeeze1x1
-relu
+relu 0
 Layer: split fire7/squeeze1x1_fire7/relu_squeeze1x1_0_split
 
 Layer: conv fire7/expand1x1
 1 1 192 0 0 1 1 1 1 none
 Layer: activity fire7/relu_expand1x1
-relu
+relu 0
 Layer: conv fire7/expand3x3
 3 3 192 1 1 1 1 1 1 none
 Layer: activity fire7/relu_expand3x3
-relu
+relu 0
 Layer: concat fire7/concat
 channel 2 fire7/relu_expand1x1 fire7/relu_expand3x3
 Layer: conv fire8/squeeze1x1
 1 1 64 0 0 1 1 1 1 none
 Layer: activity fire8/relu_squeeze1x1
-relu
+relu 0
 Layer: split fire8/squeeze1x1_fire8/relu_squeeze1x1_0_split
 
 Layer: conv fire8/expand1x1
 1 1 256 0 0 1 1 1 1 none
 Layer: activity fire8/relu_expand1x1
-relu
+relu 0
 Layer: conv fire8/expand3x3
 3 3 256 1 1 1 1 1 1 none
 Layer: activity fire8/relu_expand3x3
-relu
+relu 0
 Layer: concat fire8/concat
 channel 2 fire8/relu_expand1x1 fire8/relu_expand3x3
 Layer: pool pool8
@@ -128,23 +128,23 @@ Layer: pool pool8
 Layer: conv fire9/squeeze1x1
 1 1 64 0 0 1 1 1 1 none
 Layer: activity fire9/relu_squeeze1x1
-relu
+relu 0
 Layer: split fire9/squeeze1x1_fire9/relu_squeeze1x1_0_split
 
 Layer: conv fire9/expand1x1
 1 1 256 0 0 1 1 1 1 none
 Layer: activity fire9/relu_expand1x1
-relu
+relu 0
 Layer: conv fire9/expand3x3
 3 3 256 1 1 1 1 1 1 none
 Layer: activity fire9/relu_expand3x3
-relu
+relu 0
 Layer: concat fire9/concat
 channel 2 fire9/relu_expand1x1 fire9/relu_expand3x3
 Layer: conv conv10
 1 1 1000 1 1 1 1 1 1 none
 Layer: activity relu_conv10
-relu
+relu 0
 Layer: pool pool10
 -1 0 1 avg
 Layer: loss loss
