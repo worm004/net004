@@ -9,6 +9,8 @@
 #include "DataLayer.h"
 #include "opencv2/opencv.hpp"
 #include "glog/logging.h"
+#include "stdlib.h"
+#include "Python.h"
 #define now() (std::chrono::high_resolution_clock::now())
 #define cal_duration(t1,t2) (std::chrono::duration_cast<std::chrono::milliseconds>((t2) - (t1)).count())
 using namespace cv;
@@ -44,57 +46,7 @@ struct TestParameter{
 	int cnum;
 };
 
-void parser_yolov1(const float* data, int cnum,vector<vector<float> >& rects, float xyscale, float threshold){
-	int class_number = cnum, slide = 7, obj_number = 2;
-	int widthstep = slide * slide,
-		offset_scale = widthstep * obj_number,
-		offset_xywh = widthstep * 4;
-
-	std::vector<float> rs(4);
-	for(int i=0, loc = 0;i<slide;++i)
-	for(int j=0;j<slide;++j, ++loc){
-		const float * pscore = data + loc;
-		float score = 0.0f;
-		int c = -1;
-		for(int k=0;k<class_number;++k){
-			if(*pscore > score){
-				score = *pscore;
-				c = k;
-			}
-			pscore += widthstep;
-		}
-		const float * pscale = pscore,
-		      * px = pscale + offset_scale, 
-		      * py = px + widthstep, 
-		      * pw = py + widthstep, 
-		      * ph = pw + widthstep;
-
-		for(int k=0;k<obj_number;++k){
-			float real_score = *pscale * score;
-			if(real_score < threshold) continue;
-
-			float w = *pw * *pw,
-			      h = *ph * *ph,
-			      x = (*px+j)/slide - w/2.0f,
-			      y = (*py+i)/slide - h/2.0f;
-
-			if(xyscale > 1.0f){
-				rs[0]=x; rs[1]= (y - 0.5f*(1.0f-1.0f/xyscale)) * xyscale;
-				rs[2]=w; rs[3]= h *xyscale;
-			}
-			else {
-				rs[0]=(x- 0.5f*(1.0f-1.0f*xyscale))*xyscale; rs[1]=y;
-				rs[2]=w/xyscale; rs[3]=h;
-			}
-			rects.push_back({rs[0],rs[1],rs[2],rs[3],real_score,float(c)});
-
-			pscale += widthstep;
-			px += offset_xywh;
-			py += offset_xywh;
-			pw += offset_xywh;
-			ph += offset_xywh;
-		}
-	}
+void parser_faster_rcnn(const float* data, int cnum,vector<vector<float> >& rects, float xyscale, float threshold){
 }
 
 void net004_forward(const std::string& img_path, const TestParameter& param, bool show, vector<vector<float> >& rs){
@@ -123,7 +75,7 @@ void net004_forward(const std::string& img_path, const TestParameter& param, boo
 	Connections &cs = net.cs;
 
 	float xyscale = float(rimg.cols) / float(rimg.rows);
-	parser_yolov1(ls[cs.sorted_cs.back()]->outputs[0].data, param.cnum, rs, xyscale, param.threshold);
+	parser_faster_rcnn(ls[cs.sorted_cs.back()]->outputs[0].data, param.cnum, rs, xyscale, param.threshold);
 
 	vector<string> names(param.cnum);
 	ifstream file(param.list_path);
@@ -173,14 +125,15 @@ void caffe_forward(const std::string& img_path, const TestParameter& param, bool
 		input[(i*w+j) + h*w*1] = (data[(i*w+j)*3+1] - param.mean_g)/param.std_g;
 		input[(i*w+j) + h*w*2] = (data[(i*w+j)*3+0] - param.mean_b)/param.std_b;
 	}
-	net->Forward()[0];
+	float loss;
+	net->ForwardPrefilled(&loss);
 	t1 = now();
-	const caffe::Blob<float>* blob = net->Forward()[0];
+	const caffe::Blob<float>* blob = net->ForwardPrefilled(&loss)[0];
 	t2 = now();
 	if(show) cout<<"forward: "<<cal_duration(t1,t2)<<endl;
 
 	float xyscale = float(rimg.cols) / float(rimg.rows);
-	parser_yolov1(blob->cpu_data(),param.cnum,rs,xyscale, param.threshold);
+	parser_faster_rcnn(blob->cpu_data(), param.cnum, rs, xyscale, param.threshold);
 	
 	vector<string> names(param.cnum);
 	ifstream file(param.list_path);
@@ -202,30 +155,35 @@ void caffe_forward(const std::string& img_path, const TestParameter& param, bool
 	//waitKey();
 }
 int main(int argc, char** argv){
-	if(argc !=3){
-		printf("./detect_test model_name/all 0/1\n");
+	if(argc !=2){
+		printf("./faster_rcnn_test 0/1\n");
 		return 0;
 	}
+	char python_path[1000] = "PYTHONPATH=/Users/worm004/Projects/py-faster-rcnn/caffe-fast-rcnn/python:/Users/worm004/Projects/py-faster-rcnn/lib:$PYTHONPATH";
+	putenv(python_path);
+	Py_Initialize();
+	PyRun_SimpleString("import caffe");
+
 	google::InitGoogleLogging(argv[0]);
 	google::SetCommandLineOption("GLOG_minloglevel", "2");
 	map<string, TestParameter> maps;
 
-	maps["yolov1"] = TestParameter(
-	       "../caffe_models/detection/gnet_yolo_iter_32000.caffemodel",
-	       "../caffe_models/detection/gnet_deploy.prototxt",
-	       "../models/detection/yolov1.net004.data",
-	       "../models/detection/yolov1.net004.net",
+	maps["faster-rcnn"] = TestParameter(
+	       "../caffe_models/detection/VGG16_faster_rcnn_final.caffemodel",
+	       "../caffe_models/detection/faster_rcnn_test.pt",
+	       "../models/detection/faster-rcnn.net004.data",
+	       "../models/detection/faster-rcnn.net004.net",
 	       "../caffe_models/detection/voc.list",
-	       128, 128, 128, 1, 1, 1, 0.1, 20
+	       122.7717, 115.9465, 102.9801, 1, 1, 1, 0.1, 20
 	);
-	bool show = atoi(argv[2]);
+	bool show = atoi(argv[1]);
 	string img_path = "../imgs/person.jpg";
 
-	if(maps.find(argv[1])!= maps.end()){
-		printf("[TEST] [forwrad] %s\n",argv[1]);
+	if(maps.find("faster-rcnn")!= maps.end()){
+		printf("[TEST] [forwrad] %s\n","faster-rcnn");
 		vector<vector<float> > caffe_rs, rs;
-		caffe_forward(img_path, maps[argv[1]], show, caffe_rs);
-		net004_forward(img_path,maps[argv[1]], show, rs);
+		caffe_forward(img_path, maps["faster-rcnn"], show, caffe_rs);
+		//net004_forward(img_path,maps[argv[1]], show, rs);
 
 		if(rs.size()!=caffe_rs.size()){
 			printf("caffe rs: %lu\nnet004 rs: %lu\n",caffe_rs.size(),rs.size());
@@ -239,9 +197,6 @@ int main(int argc, char** argv){
 					is_same = false;
 			printf("[TEST] [result] %s\n",is_same?"sucessful":"\x1B[31mfailed"); // red failed
 		}
-	}
-	else {
-		printf("no such net: %s\n",argv[1]);
 	}
 
 
