@@ -15,6 +15,7 @@
 #define cal_duration(t1,t2) (std::chrono::duration_cast<std::chrono::milliseconds>((t2) - (t1)).count())
 using namespace cv;
 using namespace std;
+using namespace caffe;
 
 struct TestParameter{
 	TestParameter(){}
@@ -47,6 +48,26 @@ struct TestParameter{
 };
 
 void parser_faster_rcnn(const float* data, int cnum,vector<vector<float> >& rects, float xyscale, float threshold){
+}
+
+void preprocess_img(const cv::Mat& src, cv::Mat& des, float &scale, int target_scale, int max_size, float r, float g, float b){
+	des = Mat::zeros(src.size(),CV_32FC3);
+	float *odata = (float*)des.data;
+	uchar *idata = (uchar*)src.data;
+	int n = src.rows * src.cols * src.channels();
+
+	for(int i=0;i<n;i+=3){
+		odata[i] =   float(idata[i]) - b;
+		odata[i+1] = float(idata[i+1]) - g;
+		odata[i+2] = float(idata[i+2]) - r;
+	}
+
+	int min_s = min(src.cols,src.rows), max_s = max(src.cols,src.rows);
+	float s = float(target_scale)/float(min_s);
+	if(int(s * max_s+0.5) > max_size) s = float(max_size) / float(max_s);
+
+	resize(des,des,Size(),s,s,CV_INTER_LINEAR);
+	scale = s;
 }
 
 void net004_forward(const std::string& img_path, const TestParameter& param, bool show, vector<vector<float> >& rs){
@@ -97,9 +118,53 @@ void net004_forward(const std::string& img_path, const TestParameter& param, boo
 	//waitKey();
 
 }
+void bbox_transform_inv(const std::vector<vector<float> >& boxes, const std::vector<vector<float> >& deltas, std::vector<vector<float> >& pred_boxes){
+	int n = deltas.size(), c = deltas[0].size();
+	pred_boxes.resize(n,vector<float>(c));
+	for(int i=0;i<n;++i){
+		float width = boxes[i][2] - boxes[i][0] + 1.0f;
+		float height = boxes[i][3] - boxes[i][1] + 1.0f;
+		float cx = boxes[i][0] + 0.5*width;
+		float cy = boxes[i][1] + 0.5*height;
+		//printf("%f %f %f %f\n",width,height,cx,cy);
+
+		for(int j=0;j<c;j+=4){
+			float dx = deltas[i][j];
+			float dy = deltas[i][j+1];
+			float dw = deltas[i][j+2];
+			float dh = deltas[i][j+3];
+			//printf("%f %f %f %f",dx,dy,dw,dh);
+
+			float pred_cx = dx * width + cx;
+			float pred_cy = dy * height + cy;
+			float pred_w = exp(dw) * width;
+			float pred_h = exp(dh) * height;
+			//printf("%f %f %f %f",pred_cx, pred_cy, pred_w, pred_h);
+
+			pred_boxes[i][j] =  pred_cx - 0.5*pred_w;
+			pred_boxes[i][j+1] = pred_cy - 0.5*pred_h;
+			pred_boxes[i][j+2] = pred_cx + 0.5*pred_w;
+			pred_boxes[i][j+3] = pred_cy + 0.5*pred_h;
+
+		}
+	}
+}
 void caffe_forward(const std::string& img_path, const TestParameter& param, bool show, vector<vector<float> >& rs){
 
 	if(show) printf("caffe forwarding ...\n");
+
+	Mat img = imread(img_path);
+	Mat rimg;
+	float scale;
+	preprocess_img(img,rimg,scale,600,1000,param.mean_r,param.mean_g,param.mean_b);
+	uchar *data = (uchar*)img.data;
+	//for(int i=0;i<img.cols*img.rows*img.channels();++i)
+	//	printf("%d ",data[i]);
+	//printf("\n");
+	//for(int i=0;i<rimg.cols*rimg.rows*rimg.channels();++i)
+	//	printf("%g ",fdata[i]);
+	//printf("\n");
+
   	std::shared_ptr<caffe::Net<float> > net;
 	caffe::Caffe::set_mode(caffe::Caffe::CPU);
 	auto t1 = now();
@@ -108,23 +173,23 @@ void caffe_forward(const std::string& img_path, const TestParameter& param, bool
 	auto t2 = now();
 	if(show) cout<<"read: "<<cal_duration(t1,t2)<<endl;
 
-	int c = net->input_blobs()[0]->channels(),
-	    h = net->input_blobs()[0]->height(), 
-	    w = net->input_blobs()[0]->width();
+	int c = net->input_blobs()[0]->channels(), h = rimg.rows, w = rimg.cols;
 	net->input_blobs()[0]->Reshape(1, c, h, w);
 	net->Reshape();
+	float * input = net->input_blobs()[0]->mutable_cpu_data(), 
+		* input2 = net->input_blobs()[1]->mutable_cpu_data();
 
-	Mat img = imread(img_path);
-	Mat rimg;
-	resize(img,rimg,Size(h,w));
-	uchar* data = (uchar*)rimg.data;
-	float * input = net->input_blobs()[0]->mutable_cpu_data();
+	float* fdata = (float*)rimg.data;
 	for(int i=0;i<h;++i)
 	for(int j=0;j<w;++j){
-		input[(i*w+j) + h*w*0] = (data[(i*w+j)*3+2] - param.mean_r)/param.std_r;
-		input[(i*w+j) + h*w*1] = (data[(i*w+j)*3+1] - param.mean_g)/param.std_g;
-		input[(i*w+j) + h*w*2] = (data[(i*w+j)*3+0] - param.mean_b)/param.std_b;
+		input[(i*w+j) + h*w*2] = fdata[(i*w+j)*3+2]; 
+		input[(i*w+j) + h*w*1] = fdata[(i*w+j)*3+1];
+		input[(i*w+j) + h*w*0] = fdata[(i*w+j)*3+0];
 	}
+	input2[0] = rimg.rows;
+	input2[1] = rimg.cols;
+	input2[2] = scale;
+
 	float loss;
 	net->ForwardPrefilled(&loss);
 	t1 = now();
@@ -132,17 +197,100 @@ void caffe_forward(const std::string& img_path, const TestParameter& param, bool
 	t2 = now();
 	if(show) cout<<"forward: "<<cal_duration(t1,t2)<<endl;
 
-	float xyscale = float(rimg.cols) / float(rimg.rows);
-	parser_faster_rcnn(blob->cpu_data(), param.cnum, rs, xyscale, param.threshold);
+	const caffe::shared_ptr<caffe::Blob<float> > roi_blob = net->blob_by_name("rois");
+
+	// rois
+	const float * roi_data = roi_blob->cpu_data();
+	vector<vector<float> > boxes(roi_blob->num(),vector<float>(4));
+	for(int i=0;i<roi_blob->num();++i){
+		boxes[i][0] = roi_data[i*roi_blob->channels()+1]/scale;
+		boxes[i][1] = roi_data[i*roi_blob->channels()+2]/scale;
+		boxes[i][2] = roi_data[i*roi_blob->channels()+3]/scale;
+		boxes[i][3] = roi_data[i*roi_blob->channels()+4]/scale;
+	}
+	//for(int i=0;i<boxes.size();++i)
+	//	for(int j=0;j<4;++j)
+	//		printf("%g ",boxes[i][j]);
+	//printf("\n");
+
+	// bbox_pred
+	const caffe::shared_ptr<caffe::Blob<float> > bbox_pred_blob = net->blob_by_name("bbox_pred");
+	vector<vector<float> > pred_boxes, box_deltas(bbox_pred_blob->num(), vector<float>(bbox_pred_blob->channels()));
+	const float * bbox_pred_data = bbox_pred_blob->cpu_data();
+	for(int i=0;i<bbox_pred_blob->num();++i){
+		for(int j=0;j<bbox_pred_blob->channels();++j){
+			box_deltas[i][j] = bbox_pred_data[i*bbox_pred_blob->channels()+j];
+			//printf("%g ",box_deltas[i][j]);
+		}
+	}
+	//printf("\n");
+	bbox_transform_inv(boxes, box_deltas, pred_boxes);
+	for(int i=0;i<pred_boxes.size();++i){
+		for(int j=0;j<pred_boxes[i].size();j+=4){
+			pred_boxes[i][j] =   max(pred_boxes[i][j],0.0f);
+			pred_boxes[i][j+1] = max(pred_boxes[i][j+1],0.0f);
+			pred_boxes[i][j+2] = min(pred_boxes[i][j+2],float(img.cols-1));
+			pred_boxes[i][j+3] = min(pred_boxes[i][j+3],float(img.rows-1));
+		}
+	}
+	//for(int i=0;i<pred_boxes.size();++i)
+	//	for(int j=0;j<pred_boxes[0].size();++j){
+	//		printf("%g ",pred_boxes[i][j]);
+	//	}
+	//printf("\n");
+
+	// scores
+	const caffe::shared_ptr<caffe::Blob<float> > score_blob = net->blob_by_name("cls_prob");
+	const float * score_data = score_blob->cpu_data();
+	vector<vector<float>> scores(score_blob->num(),vector<float>(score_blob->channels()));
+
+	for(int i=0;i<scores.size();++i)
+		for(int j=0;j<scores[i].size();++j){
+			scores[i][j] = score_data[i*score_blob->channels()+j];
+			//printf("%g ",scores[i][j]);
+		}
+	//parser_faster_rcnn(blob->cpu_data(), param.cnum, rs, xyscale, param.threshold);
 	
 	vector<string> names(param.cnum);
 	ifstream file(param.list_path);
 	for(int i=0;i<param.cnum;++i)
 		file >> names[i];
 
-	for(int i=0;i<(rs.size())&&show;++i){
-		printf("%s (%f) %f %f %f %f\n",names[int(rs[i][5])].c_str(),rs[i][4],rs[i][0],rs[i][1],rs[i][2],rs[i][3]);
+	float CONF_THRESH = 0.8;
+	float NMS_THRESH = 0.3;
+	for(int i=0;i<20;++i){
+		int n = scores.size();
+		vector<vector<float> > dets;
+		for(int j=0;j<n;++j){
+			if(scores[j][i+1] < CONF_THRESH) continue;
+			dets.push_back({
+				pred_boxes[j][(i+1)*4],
+				pred_boxes[j][(i+1)*4+1],
+				pred_boxes[j][(i+1)*4+2],
+				pred_boxes[j][(i+1)*4+3],
+				scores[j][i+1]
+				});
+			printf("%d %f %f %f %f %f\n",i,
+				pred_boxes[j][(i+1)*4],
+				pred_boxes[j][(i+1)*4+1],
+				pred_boxes[j][(i+1)*4+2],
+				pred_boxes[j][(i+1)*4+3],
+				scores[j][i+1]
+			);
+		}
+		//Mat show = img.clone();
+		//for(int j=0;j<dets.size();++j){
+		//	rectangle(show,Rect(dets[j][0],dets[j][1],dets[j][2]-dets[j][0],dets[j][3]-dets[j][1]),Scalar(0,0,255),2);
+		//}
+		//imshow(names[i].c_str(),show);
+		//waitKey();
 	}
+
+	
+
+	//for(int i=0;i<(rs.size())&&show;++i){
+	//	printf("%s (%f) %f %f %f %f\n",names[int(rs[i][5])].c_str(),rs[i][4],rs[i][0],rs[i][1],rs[i][2],rs[i][3]);
+	//}
 
 	//for(int i=0;i<rs.size();++i){
 	//	int x = rs[i][0] * img.cols, y = rs[i][1] * img.rows, w = rs[i][2] * img.cols, h = rs[i][3] * img.rows;
@@ -154,15 +302,21 @@ void caffe_forward(const std::string& img_path, const TestParameter& param, bool
 	//imshow("img",img);
 	//waitKey();
 }
+void setting_python_path(const std::string& path){
+	string pp = "PYTHONPATH="+path+":$PYTHONPATH";
+	char p[1000] = {0};
+	for(int i=0;i<pp.size();++i) p[i] = pp[i];
+	putenv(p);
+	Py_Initialize();
+	PyRun_SimpleString("import caffe");
+}
 int main(int argc, char** argv){
 	if(argc !=2){
 		printf("./faster_rcnn_test 0/1\n");
 		return 0;
 	}
-	char python_path[1000] = "PYTHONPATH=/Users/worm004/Projects/py-faster-rcnn/caffe-fast-rcnn/python:/Users/worm004/Projects/py-faster-rcnn/lib:$PYTHONPATH";
-	putenv(python_path);
-	Py_Initialize();
-	PyRun_SimpleString("import caffe");
+
+	setting_python_path("/Users/worm004/Projects/py-faster-rcnn/caffe-fast-rcnn/python:/Users/worm004/Projects/py-faster-rcnn/lib");
 
 	google::InitGoogleLogging(argv[0]);
 	google::SetCommandLineOption("GLOG_minloglevel", "2");
