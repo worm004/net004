@@ -221,24 +221,22 @@ int main(int argc, char** argv){
 	bool show = atoi(argv[1]);
 	string img_path = "../imgs/person.jpg";
 
-	if(maps.find("yolov1")!= maps.end()){
-		printf("[TEST] [forwrad] %s\n","yolov1");
-		vector<vector<float> > caffe_rs, rs;
-		caffe_forward(img_path, maps["yolov1"], show, caffe_rs);
-		net004_forward(img_path,maps["yolov1"], show, rs);
+	printf("[TEST] [forwrad] %s\n","yolov1");
+	vector<vector<float> > caffe_rs, rs;
+	caffe_forward(img_path, maps["yolov1"], show, caffe_rs);
+	net004_forward(img_path,maps["yolov1"], show, rs);
 
-		if(rs.size()!=caffe_rs.size()){
-			printf("caffe rs: %lu\nnet004 rs: %lu\n",caffe_rs.size(),rs.size());
-			printf("[TEST] [result] %s\n","\x1B[31mfailed"); // red failed
-		}
-		else {
-			bool is_same = true;
-			for(int i=0;(i<rs.size()) && is_same;++i)
-			for(int j=0;(j<5)&&is_same;++j)
-				if(abs(caffe_rs[i][j] - rs[i][j])>1e-4)
-					is_same = false;
-			printf("[TEST] [result] %s\n",is_same?"sucessful":"\x1B[31mfailed"); // red failed
-		}
+	if(rs.size()!=caffe_rs.size()){
+		printf("caffe rs: %lu\nnet004 rs: %lu\n",caffe_rs.size(),rs.size());
+		printf("[TEST] [result] %s\n","\x1B[31mfailed"); // red failed
+	}
+	else {
+		bool is_same = true;
+		for(int i=0;(i<rs.size()) && is_same;++i)
+		for(int j=0;(j<5)&&is_same;++j)
+			if(abs(caffe_rs[i][j] - rs[i][j])>1e-4)
+				is_same = false;
+		printf("[TEST] [result] %s\n",is_same?"sucessful":"\x1B[31mfailed"); // red failed
 	}
 
 	return 0;

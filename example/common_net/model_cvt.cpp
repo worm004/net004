@@ -98,14 +98,6 @@ void cvt_caffe_model(const std::string& name){
 	net004_model_path = "../models/inception-res-v2.net004.data";
 	maps["in-res-v2"] = {caffe_net_path, caffe_model_path,net004_net_path,net004_model_path};
 
-	// detection
-	caffe_net_path = "../caffe_models/detection/gnet_deploy.prototxt";
-	caffe_model_path = "../caffe_models/detection/gnet_yolo_iter_32000.caffemodel";
-	net004_net_path = "../models/detection/yolov1.net004.net";
-	net004_model_path = "../models/detection/yolov1.net004.data";
-	maps["yolov1"] = {caffe_net_path, caffe_model_path,net004_net_path,net004_model_path};
-	
-
 	if(name == "all"){
 		for(auto i:maps){
 			printf("convert caffe model:\n");

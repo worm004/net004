@@ -194,49 +194,6 @@ int main(int argc, char** argv){
 	google::InitGoogleLogging(argv[0]);
 	google::SetCommandLineOption("GLOG_minloglevel", "2");
 
-	// cifar10
-	//int label = 8;
-	//float mean_r = 127 ,mean_g = 127 ,mean_b = 127;
-	//string net_path = "../caffe_models/cifar10_quick_train_test.prototxt",
-	//       model_path = "../caffe_models/cifar10_quick_iter_5000.caffemodel.h5";
-	
-	// vgg16
-	//int label = 628;
-	//float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
-	//string net_path = "../caffe_models/VGG_ILSVRC_16_layers_deploy.prototxt",
-	//       model_path = "../caffe_models/VGG_ILSVRC_16_layers.caffemodel";
-	
-	// alexnet
-	//int label = 628;
-	//float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
-	//string net_path = "../caffe_models/bvlc_alexnet.prototxt",
-	//       model_path = "../caffe_models/bvlc_alexnet.caffemodel";
-	
-	// gnet
-	//int label = 628;
-	//float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
-	//string net_path = "../caffe_models/bvlc_googlenet_deploy.prototxt",
-	//       model_path = "../caffe_models/bvlc_googlenet.caffemodel";
-
-	// resnet
-	//int label = 628;
-	//float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
-	//string net_path = "../caffe_models/ResNet-50-deploy.prototxt",
-	//       model_path = "../caffe_models/ResNet-50-model.caffemodel";
-
-	// inception v3
-	//int label = 628;
-	//float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
-	//string net_path = "../caffe_models/deploy_inception-v3.prototxt",
-	//       model_path = "../caffe_models/inception-v3.caffemodel";
-
-	// inception-resnet-v2
-	//int label = 628;
-	//float mean_r = 128, mean_g = 128, mean_b = 128;
-	//float std_r = 128, std_g = 128, std_b = 128;
-	//string net_path = "../caffe_models/deploy_inception-resnet-v2.prototxt",
-	//       model_path = "../caffe_models/inception-resnet-v2.caffemodel";
-
 	// yolo
 	float mean_r = 128, mean_g = 128, mean_b = 128;
 	float std_r = 1, std_g = 1, std_b = 1;

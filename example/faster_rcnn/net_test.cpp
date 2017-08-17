@@ -1,5 +1,5 @@
 #include "caffe/caffe.hpp"
-#include "faster_rcnn_process.h"
+#include "faster_rcnn_tool.h"
 #define now() (std::chrono::high_resolution_clock::now())
 #define cal_duration(t1,t2) (std::chrono::duration_cast<std::chrono::milliseconds>((t2) - (t1)).count())
 using namespace std;
@@ -80,7 +80,7 @@ void caffe_forward(const Mat&img, const FasterRCNNConfig& config, bool show, vec
 
 	float loss;
 	t1 = now();
-	const caffe::Blob<float>* blob = net->ForwardPrefilled(&loss)[0];
+	net->ForwardPrefilled(&loss)[0];
 	t2 = now();
 	if(show) cout<<"forward: "<<cal_duration(t1,t2)<<endl;
 
