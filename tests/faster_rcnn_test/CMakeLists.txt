@@ -16,5 +16,5 @@ include_directories(${Caffe_INCLUDE_DIRS})
 include_directories(${OpenCV_INCLUDE_DIRS})
 include_directories(${PYTHON_INCLUDE_DIRS})
 
-add_executable(faster_rcnn_test faster_rcnn_test.cpp)
+add_executable(faster_rcnn_test faster_rcnn_test.cpp faster_rcnn_process.cpp)
 target_link_libraries(faster_rcnn_test net004 ${OpenCV_LIBRARIES} ${Caffe_LIBRARIES})
