@@ -12,8 +12,8 @@ class Parser{
 	Parser();
 	void write(Net004* net, const std::string& net_path, const std::string& data_path);
 	void read(const std::string& net_path, const std::string& data_path,Net004* net);
+	void set_input_size(const std::string& name, int n, int c, int h, int w);
 	void clear();
-	int batch_size = -1;
 
 	private:
 	void write_connections(Net004* net, std::ofstream& file);
@@ -36,6 +36,7 @@ class Parser{
 
 	void read_net(const std::string& path, Net004* net);
 	void read_data(const std::string& path, Net004* net);
+	void update_input_size(Net004* net);
 #define params const std::string& line, const std::string& name, Layers* ls
 	void read_net_data(params);
 	void read_net_conv(params);
@@ -49,8 +50,14 @@ class Parser{
 	void read_net_bn(params);
 	void read_net_scale(params);
 	void read_net_eltwise(params);
+	void read_net_reshape(params);
+	void read_net_softmax(params);
+	void read_net_proposal(params);
+	void read_net_roipooling(params);
 #undef params 
 
 	private:
 	std::map<std::string, read_net_func> read_net_funcs;
+	int n = -1,c = -1,h = -1,w = -1;
+	std::string input_layer_name = "data";
 };

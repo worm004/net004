@@ -12,6 +12,10 @@
 #include "BNLayer.h"
 #include "ScaleLayer.h"
 #include "EltwiseLayer.h"
+#include "ReshapeLayer.h"
+#include "SoftmaxLayer.h"
+#include "ProposalLayer.h"
+#include "ROIPoolingLayer.h"
 
 void Layers::add(const std::string& name, Layer** p){
 	if(layers.find(name) != layers.end()){
@@ -124,5 +128,21 @@ void Layers::add_scale(const std::string& name,bool is_bias){
 }
 void Layers::add_eltwise(const std::string& name, const std::string&l0, const std::string& l1, const std::string& method, float f0, float f1){
 	Layer* l = new EltwiseLayer(name, l0, l1, method, f0, f1);
+	add(name, &l);
+}
+void Layers::add_reshape(const std::string&name, const std::vector<int>& p4){
+	Layer* l = new ReshapeLayer(name, p4);
+	add(name, &l);
+}
+void Layers::add_proposal(const std::string& name, int feat_stride, const std::vector<std::string>& names, const std::string& method){
+	Layer* l = new ProposalLayer(name, feat_stride, names, method);
+	add(name, &l);
+}
+void Layers::add_softmax(const std::string& name){
+	Layer* l = new SoftmaxLayer(name);
+	add(name, &l);
+}
+void Layers::add_roipooling(const std::string&name, int h, int w, float scale, const std::vector<std::string>& names){
+	Layer* l = new ROIPoolingLayer(name,h,w,scale,names);
 	add(name, &l);
 }

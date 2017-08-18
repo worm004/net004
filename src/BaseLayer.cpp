@@ -40,9 +40,9 @@ void Layer::connect2(Layer& l){
 		printf("error: connnect2: %s output blob number should be 1 (now %lu)\n",name.c_str(),outputs.size());
 		exit(0);
 	}
-	if(l.type == "concat"){
+	if((l.type == "concat") || (l.type == "proposal") || (l.type == "roipooling")){
 		if(l.order.find(this->name) == l.order.end()){
-			printf("error: connect2: concat(%s) cannot find name: %s\n",l.name.c_str(), this->name.c_str());
+			printf("error: connect2: %s(%s) cannot find name: %s\n",l.type.c_str(), l.name.c_str(), this->name.c_str());
 			for(auto i:l.order){
 				printf("%s %d\n",i.first.c_str(),i.second);
 			}

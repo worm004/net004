@@ -122,3 +122,18 @@ void nms_all_class(const std::vector<std::vector<float> >& boxes, const float* s
 	}
 
 }
+void set_config(FasterRCNNConfig & config){
+	config.list_path = "../caffe_models/detection/voc.list";
+	config.cnum = 20;
+	config.mean[0] = 122.7717f;
+	config.mean[1] = 115.9465f;
+	config.mean[2] = 102.9801f;
+	config.caffe_model_path = "../caffe_models/detection/VGG16_faster_rcnn_final.caffemodel";
+	config.caffe_net_path = "../caffe_models/detection/faster_rcnn_test.pt";
+	config.net004_model_path = "../models/detection/faster_rcnn.net004.data";
+	config.net004_net_path = "../models/detection/faster_rcnn.net004.net";
+	config.nms_thres = 0.3f;
+	config.conf_thres = 0.8f;
+	config.target_size = 600;
+	config.max_size = 700;
+}

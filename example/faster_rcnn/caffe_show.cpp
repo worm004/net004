@@ -5,6 +5,7 @@
 #include "caffe/caffe.hpp"
 #include "opencv2/opencv.hpp"
 #include "glog/logging.h"
+#include "faster_rcnn_tool.h"
 using namespace std;
 using namespace cv;
 
@@ -194,29 +195,56 @@ int main(int argc, char** argv){
 	google::InitGoogleLogging(argv[0]);
 	google::SetCommandLineOption("GLOG_minloglevel", "2");
 
-	// yolo
-	float mean_r = 128, mean_g = 128, mean_b = 128;
-	float std_r = 1, std_g = 1, std_b = 1;
-	string net_path = "../caffe_models/detection/gnet_deploy.prototxt",
-	       model_path = "../caffe_models/detection/gnet_yolo_iter_32000.caffemodel";
+	setting_python_path("/Users/worm004/Projects/py-faster-rcnn/caffe-fast-rcnn/python:/Users/worm004/Projects/py-faster-rcnn/lib");
+	FasterRCNNConfig config;
+	set_config(config);
+
+	string img_path = "../imgs/person.jpg";
+	Mat img = imread(img_path), rimg;
+	float scale;
+	preprocess_img(img, rimg, scale,
+			config.target_size, config.max_size,
+			config.mean[0], config.mean[1], config.mean[2]);
+
+  	std::shared_ptr<caffe::Net<float> > net;
+	caffe::Caffe::set_mode(caffe::Caffe::CPU);
+	net = make_shared<caffe::Net<float>> (config.caffe_net_path, caffe::TEST);
+	net->CopyTrainedLayersFrom(config.caffe_model_path);
+
+	int c = rimg.channels(), h = rimg.rows, w = rimg.cols;
+	net->input_blobs()[0]->Reshape(1, c, h, w);
+	net->Reshape();
+
+	float * input_blob0_data = net->input_blobs()[0]->mutable_cpu_data(), 
+		* input_blob1_data = net->input_blobs()[1]->mutable_cpu_data(),
+		* data = (float*)rimg.data;
+
+	for(int i=0;i<h;++i)
+	for(int j=0;j<w;++j)
+	for(int k=0;k<3;++k)
+		input_blob0_data[(i*w+j) + h*w*k] = data[(i*w+j)*3+k]; 
+
+	input_blob1_data[0] = rimg.rows;
+	input_blob1_data[1] = rimg.cols;
+	input_blob1_data[2] = scale;
+
+	float loss;
+	net->ForwardPrefilled(&loss);
+
 	string model_text_path = "model.txt",
 	       forward_text_path = "forward.txt",
 	       backward_text_path = "backward.txt";
 
-  	std::shared_ptr<caffe::Net<float> > net;
-	caffe::Caffe::set_mode(caffe::Caffe::CPU);
-	net = make_shared<caffe::Net<float>> (net_path, caffe::TEST);
-	net->CopyTrainedLayersFrom(model_path);
 	//show_model(net, model_text_path);
 
-	//string img_path = "../imgs/westerdam-ship-size.jpg";// for classification
-	string img_path = "../imgs/person.jpg";//for detection
-	//load_img(net,img_path,label,mean_r,mean_g,mean_b,std_r,std_g,std_b);//for classification
-	load_det_img(net,img_path,mean_r,mean_g,mean_b,std_r,std_g,std_b);// for detection
-	net->Forward();
+	////string img_path = "../imgs/westerdam-ship-size.jpg";// for classification
+	//string img_path = "../imgs/person.jpg";//for detection
+	////load_img(net,img_path,label,mean_r,mean_g,mean_b,std_r,std_g,std_b);//for classification
+	//load_det_img(net,img_path,mean_r,mean_g,mean_b,std_r,std_g,std_b);// for detection
 	show_forward(net, forward_text_path);
-	//net->Backward();
-	//show_backward(net, backward_text_path);
+	////net->Backward();
+	////show_backward(net, backward_text_path);
 
 	return 0;
 }
+

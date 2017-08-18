@@ -13,6 +13,8 @@
 #include "ActivityLayer.h"
 #include "BNLayer.h"
 #include "ScaleLayer.h"
+#include "ReshapeLayer.h"
+#include "ProposalLayer.h"
 
 using namespace std;
 Parser::Parser(){
@@ -25,10 +27,14 @@ Parser::Parser(){
 	read_net_funcs["data"] = &Parser::read_net_data;
 	read_net_funcs["split"] = &Parser::read_net_split;
 	read_net_funcs["concat"] = &Parser::read_net_concat;
+	read_net_funcs["ProposalLayer"] = &Parser::read_net_proposal;
+	read_net_funcs["roipooling"] = &Parser::read_net_roipooling;
 
 	read_net_funcs["batchnorm"] = &Parser::read_net_bn;
 	read_net_funcs["scale"] = &Parser::read_net_scale;
 	read_net_funcs["eltwise"] = &Parser::read_net_eltwise;
+	read_net_funcs["reshape"] = &Parser::read_net_reshape;
+	read_net_funcs["softmax"] = &Parser::read_net_softmax;
 }
 void Parser::write(Net004* net, const std::string& net_path, const std::string& data_path){	
 	Connections &cs = net->cs;
@@ -175,10 +181,28 @@ void Parser::write_dat_loss(Layer* layer, FILE* ofile){
 
 void Parser::read(const std::string& net_path, const std::string& data_path,Net004* net){
 	read_net(net_path,net);
+	update_input_size(net);
 	net->check();
 	net->setup();
 	read_data(data_path,net);
 	//net->show();
+}
+void Parser::set_input_size(const std::string& name, int n, int c, int h, int w){
+	input_layer_name = name;
+	this->n = n;
+	this->c = c;
+	this->h = h;
+	this->w = w;
+}
+void Parser::update_input_size(Net004* net){
+	if((n <= 0) || (c <= 0) || (h <= 0) || (w <= 0)) return;
+	if(!net->ls.exist(input_layer_name)) {
+		printf("err: no such layer for update input size: %s\n",input_layer_name.c_str());
+		exit(0);
+	}
+	DataLayer* l = (DataLayer*)(net->ls)[input_layer_name];
+	l->outputs[0].set_shape(n,c,h,w);
+	l->outputs[0].alloc();
 }
 void Parser::read_net(const std::string& path, Net004* net){
 	Layers & ls = net->ls;
@@ -264,7 +288,6 @@ void Parser::read_net_data(const std::string& line, const std::string& name, Lay
 	char method[100];
 	int n,c,h,w;
 	sscanf(line.c_str(),"%d %d %d %d %s",&n,&c,&h,&w,method);
-	if(batch_size != -1) n = batch_size;
 	ls->add_data(name,n,c,h,w,method);
 }
 void Parser::read_net_split(const std::string& line, const std::string& name, Layers* ls){
@@ -333,11 +356,37 @@ void Parser::read_net_scale(const std::string& line, const std::string& name, La
 	ls->add_scale(name,bias!=0);
 }
 void Parser::read_net_eltwise(const std::string& line, const std::string& name, Layers* ls){
-
 	char method[100];
 	float f0 = 1.0f, f1 = 1.1f;
 	istringstream iss(line);
 	std::string l0,l1;
 	iss>>l0>>l1>>method>>f0>>f1;
 	ls->add_eltwise(name,l0,l1,method,f0,f1);
+}
+void Parser::read_net_softmax(const std::string& line, const std::string& name, Layers* ls){
+	ls->add_softmax(name);
+}
+void Parser::read_net_roipooling(const std::string& line, const std::string& name, Layers* ls){
+	int h,w;
+	float spatial_scale;
+	istringstream iss(line);
+	vector<string> names(2);
+	iss>>h>>w>>spatial_scale>>names[0]>>names[1];
+	ls->add_roipooling(name,h,w,spatial_scale,names);
+}
+void Parser::read_net_proposal(const std::string& line, const std::string& name, Layers* ls){
+	char method[100];
+	int feat_stride, in;
+	istringstream iss(line);
+	iss>>method>>feat_stride>>in;
+	vector<string> names(in);
+	for(int i=0;i<in;++i)
+		iss>>names[i];
+
+	ls->add_proposal(name,feat_stride,names,method);
+}
+void Parser::read_net_reshape(const std::string& line, const std::string& name, Layers* ls){
+	vector<int> p4(4);
+	sscanf(line.c_str(),"%d %d %d %d",&(p4[0]),&(p4[1]),&(p4[2]),&(p4[3]));
+	ls->add_reshape(name, p4);
 }

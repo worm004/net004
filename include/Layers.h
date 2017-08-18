@@ -16,7 +16,11 @@ class Layers{
 	void add_split(const std::string& name);
 	void add_bn(const std::string& name,float eps);
 	void add_scale(const std::string& name, bool is_bias);
+	void add_softmax(const std::string& name);
+	void add_proposal(const std::string& name, int feat_stride, const std::vector<std::string>& names, const std::string& method);
 	void add_eltwise(const std::string& name, const std::string&l0, const std::string& l1, const std::string& method, float f0, float f1);
+	void add_reshape(const std::string&name, const std::vector<int>& p4);
+	void add_roipooling(const std::string&name, int h, int w, float scale, const std::vector<std::string>& names);
 	void add(const std::string& name, Layer** p);
 
 	void show();

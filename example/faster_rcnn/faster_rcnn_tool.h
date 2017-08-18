@@ -22,3 +22,5 @@ void nms(std::vector<std::vector<float> >& rs, float T);
 void nms_all_class(const std::vector<std::vector<float> >& boxes, const float* score_data, 
 			std::vector<std::vector<float> >& dets,
 			int cnum, float nms_thres, float conf_thres);
+
+void set_config(FasterRCNNConfig & config);

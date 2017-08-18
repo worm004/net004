@@ -16,14 +16,11 @@ include_directories(${Caffe_INCLUDE_DIRS})
 include_directories(${OpenCV_INCLUDE_DIRS})
 include_directories(${PYTHON_INCLUDE_DIRS})
 
-#add_executable(caffe_show_yolo caffe_show.cpp)
-#target_link_libraries(caffe_show_yolo ${Caffe_LIBRARIES} ${OpenCV_LIBRARIES})
+add_executable(caffe_show_faster_rcnn caffe_show.cpp faster_rcnn_tool.cpp)
+target_link_libraries(caffe_show_faster_rcnn ${Caffe_LIBRARIES} ${OpenCV_LIBRARIES})
 
 add_executable(model_cvt_faster_rcnn model_cvt.cpp caffe_parser.cpp faster_rcnn_tool.cpp)
 target_link_libraries(model_cvt_faster_rcnn ${Caffe_LIBRARIES} net004 ${OpenCV_LIBRARIES})
-
-#add_executable(net_test_yolo net_test.cpp)
-#target_link_libraries(net_test_yolo net004 ${OpenCV_LIBRARIES} ${Caffe_LIBRARIES})
 
 add_executable(net_test_faster_rcnn net_test.cpp faster_rcnn_tool.cpp)
 target_link_libraries(net_test_faster_rcnn net004 ${OpenCV_LIBRARIES} ${Caffe_LIBRARIES})

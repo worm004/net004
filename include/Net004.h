@@ -19,5 +19,6 @@ class Net004{
 
 	std::string name;
 	bool is_train;
+
 };
 #endif

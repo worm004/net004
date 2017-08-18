@@ -1,13 +1,16 @@
 #include "caffe/caffe.hpp"
 #include "faster_rcnn_tool.h"
+#include "Net004.h"
+#include "Parser.h"
+#include "DataLayer.h"
 #define now() (std::chrono::high_resolution_clock::now())
 #define cal_duration(t1,t2) (std::chrono::duration_cast<std::chrono::milliseconds>((t2) - (t1)).count())
 using namespace std;
 using namespace cv;
 using namespace caffe;
 
-void set_config(FasterRCNNConfig & config);
 void caffe_forward(const Mat&img, const FasterRCNNConfig& config, bool show, vector<vector<float>>& det, float scale);
+void net004_forward(const Mat&img, const FasterRCNNConfig& config, bool show, vector<vector<float>>& det, float scale);
 
 int main(int argc, char** argv){
 	if(argc !=2){
@@ -30,25 +33,47 @@ int main(int argc, char** argv){
 
 	bool show = atoi(argv[1]);
 	printf("[TEST] [forwrad] %s\n","faster-rcnn");
-	vector<vector<float> > caffe_rs;
-	caffe_forward(rimg, config, show, caffe_rs,scale);
+	vector<vector<float> > caffe_rs, rs;
+	caffe_forward(rimg, config, show, caffe_rs, scale);
+	net004_forward(rimg, config, show, rs, scale);
 
 	return 0;
 }
-void set_config(FasterRCNNConfig & config){
-	config.list_path = "../caffe_models/detection/voc.list";
-	config.cnum = 20;
-	config.mean[0] = 122.7717f;
-	config.mean[1] = 115.9465f;
-	config.mean[2] = 102.9801f;
-	config.caffe_model_path = "../caffe_models/detection/VGG16_faster_rcnn_final.caffemodel";
-	config.caffe_net_path = "../caffe_models/detection/faster_rcnn_test.pt";
-	config.net004_model_path = "../models/detection/faster-rcnn.net004.data";
-	config.net004_net_path = "../models/detection/faster-rcnn.net004.net";
-	config.nms_thres = 0.3f;
-	config.conf_thres = 0.8f;
-	config.target_size = 600;
-	config.max_size = 1000;
+void net004_forward(const Mat&img, const FasterRCNNConfig& config, bool show, vector<vector<float>>& det, float scale){
+	if(show) printf("net004 forwarding ...\n");
+	Net004 net;
+	Parser parser;
+	parser.set_input_size("data",1,img.channels(),img.rows,img.cols);
+	auto t1 = now();
+	parser.read(config.net004_net_path, config.net004_model_path, &net);
+	auto t2 = now();
+	if(show) cout<<"read: "<<cal_duration(t1,t2)<<endl;
+
+	//net.show();
+
+	int c = img.channels(), h = img.rows, w = img.cols;
+	Layers & ls = net.ls;
+	float *data0 = (float*)(DataLayer*)ls["data"]->outputs[0].data,
+	      *data1 = (float*)(DataLayer*)ls["im_info"]->outputs[0].data,
+	      *data = (float*)img.data;
+
+	for(int i=0;i<h;++i)
+	for(int j=0;j<w;++j)
+	for(int k=0;k<3;++k)
+		data0[(i*w+j) + h*w*k] = data[(i*w+j)*3+k]; 
+
+	data1[0] = img.rows;
+	data1[1] = img.cols;
+	data1[2] = scale;
+
+	t1 = now();
+	net.forward();
+	t2 = now();
+	if(show){
+		cout<<"forward: "<<cal_duration(t1,t2)<<endl;
+		//net.show();
+	}
+
 }
 void caffe_forward(const Mat&img, const FasterRCNNConfig& config, bool show, vector<vector<float>>& dets,float scale){
 	if(show) printf("caffe forwarding ...\n");
