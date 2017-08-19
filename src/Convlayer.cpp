@@ -53,7 +53,7 @@ ConvLayer::~ConvLayer(){
 }
 
 void ConvLayer::forward(){
-	//printf("forward: %s %s\n",type.c_str(), name.c_str());
+	printf("forward: %s %s\n",type.c_str(), name.c_str());
 	Blob &input = inputs[0], 
 	     &output = outputs[0];
 
@@ -124,9 +124,10 @@ void ConvLayer::forward(){
 				if(odata[i] < 0.0f) odata[i] = 0.0f;
 		}
 	}
-	//show_inputs();
-	//show_outputs();
-	//getchar();
+	if(name == "rpn_conv/3x3"){
+		//show_inputs();
+		//show_outputs();
+	}
 }
 
 void ConvLayer::backward(){

@@ -34,7 +34,7 @@ int main(int argc, char** argv){
 	bool show = atoi(argv[1]);
 	printf("[TEST] [forwrad] %s\n","faster-rcnn");
 	vector<vector<float> > caffe_rs, rs;
-	caffe_forward(rimg, config, show, caffe_rs, scale);
+	//caffe_forward(rimg, config, show, caffe_rs, scale);
 	net004_forward(rimg, config, show, rs, scale);
 
 	return 0;

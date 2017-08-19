@@ -18,10 +18,10 @@ ProposalLayer::ProposalLayer(
 ProposalLayer::~ProposalLayer(){
 }
 void ProposalLayer::forward(){
-	//printf("forward: %s %s %s\n",type.c_str(), name.c_str(), method.c_str());
-	//show_inputs();
-
-	//show_outputs();
+	printf("forward: %s %s %s\n",type.c_str(), name.c_str(), method.c_str());
+	show_inputs();
+	printf("%d %d %d %d\n",outputs[0].n,outputs[0].c,outputs[0].h,outputs[0].w);
+	show_outputs();
 }
 
 void ProposalLayer::backward(){
@@ -41,7 +41,7 @@ void ProposalLayer::setup_shape(){
 	// output
 	const Blob& ib = inputs[0];
 	outputs.resize(1);
-	outputs[0].set_shape(ib.n,5,ib.h,ib.w);
+	outputs[0].set_shape(ib.n,ib.h*ib.w,5,1);
 }
 void ProposalLayer::setup_data(){
 	if(outputs.size()!=1){

@@ -7,7 +7,7 @@ SoftmaxLayer::SoftmaxLayer(const std::string&name):
 SoftmaxLayer::~SoftmaxLayer(){
 }
 void SoftmaxLayer::forward(){
-	//printf("forward: %s\n",type.c_str());
+	printf("forward: %s %s\n",type.c_str(),name.c_str());
 	//show_inputs();
 
 	int batch_size = inputs[0].n, c = inputs[0].c, hw = inputs[0].hw();
@@ -36,7 +36,7 @@ void SoftmaxLayer::forward(){
 		for(int j=0;j<c;++j)
 			for(int k=0;k<hw;++k){
 				softmaxdata[j*hw +k] /= sumdata[k];
-				odata[i*hw + k] = softmaxdata[j*hw + k];
+				odata[j*hw + k] = softmaxdata[j*hw + k];
 			}
 
 		pdata += c*hw;
