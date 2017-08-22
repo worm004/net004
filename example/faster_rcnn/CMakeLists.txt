@@ -3,6 +3,7 @@ set (CMAKE_CXX_STANDARD 11)
 project("faster_rcnn")
 
 include_directories("../../include")
+set(CMAKE_CXX_FLAGS "-I/usr/local/opt/openblas/include")
 set(Caffe_DIR "/Users/worm004/Projects/py-faster-rcnn/caffe-fast-rcnn/build/install/share/Caffe")
 find_package(Caffe)
 find_package(OpenCV)
