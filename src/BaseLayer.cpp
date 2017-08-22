@@ -147,7 +147,7 @@ void Layer::show_outputs(){
 		int n = output.n, c = output.c, h = output.h, w = output.w;
 
 		for(int b=0;b<n;++b){
-			printf("output batch %d:\n",b);
+			//printf("output batch %d:\n",b);
 			for(int k=0;k<c;++k){
 				for(int i=0;i<h;++i){
 					for(int j=0;j<w;++j)

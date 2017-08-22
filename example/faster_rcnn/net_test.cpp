@@ -9,8 +9,8 @@ using namespace std;
 using namespace cv;
 using namespace caffe;
 
-void caffe_forward(const Mat&img, const FasterRCNNConfig& config, bool show, vector<vector<float>>& det, float scale);
-void net004_forward(const Mat&img, const FasterRCNNConfig& config, bool show, vector<vector<float>>& det, float scale);
+void caffe_forward(const Mat&img, const FasterRCNNConfig& config, bool show, vector<vector<float>>& dets, float scale);
+void net004_forward(const Mat&img, const FasterRCNNConfig& config, bool show, vector<vector<float>>& dets, float scale);
 
 int main(int argc, char** argv){
 	if(argc !=2){
@@ -34,12 +34,25 @@ int main(int argc, char** argv){
 	bool show = atoi(argv[1]);
 	printf("[TEST] [forwrad] %s\n","faster-rcnn");
 	vector<vector<float> > caffe_rs, rs;
-	//caffe_forward(rimg, config, show, caffe_rs, scale);
+	caffe_forward(rimg, config, show, caffe_rs, scale);
 	net004_forward(rimg, config, show, rs, scale);
+
+	if(rs.size()!=caffe_rs.size()){
+		printf("caffe rs: %lu\nnet004 rs: %lu\n",caffe_rs.size(),rs.size());
+		printf("[TEST] [result] %s\n","\x1B[31mfailed"); // red failed
+	}
+	else {
+		bool is_same = true;
+		for(int i=0;(i<rs.size()) && is_same;++i)
+		for(int j=0;(j<5)&&is_same;++j)
+			if(abs(caffe_rs[i][j] - rs[i][j])>1e-4)
+				is_same = false;
+		printf("[TEST] [result] %s\n",is_same?"sucessful":"\x1B[31mfailed"); // red failed
+	}
 
 	return 0;
 }
-void net004_forward(const Mat&img, const FasterRCNNConfig& config, bool show, vector<vector<float>>& det, float scale){
+void net004_forward(const Mat&img, const FasterRCNNConfig& config, bool show, vector<vector<float>>& dets, float scale){
 	if(show) printf("net004 forwarding ...\n");
 	Net004 net;
 	Parser parser;
@@ -72,6 +85,25 @@ void net004_forward(const Mat&img, const FasterRCNNConfig& config, bool show, ve
 	if(show){
 		cout<<"forward: "<<cal_duration(t1,t2)<<endl;
 		//net.show();
+	}
+
+	vector<vector<float> > pred_boxes;
+
+	float *rois_data = net.ls["proposal"]->outputs[0].data;
+	float *bbox_pred_data = net.ls["bbox_pred"]->outputs[0].data;
+	float *score_data = net.ls["cls_prob"]->outputs[0].data;
+	bbox_transform_inv(rois_data, bbox_pred_data, net.ls["proposal"]->outputs[0].c/5, config.cnum, pred_boxes, scale);
+	bbox_bound(pred_boxes,float(img.cols/scale-1),float(img.rows/scale-1));
+	nms_all_class(pred_boxes,score_data,dets,config.cnum,config.nms_thres,config.conf_thres);
+	
+	if(show){
+		vector<string> names(config.cnum);
+		ifstream file(config.list_path);
+		for(int i=0;i<config.cnum;++i)
+			file >> names[i];
+		for(int i=0;i<dets.size();++i){
+			printf("%s (%f) %f %f %f %f\n",names[int(dets[i][5])].c_str(),dets[i][4],dets[i][0],dets[i][1],dets[i][2],dets[i][3]);
+		}
 	}
 
 }

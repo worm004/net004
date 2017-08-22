@@ -1,5 +1,7 @@
+#include <cfloat>
 #include "stdlib.h"
 #include "ROIPoolingLayer.h"
+using namespace std;
 ROIPoolingLayer::ROIPoolingLayer(
 	const std::string&name, int h, int w, float scale, const std::vector<std::string>& names):
 		h(h),
@@ -15,9 +17,55 @@ ROIPoolingLayer::ROIPoolingLayer(
 ROIPoolingLayer::~ROIPoolingLayer(){
 }
 void ROIPoolingLayer::forward(){
-	//printf("forward: %s %s %s\n",type.c_str(), name.c_str(), method.c_str());
+	//printf("forward: %s %s\n",type.c_str(), name.c_str());
 	//show_inputs();
+	
+	int n = inputs[0].n, c = inputs[0].c, nroi = inputs[1].c/5, hw = inputs[0].hw();
+	float *rdata = inputs[1].data, *ddata = inputs[0].data, *odata = outputs[0].data;
 
+	//printf("input0: %d %d %d %d\n",n,c,inputs[0].h,inputs[0].w);
+	//printf("input1: %d %d %d %d\n",inputs[1].n,inputs[1].c,inputs[1].h,inputs[1].w);
+	//printf("scale: %g, h: %d, w: %d\n",scale,h,w);
+
+	int count = outputs[0].nchw();
+	for(int i=0;i<count;++i) odata[i] = -FLT_MAX;
+
+	for(int i=0;i<n;++i){
+		for(int j=0;j<nroi;++j){
+			int rindex = j*5,
+				ry = int(rdata[rindex+2]*scale+0.5f),
+				rx = int(rdata[rindex+1]*scale+0.5f);
+
+			float bin_size_h = float(std::max(int(rdata[rindex+4]*scale+0.5f) - ry + 1,1))/float(h),
+			      bin_size_w = float(std::max(int(rdata[rindex+3]*scale+0.5f) - rx + 1,1))/float(w);
+			
+			for(int y = 0, index = 0;y<h;++y){
+				for(int x=0;x<w;++x,++index){
+					int hstart = std::min(std::max(int(y*bin_size_h)+ry,0),inputs[0].h),
+					    wstart = std::min(std::max(int(x*bin_size_w)+rx,0),inputs[0].w),
+					    hend =   std::min(std::max(int(ceil((y+1)*bin_size_h))+ry,0),inputs[0].h),
+					    wend =   std::min(std::max(int(ceil((x+1)*bin_size_w))+rx,0),inputs[0].w);
+					if((hstart >= hend) || (wstart >= wend)){
+						for(int k=0;k<c;++k)
+							odata[w*h*k+index] = 0;
+					}
+					else{
+						for(int k=0;k<c;++k){
+							float &v = odata[w*h*k+index];
+							for(int yy=hstart;yy<hend;++yy)
+							for(int xx=wstart;xx<wend;++xx){
+								int loc = yy*inputs[0].w+xx + hw*k;
+								if(v < ddata[loc]) v = ddata[loc];
+							}
+						}
+					}
+				}
+			}
+			odata += outputs[0].chw();
+		}
+		rdata += inputs[1].chw();
+		ddata += inputs[0].chw();
+	}
 	//show_outputs();
 }
 
@@ -47,7 +95,7 @@ void ROIPoolingLayer::setup_shape(){
 	const Blob& ib0 = inputs[0];
 	const Blob& ib1 = inputs[1];
 	outputs.resize(1);
-	outputs[0].set_shape(ib1.n, ib0.c, h, w);
+	outputs[0].set_shape(ib1.c/5*ib1.n, ib0.c, h, w);
 }
 void ROIPoolingLayer::setup_data(){
 	if(outputs.size()!=1){

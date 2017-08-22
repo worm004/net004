@@ -7,7 +7,7 @@ SoftmaxLayer::SoftmaxLayer(const std::string&name):
 SoftmaxLayer::~SoftmaxLayer(){
 }
 void SoftmaxLayer::forward(){
-	printf("forward: %s %s\n",type.c_str(),name.c_str());
+	//printf("forward: %s %s\n",type.c_str(),name.c_str());
 	//show_inputs();
 
 	int batch_size = inputs[0].n, c = inputs[0].c, hw = inputs[0].hw();
