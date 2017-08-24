@@ -55,7 +55,9 @@ void Net004::setup(){
 			if(ins[j] < 0){
 				printf("error: should not reach this line\n");
 				exit(0);
-			} else if(ins[j] == 0) l1->setup();
+			} else if(ins[j] == 0){
+				l1->setup();
+			}
 		}
 	}
 }

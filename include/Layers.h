@@ -7,9 +7,11 @@ class Layers{
 	public:
 	void add_data(const std::string& name, int n, int c, int h, int w, const std::string& method);
 	void add_conv(const std::string& name, const std::vector<int>& p8, bool is_bias, const std::string& activity);
+	void add_dconv(const std::string& name, const std::vector<int>& p8, bool is_bias, const std::string& activity);
 	void add_pool(const std::string& name, const std::vector<int>& p3, const std::string& method);
 	void add_lrn(const std::string& name, int n, float alpha, float beta);
 	void add_fc(const std::string& name, int n, bool is_bias, const std::string& activity);
+	void add_crop(const std::string& name, int axis, const std::vector<int>& offset, const std::vector<std::string>& names);
 	void add_loss(const std::string& name, const std::string& method);
 	void add_concat(const std::string& name, const std::vector<std::string>& names, const std::string& method = "channel");
 	void add_activity(const std::string& name, const std::string& method, float negative_slope);

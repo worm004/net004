@@ -27,6 +27,18 @@ void im2col(float * im, int c, int h, int w, float *des, int kernel, int stride,
 	//printf("%d = %d x %d x %d\n",ii,kernel * kernel, c, ii/kernel/kernel/c);
 	//getchar();
 }
+void col2im(int c, int h, int w, float *im, float*des, int kernel_h,int kernel_w, int stride_h, int stride_w, int pad_h, int pad_w){
+	int ii = 0;
+	for(int iy = -pad_h; iy <= h + pad_h - kernel_h; iy += stride_h)
+	for(int ix = -pad_w; ix <= w + pad_w - kernel_w; ix += stride_w)
+	for(int oc = 0; oc < c; ++oc)
+	for(int ik = 0; ik < kernel_h; ++ik)
+	for(int jk = 0; jk < kernel_w; ++jk,++ii){
+		int y = iy + ik, x = ix + jk;
+		if((x < 0)|| (x>=w) || (y<0) || (y>=h));
+		else im[w*h*oc + y * w + x] += des[ii];
+	}
+}
 void generate_table(int c, int h, int w, int *table, int kernel_h,int kernel_w, int stride_h, int stride_w, int pad_h, int pad_w){
 	int ii = 0;
 	for(int iy = -pad_h; iy <= h + pad_h - kernel_h; iy += stride_h)
@@ -39,18 +51,22 @@ void generate_table(int c, int h, int w, int *table, int kernel_h,int kernel_w, 
 		else table[ii] = w*h*oc + y * w + x;
 	}
 }
+void generate_table_inv(int c, int h, int w, int *table, int kernel_h,int kernel_w, int stride_h, int stride_w, int pad_h, int pad_w){
+	int ii = 0;
+	for(int iy = -pad_h; iy <= h + pad_h - kernel_h; iy += stride_h)
+	for(int ix = -pad_w; ix <= w + pad_w - kernel_w; ix += stride_w)
+	for(int oc = 0; oc < c; ++oc)
+	for(int ik = 0; ik < kernel_h; ++ik)
+	for(int jk = 0; jk < kernel_w; ++jk,++ii){
+		int y = iy + ik, x = ix + jk;
+		if((x < 0)|| (x>=w) || (y<0) || (y>=h)) continue;
+		else table[w*h*oc + y * w + x] = ii;
+	}
+}
 void im2col2(float * im, int *table, float* des, int count){
 	for(int i=0;i<count;++i){
 		int t = table[i];
 		if(t >= 0) des[i] = im[t];
 		else des[i] = 0.0f;
 	}
-
-	//for(int i=0;i<7;++i){
-	//for(int j=0;j<7;++j)
-	//	printf(" %d",table[i*7+j]);
-	//	printf("\n");
-	//}
-	//getchar();
 }
-

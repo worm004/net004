@@ -40,6 +40,7 @@ class Parser{
 #define params const std::string& line, const std::string& name, Layers* ls
 	void read_net_data(params);
 	void read_net_conv(params);
+	void read_net_dconv(params);
 	void read_net_pool(params);
 	void read_net_activity(params);
 	void read_net_fc(params);
@@ -47,6 +48,7 @@ class Parser{
 	void read_net_lrn(params);
 	void read_net_split(params);
 	void read_net_concat(params);
+	void read_net_crop(params);
 	void read_net_bn(params);
 	void read_net_scale(params);
 	void read_net_eltwise(params);

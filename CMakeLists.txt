@@ -8,5 +8,3 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall")
 
 add_subdirectory(src)
 add_subdirectory(example)
-#add_subdirectory(tools)
-#add_subdirectory(tests)

@@ -2,6 +2,7 @@
 #include "Layers.h"
 #include "DataLayer.h"
 #include "ConvLayer.h"
+#include "DConvLayer.h"
 #include "PoolLayer.h"
 #include "LRNLayer.h"
 #include "FCLayer.h"
@@ -16,6 +17,7 @@
 #include "SoftmaxLayer.h"
 #include "ProposalLayer.h"
 #include "ROIPoolingLayer.h"
+#include "CropLayer.h"
 
 void Layers::add(const std::string& name, Layer** p){
 	if(layers.find(name) != layers.end()){
@@ -94,6 +96,10 @@ void Layers::add_conv(const std::string&name, const std::vector<int>& p8, bool i
 	Layer* l = new ConvLayer(name,p8[0],p8[1],p8[2],p8[3],p8[4],p8[5],p8[6],p8[7],is_bias,activity);
 	add(name, &l);
 }
+void Layers::add_dconv(const std::string&name, const std::vector<int>& p8, bool is_bias, const std::string& activity){
+	Layer* l = new DConvLayer(name,p8[0],p8[1],p8[2],p8[3],p8[4],p8[5],p8[6],p8[7],is_bias,activity);
+	add(name, &l);
+}
 void Layers::add_pool(const std::string&name, const std::vector<int>& p3, const std::string& method){
 	Layer* l = new PoolLayer(name,p3[0],p3[1],p3[2],method);
 	add(name, &l);
@@ -140,6 +146,10 @@ void Layers::add_proposal(const std::string& name, int feat_stride, const std::v
 }
 void Layers::add_softmax(const std::string& name){
 	Layer* l = new SoftmaxLayer(name);
+	add(name, &l);
+}
+void Layers::add_crop(const std::string& name, int axis, const std::vector<int>& offset, const std::vector<std::string>& names){
+	Layer* l = new CropLayer(name, axis, offset, names);
 	add(name, &l);
 }
 void Layers::add_roipooling(const std::string&name, int h, int w, float scale, const std::vector<std::string>& names){

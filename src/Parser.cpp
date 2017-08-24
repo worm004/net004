@@ -5,6 +5,7 @@
 #include "Net004.h"
 #include "DataLayer.h"
 #include "ConvLayer.h"
+#include "DConvLayer.h"
 #include "PoolLayer.h"
 #include "LRNLayer.h"
 #include "FCLayer.h"
@@ -15,10 +16,12 @@
 #include "ScaleLayer.h"
 #include "ReshapeLayer.h"
 #include "ProposalLayer.h"
+#include "CropLayer.h"
 
 using namespace std;
 Parser::Parser(){
 	read_net_funcs["conv"] = &Parser::read_net_conv;
+	read_net_funcs["dconv"] = &Parser::read_net_dconv;
 	read_net_funcs["pool"] = &Parser::read_net_pool;
 	read_net_funcs["activity"] = &Parser::read_net_activity;
 	read_net_funcs["fc"] = &Parser::read_net_fc;
@@ -29,12 +32,12 @@ Parser::Parser(){
 	read_net_funcs["concat"] = &Parser::read_net_concat;
 	read_net_funcs["ProposalLayer"] = &Parser::read_net_proposal;
 	read_net_funcs["roipooling"] = &Parser::read_net_roipooling;
-
 	read_net_funcs["batchnorm"] = &Parser::read_net_bn;
 	read_net_funcs["scale"] = &Parser::read_net_scale;
 	read_net_funcs["eltwise"] = &Parser::read_net_eltwise;
 	read_net_funcs["reshape"] = &Parser::read_net_reshape;
 	read_net_funcs["softmax"] = &Parser::read_net_softmax;
+	read_net_funcs["crop"] = &Parser::read_net_crop;
 }
 void Parser::write(Net004* net, const std::string& net_path, const std::string& data_path){	
 	Connections &cs = net->cs;
@@ -117,7 +120,6 @@ void Parser::write_net_conv(Layer* layer, std::ofstream& ofile){
 }
 void Parser::write_connections(Net004* net, std::ofstream& ofile){
 	Connections &cs = net->cs;
-	Layers &ls = net->ls;
 	ofile<<"Connections:"<<endl;
 
 	const vector<string> &sorted_cs = cs.sorted_cs;
@@ -209,6 +211,10 @@ void Parser::read_net(const std::string& path, Net004* net){
 	Connections& cs = net->cs;
 
 	ifstream net_file(path);
+	if(!net_file.is_open()){
+		printf("not found file: %s\n",path.c_str());
+		exit(0);
+	}
 	string line;
 	char layer_type[100], layer_name[100];
 	bool isconnect = false;
@@ -251,9 +257,14 @@ void Parser::read_data(const std::string& path, Net004* net){
 		fread(&w, sizeof(int), 1, file);
 		int total = n*c*h*w;
 		Layer* layer = ls[layer_name];
-		Blob* b;
+		Blob* b = 0;
 		if(layer->type == "conv"){
 			ConvLayer* l = (ConvLayer*)layer;
+			if(data_name == string("weight")) b = &(l->weight);
+			else if(data_name == string("bias")) b = &(l->bias);
+		}
+		else if(layer->type == "dconv"){
+			DConvLayer* l = (DConvLayer*)layer;
 			if(data_name == string("weight")) b = &(l->weight);
 			else if(data_name == string("bias")) b = &(l->bias);
 		}
@@ -298,6 +309,14 @@ void Parser::read_net_lrn(const std::string& line, const std::string& name, Laye
 	float alpha,beta;
 	sscanf(line.c_str(),"%d %f %f",&local_size,&alpha,&beta);
 	ls->add_lrn(name,local_size,alpha,beta);
+}
+void Parser::read_net_dconv(const std::string& line, const std::string& name, Layers* ls){
+	char activity[100];
+	int kernel_h,kernel_w, filters, padding_h,padding_w, stride_h,stride_w, group;
+	int bias = 0; 
+	sscanf(line.c_str(),"%d %d %d %d %d %d %d %d %d %s",&kernel_h,&kernel_w, &filters, &padding_h,&padding_w, &stride_h,&stride_w, &group, &bias, activity);
+	if (activity == string("none")) ls->add_dconv(name,{filters,kernel_h,kernel_w,stride_h,stride_w,padding_h,padding_w,group},bias!=0,"");
+	else ls->add_dconv(name,{filters,kernel_h,kernel_w,stride_h,stride_w,padding_h,padding_w,group},bias!=0,activity);
 }
 void Parser::read_net_conv(const std::string& line, const std::string& name, Layers* ls){
 	char activity[100];
@@ -365,6 +384,17 @@ void Parser::read_net_eltwise(const std::string& line, const std::string& name, 
 }
 void Parser::read_net_softmax(const std::string& line, const std::string& name, Layers* ls){
 	ls->add_softmax(name);
+}
+void Parser::read_net_crop(const std::string& line, const std::string& name, Layers* ls){
+	istringstream iss(line);
+	int axis, n;
+	iss >> axis >> n;
+	vector<int> offset(n);
+	for(int i=0;i<n;++i)
+		iss>>offset[i];
+	vector<string> names(2);
+	iss>>names[0]>>names[1];
+	ls->add_crop(name,axis,offset,names);
 }
 void Parser::read_net_roipooling(const std::string& line, const std::string& name, Layers* ls){
 	int h,w;
