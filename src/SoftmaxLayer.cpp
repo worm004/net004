@@ -15,7 +15,6 @@ void SoftmaxLayer::forward(){
 	float *maxdata = maxs.data, *sumdata = sums.data, *softmaxdata = softmaxblob.data;
 	float *odata = outputs[0].data;
 
-	float loss = 0.0f;
 	for(int i=0;i<batch_size;++i){
 		for(int k=0;k<hw;++k){
 			maxdata[k] = pdata[k];

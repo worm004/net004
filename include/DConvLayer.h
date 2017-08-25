@@ -45,7 +45,6 @@ class DConvLayer: public Layer{
 	Blob weight, weight_dif, bias, bias_dif;
 
 	float* col = 0;
-	int* table = 0;
 	bool *activity_mask = 0;
 	private:
 	int kernel_h = 0, kernel_w = 0, 

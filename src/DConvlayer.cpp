@@ -53,8 +53,8 @@ DConvLayer::~DConvLayer(){
 }
 
 void DConvLayer::forward(){
-	printf("forward: %s %s\n",type.c_str(), name.c_str());
-	show_inputs();
+	//printf("forward: %s %s\n",type.c_str(), name.c_str());
+	//show_inputs();
 	
 	Blob &input = inputs[0], 
 	     &output = outputs[0];
@@ -71,8 +71,6 @@ void DConvLayer::forward(){
 	      * weight_data = weight.data, 
 	      * bias_data = bias.data;
 	for(int b = 0;b < batch_size; ++b){
-		//for(int g=0;g<group;++g){
-		//}
 		cblas_sgemm(CblasRowMajor, 
 				CblasTrans, CblasNoTrans, 
 				nloc, w, input.c,
@@ -105,7 +103,7 @@ void DConvLayer::forward(){
 		odata += output.chw();
 		col_data += ncol;
 	}
-	show_outputs();
+	//show_outputs();
 }
 
 void DConvLayer::backward(){
@@ -174,14 +172,6 @@ void DConvLayer::setup_data(){
 	// col
 	int ncol = kernel_h * kernel_w * inputs[0].hw() * filters * inputs[0].n;
 	col = new float[ncol];
-
-	//table = new int[outputs[0].chw()/group];
-	//generate_table_inv(outputs[0].c/group, outputs[0].h, outputs[0].w, table, kernel_h,kernel_w, stride_h,stride_w, padding_h,padding_w);
-
-	//for(int i=0;i<outputs[0].chw();++i){
-	//	printf(" %d",table[i]);
-	//	getchar();
-	//}
 
 	// weight, bias and output
 	weight.alloc();

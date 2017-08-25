@@ -47,21 +47,7 @@ void net004_forward(const cv::Mat& img, const TestParameter& param, bool show, f
 
 	if(show) cout<<"forward: "<<cal_duration(t1,t2)<<endl;
 
-//
-//	Connections &cs = net.cs;
-//
-//	float xyscale = float(rimg.cols) / float(rimg.rows);
-//	parser_yolov1(ls[cs.sorted_cs.back()]->outputs[0].data, param.cnum, rs, xyscale, param.threshold);
-//
-//	vector<string> names(param.cnum);
-//	ifstream file(param.list_path);
-//	for(int i=0;i<param.cnum;++i)
-//		file >> names[i];
-//
-//	for(int i=0;i<(rs.size())&&show;++i){
-//		printf("%s (%f) %f %f %f %f\n",names[int(rs[i][5])].c_str(),rs[i][4],rs[i][0],rs[i][1],rs[i][2],rs[i][3]);
-//	}
-//
+	memcpy(*ret,ls[net.cs.sorted_cs.back()]->outputs[0].data,sizeof(float)*h*w*(param.cnum+1));
 }
 
 void process_image(const std::string& path, const TestParameter& param, cv::Mat& ret){
@@ -147,12 +133,25 @@ int main(int argc, char** argv){
 	Mat img;
 	process_image(img_path, param, img);
 	float *caffe_scores = new float[img.cols*img.rows*(param.cnum+1)];
-	//caffe_forward(img, param, show, &caffe_scores);
-	//Mat img2 = imread(img_path);
-	//resize(img2,img2,img.size());
-	//show_seg(img2, caffe_scores,param,0.4);
+	caffe_forward(img, param, show, &caffe_scores);
 	
 	float *net004_scores = new float[img.cols*img.rows*(param.cnum+1)];
 	net004_forward(img, param, show, &net004_scores);
+
+
+	bool is_same = true;
+	for(int i=0;i<img.cols*img.rows*(param.cnum+1);++i)
+		if(abs(caffe_scores[i] - net004_scores[i]) > 1e-2){
+			printf("%g %g\n",caffe_scores[i],net004_scores[i]);
+			is_same = false;
+			break;
+		}
+	printf("[TEST] [result] %s\n",is_same?"sucessful":"\x1B[31mfailed");
+
+	if(show){
+		Mat img2 = imread(img_path);
+		resize(img2,img2,img.size());
+		show_seg(img2, net004_scores,param,0.4);
+	}
 
 }
