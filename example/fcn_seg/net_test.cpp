@@ -138,14 +138,25 @@ int main(int argc, char** argv){
 	float *net004_scores = new float[img.cols*img.rows*(param.cnum+1)];
 	net004_forward(img, param, show, &net004_scores);
 
+	//printf("%d\n",img.cols*img.rows*(param.cnum+1));
+	//printf("caffe:\n");
+	//for(int i=0;i<img.cols*img.rows*(param.cnum+1);++i)
+	//	printf(" %g",caffe_scores[i]);
+	//printf("\n");
+
+	//printf("net004:\n");
+	//for(int i=0;i<img.cols*img.rows*(param.cnum+1);++i)
+	//	printf(" %g",net004_scores[i]);
+	//printf("\n");
 
 	bool is_same = true;
-	for(int i=0;i<img.cols*img.rows*(param.cnum+1);++i)
-		if(abs(caffe_scores[i] - net004_scores[i]) > 1e-2){
+	for(int i=0;i<img.cols*img.rows*(param.cnum+1);++i){
+		if(abs(caffe_scores[i] - net004_scores[i]) > 1e-4){
 			printf("%g %g\n",caffe_scores[i],net004_scores[i]);
 			is_same = false;
 			break;
 		}
+	}
 	printf("[TEST] [result] %s\n",is_same?"sucessful":"\x1B[31mfailed");
 
 	if(show){

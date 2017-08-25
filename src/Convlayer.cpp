@@ -126,10 +126,6 @@ void ConvLayer::forward(){
 				if(odata[i] < 0.0f) odata[i] = 0.0f;
 		}
 	}
-	if(name == "rpn_conv/3x3"){
-		//show_inputs();
-		//show_outputs();
-	}
 }
 
 void ConvLayer::backward(){

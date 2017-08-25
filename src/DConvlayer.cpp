@@ -54,6 +54,7 @@ DConvLayer::~DConvLayer(){
 
 void DConvLayer::forward(){
 	//printf("forward: %s %s\n",type.c_str(), name.c_str());
+	
 	//show_inputs();
 	
 	Blob &input = inputs[0], 
@@ -103,6 +104,7 @@ void DConvLayer::forward(){
 		odata += output.chw();
 		col_data += ncol;
 	}
+
 	//show_outputs();
 }
 
@@ -146,7 +148,7 @@ void DConvLayer::setup_shape(){
 		exit(0);
 	}
 	const Blob& ib = inputs[0];
-	weight.set_shape(filters,ib.c/group, kernel_h, kernel_w);
+	weight.set_shape(filters,ib.c, kernel_h, kernel_w);
 	if(is_bias) bias.set_shape(filters,1,1,1);
 	outputs.resize(1);
 	int oh = (ib.h-1)*stride_h-2*padding_h + kernel_h,
@@ -177,6 +179,7 @@ void DConvLayer::setup_data(){
 	weight.alloc();
 	if(is_bias) bias.alloc();
 	outputs[0].alloc();
+	memset(outputs[0].data,0,sizeof(float)*outputs[0].nchw());
 }
 void DConvLayer::setup_dif_data(){
 	if(output_difs.size()!=1){

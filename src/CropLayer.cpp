@@ -1,7 +1,10 @@
 #include "stdlib.h"
 #include "CropLayer.h"
 using namespace std;
-CropLayer::CropLayer(const std::string&name, int axis, const std::vector<int>& offset, const std::vector<std::string>& names):Layer(name,"crop"), axis(axis){
+CropLayer::CropLayer(const std::string&name, int axis, const std::vector<int>& offset, const std::vector<std::string>& names):
+	Layer(name,"crop"), 
+	axis(axis){
+
 	for(int i=0;i<offset.size();++i)
 		this->offset.push_back(offset[i]);
 	if(axis > 3){
@@ -26,20 +29,21 @@ CropLayer::~CropLayer(){
 }
 void CropLayer::forward(){
 	//printf("forward: %s %s\n",type.c_str(), name.c_str());
+	//if(name == "score")
 	//show_inputs();
 	int bs[4] = {0,0,0,0}, es[4] = {inputs[1].n,inputs[1].c,inputs[1].h,inputs[1].w};
 	if(axis > 0) es[0] = inputs[0].n;
 	if(axis > 1) es[1] = inputs[0].c;
 	if(axis > 2) es[2] = inputs[0].h;
 
-	for(int i=0;i<4;++i){
-		if(i<axis) continue;
+	for(int i=axis;i<4;++i){
 		bs[i] = offset[i-axis];
 		es[i] += bs[i];
 		//printf("%d %d\n",bs[i],es[i]);
 	}
 
-	float* des = outputs[0].data, * src = inputs[0].data;	
+	float * des = outputs[0].data, 
+	      * src = inputs[0].data;	
 	int ws[] = {inputs[0].chw(),inputs[0].hw(),inputs[0].w};
 	for(int i0=bs[0], index = 0;i0<es[0];++i0)
 	for(int i1=bs[1];i1<es[1];++i1)
@@ -47,8 +51,8 @@ void CropLayer::forward(){
 	for(int i3=bs[3];i3<es[3];++i3,++index){
 		des[index] = src[i3 + i2*ws[2] + i1*ws[1] + i0*ws[0]];
 	}
-
-	//show_outputs();
+	//if(name == "score")
+	//	show_outputs();
 }
 void CropLayer::backward(){
 	printf("backward: %s %s\n",type.c_str(), name.c_str());

@@ -8,6 +8,7 @@ SoftmaxLayer::~SoftmaxLayer(){
 }
 void SoftmaxLayer::forward(){
 	//printf("forward: %s %s\n",type.c_str(),name.c_str());
+	//show();
 	//show_inputs();
 
 	int batch_size = inputs[0].n, c = inputs[0].c, hw = inputs[0].hw();
@@ -21,6 +22,10 @@ void SoftmaxLayer::forward(){
 			for(int j=1;j<c;++j)
 				maxdata[k] = std::max(maxdata[k],pdata[j*hw+k]);
 		}
+		//printf("max:\n");
+		//for(int j=0;j<hw;++j)
+		//	printf(" %g",maxdata[j]);
+		//printf("\n");
 
 		for(int j=0;j<c;++j)
 			for(int k=0;k<hw;++k)
@@ -31,6 +36,10 @@ void SoftmaxLayer::forward(){
 			for(int j=1;j<c;++j)
 				sumdata[k] += softmaxdata[j*hw + k];
 		}
+		//printf("sum:\n");
+		//for(int j=0;j<hw;++j)
+		//	printf(" %g",sumdata[j]);
+		//printf("\n");
 
 		for(int j=0;j<c;++j)
 			for(int k=0;k<hw;++k){
@@ -50,6 +59,14 @@ void SoftmaxLayer::backward(){
 }
 void SoftmaxLayer::show()const {
 	printf("[%s] name: %s\n", type.c_str(), name.c_str());
+	if(inputs.size() == 1){
+		printf("\tinput: ");
+		inputs[0].show();
+	}
+	if(outputs.size() == 1){
+		printf("\toutput: ");
+		outputs[0].show();
+	}
 }
 void SoftmaxLayer::setup_shape(){
 	if(inputs.size()!=1){
