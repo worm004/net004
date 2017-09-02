@@ -152,6 +152,7 @@ void CaffeParser::find_conv_attrs(const caffe::LayerParameter& caffe_attr, std::
 	    stride = p.stride().size() == 1? p.stride()[0]:1;
 	attrs.insert({
 		{"type", string("conv")},
+		{"num", p.num_output()},
 		{"kernel_size_h", p.has_kernel_h()?p.kernel_h():kernel_size},
 		{"kernel_size_w", p.has_kernel_w()?p.kernel_w():kernel_size},
 		{"pad_h", p.has_pad_h()?p.pad_h():pad},
@@ -187,7 +188,7 @@ void CaffeParser::find_relu_attrs(const caffe::LayerParameter& caffe_attr, std::
 	attrs.insert({
 		{"type",string("activity")},
 		{"method",string("relu")},
-		{"neg_slop",p.negative_slope()}
+		{"neg_slope",p.negative_slope()}
 		});
 }
 void CaffeParser::find_fc_attrs(const caffe::LayerParameter& caffe_attr, std::map<std::string, ParamUnit>& attrs){

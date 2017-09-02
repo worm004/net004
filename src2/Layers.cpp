@@ -90,3 +90,13 @@ Layer* Layers::operator [](const std::string& name){
 	}
 	return layers[n2i[name]];
 }
+Layer* Layers::operator [](int index){
+	if((index < 0) || (index >= layers.size())){
+		printf("index error\n");
+		exit(0);
+	}
+	return layers[forder[index]];
+}
+int Layers::size(){
+	return layers.size();
+}

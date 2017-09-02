@@ -14,7 +14,6 @@ DataLayer::DataLayer(
 		method(method),
 		Layer(name,"data"){
 	outputs.resize(1);
-	output_difs.resize(1);
 	outputs[0].set_shape(n,c,h,w);
 	outputs[0].alloc();
 	outputs[0].type = method;

@@ -125,11 +125,20 @@ float net004_forward(const std::string& img_path, const TestParameter& param, bo
 	if(show) cout<<"read: "<<cal_duration(t1,t2)<<endl;
 
 	Mat img = imread(img_path);
-	//resize(img,img,Size(((DataLayer*)net["data"])->h, ((DataLayer*)net["data"])->w));
-	//net["data"]->inputs[0].set_shape(1,3,img.rows,img.cols);
-	//net["label"]->inputs[0].set_shape(1,1,1,1);
+	resize(img,img,Size(((DataLayer*)net["input_data"])->h, ((DataLayer*)net["input_data"])->w));
+	((DataLayer*)net["input_data"])->n = 1;
+	((DataLayer*)net["input_data"])->c = 3;
+	((DataLayer*)net["input_data"])->h = img.rows;
+	((DataLayer*)net["input_data"])->w = img.cols;
+	((DataLayer*)net["input_label"])->n = 1;
+	((DataLayer*)net["input_label"])->c = 1;
+	((DataLayer*)net["input_label"])->h = 1;
+	((DataLayer*)net["input_label"])->w = 1;
+	//printf("%d %d\n",img.rows,img.cols);
+	//getchar();
 	net.pre_alloc();
 	net.forward();
+	//net.ls.show();
 	//return net["loss"].outputs[0].data[0];
 
 

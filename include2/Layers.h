@@ -16,15 +16,17 @@ class Layers{
 
 	void init_n2i();
 	void init_forder();
+	int size();
 	//void init_inplace();
 	Layer* operator [](const std::string& name);
+	Layer* operator [](int index);//order
 
-	private:
 	std::vector<Layer*> layers;
 	std::map<std::string, int> n2i;
 	std::vector<int> forder;
 	std::map<std::string, std::vector<std::string>> cs;
 
+	private:
 	typedef std::map<std::string, Layer*(*)(const LayerUnit&)> LayerTypeMap;
 	LayerTypeMap layer_type_map;
 };

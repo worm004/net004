@@ -24,6 +24,9 @@ class NetParser{
 	bool is_train = false;
 };
 
-class DataParser{
+class ModelParser{
+	public:
+	ModelParser();
+	void read_model(const std::string& path, Net004* net);
 };
 #endif

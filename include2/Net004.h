@@ -10,10 +10,10 @@ class Net004{
 	void pre_alloc();
 	void forward();
 
+	Layers ls;
 	private:
 	std::string name;
 	bool is_train;
-	Layers ls;
 };
 #endif
 

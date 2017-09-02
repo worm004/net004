@@ -5,5 +5,10 @@ class FCLayer: public Layer{
 	public:
 	FCLayer();
 	FCLayer(const LayerUnit& u);
+	virtual void show();
+	virtual void setup_outputs();
+
+	bool bias;
+	int num;
 };
 #endif

@@ -1,6 +1,12 @@
 #include "stdlib.h"
 #include "BaseLayer.h"
 using namespace std;
+int i2o_floor(int w, int kernel, int stride, int padding){
+	return (w + 2 * padding - kernel) / stride + 1;
+}
+int i2o_ceil(int w, int kernel, int stride, int padding){
+	return (w + 2 * padding - kernel + stride - 1) / stride + 1;
+}
 ParamUnit::ParamUnit(){}
 ParamUnit::ParamUnit(float v){
 	type = "float";
@@ -55,8 +61,10 @@ Layer::Layer(const LayerUnit& u){
 		}
 		params[i.first];
 		params[i.first].set_shape(i.second[0],i.second[1],i.second[2],i.second[3]);
+		params[i.first].alloc();
 	}
 	inputs.resize(u.inputs.size());
+	outputs.resize(1);
 }
 Layer::~Layer(){
 	for(int i=0;i<inputs.size();++i)
@@ -76,4 +84,8 @@ void Layer::show(){
 	printf("(type name) %s %s\n",type.c_str(),name.c_str());
 	for(const auto&i : params)
 		printf("  (learnt param) %s [%d %d %d %d]\n",i.first.c_str(),i.second.n,i.second.c,i.second.h,i.second.w);
+	for(const auto&i : u.inputs)
+		printf("  (inputs) %s %d (%d %d %d %d)\n",i.first.c_str(),i.second,inputs[i.second].n,inputs[i.second].c,inputs[i.second].h,inputs[i.second].w);
+	for(const auto&i : outputs)
+		printf("  (outputs) %d %d %d %d\n",i.n,i.c,i.h,i.w);
 }

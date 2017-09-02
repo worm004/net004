@@ -24,6 +24,9 @@ struct LayerUnit{
 	std::map<std::string, std::vector<int>> params;
 	std::map<std::string, int> inputs;
 };
+
+int i2o_floor(int w, int kernel, int stride, int padding);
+int i2o_ceil(int w, int kernel, int stride, int padding);
 class Layer{
 	public:
 	Layer();
@@ -31,6 +34,7 @@ class Layer{
 	virtual ~Layer();
 	void set_inplace(bool inplace);
 	virtual void show();
+	virtual void setup_outputs() = 0;
 
 	public:
 	std::string name, type;

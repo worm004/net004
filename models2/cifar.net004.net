@@ -31,6 +31,7 @@
         "group":1,
         "kernel_size_h":5,
         "kernel_size_w":5,
+        "num":32,
         "pad_h":2,
         "pad_w":2,
         "stride_h":1,
@@ -62,7 +63,7 @@
         "type":"activity",
         "name":"relu1",
         "method":"relu",
-        "neg_slop":0,
+        "neg_slope":0,
       },
       "inputs":{
         "pool1":0
@@ -76,6 +77,7 @@
         "group":1,
         "kernel_size_h":5,
         "kernel_size_w":5,
+        "num":32,
         "pad_h":2,
         "pad_w":2,
         "stride_h":1,
@@ -94,7 +96,7 @@
         "type":"activity",
         "name":"relu2",
         "method":"relu",
-        "neg_slop":0,
+        "neg_slope":0,
       },
       "inputs":{
         "conv2":0
@@ -121,6 +123,7 @@
         "group":1,
         "kernel_size_h":5,
         "kernel_size_w":5,
+        "num":64,
         "pad_h":2,
         "pad_w":2,
         "stride_h":1,
@@ -139,7 +142,7 @@
         "type":"activity",
         "name":"relu3",
         "method":"relu",
-        "neg_slop":0,
+        "neg_slope":0,
       },
       "inputs":{
         "conv3":0
