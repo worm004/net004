@@ -195,11 +195,11 @@ int main(int argc, char** argv){
 	google::SetCommandLineOption("GLOG_minloglevel", "2");
 
 	// cifar10
-	int label = 8;
-	float mean_r = 127 ,mean_g = 127 ,mean_b = 127;
-	float std_r = 1, std_g = 1, std_b = 1;
-	string net_path = "../caffe_models/cifar10_quick_train_test.prototxt",
-	       model_path = "../caffe_models/cifar10_quick_iter_5000.caffemodel.h5";
+	//int label = 8;
+	//float mean_r = 127 ,mean_g = 127 ,mean_b = 127;
+	//float std_r = 1, std_g = 1, std_b = 1;
+	//string net_path = "../caffe_models/cifar10_quick_train_test.prototxt",
+	//       model_path = "../caffe_models/cifar10_quick_iter_5000.caffemodel.h5";
 	
 	// vgg16
 	//int label = 628;
@@ -210,14 +210,16 @@ int main(int argc, char** argv){
 	// alexnet
 	//int label = 628;
 	//float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
+	//float std_r = 1, std_g = 1, std_b = 1;
 	//string net_path = "../caffe_models/bvlc_alexnet.prototxt",
 	//       model_path = "../caffe_models/bvlc_alexnet.caffemodel";
 	
 	// gnet
-	//int label = 628;
-	//float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
-	//string net_path = "../caffe_models/bvlc_googlenet_deploy.prototxt",
-	//       model_path = "../caffe_models/bvlc_googlenet.caffemodel";
+	int label = 628;
+	float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
+	float std_r = 1, std_g = 1, std_b = 1;
+	string net_path = "../caffe_models/bvlc_googlenet_deploy.prototxt",
+	       model_path = "../caffe_models/bvlc_googlenet.caffemodel";
 
 	// resnet
 	//int label = 628;

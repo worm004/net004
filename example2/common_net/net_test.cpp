@@ -193,68 +193,8 @@ int main(int argc, char **argv){
 	maps["vgg16"] = TestParameter(
 	       "../caffe_models/VGG_ILSVRC_16_layers.caffemodel",
 	       "../caffe_models/VGG_ILSVRC_16_layers_deploy.prototxt",
-	       "../models/vgg16.net004.data",
-	       "../models/vgg16.net004.net",
-	       "../caffe_models/imagenet2012.list",
-	       123.68,116.779,103.939,
-	       1,1,1,
-	       1000,5, 628
-	);
-	maps["resnet50"] = TestParameter(
-	       "../caffe_models/ResNet-50-model.caffemodel",
-	       "../caffe_models/ResNet-50-deploy.prototxt",
-	       "../models/resnet50.net004.data",
-	       "../models/resnet50.net004.net",
-	       "../caffe_models/imagenet2012.list",
-	       123.68,116.779,103.939,
-	       1,1,1,
-	       1000,5, 628
-	);
-	maps["resnet101"] = TestParameter(
-	       "../caffe_models/ResNet-101-model.caffemodel",
-	       "../caffe_models/ResNet-101-deploy.prototxt",
-	       "../models/resnet101.net004.data",
-	       "../models/resnet101.net004.net",
-	       "../caffe_models/imagenet2012.list",
-	       123.68,116.779,103.939,
-	       1,1,1,
-	       1000,5, 628
-	);
-	maps["resnet152"] = TestParameter(
-	       "../caffe_models/ResNet-152-model.caffemodel",
-	       "../caffe_models/ResNet-152-deploy.prototxt",
-	       "../models/resnet152.net004.data",
-	       "../models/resnet152.net004.net",
-	       "../caffe_models/imagenet2012.list",
-	       123.68,116.779,103.939,
-	       1,1,1,
-	       1000,5, 628
-	);
-	maps["sqnet1.0"] = TestParameter(
-	       "../caffe_models/sqnet1.0.caffemodel",
-	       "../caffe_models/sqnet1.0.prototxt",
-	       "../models/sqnet1.0.net004.data",
-	       "../models/sqnet1.0.net004.net",
-	       "../caffe_models/imagenet2012.list",
-	       123.68,116.779,103.939,
-	       1,1,1,
-	       1000,5, 628
-	);
-	maps["sqnet1.1"] = TestParameter(
-	       "../caffe_models/sqnet1.1.caffemodel",
-	       "../caffe_models/sqnet1.1.prototxt",
-	       "../models/sqnet1.1.net004.data",
-	       "../models/sqnet1.1.net004.net",
-	       "../caffe_models/imagenet2012.list",
-	       123.68,116.779,103.939,
-	       1,1,1,
-	       1000,5, 628
-	);
-	maps["sqnet_res"] = TestParameter(
-	       "../caffe_models/sqnet_res.caffemodel",
-	       "../caffe_models/sqnet_res.prototxt",
-	       "../models/sqnet_res.net004.data",
-	       "../models/sqnet_res.net004.net",
+	       "../models2/vgg16.net004.data",
+	       "../models2/vgg16.net004.net",
 	       "../caffe_models/imagenet2012.list",
 	       123.68,116.779,103.939,
 	       1,1,1,
@@ -263,53 +203,113 @@ int main(int argc, char **argv){
 	maps["gnetv1"] = TestParameter(
 	       "../caffe_models/bvlc_googlenet.caffemodel",
 	       "../caffe_models/bvlc_googlenet_deploy.prototxt",
-	       "../models/gnetv1.net004.data",
-	       "../models/gnetv1.net004.net",
+	       "../models2/gnetv1.net004.data",
+	       "../models2/gnetv1.net004.net",
 	       "../caffe_models/imagenet2012.list",
-	       123,117,104,
+	       123.68,116.779,103.939,
 	       1,1,1,
 	       1000,5, 628
 	);
-	maps["gnetv3"] = TestParameter(
-	       "../caffe_models/inception-v3.caffemodel",
-	       "../caffe_models/deploy_inception-v3.prototxt",
-	       "../models/gnetv3.net004.data",
-	       "../models/gnetv3.net004.net",
-	       "../caffe_models/imagenet2015.list",
-	       128,128,128,
-	       128,128,128,
-	       1000,5, 243
-	);
-	maps["gnetv4"] = TestParameter(
-	       "../caffe_models/inception-v4.caffemodel",
-	       "../caffe_models/deploy_inception-v4.prototxt",
-	       "../models/gnetv4.net004.data",
-	       "../models/gnetv4.net004.net",
-	       "../caffe_models/imagenet2012.list",
-	       128,128,128,
-	       128,128,128,
-	       1000,5, 628
-	);
-	maps["dense121"] = TestParameter(
-	       "../caffe_models/DenseNet_121.caffemodel",
-	       "../caffe_models/DenseNet_121.prototxt",
-	       "../models/dense121.net004.data",
-	       "../models/dense121.net004.net",
-	       "../caffe_models/imagenet2012.list",
-	       128,128,128,
-	       128,128,128,
-	       1000,5, 628
-	);
-	maps["in-res-v2"] = TestParameter(
-	       "../caffe_models/inception-resnet-v2.caffemodel",
-	       "../caffe_models/deploy_inception-resnet-v2.prototxt",
-	       "../models/inception-res-v2.net004.data",
-	       "../models/inception-res-v2.net004.net",
-	       "../caffe_models/imagenet2012.list",
-	       128,128,128,
-	       128,128,128,
-	       1000,5, 628
-	);
+	//maps["resnet50"] = TestParameter(
+	//       "../caffe_models/ResNet-50-model.caffemodel",
+	//       "../caffe_models/ResNet-50-deploy.prototxt",
+	//       "../models/resnet50.net004.data",
+	//       "../models/resnet50.net004.net",
+	//       "../caffe_models/imagenet2012.list",
+	//       123.68,116.779,103.939,
+	//       1,1,1,
+	//       1000,5, 628
+	//);
+	//maps["resnet101"] = TestParameter(
+	//       "../caffe_models/ResNet-101-model.caffemodel",
+	//       "../caffe_models/ResNet-101-deploy.prototxt",
+	//       "../models/resnet101.net004.data",
+	//       "../models/resnet101.net004.net",
+	//       "../caffe_models/imagenet2012.list",
+	//       123.68,116.779,103.939,
+	//       1,1,1,
+	//       1000,5, 628
+	//);
+	//maps["resnet152"] = TestParameter(
+	//       "../caffe_models/ResNet-152-model.caffemodel",
+	//       "../caffe_models/ResNet-152-deploy.prototxt",
+	//       "../models/resnet152.net004.data",
+	//       "../models/resnet152.net004.net",
+	//       "../caffe_models/imagenet2012.list",
+	//       123.68,116.779,103.939,
+	//       1,1,1,
+	//       1000,5, 628
+	//);
+	//maps["sqnet1.0"] = TestParameter(
+	//       "../caffe_models/sqnet1.0.caffemodel",
+	//       "../caffe_models/sqnet1.0.prototxt",
+	//       "../models/sqnet1.0.net004.data",
+	//       "../models/sqnet1.0.net004.net",
+	//       "../caffe_models/imagenet2012.list",
+	//       123.68,116.779,103.939,
+	//       1,1,1,
+	//       1000,5, 628
+	//);
+	//maps["sqnet1.1"] = TestParameter(
+	//       "../caffe_models/sqnet1.1.caffemodel",
+	//       "../caffe_models/sqnet1.1.prototxt",
+	//       "../models/sqnet1.1.net004.data",
+	//       "../models/sqnet1.1.net004.net",
+	//       "../caffe_models/imagenet2012.list",
+	//       123.68,116.779,103.939,
+	//       1,1,1,
+	//       1000,5, 628
+	//);
+	//maps["sqnet_res"] = TestParameter(
+	//       "../caffe_models/sqnet_res.caffemodel",
+	//       "../caffe_models/sqnet_res.prototxt",
+	//       "../models/sqnet_res.net004.data",
+	//       "../models/sqnet_res.net004.net",
+	//       "../caffe_models/imagenet2012.list",
+	//       123.68,116.779,103.939,
+	//       1,1,1,
+	//       1000,5, 628
+	//);
+	//maps["gnetv3"] = TestParameter(
+	//       "../caffe_models/inception-v3.caffemodel",
+	//       "../caffe_models/deploy_inception-v3.prototxt",
+	//       "../models/gnetv3.net004.data",
+	//       "../models/gnetv3.net004.net",
+	//       "../caffe_models/imagenet2015.list",
+	//       128,128,128,
+	//       128,128,128,
+	//       1000,5, 243
+	//);
+	//maps["gnetv4"] = TestParameter(
+	//       "../caffe_models/inception-v4.caffemodel",
+	//       "../caffe_models/deploy_inception-v4.prototxt",
+	//       "../models/gnetv4.net004.data",
+	//       "../models/gnetv4.net004.net",
+	//       "../caffe_models/imagenet2012.list",
+	//       128,128,128,
+	//       128,128,128,
+	//       1000,5, 628
+	//);
+	//maps["dense121"] = TestParameter(
+	//       "../caffe_models/DenseNet_121.caffemodel",
+	//       "../caffe_models/DenseNet_121.prototxt",
+	//       "../models/dense121.net004.data",
+	//       "../models/dense121.net004.net",
+	//       "../caffe_models/imagenet2012.list",
+	//       128,128,128,
+	//       128,128,128,
+	//       1000,5, 628
+	//);
+	//maps["in-res-v2"] = TestParameter(
+	//       "../caffe_models/inception-resnet-v2.caffemodel",
+	//       "../caffe_models/deploy_inception-resnet-v2.prototxt",
+	//       "../models/inception-res-v2.net004.data",
+	//       "../models/inception-res-v2.net004.net",
+	//       "../caffe_models/imagenet2012.list",
+	//       128,128,128,
+	//       128,128,128,
+	//       1000,5, 628
+	//);
 
 	string name = argv[1];
 	bool show = atoi(argv[2]);

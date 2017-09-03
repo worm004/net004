@@ -14,9 +14,11 @@ void FCLayer::show(){
 
 void FCLayer::setup_outputs(){
 	outputs[0].set_shape(inputs[0].n, num, 1, 1);
+	inplace = false;
 	setup_outputs_data();
 }
 void FCLayer::forward(){
+	//show_inputs();
 	float * idata = inputs[0].data, * odata = outputs[0].data;
 	int w = inputs[0].chw(), h = this->num, batch_size = inputs[0].n;
 	Blob &bias_b = params["bias"], &weight_b = params["weight"];

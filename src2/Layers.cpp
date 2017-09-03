@@ -7,6 +7,9 @@
 #include "ActivityLayer.h"
 #include "DataLayer.h"
 #include "PoolLayer.h"
+#include "LRNLayer.h"
+#include "SplitLayer.h"
+#include "ConcatLayer.h"
 using namespace std;
 
 template<typename T> 
@@ -21,7 +24,10 @@ Layers::Layers(){
 		{"fc",&create_layer<FCLayer>},
 		{"activity",&create_layer<ActivityLayer>},
 		{"loss",&create_layer<LossLayer>},
-		{"pool",&create_layer<PoolLayer>}
+		{"pool",&create_layer<PoolLayer>},
+		{"lrn",&create_layer<LRNLayer>},
+		{"split",&create_layer<SplitLayer>},
+		{"concat",&create_layer<ConcatLayer>}
 	};
 }
 void Layers::add(const LayerUnit& u){
@@ -43,9 +49,11 @@ void Layers::init(){
 	init_inplace();
 }
 void Layers::init_inplace(){
+	//TODO
 	for(int i=0;i<layers.size();++i){
 		string name = layers[i]->name;
-		layers[i]->set_inplace((cs[name].size() == 1) && (layers[i]->inputs.size() == 1));
+		//layers[i]->set_inplace((cs[name].size() == 1) && (layers[i]->inputs.size() == 1));
+		layers[i]->set_inplace(false);
 	}
 }
 void Layers::init_n2i(){

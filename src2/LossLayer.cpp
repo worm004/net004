@@ -61,5 +61,6 @@ void LossLayer::forward_softmax(){
 		gdata += inputs[1].chw();
 	}
 	odata[0] = loss/inputs[0].c/inputs[0].n;
+	//show_inputs();
 	//show_outputs();
 }

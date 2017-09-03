@@ -2,7 +2,7 @@
 #include "PoolLayer.h"
 PoolLayer::PoolLayer(){}
 PoolLayer::PoolLayer(const LayerUnit& u):Layer(u){
-	float v;	
+	float v;
 	u.geta("global",v); global = v;
 	u.geta("kernel_size",v); kernel = v;
 	u.geta("pad",v); pad = v;

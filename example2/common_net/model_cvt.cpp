@@ -42,6 +42,19 @@ int main(int argc, char**argv){
 		"../models2/alexnet.net004.net",
 		"../models2/alexnet.net004.data"
 	};
+	
+	maps["vgg16"] = {
+		"../caffe_models/VGG_ILSVRC_16_layers_deploy.prototxt",
+		"../caffe_models/VGG_ILSVRC_16_layers.caffemodel",
+		"../models2/vgg16.net004.net",
+		"../models2/vgg16.net004.data"
+	};
+	maps["gnetv1"] = {
+		"../caffe_models/bvlc_googlenet_deploy.prototxt",
+		"../caffe_models/bvlc_googlenet.caffemodel",
+		"../models2/gnetv1.net004.net",
+		"../models2/gnetv1.net004.data"
+	};
 
 	string name = argv[1];
 	bool is_show = atoi(argv[2]);
