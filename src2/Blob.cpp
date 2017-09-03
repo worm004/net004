@@ -48,6 +48,6 @@ void Blob::show() const{
 	printf("n = %d, c = %d, h = %d, w = %d, type: %s\n", n, c, h, w, type.c_str());
 }
 bool Blob::is_shape_same(const Blob&b){
-	return (n == b.n) && (c == b.c) && (h = b.h) && (w = b.w);
+	return (n == b.n) && (c == b.c) && (h == b.h) && (w == b.w);
 }
 

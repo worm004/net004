@@ -40,14 +40,14 @@ void Layers::show(){
 void Layers::init(){
 	init_n2i();
 	init_forder();
-	//init_inplace();
+	init_inplace();
 }
-//void Layers::init_inplace(){
-//	for(int i=0;i<layers.size();++i){
-//		// rule 1: one input and one output with same shape
-//		// rule 2: out degree should be 1 or 0
-//	}
-//}
+void Layers::init_inplace(){
+	for(int i=0;i<layers.size();++i){
+		string name = layers[i]->name;
+		layers[i]->set_inplace((cs[name].size() == 1) && (layers[i]->inputs.size() == 1));
+	}
+}
 void Layers::init_n2i(){
 	n2i.clear();
 	for(int i=0;i<layers.size();++i) n2i[layers[i]->name] = i;

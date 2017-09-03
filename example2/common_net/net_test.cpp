@@ -66,20 +66,20 @@ void show_ret(std::shared_ptr<caffe::Net<float> > net, const std::string& path, 
 	for(int i=total-seen;i<total;++i)
 		printf("[%f] %s\n",labels[i].second, labels[i].first.c_str());
 }
-//void show_ret_net004( Net004& net, const std::string& path, int total, int seen){
-//	ifstream file(path);
-//	vector<pair<string,float> > labels;
-//	for(int i=0;i<total;++i){
-//		string line;
-//		getline(file,line);
-//		labels.push_back(make_pair(line,net.ls[net.cs.sorted_cs[net.cs.sorted_cs.size()-2]]->outputs[0].data[i]));
-//	}
-//	sort(labels.begin(), labels.end(), 
-//			[](const pair<string,float> & a, const pair<string,float> & b) -> bool
-//			{ return a.second < b.second; });
-//	for(int i=total-seen;i<total;++i)
-//		printf("[%f] %s\n",labels[i].second, labels[i].first.c_str());
-//}
+void show_ret_net004(Net004& net, const std::string& path, int total, int seen){
+	ifstream file(path);
+	vector<pair<string,float> > labels;
+	for(int i=0;i<total;++i){
+		string line;
+		getline(file,line);
+		labels.push_back(make_pair(line,net[net.ls.size()-2]->outputs[0].data[i]));
+	}
+	sort(labels.begin(), labels.end(), 
+			[](const pair<string,float> & a, const pair<string,float> & b) -> bool
+			{ return a.second < b.second; });
+	for(int i=total-seen;i<total;++i)
+		printf("[%f] %s\n",labels[i].second, labels[i].first.c_str());
+}
 float caffe_forward(const std::string& img_path, const TestParameter& param, bool show){
 	if(show) printf("caffe forwarding ...\n");
   	std::shared_ptr<caffe::Net<float> > net;
@@ -124,51 +124,32 @@ float net004_forward(const std::string& img_path, const TestParameter& param, bo
 	auto t2 = now();
 	if(show) cout<<"read: "<<cal_duration(t1,t2)<<endl;
 
-	Mat img = imread(img_path);
-	resize(img,img,Size(((DataLayer*)net["input_data"])->h, ((DataLayer*)net["input_data"])->w));
-	((DataLayer*)net["input_data"])->n = 1;
-	((DataLayer*)net["input_data"])->c = 3;
-	((DataLayer*)net["input_data"])->h = img.rows;
-	((DataLayer*)net["input_data"])->w = img.cols;
-	((DataLayer*)net["input_label"])->n = 1;
-	((DataLayer*)net["input_label"])->c = 1;
-	((DataLayer*)net["input_label"])->h = 1;
-	((DataLayer*)net["input_label"])->w = 1;
-	//printf("%d %d\n",img.rows,img.cols);
-	//getchar();
+	DataLayer* l0 = (DataLayer*)net["input_data"], *l1 = (DataLayer*)net["input_label"];
+	int h = l0->h, w = l0->w;
+	l0->n = l1->n = 1;
+	l1->c = l1->h = l1->w = 1;
+
 	net.pre_alloc();
+	l1->outputs[0].data[0] = param.label;
+	Mat img = imread(img_path);
+	resize(img,img,Size(h, w));
+	uchar *idata = (uchar*)img.data;
+	float * data = l0->outputs[0].data;
+	for(int i=0;i<h;++i)
+	for(int j=0;j<w;++j){
+		data[(i*w+j) + h*w*0] = (idata[(i*w+j)*3+2] - param.mean_r)/param.std_r;
+		data[(i*w+j) + h*w*1] = (idata[(i*w+j)*3+1] - param.mean_g)/param.std_g;
+		data[(i*w+j) + h*w*2] = (idata[(i*w+j)*3+0] - param.mean_b)/param.std_b;
+	}
+	//net.show();
+	t1 = now();
 	net.forward();
-	//net.ls.show();
-	//return net["loss"].outputs[0].data[0];
-
-
-//	int label = param.label;
-//	if(show) printf("net004 forwarding ...\n");
-//	Net004 net;
-//	Parser parser;
-//	auto t1 = now();
-//	parser.read(param.net004_net_path, param.net004_model_path, &net);
-//	auto t2 = now();
-//	if(show) cout<<"read: "<<cal_duration(t1,t2)<<endl;
-//	Layers & ls = net.ls;
-//	DataLayer* l = (DataLayer*)ls["data"];
-//	Mat img = imread(img_path);
-//	resize(img,img,Size(l->outputs[0].h, l->outputs[0].w));
-//	l->add_image((uchar*)img.data,0, param.mean_r, param.mean_g, param.mean_b,param.std_r,param.std_g,param.std_b);
-//	((DataLayer*)ls["label"])->add_label(label,0);
-//
-//	//getchar();
-//
-//	t1 = now();
-//	net.forward();
-//	t2 = now();
-//	if(show){
-//		cout<<"forward: "<<cal_duration(t1,t2)<<endl;
-//		//net.show();
-//	}
-//	if(show) show_ret_net004(net,param.list_path,param.nlabel,param.nshow);
-//	return net.ls["loss"]->outputs[0].data[0];
-	return 0.0f;
+	t2 = now();
+	if(show) {
+		cout<<"forward: "<<cal_duration(t1,t2)<<endl;
+		show_ret_net004(net,param.list_path,param.nlabel,param.nshow);
+	}
+	return net[net.ls.size()-1]->outputs[0].data[0];
 }
 
 
@@ -197,7 +178,7 @@ int main(int argc, char **argv){
 	       "../caffe_models/cifar10.list",
 	       127,127,127,
 	       1,1,1,
-	       10,5, 9
+	       10,5, 8
 	);
 	maps["alexnet"] = TestParameter(
 	       "../caffe_models/bvlc_alexnet.caffemodel",

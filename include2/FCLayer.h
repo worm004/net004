@@ -7,6 +7,7 @@ class FCLayer: public Layer{
 	FCLayer(const LayerUnit& u);
 	virtual void show();
 	virtual void setup_outputs();
+	virtual void forward();
 
 	bool bias;
 	int num;

@@ -7,8 +7,10 @@ class Net004{
 	public:
 	void load(const std::string& net_path, const std::string& model_path);
 	Layer* operator [](const std::string& name);
+	Layer* operator [](int index);
 	void pre_alloc();
 	void forward();
+	void show();
 
 	Layers ls;
 	private:

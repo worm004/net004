@@ -16,8 +16,8 @@ class Layers{
 
 	void init_n2i();
 	void init_forder();
+	void init_inplace();
 	int size();
-	//void init_inplace();
 	Layer* operator [](const std::string& name);
 	Layer* operator [](int index);//order
 

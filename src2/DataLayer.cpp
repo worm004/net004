@@ -14,7 +14,10 @@ void DataLayer::show(){
 	printf("  (shape) [%d %d %d %d]\n",n,c,h,w);
 }
 void DataLayer::setup_outputs(){
-	inplace = false;
 	outputs[0].set_shape(n,c,h,w);
-	outputs[0].alloc();
+	inplace = false;
+	setup_outputs_data();
+}
+void DataLayer::forward(){
+	//show_outputs();
 }

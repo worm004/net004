@@ -33,8 +33,12 @@ class Layer{
 	Layer(const LayerUnit& u);
 	virtual ~Layer();
 	void set_inplace(bool inplace);
+	void show_inputs();
+	void show_outputs();
 	virtual void show();
 	virtual void setup_outputs() = 0;
+	virtual void forward() = 0;
+	void setup_outputs_data();
 
 	public:
 	std::string name, type;

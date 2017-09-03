@@ -31,6 +31,7 @@
         "group":1,
         "kernel_size_h":11,
         "kernel_size_w":11,
+        "num":96,
         "pad_h":0,
         "pad_w":0,
         "stride_h":4,
@@ -49,7 +50,7 @@
         "type":"activity",
         "name":"relu1",
         "method":"relu",
-        "neg_slop":0,
+        "neg_slope":0,
       },
       "inputs":{
         "conv1":0
@@ -88,6 +89,7 @@
         "group":2,
         "kernel_size_h":5,
         "kernel_size_w":5,
+        "num":256,
         "pad_h":2,
         "pad_w":2,
         "stride_h":1,
@@ -106,7 +108,7 @@
         "type":"activity",
         "name":"relu2",
         "method":"relu",
-        "neg_slop":0,
+        "neg_slope":0,
       },
       "inputs":{
         "conv2":0
@@ -145,6 +147,7 @@
         "group":1,
         "kernel_size_h":3,
         "kernel_size_w":3,
+        "num":384,
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
@@ -163,7 +166,7 @@
         "type":"activity",
         "name":"relu3",
         "method":"relu",
-        "neg_slop":0,
+        "neg_slope":0,
       },
       "inputs":{
         "conv3":0
@@ -177,6 +180,7 @@
         "group":2,
         "kernel_size_h":3,
         "kernel_size_w":3,
+        "num":384,
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
@@ -195,7 +199,7 @@
         "type":"activity",
         "name":"relu4",
         "method":"relu",
-        "neg_slop":0,
+        "neg_slope":0,
       },
       "inputs":{
         "conv4":0
@@ -209,6 +213,7 @@
         "group":2,
         "kernel_size_h":3,
         "kernel_size_w":3,
+        "num":256,
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
@@ -227,7 +232,7 @@
         "type":"activity",
         "name":"relu5",
         "method":"relu",
-        "neg_slop":0,
+        "neg_slope":0,
       },
       "inputs":{
         "conv5":0
@@ -266,7 +271,7 @@
         "type":"activity",
         "name":"relu6",
         "method":"relu",
-        "neg_slop":0,
+        "neg_slope":0,
       },
       "inputs":{
         "fc6":0
@@ -292,7 +297,7 @@
         "type":"activity",
         "name":"relu7",
         "method":"relu",
-        "neg_slop":0,
+        "neg_slope":0,
       },
       "inputs":{
         "fc7":0

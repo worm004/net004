@@ -7,8 +7,11 @@ class ActivityLayer: public Layer{
 	ActivityLayer(const LayerUnit& u);
 	virtual void show();
 	virtual void setup_outputs();
-
+	virtual void forward();
+	void forward_relu();
 	float neg_slope;
 	std::string method;
+	typedef void (ActivityLayer::*FORWARD_FUNC)();
+	FORWARD_FUNC f = 0;
 };
 #endif

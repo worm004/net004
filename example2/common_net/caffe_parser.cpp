@@ -179,7 +179,8 @@ void CaffeParser::find_pooling_attrs(const caffe::LayerParameter& caffe_attr, st
 		{"type",string("pool")},
 		{"global",p.global_pooling()},
 		{"stride",int(p.stride())},
-		{"pad",int(p.pad())}
+		{"pad",int(p.pad())},
+		{"method",method}
 		});
 	if(!p.global_pooling()) attrs["kernel_size"] = p.kernel_size();
 }

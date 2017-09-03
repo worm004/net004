@@ -82,10 +82,48 @@ void Layer::set_inplace(bool inplace){
 }
 void Layer::show(){
 	printf("(type name) %s %s\n",type.c_str(),name.c_str());
+	printf("  (inplace) %d\n",int(inplace));
 	for(const auto&i : params)
 		printf("  (learnt param) %s [%d %d %d %d]\n",i.first.c_str(),i.second.n,i.second.c,i.second.h,i.second.w);
 	for(const auto&i : u.inputs)
-		printf("  (inputs) %s %d (%d %d %d %d)\n",i.first.c_str(),i.second,inputs[i.second].n,inputs[i.second].c,inputs[i.second].h,inputs[i.second].w);
-	for(const auto&i : outputs)
-		printf("  (outputs) %d %d %d %d\n",i.n,i.c,i.h,i.w);
+		printf("  (inputs) %s %d [%d %d %d %d]\n",i.first.c_str(),i.second,inputs[i.second].n,inputs[i.second].c,inputs[i.second].h,inputs[i.second].w);
+	printf("  (outputs) [%d %d %d %d]\n",outputs[0].n,outputs[0].c,outputs[0].h,outputs[0].w);
+}
+void Layer::show_inputs(){
+	printf("input %s %s:\n",type.c_str(),name.c_str());
+	for(int index = 0; index < inputs.size(); ++index){
+		printf("[index] %d\n",index);
+		Blob &input = inputs[index];
+		int n = input.n, chw = input.chw();
+		for(int b=0;b<n;++b){
+			printf("[batch] %d\n",b);
+			for(int k=0;k<chw;++k)
+				printf("%g ", input.data[b*chw + k]);
+			printf("\n");
+		}
+		printf("\n");
+	}
+}
+void Layer::show_outputs(){
+	printf("output %s %s\n",type.c_str(),name.c_str());
+	for(int index = 0; index < outputs.size(); ++index){
+		printf("[index] %d\n",index);
+		Blob &output = outputs[index];
+		int n = output.n, chw = output.chw();
+		for(int b=0;b<n;++b){
+			printf("[batch] %d\n",b);
+			for(int k=0;k<chw;++k)
+				printf("%g ", output.data[b*chw + k]);
+			printf("\n");
+		}
+		printf("\n");
+	}
+}
+void Layer::setup_outputs_data(){
+	if(inplace && outputs[0].is_shape_same(inputs[0]))
+		outputs[0].set_data(inputs[0].data);
+	else {
+		inplace = false;
+		outputs[0].alloc();
+	}
 }

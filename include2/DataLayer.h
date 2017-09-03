@@ -7,6 +7,7 @@ class DataLayer: public Layer{
 	DataLayer(const LayerUnit& u);
 	virtual void show();
 	virtual void setup_outputs();
+	virtual void forward();
 	int n,c,h,w;
 	std::string method;
 };

@@ -4,6 +4,6 @@ project("net004")
 include_directories("../include2")
 include_directories(${vecLib_INCLUDE_DIR})
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-add_library(net004 STATIC Parser.cpp Net004.cpp Layers.cpp Blob.cpp
+add_library(net004 STATIC Parser.cpp Net004.cpp Layers.cpp Blob.cpp im2col.cpp
 			BaseLayer.cpp ConvLayer.cpp FCLayer.cpp ActivityLayer.cpp LossLayer.cpp DataLayer.cpp PoolLayer.cpp)
 target_link_libraries(net004 ${vecLib_LINKER_LIBS})
