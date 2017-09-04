@@ -1,88 +1,34 @@
 #include "stdlib.h"
 #include "ActivityLayer.h"
-
-ActivityLayer::ActivityLayer(
-	const std::string& name, 
-	const std::string& method,
-	float negative_slope):
-		method(method),
-		Layer(name,"activity"),
-		negative_slope(negative_slope)
-		{
-}
-ActivityLayer::~ActivityLayer(){
-}
-
-void ActivityLayer::forward_relu(){
-	float * odata = outputs[0].data,
-		* idata = inputs[0].data;
-	int nchw = inputs[0].nchw();
-
-	if(is_train){
-		// do this when backward
-		//for(int i=0;i<nchw;++i) 
-		//	mask[i] = 1;
-
-		for(int i=0;i<nchw;++i)
-			if (idata[i] < 0.0f){
-				odata[i] = negative_slope * odata[i];
-				mask[i] = 0;
-			}
+ActivityLayer::ActivityLayer(){}
+ActivityLayer::ActivityLayer(const LayerUnit& u):Layer(u){
+	u.geta("neg_slope",neg_slope);
+	u.geta("method",method);
+	if(method != "relu"){
+		printf("not implement %s method in activity layer\n",method.c_str());
+		exit(0);
 	}
-	else{
-		for(int i=0;i<nchw;++i)
-			if (idata[i] < 0.0f)
-				odata[i] = negative_slope * odata[i];
-	}
+	else f = &ActivityLayer::forward_relu;
 }
-
+void ActivityLayer::show(){
+	Layer::show();
+	printf("  (neg_slope) %g\n",neg_slope);
+	printf("  (method) %s\n",method.c_str());
+}
+void ActivityLayer::setup_outputs(){
+	outputs[0].set_shape(inputs[0]);
+	setup_outputs_data();
+}
 void ActivityLayer::forward(){
-	//printf("forward: %s %s\n",type.c_str(), name.c_str());
-
 	//show_inputs();
-	if(method == "relu") forward_relu();
-	else printf("not implemented %s in activit layer\n",method.c_str());
-	//if(name == "rpn_relu/3x3")
-	//	show_outputs();
-
+	(this->*f)();
+	//show_outputs();
 }
-void ActivityLayer::backward(){
-	printf("backward: %s %s\n",type.c_str(), name.c_str());
-}
-void ActivityLayer::setup_shape(){
-	if(inputs.size()!=1){
-		printf("error: acvtivity input blob number should be 1\n");
-		exit(0);
+void ActivityLayer::forward_relu(){
+	float * odata = outputs[0].data, * idata = inputs[0].data;
+	int nchw = inputs[0].nchw();
+	for(int i=0;i<nchw;++i){
+		if (idata[i] < 0.0f) odata[i] = neg_slope * idata[i];
+		else odata[i] = idata[i];
 	}
-	const Blob& ib = inputs[0];
-	outputs.resize(1);
-	outputs[0].set_shape(ib);
-}
-void ActivityLayer::setup_data(){
-	if(outputs.size()!=1){
-		printf("error: activity output blob number should be 1\n");
-		exit(0);
-	}
-
-	outputs[0].set_data(inputs[0].data);
-
-}
-void ActivityLayer::setup_dif_shape(){
-	if(input_difs.size()!=1){
-		printf("error: acvtivity input blob number should be 1\n");
-		exit(0);
-	}
-	output_difs.resize(1);
-	output_difs[0].set_shape(outputs[0]);
-}
-void ActivityLayer::setup_dif_data(){
-	if(output_difs.size()!=1){
-		printf("error: activity output blob number should be 1\n");
-		exit(0);
-	}
-	mask = new bool[outputs[0].nchw()];
-	memset(mask,0,sizeof(bool)*outputs[0].nchw());
-}
-void ActivityLayer::show() const{
-	printf("[%s] name: %s, method: %s\n", type.c_str(),name.c_str(), method.c_str());
 }

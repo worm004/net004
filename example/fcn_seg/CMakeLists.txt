@@ -10,8 +10,8 @@ add_definitions(-DCPU_ONLY)
 include_directories(${Caffe_INCLUDE_DIRS})
 include_directories(${OpenCV_INCLUDE_DIRS})
 
-add_executable(caffe_show_fcn_seg caffe_show.cpp)
-target_link_libraries(caffe_show_fcn_seg ${Caffe_LIBRARIES} ${OpenCV_LIBRARIES})
+#add_executable(caffe_show_fcn_seg caffe_show.cpp)
+#target_link_libraries(caffe_show_fcn_seg ${Caffe_LIBRARIES} ${OpenCV_LIBRARIES})
 
 add_executable(model_cvt_fcn_seg model_cvt.cpp caffe_parser.cpp)
 target_link_libraries(model_cvt_fcn_seg ${Caffe_LIBRARIES} net004 ${OpenCV_LIBRARIES})

@@ -197,6 +197,7 @@ int main(int argc, char** argv){
 	// cifar10
 	//int label = 8;
 	//float mean_r = 127 ,mean_g = 127 ,mean_b = 127;
+	//float std_r = 1, std_g = 1, std_b = 1;
 	//string net_path = "../caffe_models/cifar10_quick_train_test.prototxt",
 	//       model_path = "../caffe_models/cifar10_quick_iter_5000.caffemodel.h5";
 	
@@ -209,14 +210,16 @@ int main(int argc, char** argv){
 	// alexnet
 	//int label = 628;
 	//float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
+	//float std_r = 1, std_g = 1, std_b = 1;
 	//string net_path = "../caffe_models/bvlc_alexnet.prototxt",
 	//       model_path = "../caffe_models/bvlc_alexnet.caffemodel";
 	
 	// gnet
-	//int label = 628;
-	//float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
-	//string net_path = "../caffe_models/bvlc_googlenet_deploy.prototxt",
-	//       model_path = "../caffe_models/bvlc_googlenet.caffemodel";
+	int label = 628;
+	float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
+	float std_r = 1, std_g = 1, std_b = 1;
+	string net_path = "../caffe_models/bvlc_googlenet_deploy.prototxt",
+	       model_path = "../caffe_models/bvlc_googlenet.caffemodel";
 
 	// resnet
 	//int label = 628;
@@ -231,11 +234,11 @@ int main(int argc, char** argv){
 	//       model_path = "../caffe_models/inception-v3.caffemodel";
 
 	// inception-resnet-v2
-	int label = 628;
-	float mean_r = 128, mean_g = 128, mean_b = 128;
-	float std_r = 128, std_g = 128, std_b = 128;
-	string net_path = "../caffe_models/deploy_inception-resnet-v2.prototxt",
-	       model_path = "../caffe_models/inception-resnet-v2.caffemodel";
+	//int label = 628;
+	//float mean_r = 128, mean_g = 128, mean_b = 128;
+	//float std_r = 128, std_g = 128, std_b = 128;
+	//string net_path = "../caffe_models/deploy_inception-resnet-v2.prototxt",
+	//       model_path = "../caffe_models/inception-resnet-v2.caffemodel";
 
 	string model_text_path = "model.txt", forward_text_path = "forwrad.txt", backward_text_path = "backward.txt";
   	std::shared_ptr<caffe::Net<float> > net;
@@ -244,10 +247,10 @@ int main(int argc, char** argv){
 	net->CopyTrainedLayersFrom(model_path);
 	//show_model(net, model_text_path);
 
-	//string img_path = "../imgs/westerdam-ship-size.jpg";// for classification
-	string img_path = "../imgs/person.jpg";//for detection
-	//load_img(net,img_path,label,mean_r,mean_g,mean_b,std_r,std_g,std_b);//for classification
-	load_det_img(net,img_path,mean_r,mean_g,mean_b,std_r,std_g,std_b);// for detection
+	string img_path = "../imgs/westerdam-ship-size.jpg";// for classification
+	//string img_path = "../imgs/person.jpg";//for detection
+	load_img(net,img_path,label,mean_r,mean_g,mean_b,std_r,std_g,std_b);//for classification
+	//load_det_img(net,img_path,mean_r,mean_g,mean_b,std_r,std_g,std_b);// for detection
 	net->Forward();
 	show_forward(net, forward_text_path);
 	//net->Backward();

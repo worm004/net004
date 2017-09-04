@@ -1,70 +1,336 @@
-AlexNet
-Layer: data data
-1 3 227 227 image
-Layer: data label
-1 1 1 1 label
-Layer: conv conv1
-11 11 96 0 0 4 4 1 1 none
-Layer: activity relu1
-relu 0
-Layer: lrn norm1
-5 0.0001 0.75
-Layer: pool pool1
-3 0 2 max
-Layer: conv conv2
-5 5 256 2 2 1 1 2 1 none
-Layer: activity relu2
-relu 0
-Layer: lrn norm2
-5 0.0001 0.75
-Layer: pool pool2
-3 0 2 max
-Layer: conv conv3
-3 3 384 1 1 1 1 1 1 none
-Layer: activity relu3
-relu 0
-Layer: conv conv4
-3 3 384 1 1 1 1 2 1 none
-Layer: activity relu4
-relu 0
-Layer: conv conv5
-3 3 256 1 1 1 1 2 1 none
-Layer: activity relu5
-relu 0
-Layer: pool pool5
-3 0 2 max
-Layer: fc fc6
-4096 1 none
-Layer: activity relu6
-relu 0
-Layer: fc fc7
-4096 1 none
-Layer: activity relu7
-relu 0
-Layer: fc fc8
-1000 1 none
-Layer: loss loss
-softmax
-Connections:
-data conv1
-conv1 relu1
-relu1 norm1
-norm1 pool1
-pool1 conv2
-conv2 relu2
-relu2 norm2
-norm2 pool2
-pool2 conv3
-conv3 relu3
-relu3 conv4
-conv4 relu4
-relu4 conv5
-conv5 relu5
-relu5 pool5
-pool5 fc6
-fc6 relu6
-relu6 fc7
-fc7 relu7
-relu7 fc8
-fc8 loss
-label loss
+{
+  "net_name":"AlexNet",
+  "layers":[
+    {
+      "attrs":{
+        "type":"data",
+        "name":"input_data",
+        "c":3,
+        "h":227,
+        "method":"data",
+        "n":1,
+        "w":227
+      }
+    },
+    {
+      "attrs":{
+        "type":"data",
+        "name":"input_label",
+        "c":1,
+        "h":1,
+        "method":"label",
+        "n":1,
+        "w":1
+      }
+    },
+    {
+      "attrs":{
+        "type":"conv",
+        "name":"conv1",
+        "bias":1,
+        "group":1,
+        "kernel_size_h":11,
+        "kernel_size_w":11,
+        "num":96,
+        "pad_h":0,
+        "pad_w":0,
+        "stride_h":4,
+        "stride_w":4
+      },
+      "params":{
+        "bias":[96,1,1,1],
+        "weight":[96,3,11,11]
+      },
+      "inputs":{
+        "input_data":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"activity",
+        "name":"relu1",
+        "method":"relu",
+        "neg_slope":0
+      },
+      "inputs":{
+        "conv1":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"lrn",
+        "name":"norm1",
+        "alpha":0.0001,
+        "beta":0.75,
+        "local_size":5
+      },
+      "inputs":{
+        "relu1":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"pool",
+        "name":"pool1",
+        "global":0,
+        "kernel_size":3,
+        "method":"max",
+        "pad":0,
+        "stride":2
+      },
+      "inputs":{
+        "norm1":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"conv",
+        "name":"conv2",
+        "bias":1,
+        "group":2,
+        "kernel_size_h":5,
+        "kernel_size_w":5,
+        "num":256,
+        "pad_h":2,
+        "pad_w":2,
+        "stride_h":1,
+        "stride_w":1
+      },
+      "params":{
+        "bias":[256,1,1,1],
+        "weight":[256,48,5,5]
+      },
+      "inputs":{
+        "pool1":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"activity",
+        "name":"relu2",
+        "method":"relu",
+        "neg_slope":0
+      },
+      "inputs":{
+        "conv2":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"lrn",
+        "name":"norm2",
+        "alpha":0.0001,
+        "beta":0.75,
+        "local_size":5
+      },
+      "inputs":{
+        "relu2":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"pool",
+        "name":"pool2",
+        "global":0,
+        "kernel_size":3,
+        "method":"max",
+        "pad":0,
+        "stride":2
+      },
+      "inputs":{
+        "norm2":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"conv",
+        "name":"conv3",
+        "bias":1,
+        "group":1,
+        "kernel_size_h":3,
+        "kernel_size_w":3,
+        "num":384,
+        "pad_h":1,
+        "pad_w":1,
+        "stride_h":1,
+        "stride_w":1
+      },
+      "params":{
+        "bias":[384,1,1,1],
+        "weight":[384,256,3,3]
+      },
+      "inputs":{
+        "pool2":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"activity",
+        "name":"relu3",
+        "method":"relu",
+        "neg_slope":0
+      },
+      "inputs":{
+        "conv3":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"conv",
+        "name":"conv4",
+        "bias":1,
+        "group":2,
+        "kernel_size_h":3,
+        "kernel_size_w":3,
+        "num":384,
+        "pad_h":1,
+        "pad_w":1,
+        "stride_h":1,
+        "stride_w":1
+      },
+      "params":{
+        "bias":[384,1,1,1],
+        "weight":[384,192,3,3]
+      },
+      "inputs":{
+        "relu3":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"activity",
+        "name":"relu4",
+        "method":"relu",
+        "neg_slope":0
+      },
+      "inputs":{
+        "conv4":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"conv",
+        "name":"conv5",
+        "bias":1,
+        "group":2,
+        "kernel_size_h":3,
+        "kernel_size_w":3,
+        "num":256,
+        "pad_h":1,
+        "pad_w":1,
+        "stride_h":1,
+        "stride_w":1
+      },
+      "params":{
+        "bias":[256,1,1,1],
+        "weight":[256,192,3,3]
+      },
+      "inputs":{
+        "relu4":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"activity",
+        "name":"relu5",
+        "method":"relu",
+        "neg_slope":0
+      },
+      "inputs":{
+        "conv5":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"pool",
+        "name":"pool5",
+        "global":0,
+        "kernel_size":3,
+        "method":"max",
+        "pad":0,
+        "stride":2
+      },
+      "inputs":{
+        "relu5":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"fc",
+        "name":"fc6",
+        "bias":1,
+        "num":4096
+      },
+      "params":{
+        "bias":[4096,1,1,1],
+        "weight":[4096,9216,1,1]
+      },
+      "inputs":{
+        "pool5":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"activity",
+        "name":"relu6",
+        "method":"relu",
+        "neg_slope":0
+      },
+      "inputs":{
+        "fc6":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"fc",
+        "name":"fc7",
+        "bias":1,
+        "num":4096
+      },
+      "params":{
+        "bias":[4096,1,1,1],
+        "weight":[4096,4096,1,1]
+      },
+      "inputs":{
+        "relu6":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"activity",
+        "name":"relu7",
+        "method":"relu",
+        "neg_slope":0
+      },
+      "inputs":{
+        "fc7":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"fc",
+        "name":"fc8",
+        "bias":1,
+        "num":1000
+      },
+      "params":{
+        "bias":[1000,1,1,1],
+        "weight":[1000,4096,1,1]
+      },
+      "inputs":{
+        "relu7":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"loss",
+        "name":"loss",
+        "method":"softmax"
+      },
+      "inputs":{
+        "fc8":0,
+        "input_label":1
+      }
+    }
+  ]
+}

@@ -1,42 +1,51 @@
 #ifndef BASELAYER_H
 #define BASELAYER_H
-#include <cmath>
 #include <map>
 #include <string>
 #include <vector>
 #include "Blob.h"
+struct ParamUnit{
+	ParamUnit();
+	ParamUnit(float v);
+	ParamUnit(const std::string& v);
+	std::string type;
+	float fval;
+	std::string sval;
+};
+struct LayerUnit{
+	void geta(const std::string& key, float& val) const;
+	void geta(const std::string& key, std::string& val) const;
+	void clear();
+	bool exista(const std::string&key) const;
+	bool existp(const std::string&key) const;
+	bool existi(const std::string&key) const;
+	void checka(const std::string& key, const std::string& type) const;
+	std::map<std::string, ParamUnit> attrs;
+	std::map<std::string, std::vector<int>> params;
+	std::map<std::string, int> inputs;
+};
 
+int i2o_floor(int w, int kernel, int stride, int padding);
+int i2o_ceil(int w, int kernel, int stride, int padding);
 class Layer{
 	public:
-	Layer(const std::string& name, const std::string& type);
+	Layer();
+	Layer(const LayerUnit& u);
 	virtual ~Layer();
-	virtual void forward() = 0;
-	virtual void backward() = 0;
-	virtual void show() const = 0;
-	virtual void setup_shape();
-	virtual void setup_data();
-	virtual void setup_dif_shape();
-	virtual void setup_dif_data();
-	virtual void connect2(Layer& l);
-	virtual int parameter_number();
-	int input_parameter_number();
-	int output_parameter_number();
-
+	void set_inplace(bool inplace);
 	void show_inputs();
 	void show_outputs();
+	virtual void show();
+	virtual void setup_outputs() = 0;
+	virtual void forward() = 0;
+	void setup_outputs_data();
 
-	void setup();
-	void set_train(bool is_train);
-	static int i2o_floor(int w, int kernel, int stride, int padding){
-		return (w + 2 * padding - kernel) / stride + 1;
-	}
-	static int i2o_ceil(int w, int kernel, int stride, int padding){
-		return (w + 2 * padding - kernel + stride - 1) / stride + 1;
-	}
+	public:
+	std::string name, type;
+	std::vector<Blob> inputs, outputs;
+	std::map<std::string, Blob> params;
 
-	std::vector<Blob> inputs, input_difs, outputs, output_difs;
-	std::string type, name;
-	bool is_train = false;
-	std::map<std::string, int> order;
+	LayerUnit u;
+	bool inplace = false;
 };
 #endif

@@ -1,26 +1,17 @@
 #ifndef ACTIVITYLAYER_H
 #define ACTIVITYLAYER_H
 #include "BaseLayer.h"
-
 class ActivityLayer: public Layer{
 	public:
-	ActivityLayer(const std::string& name, const std::string& method, float negative_slope);
-	virtual ~ActivityLayer();
+	ActivityLayer();
+	ActivityLayer(const LayerUnit& u);
+	virtual void show();
+	virtual void setup_outputs();
 	virtual void forward();
-	virtual void backward();
-	virtual void setup_shape();
-	virtual void setup_data();
-	virtual void setup_dif_shape();
-	virtual void setup_dif_data();
-	virtual void show() const;
-
 	void forward_relu();
-	std::string get_method(){return method;}
-
-	private:
+	float neg_slope;
 	std::string method;
-	bool *mask = 0;
-	float negative_slope;
+	typedef void (ActivityLayer::*FORWARD_FUNC)();
+	FORWARD_FUNC f = 0;
 };
-
 #endif

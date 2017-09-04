@@ -1,21 +1,13 @@
 #ifndef BNLAYER_H
 #define BNLAYER_H
 #include "BaseLayer.h"
-
 class BNLayer: public Layer{
 	public:
-	BNLayer(const std::string& name, float eps);
-	virtual ~BNLayer();
+	BNLayer();
+	BNLayer(const LayerUnit& u);
+	virtual void show();
+	virtual void setup_outputs();
 	virtual void forward();
-	virtual void backward();
-	virtual void setup_shape();
-	virtual void setup_data();
-	virtual void setup_dif_shape();
-	virtual void setup_dif_data();
-	virtual void show() const;
-	virtual int parameter_number();
-
-	Blob mean, variance, mean_dif, variance_dif, scale, scale_dif;
 	float eps;
 };
 #endif

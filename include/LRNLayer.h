@@ -3,21 +3,15 @@
 #include "BaseLayer.h"
 class LRNLayer: public Layer{
 	public:
-	LRNLayer(const std::string&name, int n, float alpha, float beta);
-	virtual ~LRNLayer();
+	LRNLayer();
+	LRNLayer(const LayerUnit& u);
+	virtual void show();
+	virtual void setup_outputs();
 	virtual void forward();
-	virtual void backward();
-	virtual void show()const;
-	virtual void setup_shape();
-	virtual void setup_data();
-	virtual void setup_dif_shape();
-	virtual void setup_dif_data();
+	float alpha, beta;
+	int local_size;
 
-	private:
-	int n = 0;
-	float beta = 0.0f, alpha = 0.0f;
 	Blob buffer;
 };
-
 #endif
 

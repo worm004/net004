@@ -3,18 +3,17 @@
 #include "BaseLayer.h"
 class ScaleLayer: public Layer{
 	public:
-	ScaleLayer(const std::string& name, bool is_bias);
-	virtual ~ScaleLayer();
+	ScaleLayer();
+	ScaleLayer(const LayerUnit& u);
+	virtual void show();
+	virtual void setup_outputs();
 	virtual void forward();
-	virtual void backward();
-	virtual void setup_shape();
-	virtual void setup_data();
-	virtual void setup_dif_shape();
-	virtual void setup_dif_data();
-	virtual void show() const;
-	virtual int parameter_number();
+	void forward_bias();
+	void forward_nbias();
+	bool bias;
 
-	Blob weight, bias, weight_dif, bias_dif;
-	bool is_bias = 0;
+	typedef void (ScaleLayer::*FORWARD_FUNC) ();
+	FORWARD_FUNC f;
 };
 #endif
+

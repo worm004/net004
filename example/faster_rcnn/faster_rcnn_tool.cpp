@@ -130,8 +130,8 @@ void set_config(FasterRCNNConfig & config){
 	config.mean[2] = 102.9801f;
 	config.caffe_model_path = "../caffe_models/detection/VGG16_faster_rcnn_final.caffemodel";
 	config.caffe_net_path = "../caffe_models/detection/faster_rcnn_test.pt";
-	config.net004_model_path = "../models/detection/faster_rcnn.net004.data";
-	config.net004_net_path = "../models/detection/faster_rcnn.net004.net";
+	config.net004_model_path = "../models/faster_rcnn.net004.data";
+	config.net004_net_path = "../models/faster_rcnn.net004.net";
 	config.nms_thres = 0.3f;
 	config.conf_thres = 0.8f;
 	config.target_size = 600;

@@ -1,163 +1,129 @@
 #include "stdlib.h"
 #include "BaseLayer.h"
-#include "ConcatLayer.h"
-
-Layer::Layer(
-	const std::string& name, 
-	const std::string& type):
-		type(type),
-		name(name){
+using namespace std;
+int i2o_floor(int w, int kernel, int stride, int padding){
+	return (w + 2 * padding - kernel) / stride + 1;
+}
+int i2o_ceil(int w, int kernel, int stride, int padding){
+	return (w + 2 * padding - kernel + stride - 1) / stride + 1;
+}
+ParamUnit::ParamUnit(){}
+ParamUnit::ParamUnit(float v){
+	type = "float";
+	fval = v;
+}
+ParamUnit::ParamUnit(const std::string& v){
+	type = "string";
+	sval = v;
+}
+void LayerUnit::clear(){
+	attrs.clear();
+	params.clear();
+	inputs.clear();
+}
+bool LayerUnit::exista(const std::string&key)const {
+	return attrs.find(key) != attrs.end();
+}
+bool LayerUnit::existp(const std::string&key)const{
+	return params.find(key) != params.end();
+}
+bool LayerUnit::existi(const std::string&key)const{
+	return inputs.find(key) != inputs.end();
+}
+void LayerUnit::checka(const std::string& key, const std::string& type)const{
+	if(!exista(key)){
+		printf("unknown key (%s) in attrs\n",key.c_str());
+		exit(0);
+	}
+	if(attrs.at(key).type != type){
+		printf("attrs[\"%s\"]'s type (%s) should be %s\n",key.c_str(),attrs.at(key).type.c_str(), type.c_str());
+		exit(0);
+	}
+}
+void LayerUnit::geta(const std::string& key, float& val)const{
+	checka(key,"float");
+	val = attrs.at(key).fval;
+}
+void LayerUnit::geta(const std::string& key, std::string& val)const{
+	checka(key,"string");
+	val = attrs.at(key).sval;
+}
+Layer::Layer(){
+}
+Layer::Layer(const LayerUnit& u){
+	this->u = u;
+	u.geta("name",name);
+	u.geta("type",type);
+	for(const auto& i:u.params){
+		if(params.find(i.first) != params.end()){
+			printf("[%s %s] duplicate params: %s\n",type.c_str(), name.c_str(),i.first.c_str());
+			exit(0);
+		}
+		params[i.first];
+		params[i.first].set_shape(i.second[0],i.second[1],i.second[2],i.second[3]);
+		params[i.first].alloc();
+	}
+	inputs.resize(u.inputs.size());
+	outputs.resize(1);
 }
 Layer::~Layer(){
 	for(int i=0;i<inputs.size();++i)
 		inputs[i].clear();
 	for(int i=0;i<outputs.size();++i)
 		outputs[i].clear();
+	for(auto& i:params)
+		i.second.clear();
 	inputs.clear();
 	outputs.clear();
+	params.clear();
 }
-void Layer::setup_shape(){
+void Layer::set_inplace(bool inplace){
+	this->inplace = inplace;
 }
-void Layer::setup_data(){
-}
-void Layer::setup_dif_shape(){
-}
-void Layer::setup_dif_data(){
-}
-void Layer::setup(){
-	setup_shape();
-	setup_data();
-	if(is_train){
-		setup_dif_shape();
-		setup_dif_data();
-	}
-}
-
-void Layer::set_train(bool is_train){this->is_train = is_train;}
-
-void Layer::connect2(Layer& l){
-	if(outputs.size()!=1){
-		printf("error: connnect2: %s output blob number should be 1 (now %lu)\n",name.c_str(),outputs.size());
-		exit(0);
-	}
-	if((l.type == "concat") || (l.type == "proposal") || (l.type == "roipooling") || (l.type == "crop")){
-		if(l.order.find(this->name) == l.order.end()){
-			printf("error: connect2: %s(%s) cannot find name: %s\n",l.type.c_str(), l.name.c_str(), this->name.c_str());
-			for(auto i:l.order){
-				printf("%s %d\n",i.first.c_str(),i.second);
-			}
-			exit(0);
-		}
-		int index = l.order[this->name];
-		l.inputs[index].set_shape(outputs[0]);
-		l.inputs[index].set_data(outputs[0].data);
-		l.inputs[index].type = outputs[0].type;
-	}
-	else if(l.type == "eltwise"){
-		if(l.order.find(this->name) == l.order.end()){
-			printf("error: connect2: eltwise(%s) cannot find name: %s\n",l.name.c_str(), this->name.c_str());
-			for(auto i:l.order){
-				printf("%s %d\n",i.first.c_str(),i.second);
-			}
-			exit(0);
-		}
-		l.inputs.resize(2);
-		int index = l.order[this->name];
-		l.inputs[index].set_shape(outputs[0]);
-		l.inputs[index].set_data(outputs[0].data);
-		l.inputs[index].type = outputs[0].type;
-	}
-	else{
-		l.inputs.push_back(Blob());
-		l.inputs.back().set_shape(outputs[0]);
-		l.inputs.back().set_data(outputs[0].data);
-		l.inputs.back().type = outputs[0].type;
-	}
-
-	if(is_train){
-		if(output_difs.size()!=1){
-			printf("error: connnect2: %s output blob number should be 1 (now %lu)\n",name.c_str(),outputs.size());
-			exit(0);
-		}
-		if(l.type == "concat"){
-			if(l.order.find(this->name) == l.order.end()){
-				printf("error: connect2: concat(%s) cannot find name: %s\n",l.name.c_str(), this->name.c_str());
-				exit(0);
-			}
-			int index = l.order[this->name];
-			l.input_difs[index].set_shape(outputs[0]);
-			l.input_difs[index].set_data(output_difs[0].data);
-		}else{
-			l.input_difs.push_back(Blob());
-			l.input_difs.back().set_shape(outputs[0]);
-			l.input_difs.back().set_data(output_difs[0].data);
-		}
-	}
-
-}
-int Layer::parameter_number(){
-	return 0;
-}
-int Layer::input_parameter_number(){
-	int sum = 0;
-	for(const auto&i: inputs)
-		sum += i.nchw();
-	return sum;
-}
-int Layer::output_parameter_number(){
-	int sum = 0;
-	for(const auto&i: outputs)
-		sum += i.nchw();
-	return sum;
+void Layer::show(){
+	printf("(type name) %s %s\n",type.c_str(),name.c_str());
+	printf("  (inplace) %d\n",int(inplace));
+	for(const auto&i : params)
+		printf("  (learnt param) %s [%d %d %d %d]\n",i.first.c_str(),i.second.n,i.second.c,i.second.h,i.second.w);
+	for(const auto&i : u.inputs)
+		printf("  (inputs) %s %d [%d %d %d %d]\n",i.first.c_str(),i.second,inputs[i.second].n,inputs[i.second].c,inputs[i.second].h,inputs[i.second].w);
+	printf("  (outputs) [%d %d %d %d]\n",outputs[0].n,outputs[0].c,outputs[0].h,outputs[0].w);
 }
 void Layer::show_inputs(){
-	if(inputs.size() == 0){
-		printf("no input\n");
-		return;
-	}
+	printf("input %s %s:\n",type.c_str(),name.c_str());
 	for(int index = 0; index < inputs.size(); ++index){
-		printf("input index: %d\n",index);
+		printf("[index] %d\n",index);
 		Blob &input = inputs[index];
-		int n = input.n, c = input.c, h = input.h, w = input.w;
-
+		int n = input.n, chw = input.chw();
 		for(int b=0;b<n;++b){
-			printf("input batch %d:\n",b);
-			for(int k=0;k<c;++k){
-				for(int i=0;i<h;++i){
-					for(int j=0;j<w;++j)
-						printf("%g ", input.data[b*c*h*w + h*w*k + i*w + j]);
-						//printf("%d: %g, ",i*w+j, input.data[b*c*h*w + h*w*k + i*w + j]);
-					//printf("\n");
-				}
-				//printf("\n");
-			}
+			printf("[batch] %d\n",b);
+			for(int k=0;k<chw;++k)
+				printf("%g ", input.data[b*chw + k]);
+			printf("\n");
 		}
 		printf("\n");
 	}
-	printf("\n");
 }
 void Layer::show_outputs(){
-	if(outputs.size() == 0){
-		printf("no output\n");
-		return;
-	}
+	printf("output %s %s\n",type.c_str(),name.c_str());
 	for(int index = 0; index < outputs.size(); ++index){
-		printf("output index: %d\n",index);
+		printf("[index] %d\n",index);
 		Blob &output = outputs[index];
-		int n = output.n, c = output.c, h = output.h, w = output.w;
-
+		int n = output.n, chw = output.chw();
 		for(int b=0;b<n;++b){
-			//printf("output batch %d:\n",b);
-			for(int k=0;k<c;++k){
-				for(int i=0;i<h;++i){
-					for(int j=0;j<w;++j)
-						//printf("%d: %g, ",i*w+j, output.data[b*c*h*w + h*w*k + i*w + j]);
-						printf("%g ", output.data[b*c*h*w + h*w*k + i*w + j]);
-					//printf("\n");
-				}
-				//printf("\n");
-			}
+			printf("[batch] %d\n",b);
+			for(int k=0;k<chw;++k)
+				printf("%g ", output.data[b*chw + k]);
+			printf("\n");
 		}
+		printf("\n");
 	}
-	printf("\n");
+}
+void Layer::setup_outputs_data(){
+	if(inplace && (outputs[0].nchw() == inputs[0].nchw()))
+		outputs[0].set_data(inputs[0].data);
+	else {
+		inplace = false;
+		outputs[0].alloc();
+	}
 }

@@ -1,71 +1,55 @@
 #include "stdlib.h"
-#include <string>
-#include <map>
-#include <iostream>
 #include "Net004.h"
+#include "Parser.h"
 using namespace std;
-
-void Net004::check(){
-	if(cs.sorted_cs.size() != ls.count()){
-		printf("error: connections and layers are not match\n");
-		printf("cs: %lu, ls: %d\n",cs.sorted_cs.size(), ls.count());
-		exit(0);
-	}
-	for(auto i:cs.sorted_cs){
-		if (!ls.exist(i)){
-			printf("error: not found layer %s\n",i.c_str());
-			exit(0);
-		}
-	}
+void Net004::load(const std::string& net_path, const std::string& model_path){
+	NetParser nparser;
+	nparser.read_net(net_path);
+	is_train = nparser.get_net_mode();
+	name = nparser.get_net_name();
+	const std::vector<LayerUnit>& layers = nparser.get_layers();
+	for(int i=0;i<layers.size();++i) ls.add(layers[i]);
+	ls.init();
+	ModelParser mparser;
+	mparser.read_model(model_path, this);
 }
-void Net004::show(){
-	printf("[net] %s\n",name.c_str());
-	int total_pm = 0, total_im = 0, total_om = 0;
-	for(const auto i : cs.sorted_cs){
-		ls.show(i);
-		int pm = ls.parameter_number(i);
-		int im = ls.input_parameter_number(i);
-		int om = ls.output_parameter_number(i);
-		total_pm += pm;
-		total_im += im;
-		total_om += om;
-		if(pm != 0) printf("\tparameter number: %d\n",pm);
-		if(im != 0) printf("\tinput parameter number: %d\n",im);
-		if(om != 0) printf("\toutput parameter number: %d\n",om);
-	}
-	printf("total parameter number: %d (%.2f mb)\n",total_pm, sizeof(float)*total_pm/1024.0f/1024.0f);
-	printf("total input parameter number (include dif): %d (%.2f mb)\n", total_im * 2, sizeof(float) * 2 * total_im/1024.0f/1024.0f);
-	printf("total output parameter number (include dif): %d (%.2f mb)\n",total_om * 2, sizeof(float) * 2 * total_om/1024.0f/1024.0f);
+Layer* Net004::operator [](const std::string& name){
+	return ls[name];
 }
-void Net004::setup(){
-	map<string, int> ins,outs;
-	cs.indegrees(ins);
-	cs.outdegrees(outs);
-
-	for(const auto& i : cs.sorted_cs) 
-		ls[i]->set_train(is_train);
-
-	for(const auto& i : cs.sorted_cs){
-		if(outs.find(i) == outs.end()) continue;
-		Layer* l0 = ls[i];
-		for (const auto& j : cs[i]){
-			Layer* l1 = ls[j];
-			l0->connect2(*l1);
-			ins[j] -= 1;
-			if(ins[j] < 0){
-				printf("error: should not reach this line\n");
-				exit(0);
-			} else if(ins[j] == 0){
-				l1->setup();
-			}
+Layer* Net004::operator [](int index){
+	return ls[index];
+}
+void Net004::pre_alloc(){
+	// connect
+	for(int i=0;i<ls.size();++i){
+		Layer* l = ls[i];
+		if(l->type != "data") continue;
+		l->setup_outputs();
+	}
+	for(int i=0;i<ls.size();++i){
+		Layer* l = ls[i];
+		if(l->type == "data") continue;
+		for(const auto& j:l->u.inputs){
+			Layer* l1 = ls[j.first];
+			int index = j.second;
+			//printf("%s <- %s %d\n",l->name.c_str(), l1->name.c_str(),index);
+			Blob &b = l->inputs[index];
+			Blob &b1 = l1->outputs[0];
+			b.clear();
+			b.set_shape(b1);
+			b.set_data(b1.data);
 		}
+		l->setup_outputs();
 	}
 }
 void Net004::forward(){
-	for(const auto& i : cs.sorted_cs) 
+	for(int i=0;i<ls.size();++i){
+		//printf("%s\n",ls[i]->name.c_str());
 		ls[i]->forward();
+	}
 }
-void Net004::backward(){
-	for(int i=cs.sorted_cs.size()-1; i>=0;--i)
-		ls[cs.sorted_cs[i]]->backward();
+void Net004::show(){
+	printf("(net) %s\n",name.c_str());
+	for(int i=0;i<ls.size();++i)
+		ls[i]->show();
 }

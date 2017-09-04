@@ -3,27 +3,19 @@
 #include "BaseLayer.h"
 class LossLayer: public Layer{
 	public:
-	LossLayer(const std::string&name, const std::string& method);
-	virtual ~LossLayer();
+	LossLayer();
+	LossLayer(const LayerUnit& u);
+	virtual void show();
+	virtual void setup_outputs();
 	virtual void forward();
-	virtual void backward();
-	virtual void show()const;
-	virtual void setup_shape();
-	virtual void setup_data();
-	virtual void setup_dif_shape();
-	virtual void setup_dif_data();
-	std::string get_method(){return method;}
-	private:
+	void init_softmax();
 	void forward_softmax();
-	void backward_softmax();
-	private:
+
+	typedef void (LossLayer::*FUNCTION)();
+	FUNCTION forward_f, init_f;
 	std::string method;
 
-	
+	// softmax
 	Blob softmaxblob, maxs, sums;
-	Blob predict, gt;
 };
-
 #endif
-
-

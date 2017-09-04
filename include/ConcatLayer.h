@@ -3,20 +3,14 @@
 #include "BaseLayer.h"
 class ConcatLayer: public Layer{
 	public:
-	ConcatLayer(const std::string&name, const std::vector<std::string>& names, const std::string& method);
-	virtual ~ConcatLayer();
+	ConcatLayer();
+	ConcatLayer(const LayerUnit& u);
+	virtual void show();
+	virtual void setup_outputs();
 	virtual void forward();
-	virtual void backward();
-	virtual void setup_shape();
-	virtual void setup_data();
-	virtual void setup_dif_shape();
-	virtual void setup_dif_data();
-	virtual void show()const;
-
 	void forward_channel();
-
-	Blob output, output_dif;
+	typedef void (ConcatLayer::*FORWARD_FUNC) ();
+	FORWARD_FUNC f = 0;
 	std::string method;
 };
-
 #endif

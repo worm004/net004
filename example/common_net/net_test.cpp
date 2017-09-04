@@ -5,7 +5,6 @@
 #include <string>
 #include "caffe/caffe.hpp"
 #include "Net004.h"
-#include "Parser.h"
 #include "DataLayer.h"
 #include "opencv2/opencv.hpp"
 #include "glog/logging.h"
@@ -67,13 +66,13 @@ void show_ret(std::shared_ptr<caffe::Net<float> > net, const std::string& path, 
 	for(int i=total-seen;i<total;++i)
 		printf("[%f] %s\n",labels[i].second, labels[i].first.c_str());
 }
-void show_ret_net004( Net004& net, const std::string& path, int total, int seen){
+void show_ret_net004(Net004& net, const std::string& path, int total, int seen){
 	ifstream file(path);
 	vector<pair<string,float> > labels;
 	for(int i=0;i<total;++i){
 		string line;
 		getline(file,line);
-		labels.push_back(make_pair(line,net.ls[net.cs.sorted_cs[net.cs.sorted_cs.size()-2]]->outputs[0].data[i]));
+		labels.push_back(make_pair(line,net[net.ls.size()-2]->outputs[0].data[i]));
 	}
 	sort(labels.begin(), labels.end(), 
 			[](const pair<string,float> & a, const pair<string,float> & b) -> bool
@@ -82,7 +81,6 @@ void show_ret_net004( Net004& net, const std::string& path, int total, int seen)
 		printf("[%f] %s\n",labels[i].second, labels[i].first.c_str());
 }
 float caffe_forward(const std::string& img_path, const TestParameter& param, bool show){
-	int label = param.label;
 	if(show) printf("caffe forwarding ...\n");
   	std::shared_ptr<caffe::Net<float> > net;
 	caffe::Caffe::set_mode(caffe::Caffe::CPU);
@@ -91,7 +89,6 @@ float caffe_forward(const std::string& img_path, const TestParameter& param, boo
 	net->CopyTrainedLayersFrom(param.caffe_model_path);
 	auto t2 = now();
 	if(show) cout<<"read: "<<cal_duration(t1,t2)<<endl;
-
 	int c = net->input_blobs()[0]->channels(),
 	    h = net->input_blobs()[0]->height(), 
 	    w = net->input_blobs()[0]->width();
@@ -100,7 +97,7 @@ float caffe_forward(const std::string& img_path, const TestParameter& param, boo
 	net->Reshape();
 	float * input = net->input_blobs()[0]->mutable_cpu_data(),
 	      * input2 = net->input_blobs()[1]->mutable_cpu_data();
-	input2[0] = label;
+	input2[0] = param.label;
 	Mat img = imread(img_path);
 	resize(img,img,Size(h,w));
 	uchar* data = (uchar*)img.data;
@@ -114,45 +111,57 @@ float caffe_forward(const std::string& img_path, const TestParameter& param, boo
 	t1 = now();
 	const caffe::Blob<float>* blob = net->Forward()[0];
 	t2 = now();
-	if(show) cout<<"forward: "<<cal_duration(t1,t2)<<endl;
-
-	if(show) show_ret(net,param.list_path,param.nlabel,param.nshow);
+	if(show) {
+		cout<<"forward: "<<cal_duration(t1,t2)<<endl;
+		show_ret(net,param.list_path,param.nlabel,param.nshow);
+	}
 	return blob->cpu_data()[0];
 }
 float net004_forward(const std::string& img_path, const TestParameter& param, bool show){
-	int label = param.label;
-	if(show) printf("net004 forwarding ...\n");
 	Net004 net;
-	Parser parser;
 	auto t1 = now();
-	parser.read(param.net004_net_path, param.net004_model_path, &net);
+	net.load(param.net004_net_path, param.net004_model_path);
 	auto t2 = now();
 	if(show) cout<<"read: "<<cal_duration(t1,t2)<<endl;
-	Layers & ls = net.ls;
-	DataLayer* l = (DataLayer*)ls["data"];
+
+	DataLayer* l0 = (DataLayer*)net["input_data"], *l1 = (DataLayer*)net["input_label"];
+	int h = l0->h, w = l0->w;
+	l0->n = l1->n = 1;
+	l1->c = l1->h = l1->w = 1;
+
+	net.pre_alloc();
+	l1->outputs[0].data[0] = param.label;
 	Mat img = imread(img_path);
-	resize(img,img,Size(l->outputs[0].h, l->outputs[0].w));
-	l->add_image((uchar*)img.data,0, param.mean_r, param.mean_g, param.mean_b,param.std_r,param.std_g,param.std_b);
-	((DataLayer*)ls["label"])->add_label(label,0);
-
-	//getchar();
-
+	resize(img,img,Size(h, w));
+	uchar *idata = (uchar*)img.data;
+	float * data = l0->outputs[0].data;
+	for(int i=0;i<h;++i)
+	for(int j=0;j<w;++j){
+		data[(i*w+j) + h*w*0] = (idata[(i*w+j)*3+2] - param.mean_r)/param.std_r;
+		data[(i*w+j) + h*w*1] = (idata[(i*w+j)*3+1] - param.mean_g)/param.std_g;
+		data[(i*w+j) + h*w*2] = (idata[(i*w+j)*3+0] - param.mean_b)/param.std_b;
+	}
+	//net.show();
 	t1 = now();
 	net.forward();
 	t2 = now();
-	if(show){
+	if(show) {
 		cout<<"forward: "<<cal_duration(t1,t2)<<endl;
-		//net.show();
+		show_ret_net004(net,param.list_path,param.nlabel,param.nshow);
 	}
-	if(show) show_ret_net004(net,param.list_path,param.nlabel,param.nshow);
-	return net.ls["loss"]->outputs[0].data[0];
+	return net[net.ls.size()-1]->outputs[0].data[0];
+}
+
+
+void test(const std::string& img_path, const std::string& net_name, const TestParameter & param, bool show){
+	printf("[TEST] [forwrad] %s\n", net_name.c_str());
+	float caffe_score = caffe_forward(img_path, param, show);
+	float net004_score = net004_forward(img_path, param, show);
+	bool ret = abs(caffe_score - net004_score) < 1e-5;
+	if(show) printf("caffe score: %f\nnet004 score: %f\n",caffe_score,net004_score);
+	printf("[TEST] [result] %s\n",ret?"sucessful":"failed");
 }
 int main(int argc, char **argv){
-
-	if(argc !=3){
-		printf("./net_test model_name/all 0/1\n");
-		return 0;
-	}
 	google::InitGoogleLogging(argv[0]);
 	google::SetCommandLineOption("GLOG_minloglevel", "2");
 
@@ -165,7 +174,7 @@ int main(int argc, char **argv){
 	       "../caffe_models/cifar10.list",
 	       127,127,127,
 	       1,1,1,
-	       10,5, 9
+	       10,5, 8
 	);
 	maps["alexnet"] = TestParameter(
 	       "../caffe_models/bvlc_alexnet.caffemodel",
@@ -182,6 +191,16 @@ int main(int argc, char **argv){
 	       "../caffe_models/VGG_ILSVRC_16_layers_deploy.prototxt",
 	       "../models/vgg16.net004.data",
 	       "../models/vgg16.net004.net",
+	       "../caffe_models/imagenet2012.list",
+	       123.68,116.779,103.939,
+	       1,1,1,
+	       1000,5, 628
+	);
+	maps["gnetv1"] = TestParameter(
+	       "../caffe_models/bvlc_googlenet.caffemodel",
+	       "../caffe_models/bvlc_googlenet_deploy.prototxt",
+	       "../models/gnetv1.net004.data",
+	       "../models/gnetv1.net004.net",
 	       "../caffe_models/imagenet2012.list",
 	       123.68,116.779,103.939,
 	       1,1,1,
@@ -247,16 +266,6 @@ int main(int argc, char **argv){
 	       1,1,1,
 	       1000,5, 628
 	);
-	maps["gnetv1"] = TestParameter(
-	       "../caffe_models/bvlc_googlenet.caffemodel",
-	       "../caffe_models/bvlc_googlenet_deploy.prototxt",
-	       "../models/gnetv1.net004.data",
-	       "../models/gnetv1.net004.net",
-	       "../caffe_models/imagenet2012.list",
-	       123,117,104,
-	       1,1,1,
-	       1000,5, 628
-	);
 	maps["gnetv3"] = TestParameter(
 	       "../caffe_models/inception-v3.caffemodel",
 	       "../caffe_models/deploy_inception-v3.prototxt",
@@ -298,35 +307,19 @@ int main(int argc, char **argv){
 	       1000,5, 628
 	);
 
+	if(argc !=3){
+		printf("./net_test model_name/all 0/1\n");
+		printf("model_name: \n");
+		for(const auto& i : maps)
+			printf("%s\n",i.first.c_str());
+		return 0;
+	}
+	string name = argv[1];
 	bool show = atoi(argv[2]);
 	string img_path = "../imgs/westerdam-ship-size.jpg";
 	//string img_path = "../imgs/tabby-cat-names.jpg";
-	int label = 9;
-	if(argv[1] == string("all")){
-		for(auto i: maps){
-			printf("[TEST] [forwrad] %s\n",i.first.c_str());
-			float caffe_score = caffe_forward(img_path, i.second, show);
-			float net004_score = net004_forward(img_path, i.second, show);
-			bool ret = abs(caffe_score - net004_score) < 1e-5;
-			if(show){
-				printf("caffe score: %f\nnet004 score: %f\n",caffe_score,net004_score);
-			}
-
-			printf("[TEST] [result] %s\n",ret?"sucessful":"failed");
-		}
-	}
-	else if(maps.find(argv[1])!= maps.end()){
-		printf("[TEST] [forwrad] %s\n",argv[1]);
-		float caffe_score = caffe_forward(img_path, maps[argv[1]], show);
-		float net004_score = net004_forward(img_path,maps[argv[1]], show);
-		bool ret = abs(caffe_score - net004_score) < 1e-5;
-		if(show){
-			printf("caffe score: %f\nnet004 score: %f\n",caffe_score,net004_score);
-		}
-		printf("[TEST] [result] %s\n",ret?"sucessful":"\x1B[31mfailed"); // red failed
-	}
-	else {
-		printf("no such net: %s\n",argv[1]);
-	}
+	if(name == string("all")) for(auto i: maps) test(img_path, i.first, i.second,show);
+	else if(maps.find(name) != maps.end()) test(img_path, name, maps[name],show);
+	else printf("no such net: %s\n",argv[1]);
 	return 0;
 }

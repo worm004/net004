@@ -1,158 +1,128 @@
+#include <set>
 #include "stdlib.h"
 #include "Layers.h"
-#include "DataLayer.h"
 #include "ConvLayer.h"
-#include "DConvLayer.h"
-#include "PoolLayer.h"
-#include "LRNLayer.h"
 #include "FCLayer.h"
 #include "LossLayer.h"
-#include "ConcatLayer.h"
 #include "ActivityLayer.h"
+#include "DataLayer.h"
+#include "PoolLayer.h"
+#include "LRNLayer.h"
 #include "SplitLayer.h"
+#include "ConcatLayer.h"
 #include "BNLayer.h"
 #include "ScaleLayer.h"
 #include "EltwiseLayer.h"
 #include "ReshapeLayer.h"
 #include "SoftmaxLayer.h"
+#include "RoipoolLayer.h"
 #include "ProposalLayer.h"
-#include "ROIPoolingLayer.h"
+#include "DConvLayer.h"
 #include "CropLayer.h"
+using namespace std;
 
-void Layers::add(const std::string& name, Layer** p){
-	if(layers.find(name) != layers.end()){
-		printf("error: duplicate name: %s\n",name.c_str());
-		exit(0);
-	}
-	layers[name] = *p;
+template<typename T> 
+Layer* create_layer(const LayerUnit& u){
+	return new T(u);
 }
 
-void Layers::clear(){
-	for(auto i: layers){
-		if (i.second){
-			delete i.second;
-		}
-	}
-	layers.clear();
+Layers::Layers(){
+	layer_type_map = {
+		{"conv",&create_layer<ConvLayer>},
+		{"data",&create_layer<DataLayer>},
+		{"fc",&create_layer<FCLayer>},
+		{"activity",&create_layer<ActivityLayer>},
+		{"loss",&create_layer<LossLayer>},
+		{"pool",&create_layer<PoolLayer>},
+		{"lrn",&create_layer<LRNLayer>},
+		{"split",&create_layer<SplitLayer>},
+		{"concat",&create_layer<ConcatLayer>},
+		{"bn",&create_layer<BNLayer>},
+		{"scale",&create_layer<ScaleLayer>},
+		{"eltwise",&create_layer<EltwiseLayer>},
+		{"reshape",&create_layer<ReshapeLayer>},
+		{"softmax",&create_layer<SoftmaxLayer>},
+		{"roipooling",&create_layer<RoipoolLayer>},
+		{"proposal",&create_layer<ProposalLayer>},
+		{"dconv",&create_layer<DConvLayer>},
+		{"crop",&create_layer<CropLayer>}
+	};
 }
-
-bool Layers::exist(const std::string& name){
-	return layers.find(name) != layers.end();
-}
-int Layers::count(){
-	return layers.size();
-}
-Layer* Layers::operator [] (const std::string& name){
-	if(!exist(name)){
-		printf("error: no such layer named %s\n",name.c_str());
+void Layers::add(const LayerUnit& u){
+	string type;
+	u.geta("type",type);
+	if(layer_type_map.find(type) == layer_type_map.end()){
+		printf("unknown layer: %s\n",type.c_str());
 		exit(0);
 	}
-	return layers[name];
-}
-
-int Layers::parameter_number(const std::string& name){
-	if(!exist(name)){
-		printf("error: no such layer named %s\n",name.c_str());
-		exit(0);
-	}
-	return layers[name]->parameter_number();
-}
-int Layers::input_parameter_number(const std::string& name){
-	if(!exist(name)){
-		printf("error: no such layer named %s\n",name.c_str());
-		exit(0);
-	}
-	return layers[name]->input_parameter_number();
-}
-int Layers::output_parameter_number(const std::string& name){
-	if(!exist(name)){
-		printf("error: no such layer named %s\n",name.c_str());
-		exit(0);
-	}
-	return layers[name]->output_parameter_number();
-}
-void Layers::show(const std::string& name){
-	if(!exist(name)){
-		printf("error: no such layer named %s\n",name.c_str());
-		exit(0);
-	}
-	layers[name]->show();
+	layers.push_back(layer_type_map[type](u));
 }
 void Layers::show(){
-	printf("Layers:\n");
-	for(const auto&i:layers) i.second->show();
+	for(int i=0;i<layers.size();++i)
+		layers[i]->show();
 }
-
-// different types of layers
-void Layers::add_activity(const std::string& name, const std::string& method, float negative_slope){
-	Layer* l = new ActivityLayer(name,method,negative_slope);
-	add(name, &l);
+void Layers::init(){
+	init_n2i();
+	init_forder();
+	init_inplace();
 }
-void Layers::add_data(const std::string& name, int n, int c, int h, int w, const std::string& method){
-	Layer* l = new DataLayer(name, n,c,h,w, method);
-	add(name, &l);
+void Layers::init_inplace(){
+	for(int i=0;i<layers.size();++i){
+		string name = layers[i]->name;
+		const vector<string>& ns = cs[name];
+		if(ns.size() == 1) 
+			layers[n2i[ns[0]]]->set_inplace(true);
+	}
 }
-void Layers::add_conv(const std::string&name, const std::vector<int>& p8, bool is_bias, const std::string& activity){
-	Layer* l = new ConvLayer(name,p8[0],p8[1],p8[2],p8[3],p8[4],p8[5],p8[6],p8[7],is_bias,activity);
-	add(name, &l);
+void Layers::init_n2i(){
+	n2i.clear();
+	for(int i=0;i<layers.size();++i) n2i[layers[i]->name] = i;
 }
-void Layers::add_dconv(const std::string&name, const std::vector<int>& p8, bool is_bias, const std::string& activity){
-	Layer* l = new DConvLayer(name,p8[0],p8[1],p8[2],p8[3],p8[4],p8[5],p8[6],p8[7],is_bias,activity);
-	add(name, &l);
+void Layers::init_forder(){
+	forder.clear();
+	cs.clear();
+	map<string, int> ins;
+	for(int i=0;i<layers.size();++i){
+		string name = layers[i]->name;
+		ins[name] = layers[i]->u.inputs.size();
+		for(const auto& j:layers[i]->u.inputs){
+			if(cs.find(j.first) == cs.end()) cs[j.first];
+			cs[j.first].push_back(name);
+		}
+	}
+	set<string> noins;
+	for(const auto& l: ins)
+		if(l.second == 0) noins.insert(l.first);
+	while(!noins.empty()){
+		const string l = *noins.begin();
+		forder.push_back(n2i[l]);
+		noins.erase(noins.begin());
+		if(n2i.find(l) == n2i.end()) continue;
+		for(const auto& to : cs[l]){
+			ins[to] -= 1;
+			if(ins[to] == 0) noins.insert(to);
+		}
+	}
+	for(const auto&l:ins){
+		if(l.second ==0) continue;
+		printf("layer connection error\n");
+		exit(0);
+	}
 }
-void Layers::add_pool(const std::string&name, const std::vector<int>& p3, const std::string& method){
-	Layer* l = new PoolLayer(name,p3[0],p3[1],p3[2],method);
-	add(name, &l);
+Layer* Layers::operator [](const std::string& name){
+	if(n2i.find(name) == n2i.end()){
+		printf("unknown layer name: %s\n",name.c_str());
+		exit(0);
+	}
+	return layers[n2i[name]];
 }
-void Layers::add_lrn(const std::string&name, int n, float alpha,float beta){
-	Layer* l = new LRNLayer(name,n,alpha,beta);
-	add(name, &l);
+Layer* Layers::operator [](int index){
+	if((index < 0) || (index >= layers.size())){
+		printf("index error\n");
+		exit(0);
+	}
+	return layers[forder[index]];
 }
-void Layers::add_fc(const std::string&name, int n, bool is_bias, const std::string& activity){
-	Layer* l = new FCLayer(name,n,is_bias,activity);
-	add(name, &l);
-}
-void Layers::add_loss(const std::string&name, const std::string& method){
-	Layer* l = new LossLayer(name,method);
-	add(name, &l);
-}
-void Layers::add_concat(const std::string& name, const std::vector<std::string>& names, const std::string& method){
-	Layer* l = new ConcatLayer(name, names, method);
-	add(name, &l);
-}
-void Layers::add_split(const std::string& name){
-	Layer* l = new SplitLayer(name);
-	add(name, &l);
-}
-void Layers::add_bn(const std::string& name,float eps){
-	Layer* l = new BNLayer(name, eps);
-	add(name, &l);
-}
-void Layers::add_scale(const std::string& name,bool is_bias){
-	Layer* l = new ScaleLayer(name,is_bias);
-	add(name, &l);
-}
-void Layers::add_eltwise(const std::string& name, const std::string&l0, const std::string& l1, const std::string& method, float f0, float f1){
-	Layer* l = new EltwiseLayer(name, l0, l1, method, f0, f1);
-	add(name, &l);
-}
-void Layers::add_reshape(const std::string&name, const std::vector<int>& p4){
-	Layer* l = new ReshapeLayer(name, p4);
-	add(name, &l);
-}
-void Layers::add_proposal(const std::string& name, int feat_stride, const std::vector<std::string>& names, const std::string& method){
-	Layer* l = new ProposalLayer(name, feat_stride, names, method);
-	add(name, &l);
-}
-void Layers::add_softmax(const std::string& name){
-	Layer* l = new SoftmaxLayer(name);
-	add(name, &l);
-}
-void Layers::add_crop(const std::string& name, int axis, const std::vector<int>& offset, const std::vector<std::string>& names){
-	Layer* l = new CropLayer(name, axis, offset, names);
-	add(name, &l);
-}
-void Layers::add_roipooling(const std::string&name, int h, int w, float scale, const std::vector<std::string>& names){
-	Layer* l = new ROIPoolingLayer(name,h,w,scale,names);
-	add(name, &l);
+int Layers::size(){
+	return layers.size();
 }

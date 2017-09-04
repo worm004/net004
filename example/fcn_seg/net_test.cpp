@@ -16,8 +16,8 @@ using namespace std;
 struct TestParameter{
 	string caffe_net_path = "../caffe_models/segmentation/fcn8s.prototxt",
 		caffe_model_path = "../caffe_models/segmentation/fcn8s-atonce-pascal.caffemodel",
-		net004_net_path = "../models/segmentation/fcn8s.net004.net",
-		net004_model_path = "../models/segmentation/fcn8s.net004.data";
+		net004_net_path = "../models/fcn_seg_8s.net004.net",
+		net004_model_path = "../models/fcn_seg_8s.net004.data";
 	float mean_r = 104.00699, mean_g = 116.66877, mean_b = 122.67892;
 	float std_r = 1.0, std_g = 1.0, std_b = 1.0;
 	int cnum = 20;
@@ -25,29 +25,31 @@ struct TestParameter{
 void net004_forward(const cv::Mat& img, const TestParameter& param, bool show, float** ret){
 	if(show) printf("net004 forwarding ...\n");
 	Net004 net;
-	Parser parser;
-	parser.set_input_size("data",1,img.channels(),img.rows,img.cols);
 	auto t1 = now();
-	parser.read(param.net004_net_path, param.net004_model_path, &net);
+	net.load(param.net004_net_path, param.net004_model_path);
 	auto t2 = now();
-
 	if(show) cout<<"read: "<<cal_duration(t1,t2)<<endl;
+	DataLayer* l0 = (DataLayer*)net["input_data"];
+	l0->n = 1;
+	l0->c = img.channels();
+	l0->h = img.rows;
+	l0->w = img.cols;
 
-	Layers & ls = net.ls;
+	net.pre_alloc();
 	int c = img.channels(), h = img.rows, w = img.cols;
-	float *idata = (float*)(DataLayer*)ls["data"]->outputs[0].data, *data = (float*)img.data;
+	float* data0 = l0->outputs[0].data, *data = (float*)img.data;
+
 	for(int i=0;i<h;++i)
 	for(int j=0;j<w;++j)
 	for(int k=0;k<c;++k)
-		idata[(i*w+j) + h*w*k] = data[(i*w+j)*c+k]; 
+		data0[(i*w+j) + h*w*k] = data[(i*w+j)*c+k]; 
 
 	t1 = now();
 	net.forward();
 	t2 = now();
-
 	if(show) cout<<"forward: "<<cal_duration(t1,t2)<<endl;
 
-	memcpy(*ret,ls[net.cs.sorted_cs.back()]->outputs[0].data,sizeof(float)*h*w*(param.cnum+1));
+	memcpy(*ret,net[net.ls.size()-1]->outputs[0].data,sizeof(float)*h*w*(param.cnum+1));
 }
 
 void process_image(const std::string& path, const TestParameter& param, cv::Mat& ret){
@@ -138,17 +140,6 @@ int main(int argc, char** argv){
 	float *net004_scores = new float[img.cols*img.rows*(param.cnum+1)];
 	net004_forward(img, param, show, &net004_scores);
 
-	//printf("%d\n",img.cols*img.rows*(param.cnum+1));
-	//printf("caffe:\n");
-	//for(int i=0;i<img.cols*img.rows*(param.cnum+1);++i)
-	//	printf(" %g",caffe_scores[i]);
-	//printf("\n");
-
-	//printf("net004:\n");
-	//for(int i=0;i<img.cols*img.rows*(param.cnum+1);++i)
-	//	printf(" %g",net004_scores[i]);
-	//printf("\n");
-
 	bool is_same = true;
 	for(int i=0;i<img.cols*img.rows*(param.cnum+1);++i){
 		if(abs(caffe_scores[i] - net004_scores[i]) > 1e-4){
@@ -162,7 +153,7 @@ int main(int argc, char** argv){
 	if(show){
 		Mat img2 = imread(img_path);
 		resize(img2,img2,img.size());
-		show_seg(img2, net004_scores,param,0.4);
+		show_seg(img2, caffe_scores,param,0.4);
 	}
 
 }

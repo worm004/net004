@@ -3,32 +3,18 @@
 #include "BaseLayer.h"
 class PoolLayer: public Layer{
 	public:
-	PoolLayer(
-		const std::string&name, 
-		int kernel, 
-		int stride, 
-		int padding, 
-		const std::string& method);
-	virtual ~PoolLayer();
+	PoolLayer();
+	PoolLayer(const LayerUnit& u);
+	virtual void show();
+	virtual void setup_outputs();
 	virtual void forward();
-	virtual void backward();
-	virtual void setup_shape();
-	virtual void setup_data();
-	virtual void setup_dif_shape();
-	virtual void setup_dif_data();
-	virtual void show()const;
-	void forward_maxpool();
-	void forward_avgpool();
-	void backward_maxpool();
-	void backward_avgpool();
-	int get_stride(){return stride;}
-	int get_padding(){return padding;}
-	int get_kernel(){return kernel;}
-	std::string get_method(){return method;}
+	void forward_max();
+	void forward_avg();
 
-	private:
-	int stride = 0, padding = 0, kernel = 0;
+	bool global;
+	int pad, kernel, stride;
 	std::string method;
-	int * mask = 0;
+	typedef void (PoolLayer::*FORWARD_FUNC)();
+	FORWARD_FUNC f;
 };
 #endif

@@ -55,20 +55,22 @@ int main(int argc, char** argv){
 void net004_forward(const Mat&img, const FasterRCNNConfig& config, bool show, vector<vector<float>>& dets, float scale){
 	if(show) printf("net004 forwarding ...\n");
 	Net004 net;
-	Parser parser;
-	parser.set_input_size("data",1,img.channels(),img.rows,img.cols);
 	auto t1 = now();
-	parser.read(config.net004_net_path, config.net004_model_path, &net);
+	net.load(config.net004_net_path, config.net004_model_path);
 	auto t2 = now();
 	if(show) cout<<"read: "<<cal_duration(t1,t2)<<endl;
 
-	//net.show();
+	DataLayer* l0 = (DataLayer*)net["data"], *l1 = (DataLayer*)net["im_info"];
+	l0->n = 1;
+	l0->c = img.channels();
+	l0->h = img.rows;
+	l0->w = img.cols;
+	l1->c = 3;
+	l1->n = l1->h = l1->w = 1;
 
+	net.pre_alloc();
 	int c = img.channels(), h = img.rows, w = img.cols;
-	Layers & ls = net.ls;
-	float *data0 = (float*)(DataLayer*)ls["data"]->outputs[0].data,
-	      *data1 = (float*)(DataLayer*)ls["im_info"]->outputs[0].data,
-	      *data = (float*)img.data;
+	float* data0 = l0->outputs[0].data, *data1 = l1->outputs[0].data, *data = (float*)img.data;
 
 	for(int i=0;i<h;++i)
 	for(int j=0;j<w;++j)
@@ -82,17 +84,14 @@ void net004_forward(const Mat&img, const FasterRCNNConfig& config, bool show, ve
 	t1 = now();
 	net.forward();
 	t2 = now();
-	if(show){
-		cout<<"forward: "<<cal_duration(t1,t2)<<endl;
-		//net.show();
-	}
+	if(show) cout<<"forward: "<<cal_duration(t1,t2)<<endl;
 
 	vector<vector<float> > pred_boxes;
 
-	float *rois_data = net.ls["proposal"]->outputs[0].data;
-	float *bbox_pred_data = net.ls["bbox_pred"]->outputs[0].data;
-	float *score_data = net.ls["cls_prob"]->outputs[0].data;
-	bbox_transform_inv(rois_data, bbox_pred_data, net.ls["proposal"]->outputs[0].c/5, config.cnum, pred_boxes, scale);
+	float *rois_data = net["proposal"]->outputs[0].data;
+	float *bbox_pred_data = net["bbox_pred"]->outputs[0].data;
+	float *score_data = net["cls_prob"]->outputs[0].data;
+	bbox_transform_inv(rois_data, bbox_pred_data, net["proposal"]->outputs[0].c/5, config.cnum, pred_boxes, scale);
 	bbox_bound(pred_boxes,float(img.cols/scale-1),float(img.rows/scale-1));
 	nms_all_class(pred_boxes,score_data,dets,config.cnum,config.nms_thres,config.conf_thres);
 	

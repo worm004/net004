@@ -99,31 +99,35 @@ void parser_yolov1(const float* data, int cnum,vector<vector<float> >& rects, fl
 
 void net004_forward(const std::string& img_path, const TestParameter& param, bool show, vector<vector<float> >& rs){
 	if(show) printf("net004 forwarding ...\n");
+
 	Net004 net;
-	Parser parser;
 	auto t1 = now();
-	parser.read(param.net004_net_path, param.net004_model_path, &net);
+	net.load(param.net004_net_path, param.net004_model_path);
 	auto t2 = now();
 	if(show) cout<<"read: "<<cal_duration(t1,t2)<<endl;
-	Layers & ls = net.ls;
-	DataLayer* l = (DataLayer*)ls["data"];
-	Mat img = imread(img_path);
-	Mat rimg;
-	resize(img,rimg,Size(l->outputs[0].h, l->outputs[0].w));
-	l->add_image((uchar*)rimg.data,0, param.mean_r, param.mean_g, param.mean_b,param.std_r,param.std_g,param.std_b);
 
+	DataLayer* l0 = (DataLayer*)net["input_data"];
+	int h = l0->h, w = l0->w;
+	l0->n = 1;
+
+	net.pre_alloc();
+	Mat img = imread(img_path);
+	resize(img,img,Size(h, w));
+	uchar *idata = (uchar*)img.data;
+	float * data = l0->outputs[0].data;
+	for(int i=0;i<h;++i)
+	for(int j=0;j<w;++j){
+		data[(i*w+j) + h*w*0] = (idata[(i*w+j)*3+2] - param.mean_r)/param.std_r;
+		data[(i*w+j) + h*w*1] = (idata[(i*w+j)*3+1] - param.mean_g)/param.std_g;
+		data[(i*w+j) + h*w*2] = (idata[(i*w+j)*3+0] - param.mean_b)/param.std_b;
+	}
 	t1 = now();
 	net.forward();
 	t2 = now();
-	if(show){
-		cout<<"forward: "<<cal_duration(t1,t2)<<endl;
-		//net.show();
-	}
+	if(show) cout<<"forward: "<<cal_duration(t1,t2)<<endl;
 
-	Connections &cs = net.cs;
-
-	float xyscale = float(rimg.cols) / float(rimg.rows);
-	parser_yolov1(ls[cs.sorted_cs.back()]->outputs[0].data, param.cnum, rs, xyscale, param.threshold);
+	float xyscale = float(img.cols) / float(img.rows);
+	parser_yolov1(net[net.ls.size()-1]->outputs[0].data, param.cnum, rs, xyscale, param.threshold);
 
 	vector<string> names(param.cnum);
 	ifstream file(param.list_path);
@@ -187,23 +191,23 @@ void caffe_forward(const std::string& img_path, const TestParameter& param, bool
 	for(int i=0;i<param.cnum;++i)
 		file >> names[i];
 
-	for(int i=0;i<(rs.size())&&show;++i){
+	for(int i=0;i<(rs.size())&&show;++i)
 		printf("%s (%f) %f %f %f %f\n",names[int(rs[i][5])].c_str(),rs[i][4],rs[i][0],rs[i][1],rs[i][2],rs[i][3]);
-	}
-
-	//for(int i=0;i<rs.size();++i){
-	//	int x = rs[i][0] * img.cols, y = rs[i][1] * img.rows, w = rs[i][2] * img.cols, h = rs[i][3] * img.rows;
-	//	for(int j=0;j<6;++j)
-	//		printf("%g ",rs[i][j]);
-	//	printf("\n");
-	//	rectangle(img,Rect(x,y,w,h),Scalar(0,0,255),2);
+	//if(show){
+	//	for(int i=0;i<rs.size();++i){
+	//		int x = rs[i][0] * img.cols, y = rs[i][1] * img.rows, w = rs[i][2] * img.cols, h = rs[i][3] * img.rows;
+	//		//for(int j=0;j<6;++j)
+	//		//	printf("%g ",rs[i][j]);
+	//		//printf("\n");
+	//		rectangle(img,Rect(x,y,w,h),Scalar(0,0,255),2);
+	//	}
+	//	imshow("img",img);
+	//	waitKey();
 	//}
-	//imshow("img",img);
-	//waitKey();
 }
 int main(int argc, char** argv){
 	if(argc !=2){
-		printf("./yolov1_test 0/1\n");
+		printf("./net_test_yolo 0/1\n");
 		return 0;
 	}
 	google::InitGoogleLogging(argv[0]);
@@ -213,8 +217,8 @@ int main(int argc, char** argv){
 	maps["yolov1"] = TestParameter(
 	       "../caffe_models/detection/gnet_yolo_iter_32000.caffemodel",
 	       "../caffe_models/detection/gnet_deploy.prototxt",
-	       "../models/detection/yolov1.net004.data",
-	       "../models/detection/yolov1.net004.net",
+	       "../models/yolov1.net004.data",
+	       "../models/yolov1.net004.net",
 	       "../caffe_models/detection/voc.list",
 	       128, 128, 128, 1, 1, 1, 0.1, 20
 	);

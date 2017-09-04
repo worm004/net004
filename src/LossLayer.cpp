@@ -1,138 +1,66 @@
+#include <cmath>
 #include <cfloat>
-#include "stdlib.h"
 #include "LossLayer.h"
-LossLayer::LossLayer(const std::string&name, 
-			const std::string& method):
-				method(method),
-				Layer(name,"loss"){
+LossLayer::LossLayer(){}
+LossLayer::LossLayer(const LayerUnit& u):Layer(u){
+	u.geta("method",method);
+	if(method == "softmax"){
+		forward_f = &LossLayer::forward_softmax;
+		init_f = &LossLayer::init_softmax;
+	}
 }
-LossLayer::~LossLayer(){
+void LossLayer::show(){
+	Layer::show();
+	printf("  (method) %s\n",method.c_str());
 }
-void LossLayer::backward_softmax(){
+void LossLayer::setup_outputs(){
+	outputs[0].set_shape(1,1,1,1);
+	inplace = false;
+	setup_outputs_data();
+	(this->*init_f)();
+}
+void LossLayer::forward(){
+	(this->*forward_f)();
+}
+void LossLayer::init_softmax(){
+	Blob &ib = inputs[0];
+	maxs.set_shape(1,1,ib.h,ib.w);
+	maxs.alloc();
+	sums.set_shape(1,1,ib.h,ib.w);
+	sums.alloc();
+	softmaxblob.set_shape(1,ib.c,ib.h,ib.w);
+	softmaxblob.alloc();
 }
 void LossLayer::forward_softmax(){
-	int batch_size = predict.n, c = predict.c, hw = predict.hw();
-	float *pdata = predict.data, *gdata = gt.data;
-	float *maxdata = maxs.data, *sumdata = sums.data, *softmaxdata = softmaxblob.data;
-	float *odata = outputs[0].data;
-	//predict.show();
-	//gt.show();
-	float loss = 0.0f;
+	Blob& ib = inputs[0], &ib2 = inputs[1];
+	int batch_size = ib.n, c = ib.c, hw = ib.hw();
+	float *pdata = ib.data, *gdata = ib2.data, *odata = outputs[0].data, 
+	      *maxdata = maxs.data, *sumdata = sums.data, *softmaxdata = softmaxblob.data,
+	      loss = 0.0f;
 	for(int i=0;i<batch_size;++i){
-
 		for(int k=0;k<hw;++k){
 			maxdata[k] = pdata[k];
 			for(int j=1;j<c;++j)
 				maxdata[k] = std::max(maxdata[k],pdata[j*hw+k]);
 		}
-
 		for(int j=0;j<c;++j)
 			for(int k=0;k<hw;++k)
 				softmaxdata[j*hw+k] = exp(pdata[j*hw+k] - maxdata[k]);
-
 		for(int k=0;k<hw;++k){
 			sumdata[k] = softmaxdata[k];
 			for(int j=1;j<c;++j)
 				sumdata[k] += softmaxdata[j*hw + k];
 		}
-
 		for(int j=0;j<c;++j)
 			for(int k=0;k<hw;++k)
 				softmaxdata[j*hw +k] /= sumdata[k];
-
 		for(int j=0;j<c;++j)
 			for(int k=0;k<hw;++k)
 				loss -= log(std::max(softmaxdata[int(gdata[k]) * hw + k], FLT_MIN));
-
 		pdata += c*hw;
-		gdata += gt.chw();
+		gdata += inputs[1].chw();
 	}
-	odata[0] = loss/predict.c;
-	//printf("loss: %f\n",odata[0]);
-
-}
-void LossLayer::forward(){
-	//printf("forward: %s %s\n",type.c_str(), method.c_str());
+	odata[0] = loss/inputs[0].c/inputs[0].n;
 	//show_inputs();
-	if(method == "softmax")
-		forward_softmax();
 	//show_outputs();
-	
-}
-void LossLayer::backward(){
-	printf("backward: %s %s\n",type.c_str(), method.c_str());
-	if(method == "softmax")
-		backward_softmax();
-}
-void LossLayer::show()const {
-	printf("[%s%s] name: %s\n",
-			type.c_str(),("+"+method).c_str(), 
-			name.c_str());
-}
-void LossLayer::setup_shape(){
-	if(inputs.size()!=2){
-		printf("error: loss input blob number should be 2\n");
-		exit(0);
-	}
-	else if(inputs[0].n != inputs[1].n){
-		printf("error: two inputs should have same batch size in loss layer\n");
-		exit(0);
-	}
-	if((inputs[0].type == "label") && (inputs[1].type != "label")){
-		gt.set_shape(inputs[0]);
-		gt.set_data(inputs[0].data);
-		gt.type = inputs[0].type;
-		predict.set_shape(inputs[1]);
-		predict.set_data(inputs[1].data);
-	}
-	else if((inputs[0].type != "label") && (inputs[1].type == "label")){
-		gt.set_shape(inputs[1]);
-		gt.set_data(inputs[1].data);
-		gt.type = inputs[1].type;
-		predict.set_shape(inputs[0]);
-		predict.set_data(inputs[0].data);
-	}
-	else{
-		printf("error: loss layer needs one label\n");
-		exit(0);
-	}
-	
-	outputs.resize(1);
-	outputs[0].set_shape(1, 1, 1, 1);
-
-	if(method == "softmax"){
-		maxs.set_shape(1,1,predict.h,predict.w);
-		sums.set_shape(1,1,predict.h,predict.w);
-		softmaxblob.set_shape(1,predict.c,predict.h,predict.w);
-	}
-
-
-}
-void LossLayer::setup_data(){
-	if(outputs.size()!=1){
-		printf("error: loss output blob number should be 1\n");
-		exit(0);
-	}
-	outputs[0].alloc();
-	if(method == "softmax"){
-		maxs.alloc();
-		sums.alloc();
-		softmaxblob.alloc();
-	}
-
-}
-void LossLayer::setup_dif_shape(){
-	if(input_difs.size()!=2){
-		printf("error: loss input blob number should be 2\n");
-		exit(0);
-	}
-	output_difs.resize(1);
-	output_difs[0].set_shape(outputs[0]);
-}
-void LossLayer::setup_dif_data(){
-	if(output_difs.size()!=1){
-		printf("error: loss output blob number should be 1\n");
-		exit(0);
-	}
-	output_difs[0].alloc();
 }

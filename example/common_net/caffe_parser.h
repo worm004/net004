@@ -1,36 +1,52 @@
-#ifndef CAFFE_PARSER_H
-#define CAFFE_PARSER_H
 #include <string>
-#include <vector>
-#include <fstream>
 #include "caffe/caffe.hpp"
-
-class CaffeModelParser{
-public:
-	void load_caffe_model(const std::string& net_path, const std::string& model_path);
+#include "Parser.h"
+class CaffeParser{
+	public:
+	CaffeParser();
+	void load_caffe_model(
+		const std::string& net_path, 
+		const std::string& model_path, 
+		bool is_train);
 	void write(const std::string& net_path, const std::string& model_path);
-	void show_layers();
-
-private:
-	void write_net_conv(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile);
-	void write_net_pool(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile);
-	void write_net_data(const std::string& layer_name, const std::string& blob_name, int n,int c,int h,int w, std::ofstream& ofile);
-	void write_net_relu(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile);
-	void write_net_fc(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile);
-	void write_net_softmaxloss(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile);
-	void write_net_lrn(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile);
-	void write_net_split(const std::string& layer_name, std::ofstream& ofile);
-	void write_net_concat(const std::string& layer_name, const std::vector<std::string>& names, std::ofstream& ofile);
-	void write_net_bn(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile);
-	void write_net_scale(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile);
-	void write_net_eltwise(const std::string& layer_name, const caffe::LayerParameter& param, const std::vector<std::string>& names, std::ofstream& ofile);
-	void write_net(const std::string& net_path);
+	void convert();
+	void find_inputs(
+		const std::vector<boost::shared_ptr<caffe::Layer<float> >>& layers,
+		const std::vector<std::string>& layer_names, 
+		const std::vector<std::string>& blob_names, 
+		const std::vector<int>& bottom_ids, 
+		std::map<std::string, int>& inputs,
+		int cur_layer);
+	void find_params(
+		const std::string& type, 
+		const std::vector<boost::shared_ptr<caffe::Blob<float> > >& param_blobs,
+		std::map<std::string, std::vector<int> >&  params);
+	void find_attrs(
+		const std::string& type,
+		const caffe::LayerParameter& caffe_attr,
+		std::map<std::string, ParamUnit>& attrs);
 	void write_model(const std::string& model_path);
-	void write_model2(const std::string& model_path);
 	void write_blob(const std::string& layer_name, const std::string& blob_name, const caffe::Blob<float> *blob, FILE* file);
-	void read_connections();
-private:
+
+#define func_param const caffe::LayerParameter& param, std::map<std::string, ParamUnit>& params
+	typedef void (CaffeParser::*find_attrs_func) (func_param);
+	void find_conv_attrs(func_param);
+	void find_pooling_attrs(func_param);
+	void find_relu_attrs(func_param);
+	void find_fc_attrs(func_param);
+	void find_concat_attrs(func_param);
+	void find_split_attrs(func_param);
+	void find_lrn_attrs(func_param);
+	void find_softmaxloss_attrs(func_param);
+	void find_bn_attrs(func_param);
+	void find_scale_attrs(func_param);
+	void find_eltwise_attrs(func_param);
+#undef func_param
+
+	private:
+	NetParser parser;
 	std::shared_ptr<caffe::Net<float> > net;
-	std::vector<std::pair<std::string, std::string> > connections;
+	bool is_train = false;
+	std::map<std::string,std::vector<std::string> > caffe_param_table;
+	std::map<std::string, find_attrs_func> find_attrs_funcs;
 };
-#endif

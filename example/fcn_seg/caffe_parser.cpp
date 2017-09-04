@@ -1,337 +1,293 @@
+#include "stdlib.h"
 #include <map>
 #include "caffe_parser.h"
 using namespace std;
-using namespace cv;
-void CaffeModelParser::load_caffe_model(const std::string& net_path, const std::string& model_path){
-	caffe::Caffe::set_mode(caffe::Caffe::CPU);
-	net = make_shared<caffe::Net<float>> (net_path, caffe::TEST);
-	net->CopyTrainedLayersFrom(model_path);
-	read_connections();
+CaffeParser::CaffeParser(){
+	caffe_param_table = {
+		{"Convolution", {"weight","bias"}},
+		{"Deconvolution", {"weight","bias"}},
+		{"InnerProduct", {"weight","bias"}},
+		{"BatchNorm", {"mean","variance","scale"}},
+		{"Scale", {"scale","bias"}}
+		};
+	find_attrs_funcs = {
+		{"Convolution", &CaffeParser::find_conv_attrs},
+		{"Pooling", &CaffeParser::find_pooling_attrs},
+		{"ReLU", &CaffeParser::find_relu_attrs},
+		{"InnerProduct", &CaffeParser::find_fc_attrs},
+		{"SoftmaxWithLoss", &CaffeParser::find_softmaxloss_attrs},
+		{"LRN", &CaffeParser::find_lrn_attrs},
+		{"Split", &CaffeParser::find_split_attrs},
+		{"Concat", &CaffeParser::find_concat_attrs},
+		{"BatchNorm", &CaffeParser::find_bn_attrs},
+		{"Scale", &CaffeParser::find_scale_attrs},
+		{"Eltwise", &CaffeParser::find_eltwise_attrs},
+		{"Softmax", &CaffeParser::find_softmax_attrs},
+		{"Crop", &CaffeParser::find_crop_attrs},
+		{"Deconvolution", &CaffeParser::find_dconv_attrs}
+		};
 }
-void CaffeModelParser::read_connections(){
-	const vector<boost::shared_ptr<caffe::Layer<float> >> layers = net->layers();
-	const vector<string> layer_names = net->layer_names();
-	const vector<string> blob_names = net->blob_names();
-
-	vector<pair<string,string>> tops;
-	for(int i=0;i<layers.size();++i){
-		string layer_name = layer_names[i], layer_type = layers[i]->type();
-		const vector<int> bottom_ids = net->bottom_ids(i);
-		// connect
-		for(int j=0;j<bottom_ids.size();++j){
-			for(int k=0;k<tops.size();){
-				string bname = blob_names[bottom_ids[j]];
-				if(tops[k].second == bname){
-					connections.push_back(make_pair(tops[k].first,layer_name));
-					tops.erase(tops.begin()+k);
-				} else ++k;
+void CaffeParser::load_caffe_model(
+	const std::string& net_path, 
+	const std::string& model_path, 
+	bool is_train){
+	this->is_train = is_train;
+	caffe::Caffe::set_mode(caffe::Caffe::CPU);
+	net = make_shared<caffe::Net<float>> (
+		net_path, 
+		is_train?caffe::TRAIN:caffe::TEST);
+	net->CopyTrainedLayersFrom(model_path);
+}
+void CaffeParser::find_inputs(
+	const vector<boost::shared_ptr<caffe::Layer<float> >>& layers,
+	const std::vector<std::string>& layer_names,
+	const std::vector<std::string>& blob_names,
+	const std::vector<int>& bottom_ids,
+	std::map<std::string, int>& inputs,
+	int cur_layer){
+	for(int i=0;i<bottom_ids.size();++i){
+		const string& bottom_blob_name = blob_names[bottom_ids[i]];
+		for(int ii=cur_layer-1;ii>=0;--ii){
+			const vector<int>& top_ids = net->top_ids(ii);
+			for(int jj = 0;jj<top_ids.size();++jj){
+				const string& top_blob_name = blob_names[top_ids[jj]];
+				if(top_blob_name != bottom_blob_name) continue;
+				if(layers[ii]->type() == string("Input"))
+					inputs[layer_names[ii] + "_" + top_blob_name] = inputs.size();
+				else inputs[layer_names[ii]] = inputs.size();
+				ii = 0;
+				break;
 			}
 		}
-
-		// add new
-		const vector<int> top_ids = net->top_ids(i);
-		for(int j=0;j<top_ids.size();++j){
-			if(layer_type == "Input")
-				tops.push_back(make_pair(blob_names[top_ids[j]], blob_names[top_ids[j]]));
-			else tops.push_back(make_pair(layer_name, blob_names[top_ids[j]]));
+	}
+}
+void CaffeParser::find_attrs(
+	const std::string& type,
+	const caffe::LayerParameter& caffe_attr,
+	std::map<std::string, ParamUnit>& attrs){
+	if(find_attrs_funcs.find(type) == find_attrs_funcs.end()){
+		printf("no layer: %s in find_attrs_funcs\n",type.c_str());
+		exit(0);
+	}else if(type != "Input") attrs["name"] = caffe_attr.name();
+	find_attrs_func func = find_attrs_funcs[type];
+	(this->*func)(caffe_attr,attrs);
+}
+void CaffeParser::find_params(
+	const std::string& type, 
+	const std::vector<boost::shared_ptr<caffe::Blob<float> > >& param_blobs,
+	std::map<std::string, std::vector<int> >&  params){
+	if((caffe_param_table.find(type) == caffe_param_table.end()) && (param_blobs.size() > 0)){
+		printf("no layer: %s in caffe_param_table\n",type.c_str());
+		exit(0);
+	}
+	for(int i=0;i<param_blobs.size();++i){
+		const caffe::Blob<float> *blob = param_blobs[i].get();
+		params[caffe_param_table[type][i]] = {blob->num(),blob->channels(),blob->height(),blob->width()};
+	}
+}
+void CaffeParser::convert(){
+	const vector<boost::shared_ptr<caffe::Layer<float> >>& layers = net->layers();
+	const vector<string>& layer_names = net->layer_names(), &blob_names = net->blob_names();
+	const vector<vector<caffe::Blob<float> *> >& tops = net->top_vecs();
+	parser.set_net_name(net->name());
+	parser.set_net_mode(false);//TODO
+	for(int i=0;i<layers.size();++i){
+		if(layers[i]->type() != string("Input")) continue;
+		string layer_name = layer_names[i];
+		for(int j=0;j<layers[i]->layer_param().top().size();++j){
+			LayerUnit u;
+			const string& top_name = layers[i]->layer_param().top()[j];
+			string method = top_name.find("label") != string::npos? "label":"data";
+			u.attrs = {
+				{"type",string("data")},
+				{"name",layer_name + "_" + top_name},
+				{"method",method},
+				{"n",tops[i][j]->num()},
+				{"c",tops[i][j]->channels()},
+				{"h",tops[i][j]->height()},
+				{"w",tops[i][j]->width()},
+				};
+			parser.add_layer(u);
 		}
 	}
-	//for(auto i:connections){
-	//	printf("%s -> %s\n",i.first.c_str(),i.second.c_str());
-	//}
+	for(int i=0;i<layers.size();++i){
+		string layer_type = layers[i]->type(), layer_name = layer_names[i];
+		if(layer_type == "Input") continue;
+		LayerUnit u;
+		find_attrs(layer_type, layers[i]->layer_param(), u.attrs);
+		find_params(layer_type, layers[i]->blobs(), u.params);
+		find_inputs(layers, layer_names, blob_names, net->bottom_ids(i),u.inputs,i);
+		//for(auto i:attrs)
+		//	printf("%s %s %s\n",layer_name.c_str(), i.first.c_str(), i.second.type.c_str());
+		//for(auto i:params) printf("%s [%s %d %d %d %d]\n",layer_name.c_str(), i.first.c_str(),i.second[0],i.second[1],i.second[2],i.second[3]);
+		//for(auto i:inputs) printf("%s [%s %d]\n",layer_name.c_str(), i.first.c_str(),i.second);
+		parser.add_layer(u);
+	}
 }
-void CaffeModelParser::write(const std::string& net_path, const std::string& model_path){
-	write_net(net_path);
-	//write_model(model_path);
-	write_model2(model_path);
-}
-
-void CaffeModelParser::write_blob(const std::string& layer_name, const std::string& blob_name, const caffe::Blob<float> *blob, FILE* file){
+void CaffeParser::write_blob(const std::string& layer_name, const std::string& blob_name, const caffe::Blob<float> *blob, FILE* file){
+	int total = blob->num() *  blob->channels() * blob->height() *  blob->width();
 	char buffer[100];
-	sprintf(buffer,"Layer: %s %s",layer_name.c_str(),blob_name.c_str());
+	sprintf(buffer,"%s %s %d",layer_name.c_str(),blob_name.c_str(),total);
 	fwrite(buffer, sizeof(char), 100, file);
-	int num = blob->num(), channel = blob->channels(), height = blob->height(), width = blob->width();
-	int total = num * channel * height * width;
-	fwrite(&num, sizeof(int), 1, file);
-	fwrite(&channel, sizeof(int), 1, file);
-	fwrite(&height, sizeof(int), 1, file);
-	fwrite(&width, sizeof(int), 1, file);
 	fwrite(blob->cpu_data(), sizeof(float), total, file);
 }
-void CaffeModelParser::write_model2(const std::string& model_path){
+void CaffeParser::write_model(const std::string& model_path){
 	FILE* file = fopen(model_path.c_str(), "wb");
-	const vector<boost::shared_ptr<caffe::Layer<float> >> layers = net->layers();
-	const vector<string>& layer_names = net->layer_names(), &blob_names = net->blob_names();
+	const vector<boost::shared_ptr<caffe::Layer<float> >>& layers = net->layers();
 	for(int i=0;i<layers.size();++i){
-		const vector<boost::shared_ptr<caffe::Blob<float> > >& params = layers[i]->blobs();
-		const string& layer_type = layers[i]->type();
-		if((layer_type == "Convolution") || (layer_type == "InnerProduct") || (layer_type == "Deconvolution")){
-			write_blob(layer_names[i], "weight", params[0].get(),file);
-			if(params.size()>1) write_blob(layer_names[i], "bias", params[1].get(),file);
-		} 
-		else if(layer_type == "BatchNorm"){
-			write_blob(layer_names[i], "mean", params[0].get(),file);
-			if(params.size()>1) write_blob(layer_names[i], "variance", params[1].get(),file);
-			if(params.size()>2) write_blob(layer_names[i], "scale", params[2].get(),file);
+		const string& type = layers[i]->type();
+		if((caffe_param_table.find(type) == caffe_param_table.end()) && (layers[i]->blobs().size() > 0)){
+			printf("no layer: %s in caffe_param_table\n",type.c_str());
+			exit(0);
 		}
-		else if(layer_type == "Scale"){
-			write_blob(layer_names[i], "scale", params[0].get(),file);
-			if(params.size()>1) write_blob(layer_names[i], "bias", params[1].get(),file);
-		}
+		for(int j=0;j<layers[i]->blobs().size();++j)
+			write_blob(layers[i]->layer_param().name(),caffe_param_table[type][j],layers[i]->blobs()[j].get(),file);
 	}
 	fclose(file);
 }
-void CaffeModelParser::write_model(const std::string& model_path){
-	ofstream ofile(model_path);
-	const vector<boost::shared_ptr<caffe::Layer<float> >> layers = net->layers();
-	const vector<string>& layer_names = net->layer_names(), &blob_names = net->blob_names();
-	for(int i=0;i<layers.size();++i){
-		const vector<boost::shared_ptr<caffe::Blob<float> > >& params = layers[i]->blobs();
-		const string& layer_type = layers[i]->type();
-		if((layer_type == "Convolution") || (layer_type == "InnerProduct")||(layer_type == "Deconvolution")){
-			caffe::Blob<float> *bweight = params[0].get();
-			ofile<<"Layer: "<<layer_names[i]<<" weight"<<endl;
-			ofile<<bweight->num()<<" "<<bweight->channels()<<" "<<bweight->height()<<" "<<bweight->width()<<endl;
-			int total = bweight->num() * bweight->channels() * bweight->height() * bweight->width();
-			const float *data = bweight->cpu_data();
-			for(int j=0;j<total;++j) ofile<<data[j]<<" ";
-			ofile<<endl;
-
-			caffe::Blob<float> *bbias = params[1].get();
-			ofile<<"Layer: "<<layer_names[i]<<" bias"<<endl;
-			ofile<<bbias->num() <<" "<< bbias->channels() <<" "<< bbias->height() <<" "<< bbias->width()<<endl;
-			total = bbias->num() * bbias->channels() * bbias->height() * bbias->width();
-			data = bbias->cpu_data();
-			for(int j=0;j<total;++j) ofile<<data[j]<<" ";
-			ofile<<endl;
-		}
-	}
+void CaffeParser::write(const std::string& net_path, const std::string& model_path){
+	parser.write_net(net_path);
+	write_model(model_path);
 }
-void CaffeModelParser::write_net(const std::string& net_path){
-	const vector<boost::shared_ptr<caffe::Layer<float> >> layers = net->layers();
-	const vector<string>& layer_names = net->layer_names(), &blob_names = net->blob_names();
-	const vector<vector<caffe::Blob<float> *> >& tops = net->top_vecs();
-	const vector<vector<caffe::Blob<float> *> >& bottoms = net->bottom_vecs();
-	ofstream ofile(net_path);
-	ofile<<net->name()<<endl;
-	for(int i=0;i<layers.size();++i){
-		string layer_type = layers[i]->type(), 
-		       layer_name = layer_names[i];
-		//printf("%d %s %s\n",i,layer_type.c_str(),layer_name.c_str());
-		const caffe::LayerParameter& param = layers[i]->layer_param();
-
-		const vector<int> bottom_ids = net->bottom_ids(i);
-		vector<string> names;
-		for(int j=0;j<bottom_ids.size();++j){
-			string bname = blob_names[bottom_ids[j]];
-			//printf("concat bottom: %s\n",bname.c_str());
-
-			for(int ii=i-1;ii>=0;--ii){
-				const vector<int> top_ids = net->top_ids(ii);
-				string lname = layer_names[ii];
-				bool found = false;
-				for(int jj = 0;jj<top_ids.size();++jj){
-					string tname = blob_names[top_ids[jj]];
-					//printf("top: %s\n",tname.c_str());
-					if(tname == bname){
-						found = true;
-						break;
-					}
-				}
-				if(found){
-					names.push_back(lname);
-					break;
-				}
-			}
-		}
-
-		if(layer_type == "Input"){
-			const vector<int> top_ids = net->top_ids(i);
-			for(int j=0;j<top_ids.size();++j){
-				caffe::Blob<float> *b = tops[i][j];
-				write_net_data(layer_name, blob_names[top_ids[j]], 
-						b->num(), b->channels(), b->height(), b->width(), ofile);
-			}
-		}
-		else if(layer_type == "Convolution") write_net_conv(layer_name, param, ofile);
-		else if(layer_type == "Deconvolution") write_net_dconv(layer_name, param, ofile);
-		else if(layer_type == "Crop") write_net_crop(layer_name, param, names, ofile);
-		else if(layer_type == "Pooling") write_net_pool(layer_name, param, ofile);
-		else if(layer_type == "ReLU") write_net_relu(layer_name, param, ofile);
-		else if(layer_type == "InnerProduct") write_net_fc(layer_name, param, ofile);
-		else if(layer_type == "SoftmaxWithLoss") write_net_softmaxloss(layer_name, param, ofile);
-		else if(layer_type == "Softmax") write_net_softmax(layer_name, param, ofile);
-		else if(layer_type == "LRN") write_net_lrn(layer_name, param, ofile);
-		else if(layer_type == "Split") write_net_split(layer_name, ofile);
-		else if(layer_type == "Concat") write_net_concat(layer_name, names, ofile);
-		else if(layer_type == "BatchNorm") write_net_bn(layer_name,param,ofile);
-		else if(layer_type == "Scale") write_net_scale(layer_name,param,ofile);
-		else if(layer_type == "Eltwise") write_net_eltwise(layer_name,param,names,ofile);
-		else{
-			printf("unknown layer: %s\n",layer_type.c_str());
-			exit(0);
-		}
-	}
-	ofile<<"Connections:"<<endl;
-	for(auto i:connections) ofile<<i.first<<" "<<i.second<<endl;
-	ofile.close();
+void CaffeParser::find_conv_attrs(const caffe::LayerParameter& caffe_attr, std::map<std::string, ParamUnit>& attrs){
+	const caffe::ConvolutionParameter& p = caffe_attr.convolution_param();
+	int kernel_size = p.kernel_size().size() == 1?p.kernel_size()[0]:1,
+	    pad = p.pad().size() == 1? p.pad()[0]:0,
+	    stride = p.stride().size() == 1? p.stride()[0]:1;
+	attrs.insert({
+		{"type", string("conv")},
+		{"num", p.num_output()},
+		{"kernel_size_h", p.has_kernel_h()?p.kernel_h():kernel_size},
+		{"kernel_size_w", p.has_kernel_w()?p.kernel_w():kernel_size},
+		{"pad_h", p.has_pad_h()?p.pad_h():pad},
+		{"pad_w", p.has_pad_w()?p.pad_w():pad},
+		{"stride_h", p.has_stride_h()?p.stride_h():stride},
+		{"stride_w", p.has_stride_w()?p.stride_w():stride},
+		{"bias", p.bias_term()},
+		{"group", p.group()}
+		});
 }
-void CaffeModelParser::write_net_eltwise(const std::string& layer_name, const caffe::LayerParameter& param, const std::vector<std::string>& names, std::ofstream& ofile){
-	ofile<<"Layer: eltwise "<<layer_name<<endl;
-
-	for(int i=0;i<names.size();++i)
-		ofile<<names[i]<<" ";
-
-	const caffe::EltwiseParameter& eltwise_param = param.eltwise_param();
-	if(eltwise_param.operation() == caffe::EltwiseParameter_EltwiseOp_SUM){
-		ofile<<"sum ";
-		float coeff0 = 1.0f;
-		float coeff1 = 1.0f;
-		if(eltwise_param.coeff().size()){
-			coeff0 = eltwise_param.coeff()[0];
-			coeff1 = eltwise_param.coeff()[1];
-		}
-		ofile<<coeff0<<" "<<coeff1<<endl;
+void CaffeParser::find_pooling_attrs(const caffe::LayerParameter& caffe_attr, std::map<std::string, ParamUnit>& attrs){
+	const caffe::PoolingParameter& p = caffe_attr.pooling_param();
+	string method;
+	switch (p.pool()){
+		case caffe::PoolingParameter_PoolMethod_MAX:
+		method = "max"; break;
+		case caffe::PoolingParameter_PoolMethod_AVE:
+		method = "avg"; break;
+		default:
+		printf("cannot process pooling method in find_pooling_attrs\n");
+		exit(0);
 	}
-	else if(eltwise_param.operation() == caffe::EltwiseParameter_EltwiseOp_MAX){
-		ofile<<"max"<<endl;
-	}
-	else if(eltwise_param.operation() == caffe::EltwiseParameter_EltwiseOp_PROD){
-		ofile<<"prod"<<endl;
-	}
-	else{
+	attrs.insert({
+		{"type",string("pool")},
+		{"global",p.global_pooling()},
+		{"stride",int(p.stride())},
+		{"pad",int(p.pad())},
+		{"method",method}
+		});
+	if(!p.global_pooling()) attrs["kernel_size"] = p.kernel_size();
+}
+void CaffeParser::find_relu_attrs(const caffe::LayerParameter& caffe_attr, std::map<std::string, ParamUnit>& attrs){
+	const caffe::ReLUParameter& p = caffe_attr.relu_param();
+	attrs.insert({
+		{"type",string("activity")},
+		{"method",string("relu")},
+		{"neg_slope",p.negative_slope()}
+		});
+}
+void CaffeParser::find_fc_attrs(const caffe::LayerParameter& caffe_attr, std::map<std::string, ParamUnit>& attrs){
+	const caffe::InnerProductParameter& p = caffe_attr.inner_product_param();
+	attrs.insert({
+		{"type",string("fc")},
+		{"bias",p.bias_term()},
+		{"num",int(p.num_output())}
+		});
+}
+void CaffeParser::find_concat_attrs(const caffe::LayerParameter& caffe_attr, std::map<std::string, ParamUnit>& attrs){
+	attrs.insert({
+		{"type",string("concat")},
+		{"method",string("channel")},
+		});
+}
+void CaffeParser::find_split_attrs(const caffe::LayerParameter& caffe_attr, std::map<std::string, ParamUnit>& attrs){
+	attrs["type"] = string("split");
+}
+void CaffeParser::find_lrn_attrs(const caffe::LayerParameter& caffe_attr, std::map<std::string, ParamUnit>& attrs){
+	const caffe::LRNParameter& p = caffe_attr.lrn_param();
+	attrs.insert({
+		{"type",string("lrn")},
+		{"local_size",int(p.local_size())},
+		{"alpha",p.alpha()},
+		{"beta",p.beta()}
+		});
+}
+void CaffeParser::find_softmaxloss_attrs(const caffe::LayerParameter& caffe_attr, std::map<std::string, ParamUnit>& attrs){
+	attrs.insert({
+		{"type",string("loss")},
+		{"method",string("softmax")}
+		});
+}
+void CaffeParser::find_bn_attrs(const caffe::LayerParameter& caffe_attr, std::map<std::string, ParamUnit>& attrs){
+	attrs.insert({
+		{"type",string("bn")},
+		{"eps",caffe_attr.batch_norm_param().eps()}
+		});
+}
+void CaffeParser::find_scale_attrs(const caffe::LayerParameter& caffe_attr, std::map<std::string, ParamUnit>& attrs){
+	attrs.insert({
+		{"type",string("scale")},
+		{"bias",caffe_attr.scale_param().bias_term()}
+		});
+}
+void CaffeParser::find_eltwise_attrs(const caffe::LayerParameter& caffe_attr, std::map<std::string, ParamUnit>& attrs){
+	const caffe::EltwiseParameter& p = caffe_attr.eltwise_param();
+	if(p.operation() != caffe::EltwiseParameter_EltwiseOp_SUM){
 		printf("no such op in eltwise\n");
 		exit(0);
 	}
+	float coeff0 = 1.0f, coeff1 = 1.0f;
+	if(p.coeff().size()){
+		coeff0 = p.coeff()[0];
+		coeff1 = p.coeff()[1];
+	}
+	attrs.insert({
+		{"type",string("eltwise")},
+		{"method",string("sum")},
+		{"coeff0",coeff0},
+		{"coeff1",coeff1}
+		});
 }
-void CaffeModelParser::write_net_scale(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
-	ofile<<"Layer: scale "<<layer_name<<endl;
-	bool is_bias = param.scale_param().bias_term();
-	ofile<<is_bias<<endl;
+void CaffeParser::find_softmax_attrs(const caffe::LayerParameter& caffe_attr, std::map<std::string, ParamUnit>& attrs){
+	attrs.insert({{"type",string("softmax")}});
 }
-void CaffeModelParser::write_net_bn(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
-	ofile<<"Layer: batchnorm "<<layer_name<<endl;
-	ofile<<param.batch_norm_param().eps()<<endl;
-}
-void CaffeModelParser::write_net_concat(const std::string& layer_name, const std::vector<std::string>& names, std::ofstream& ofile){
-	ofile<<"Layer: concat "<<layer_name<<endl;
-	ofile<<"channel "<<names.size();
-	for(int i=0;i<names.size();++i)
-		ofile<<" "<<names[i];
-	ofile<<endl;
-}
-void CaffeModelParser::write_net_split(const std::string& layer_name, std::ofstream& ofile){
-	ofile<<"Layer: split "<<layer_name<<endl;
-	ofile<<endl;
-}
-void CaffeModelParser::write_net_dconv(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
-	const caffe::ConvolutionParameter& conv_param = param.convolution_param();
-	ofile<<"Layer: dconv "<<layer_name<<endl;
-	int kernel_size = conv_param.kernel_size().size() == 1?conv_param.kernel_size()[0]:1;
-	int pad = conv_param.pad().size() == 1? conv_param.pad()[0]:0;
-	int stride = conv_param.stride().size() == 1? conv_param.stride()[0]:1;
-	int group = conv_param.group();
-	bool is_bias = conv_param.bias_term();
-
-	int kernel_size_h = conv_param.has_kernel_h()?conv_param.kernel_h():kernel_size, 
-		kernel_size_w = conv_param.has_kernel_w()?conv_param.kernel_w():kernel_size, 
-		pad_h = conv_param.has_pad_h()?conv_param.pad_h():pad, 
-		pad_w = conv_param.has_pad_w()?conv_param.pad_w():pad, 
-		stride_h = conv_param.has_stride_h()?conv_param.stride_h():stride,
-		stride_w = conv_param.has_stride_w()?conv_param.stride_w():stride;
-
-	ofile<<kernel_size_h<<" "<<kernel_size_w<<" "<<conv_param.num_output()<<" "
-		<<pad_h<<" "<<pad_w<<" "<<stride_h<<" "<<stride_w<<" "<<group<<" "<<is_bias<<" none"<<endl;
-
-}
-void CaffeModelParser::write_net_conv(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
-	const caffe::ConvolutionParameter& conv_param = param.convolution_param();
-	ofile<<"Layer: conv "<<layer_name<<endl;
-	int kernel_size = conv_param.kernel_size().size() == 1?conv_param.kernel_size()[0]:1;
-	int pad = conv_param.pad().size() == 1? conv_param.pad()[0]:0;
-	int stride = conv_param.stride().size() == 1? conv_param.stride()[0]:1;
-	int group = conv_param.group();
-	bool is_bias = conv_param.bias_term();
-
-	int kernel_size_h = conv_param.has_kernel_h()?conv_param.kernel_h():kernel_size, 
-		kernel_size_w = conv_param.has_kernel_w()?conv_param.kernel_w():kernel_size, 
-		pad_h = conv_param.has_pad_h()?conv_param.pad_h():pad, 
-		pad_w = conv_param.has_pad_w()?conv_param.pad_w():pad, 
-		stride_h = conv_param.has_stride_h()?conv_param.stride_h():stride,
-		stride_w = conv_param.has_stride_w()?conv_param.stride_w():stride;
-
-	ofile<<kernel_size_h<<" "<<kernel_size_w<<" "<<conv_param.num_output()<<" "
-		<<pad_h<<" "<<pad_w<<" "<<stride_h<<" "<<stride_w<<" "<<group<<" "<<is_bias<<" none"<<endl;
-}
-void CaffeModelParser::write_net_crop(const std::string& layer_name, const caffe::LayerParameter& param, const std::vector<std::string>& names, std::ofstream& ofile){
-	const caffe::CropParameter& crop_param = param.crop_param();
-	ofile<<"Layer: crop "<<layer_name<<endl;
-	int n = crop_param.offset().size();
-	ofile<<crop_param.axis()<<" "<<n;
-	for(int i=0;i<n;++i)
-		ofile<<" "<<crop_param.offset()[i];
-	ofile<<" "<<names[0]<<" "<<names[1];
-	ofile<<endl;
-}
-void CaffeModelParser::write_net_pool(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
-	const caffe::PoolingParameter& pool_param = param.pooling_param();
-	ofile<<"Layer: pool "<<layer_name<<endl;
-	string method;
-	if(pool_param.pool() == caffe::PoolingParameter_PoolMethod_MAX)
-		method = "max";
-	else if(pool_param.pool() == caffe::PoolingParameter_PoolMethod_AVE)
-		method = "avg";
-	else{
-		printf("should not touch here\n");
+void CaffeParser::find_crop_attrs(const caffe::LayerParameter& caffe_attr, std::map<std::string, ParamUnit>& attrs){
+	const caffe::CropParameter& p = caffe_attr.crop_param();
+	if(p.offset().size() != 1){
+		printf("cannot process offset > 1 in crop\n");
 		exit(0);
 	}
-	int k = pool_param.global_pooling()?-1:pool_param.kernel_size();
-	ofile<<k<<" "<<pool_param.pad()<<" "<<pool_param.stride()<<" "<<method<<endl;
+	attrs.insert({
+		{"type",string("crop")},
+		{"axis",p.axis()},
+		{"offset",p.offset()[0]}
+		});
 }
-void CaffeModelParser::write_net_data(const std::string& layer_name, const std::string& blob_name, int n,int c,int h,int w, std::ofstream& ofile){
-	ofile<<"Layer: data "<<blob_name<<endl;
-	string method;
-	if(blob_name.find("label") != string::npos){
-		method = "label";
-	}else method = "image";
-	ofile<<n<<" "<<c<<" "<<h<<" "<<w<<" "<<method<<endl;
-}
-void CaffeModelParser::write_net_relu(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
-	const caffe::ReLUParameter& relu_param = param.relu_param();
-	ofile<<"Layer: activity "<<layer_name<<endl;
-	ofile<<"relu "<<relu_param.negative_slope()<<endl;
-}
-void CaffeModelParser::write_net_fc(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
-	const caffe::InnerProductParameter& fc_param = param.inner_product_param();
-	ofile<<"Layer: fc "<<layer_name<<endl;
-	bool is_bias = fc_param.bias_term();
-	ofile<<fc_param.num_output()<<" "<<is_bias<<" none"<<endl;
-}
-void CaffeModelParser::write_net_softmax(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
-	ofile<<"Layer: softmax "<<layer_name<<endl;
-	ofile<<endl;
-}
-void CaffeModelParser::write_net_softmaxloss(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
-	ofile<<"Layer: loss "<<layer_name<<endl;
-	ofile<<"softmax"<<endl;
-}
-void CaffeModelParser::write_net_lrn(const std::string& layer_name, const caffe::LayerParameter& param, std::ofstream& ofile){
-	const caffe::LRNParameter& lrn_param = param.lrn_param();
-	ofile<<"Layer: lrn "<<layer_name<<endl;
-	ofile<<lrn_param.local_size()<<" "<<lrn_param.alpha()<<" "<<lrn_param.beta()<<endl;
-
-}
-void CaffeModelParser::show_layers(){
-	const vector<boost::shared_ptr<caffe::Layer<float> >> layers = net->layers();
-	const vector<string> layer_names = net->layer_names();
-	const vector<string> blob_names = net->blob_names();
-	for(int i=0;i<layers.size();++i){
-		printf("Layers: %s %s\n",layers[i]->type(), layer_names[i].c_str());
-		const vector<int> top_ids = net->top_ids(i);
-		const vector<int> bottom_ids = net->bottom_ids(i);
-		for(int j=0;j<bottom_ids.size();++j)
-			printf("bottom Blob: %s\n",blob_names[bottom_ids[j]].c_str());
-		for(int j=0;j<top_ids.size();++j)
-			printf("top Blob: %s\n",blob_names[top_ids[j]].c_str());
-	}
+void CaffeParser::find_dconv_attrs(const caffe::LayerParameter& caffe_attr, std::map<std::string, ParamUnit>& attrs){
+	const caffe::ConvolutionParameter& p = caffe_attr.convolution_param();
+	int kernel_size = p.kernel_size().size() == 1?p.kernel_size()[0]:1,
+	    pad = p.pad().size() == 1? p.pad()[0]:0,
+	    stride = p.stride().size() == 1? p.stride()[0]:1;
+	attrs.insert({
+		{"type", string("dconv")},
+		{"num", p.num_output()},
+		{"kernel_size_h", p.has_kernel_h()?p.kernel_h():kernel_size},
+		{"kernel_size_w", p.has_kernel_w()?p.kernel_w():kernel_size},
+		{"pad_h", p.has_pad_h()?p.pad_h():pad},
+		{"pad_w", p.has_pad_w()?p.pad_w():pad},
+		{"stride_h", p.has_stride_h()?p.stride_h():stride},
+		{"stride_w", p.has_stride_w()?p.stride_w():stride},
+		{"bias", p.bias_term()},
+		{"group", p.group()}
+		});
 }

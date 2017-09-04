@@ -1,102 +1,47 @@
+#include <cmath>
 #include "stdlib.h"
 #include "ScaleLayer.h"
-ScaleLayer::ScaleLayer(const std::string& name, bool is_bias):
-	is_bias(is_bias),
-	Layer(name,"scale"){
+ScaleLayer::ScaleLayer(){}
+ScaleLayer::ScaleLayer(const LayerUnit& u):Layer(u){
+	float v;
+	u.geta("bias",v); bias = v;
+	if(bias) f = &ScaleLayer::forward_bias;
+	else f = &ScaleLayer::forward_nbias;
 }
-ScaleLayer::~ScaleLayer(){
+void ScaleLayer::show(){
+	Layer::show();
+	printf("  (bias) %d\n",int(bias));
+}
+void ScaleLayer::setup_outputs(){
+	outputs[0].set_shape(inputs[0]);
+	setup_outputs_data();
 }
 void ScaleLayer::forward(){
-	//printf("forward: %s %s\n",type.c_str(), name.c_str());
-
-	float *weight_data = weight.data, *bias_data = bias.data;
-
+	(this->*f)();
+}
+void ScaleLayer::forward_bias(){
 	int n = inputs[0].n, c = inputs[0].c, hw = inputs[0].hw();
-
 	float *input_data = inputs[0].data, *output_data = outputs[0].data;
-
-	//show_inputs();
-	if(is_bias){
-		//printf("bias\n");
-		for(int i=0;i<n;++i){
-			for(int j=0;j<c;++j){
-				float s = weight_data[j];
-				float b = bias_data[j];
-				for(int k=0;k<hw;++k){
-					int index = i*c*hw + j*hw + k;
-					output_data[index] = input_data[index] * s + b;
-				}
+	float *weight_data = params["scale"].data, *bias_data = params["bias"].data;
+	for(int i=0;i<n;++i)
+		for(int j=0;j<c;++j){
+			float s = weight_data[j], b = bias_data[j];
+			for(int k=0;k<hw;++k){
+				int index = i*c*hw + j*hw + k;
+				output_data[index] = input_data[index] * s + b;
 			}
 		}
-	}
-	else{
-		for(int i=0;i<n;++i){
-			for(int j=0;j<c;++j){
-				float s = weight_data[j];
-				for(int k=0;k<hw;++k){
-					int index = i*c*hw + j*hw + k;
-					output_data[index] = input_data[index] * s;
-				}
+}
+void ScaleLayer::forward_nbias(){
+	int n = inputs[0].n, c = inputs[0].c, hw = inputs[0].hw();
+	float *input_data = inputs[0].data, *output_data = outputs[0].data;
+	float *weight_data = params["scale"].data;
+	for(int i=0;i<n;++i)
+		for(int j=0;j<c;++j){
+			float s = weight_data[j];
+			for(int k=0;k<hw;++k){
+				int index = i*c*hw + j*hw + k;
+				output_data[index] = input_data[index] * s;
 			}
 		}
-	}
-	//show_outputs();
-
-}
-void ScaleLayer::backward(){
-}
-void ScaleLayer::setup_shape(){
-	if(inputs.size()!=1){
-		printf("error: scale input blob number should be 1\n");
-		exit(0);
-	}
-
-	// weight and bias
-	const Blob& ib = inputs[0];
-	weight.set_shape(ib.c,1,1,1);
-	if(is_bias)
-		bias.set_shape(ib.c,1,1,1);
-
-	// output
-	outputs.resize(1);
-	outputs[0].set_shape(ib);
-
-}
-void ScaleLayer::setup_data(){
-	if(outputs.size()!=1){
-		printf("error: scale output blob number should be 1\n");
-		exit(0);
-	}
-	// mean and variance
-	weight.alloc();
-	if(is_bias)
-		bias.alloc();
-	// output
-	outputs[0].set_data(inputs[0].data);
-
-}
-void ScaleLayer::setup_dif_shape(){
-	if(input_difs.size()!=1){
-		printf("error: scale input blob number should be 1\n");
-		exit(0);
-	}
-	weight_dif.set_shape(weight);
-	if(is_bias) bias_dif.set_shape(bias);
-	output_difs.resize(1);
-	output_difs[0].set_shape(outputs[0]);
-}
-void ScaleLayer::setup_dif_data(){
-	if(output_difs.size()!=1){
-		printf("error: scale output blob number should be 1\n");
-		exit(0);
-	}
-	weight_dif.alloc();
-	if(is_bias) bias_dif.alloc();
-	output_difs[0].alloc();
-}
-void ScaleLayer::show() const{
-	printf("[%s%s] name: %s\n", type.c_str(),bias.data?"+bias":"", name.c_str()); 
-}
-int ScaleLayer::parameter_number(){
-	return weight.nchw() + bias.nchw();
 }

@@ -1,26 +1,30 @@
 #include "stdlib.h"
 #include "ConcatLayer.h"
-ConcatLayer::ConcatLayer(const std::string&name, const std::vector<std::string>& names, const std::string& method):Layer(name,"concat"), method(method){
-	for(int i=0;i<names.size();++i)
-		order[names[i]] = i;
-
-	if(is_train) input_difs.resize(names.size());
-	inputs.resize(names.size());
-}
-ConcatLayer::~ConcatLayer(){
-}
-void ConcatLayer::forward(){
-	//printf("forward: %s %s\n",type.c_str(), name.c_str());
-	//show_inputs();
-
-	if(method == "channel"){
-		forward_channel();
-	}
+ConcatLayer::ConcatLayer(){}
+ConcatLayer::ConcatLayer(const LayerUnit& u):Layer(u){
+	u.geta("method",method);
+	if(method == "channel") f = &ConcatLayer::forward_channel;
 	else{
-		printf("no such method: %s in concat layer\n",method.c_str());
+		printf("no method: %s in concat layer\n",method.c_str());
 		exit(0);
 	}
-	//show_outputs();
+}
+
+void ConcatLayer::show(){
+	Layer::show();
+}
+void ConcatLayer::setup_outputs(){
+	const Blob& ib = inputs[0];
+	int c = 0, h = inputs[0].h, w = inputs[0].w;
+	for (const auto& i: inputs){
+		c += i.c;
+		if((i.h != h) || (i.w != w)){
+			printf("error: concat inputs should have same w and h\n");
+			exit(0);
+		}
+	}
+	outputs[0].set_shape(ib.n, c, ib.h, ib.w);
+	setup_outputs_data();
 }
 void ConcatLayer::forward_channel(){
 	int n = inputs[0].n;
@@ -36,68 +40,6 @@ void ConcatLayer::forward_channel(){
 		}
 	}
 }
-void ConcatLayer::backward(){
-	printf("backward: %s %s\n",type.c_str(), name.c_str());
-}
-void ConcatLayer::setup_shape(){
-	if(inputs.size()<=1){
-		printf("error: concat input blob number should be > 1\n");
-		exit(0);
-	}
-	// output
-	const Blob& ib = inputs[0];
-	outputs.resize(1);
-	int c = 0, h = inputs[0].h, w = inputs[0].w;
-	for (const auto& i: inputs){
-		c += i.c;
-		if((i.h != h) || (i.w != w)){
-			printf("error: concat inputs should have same w and h\n");
-			exit(0);
-		}
-	}
-	outputs[0].set_shape(ib.n, c, ib.h, ib.w);
-
-}
-void ConcatLayer::setup_data(){
-	if(outputs.size()!=1){
-		printf("error: concat output blob number should be 1\n");
-		exit(0);
-	}
-	outputs[0].alloc();
-
-}
-void ConcatLayer::setup_dif_shape(){
-	if(input_difs.size()<=1){
-		printf("error: concat input blob number should be > 1\n");
-		exit(0);
-	}
-	output_difs.resize(1);
-	output_difs[0].set_shape(outputs[0]);
-}
-void ConcatLayer::setup_dif_data(){
-	if(output_difs.size()!=1){
-		printf("error: concat output blob number should be 1\n");
-		exit(0);
-	}
-	output_difs[0].alloc();
-}
-
-void ConcatLayer::show()const {
-	printf("[%s] name: %s\n", type.c_str(), name.c_str());
-
-	if(inputs.size()){
-		printf("\tinput: \n");
-		for(int i=0;i<inputs.size();++i){
-			printf("\t");
-			inputs[i].show();
-		}
-	}
-
-	if(outputs.size()){
-		printf("\toutput: \n");
-		for(int i=0;i<outputs.size();++i){
-			printf("\t");
-			outputs[i].show();
-		}
-	}
+void ConcatLayer::forward(){
+	(this->*f)();
 }

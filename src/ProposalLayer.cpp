@@ -1,21 +1,20 @@
+#include <cmath>
 #include "stdlib.h"
 #include "ProposalLayer.h"
 using namespace std;
-ProposalLayer::ProposalLayer(
-	const std::string&name, 
-	int feat_stride, 
-	const std::vector<std::string>& names,
-	const std::string& method):
-		feat_stride(feat_stride),
-		method(method),
-		Layer(name,"proposal"){
-
-	for(int i=0;i<names.size();++i)
-		order[names[i]] = i;
-	if(is_train) input_difs.resize(names.size());
-	inputs.resize(names.size());
-
+ProposalLayer::ProposalLayer(){}
+ProposalLayer::ProposalLayer(const LayerUnit& u):Layer(u){
+	float v;
+	u.geta("feat_stride",v); feat_stride = v;
 	generate_anchors();
+}
+void ProposalLayer::show(){
+	Layer::show();
+	printf("  (feat_stride) %d\n", feat_stride);
+}
+void ProposalLayer::setup_outputs(){
+	outputs[0].set_shape(inputs[0].n,RPN_POST_NMS_TOP_N*5,1,1);
+	setup_outputs_data();
 }
 void ProposalLayer::generate_anchors(){
 	anchors.clear();
@@ -39,9 +38,6 @@ void ProposalLayer::generate_anchors(){
 			anchors.push_back({l2,t2,r2,b2});
 		}
 	}
-}
-
-ProposalLayer::~ProposalLayer(){
 }
 void nms2(vector<vector<float> >& rs, float T,int top_n){
 	int count = rs.size();
@@ -82,7 +78,6 @@ void nms2(vector<vector<float> >& rs, float T,int top_n){
 	//	printf("+ %d %f %f %f %f %f\n",i,rs[i][0], rs[i][1], rs[i][2], rs[i][3],rs[i][4]);
 }
 void ProposalLayer::forward(){
-	//printf("forward: %s %s %s\n",type.c_str(), name.c_str(), method.c_str());
 	//show_inputs();
 	int n = inputs[0].n, 
 		h = inputs[0].h, 
@@ -132,45 +127,4 @@ void ProposalLayer::forward(){
 		odata += 5*RPN_POST_NMS_TOP_N;
 	}
 	//show_outputs();
-}
-
-void ProposalLayer::backward(){
-	printf("backward: %s %s %s\n",type.c_str(), name.c_str(), method.c_str());
-}
-void ProposalLayer::show()const {
-	printf("[%s%s] name: %s, feat_stride: %d\n",
-			type.c_str(),("+"+method).c_str(), 
-			name.c_str(),
-			feat_stride);
-}
-void ProposalLayer::setup_shape(){
-	if(inputs.size()<=1){
-		printf("error: proposal input blob number should be > 1\n");
-		exit(0);
-	}
-	// output
-	const Blob& ib = inputs[0];
-	outputs.resize(1);
-	outputs[0].set_shape(ib.n,RPN_POST_NMS_TOP_N*5,1,1);
-
-}
-void ProposalLayer::setup_data(){
-	if(outputs.size()!=1){
-		printf("error: proposal output blob number should be 1\n");
-		exit(0);
-	}
-	outputs[0].alloc();
-}
-void ProposalLayer::setup_dif_shape(){
-	if(input_difs.size() <=1){
-		printf("error: proposal input blob number should be > 1\n");
-		exit(0);
-	}
-	output_difs.resize(1);
-}
-void ProposalLayer::setup_dif_data(){
-	if(output_difs.size()!=1){
-		printf("error: proposal output blob number should be 1\n");
-		exit(0);
-	}
 }
