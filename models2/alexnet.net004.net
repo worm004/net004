@@ -35,7 +35,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":4,
-        "stride_w":4,
+        "stride_w":4
       },
       "params":{
         "bias":[96,1,1,1],
@@ -50,7 +50,7 @@
         "type":"activity",
         "name":"relu1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv1":0
@@ -62,7 +62,7 @@
         "name":"norm1",
         "alpha":0.0001,
         "beta":0.75,
-        "local_size":5,
+        "local_size":5
       },
       "inputs":{
         "relu1":0
@@ -76,7 +76,7 @@
         "kernel_size":3,
         "method":"max",
         "pad":0,
-        "stride":2,
+        "stride":2
       },
       "inputs":{
         "norm1":0
@@ -94,7 +94,7 @@
         "pad_h":2,
         "pad_w":2,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -109,7 +109,7 @@
         "type":"activity",
         "name":"relu2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv2":0
@@ -121,7 +121,7 @@
         "name":"norm2",
         "alpha":0.0001,
         "beta":0.75,
-        "local_size":5,
+        "local_size":5
       },
       "inputs":{
         "relu2":0
@@ -135,7 +135,7 @@
         "kernel_size":3,
         "method":"max",
         "pad":0,
-        "stride":2,
+        "stride":2
       },
       "inputs":{
         "norm2":0
@@ -153,7 +153,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[384,1,1,1],
@@ -168,7 +168,7 @@
         "type":"activity",
         "name":"relu3",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3":0
@@ -186,7 +186,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[384,1,1,1],
@@ -201,7 +201,7 @@
         "type":"activity",
         "name":"relu4",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4":0
@@ -219,7 +219,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -234,7 +234,7 @@
         "type":"activity",
         "name":"relu5",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5":0
@@ -248,7 +248,7 @@
         "kernel_size":3,
         "method":"max",
         "pad":0,
-        "stride":2,
+        "stride":2
       },
       "inputs":{
         "relu5":0
@@ -259,7 +259,7 @@
         "type":"fc",
         "name":"fc6",
         "bias":1,
-        "num":4096,
+        "num":4096
       },
       "params":{
         "bias":[4096,1,1,1],
@@ -274,7 +274,7 @@
         "type":"activity",
         "name":"relu6",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fc6":0
@@ -285,7 +285,7 @@
         "type":"fc",
         "name":"fc7",
         "bias":1,
-        "num":4096,
+        "num":4096
       },
       "params":{
         "bias":[4096,1,1,1],
@@ -300,7 +300,7 @@
         "type":"activity",
         "name":"relu7",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fc7":0
@@ -311,7 +311,7 @@
         "type":"fc",
         "name":"fc8",
         "bias":1,
-        "num":1000,
+        "num":1000
       },
       "params":{
         "bias":[1000,1,1,1],
@@ -325,7 +325,7 @@
       "attrs":{
         "type":"loss",
         "name":"loss",
-        "method":"softmax",
+        "method":"softmax"
       },
       "inputs":{
         "fc8":0,

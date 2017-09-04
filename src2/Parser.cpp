@@ -41,7 +41,10 @@ void NetParser::write_net(const std::string& path){
 				printf("unknown value type: %s\n",j.second.type.c_str());
 				exit(0);
 			}
-			ss<<((&j == &*(prev(layers[i].attrs.end())))?"":",")<<endl;
+			auto k = prev(layers[i].attrs.end());
+			while((k->first == "type") || (k->first == "name"))
+				k = prev(k);
+			ss<<((&j == &*k)?"":",")<<endl;
 		}
 		--t; offset(t); ss<<((layers[i].params.size() + layers[i].inputs.size() > 0)?"},":"}")<<endl;
 
@@ -84,6 +87,10 @@ void NetParser::read_net(const std::string& path){
 	stack<char> levels;
 	LayerUnit u;
 	ifstream file(path);
+	if(file.eof()){
+		printf("cannot find file %s\n",path.c_str());
+		exit(0);
+	}
 	int state = -1;
 	while(1){
 		string raw_line;

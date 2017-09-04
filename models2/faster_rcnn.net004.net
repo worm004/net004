@@ -1,10 +1,10 @@
 {
-  "net_name":"VGG_ILSVRC_16_layers",
+  "net_name":"faster_rcnn_vgg16",
   "layers":[
     {
       "attrs":{
         "type":"data",
-        "name":"input_data",
+        "name":"data_data",
         "c":3,
         "h":224,
         "method":"data",
@@ -15,10 +15,10 @@
     {
       "attrs":{
         "type":"data",
-        "name":"input_label",
-        "c":1,
+        "name":"data_im_info",
+        "c":3,
         "h":1,
-        "method":"label",
+        "method":"im_info",
         "n":1,
         "w":1
       }
@@ -40,9 +40,6 @@
       "params":{
         "bias":[64,1,1,1],
         "weight":[64,3,3,3]
-      },
-      "inputs":{
-        "input_data":0
       }
     },
     {
@@ -510,16 +507,156 @@
     },
     {
       "attrs":{
-        "type":"pool",
-        "name":"pool5",
-        "global":0,
-        "kernel_size":2,
-        "method":"max",
-        "pad":0,
-        "stride":2
+        "type":"split",
+        "name":"conv5_3_relu5_3_0_split"
       },
       "inputs":{
         "relu5_3":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"conv",
+        "name":"rpn_conv/3x3",
+        "bias":1,
+        "group":1,
+        "kernel_size_h":3,
+        "kernel_size_w":3,
+        "num":512,
+        "pad_h":1,
+        "pad_w":1,
+        "stride_h":1,
+        "stride_w":1
+      },
+      "params":{
+        "bias":[512,1,1,1],
+        "weight":[512,512,3,3]
+      },
+      "inputs":{
+        "conv5_3_relu5_3_0_split":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"activity",
+        "name":"rpn_relu/3x3",
+        "method":"relu",
+        "neg_slope":0
+      },
+      "inputs":{
+        "rpn_conv/3x3":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"split",
+        "name":"rpn/output_rpn_relu/3x3_0_split"
+      },
+      "inputs":{
+        "rpn_relu/3x3":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"conv",
+        "name":"rpn_cls_score",
+        "bias":1,
+        "group":1,
+        "kernel_size_h":1,
+        "kernel_size_w":1,
+        "num":18,
+        "pad_h":0,
+        "pad_w":0,
+        "stride_h":1,
+        "stride_w":1
+      },
+      "params":{
+        "bias":[18,1,1,1],
+        "weight":[18,512,1,1]
+      },
+      "inputs":{
+        "rpn/output_rpn_relu/3x3_0_split":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"conv",
+        "name":"rpn_bbox_pred",
+        "bias":1,
+        "group":1,
+        "kernel_size_h":1,
+        "kernel_size_w":1,
+        "num":36,
+        "pad_h":0,
+        "pad_w":0,
+        "stride_h":1,
+        "stride_w":1
+      },
+      "params":{
+        "bias":[36,1,1,1],
+        "weight":[36,512,1,1]
+      },
+      "inputs":{
+        "rpn/output_rpn_relu/3x3_0_split":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"reshape",
+        "name":"rpn_cls_score_reshape",
+        "d0":0,
+        "d1":2,
+        "d2":-1,
+        "d3":0
+      },
+      "inputs":{
+        "rpn_cls_score":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"softmax",
+        "name":"rpn_cls_prob"
+      },
+      "inputs":{
+        "rpn_cls_score_reshape":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"reshape",
+        "name":"rpn_cls_prob_reshape",
+        "d0":0,
+        "d1":18,
+        "d2":-1,
+        "d3":0
+      },
+      "inputs":{
+        "rpn_cls_prob":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"proposal",
+        "name":"proposal",
+        "feat_stride":16
+      },
+      "inputs":{
+        "rpn_bbox_pred":1,
+        "rpn_cls_prob_reshape":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"roipooling",
+        "name":"roi_pool5",
+        "h":7,
+        "s":0.0625,
+        "w":7
+      },
+      "inputs":{
+        "conv5_3_relu5_3_0_split":0,
+        "proposal":1
       }
     },
     {
@@ -534,7 +671,7 @@
         "weight":[4096,25088,1,1]
       },
       "inputs":{
-        "pool5":0
+        "roi_pool5":0
       }
     },
     {
@@ -576,14 +713,8 @@
     },
     {
       "attrs":{
-        "type":"fc",
-        "name":"fc8",
-        "bias":1,
-        "num":1000
-      },
-      "params":{
-        "bias":[1000,1,1,1],
-        "weight":[1000,4096,1,1]
+        "type":"split",
+        "name":"fc7_relu7_0_split"
       },
       "inputs":{
         "relu7":0
@@ -591,13 +722,41 @@
     },
     {
       "attrs":{
-        "type":"loss",
-        "name":"loss",
-        "method":"softmax"
+        "type":"fc",
+        "name":"cls_score",
+        "bias":1,
+        "num":21
+      },
+      "params":{
+        "bias":[21,1,1,1],
+        "weight":[21,4096,1,1]
       },
       "inputs":{
-        "fc8":0,
-        "input_label":1
+        "fc7_relu7_0_split":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"fc",
+        "name":"bbox_pred",
+        "bias":1,
+        "num":84
+      },
+      "params":{
+        "bias":[84,1,1,1],
+        "weight":[84,4096,1,1]
+      },
+      "inputs":{
+        "fc7_relu7_0_split":0
+      }
+    },
+    {
+      "attrs":{
+        "type":"softmax",
+        "name":"cls_prob"
+      },
+      "inputs":{
+        "cls_score":0
       }
     }
   ]

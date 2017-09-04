@@ -216,13 +216,6 @@ int main(int argc, char **argv){
 	       1,1,1,
 	       1000,5, 628
 	);
-	if(argc !=3){
-		printf("./net_test model_name/all 0/1\n");
-		printf("model_name: \n");
-		for(const auto& i : maps)
-			printf("%s\n",i.first.c_str());
-		return 0;
-	}
 	maps["resnet101"] = TestParameter(
 	       "../caffe_models/ResNet-101-model.caffemodel",
 	       "../caffe_models/ResNet-101-deploy.prototxt",
@@ -314,6 +307,13 @@ int main(int argc, char **argv){
 	       1000,5, 628
 	);
 
+	if(argc !=3){
+		printf("./net_test model_name/all 0/1\n");
+		printf("model_name: \n");
+		for(const auto& i : maps)
+			printf("%s\n",i.first.c_str());
+		return 0;
+	}
 	string name = argv[1];
 	bool show = atoi(argv[2]);
 	string img_path = "../imgs/westerdam-ship-size.jpg";

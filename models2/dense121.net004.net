@@ -35,7 +35,7 @@
         "pad_h":3,
         "pad_w":3,
         "stride_h":2,
-        "stride_w":2,
+        "stride_w":2
       },
       "params":{
         "weight":[64,3,7,7]
@@ -48,7 +48,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[64,1,1,1],
@@ -63,7 +63,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -78,7 +78,7 @@
         "type":"activity",
         "name":"relu1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv1/scale":0
@@ -92,7 +92,7 @@
         "kernel_size":3,
         "method":"max",
         "pad":1,
-        "stride":2,
+        "stride":2
       },
       "inputs":{
         "relu1":0
@@ -111,7 +111,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv2_1/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[64,1,1,1],
@@ -126,7 +126,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv2_1/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -141,7 +141,7 @@
         "type":"activity",
         "name":"relu2_1/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv2_1/x1/scale":0
@@ -159,7 +159,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,64,1,1]
@@ -172,7 +172,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv2_1/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -187,7 +187,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv2_1/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -202,7 +202,7 @@
         "type":"activity",
         "name":"relu2_1/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv2_1/x2/scale":0
@@ -220,7 +220,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -233,7 +233,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_2_1",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "conv2_1/x2":1,
@@ -253,7 +253,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv2_2/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[96,1,1,1],
@@ -268,7 +268,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv2_2/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[96,1,1,1],
@@ -283,7 +283,7 @@
         "type":"activity",
         "name":"relu2_2/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv2_2/x1/scale":0
@@ -301,7 +301,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,96,1,1]
@@ -314,7 +314,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv2_2/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -329,7 +329,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv2_2/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -344,7 +344,7 @@
         "type":"activity",
         "name":"relu2_2/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv2_2/x2/scale":0
@@ -362,7 +362,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -375,7 +375,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_2_2",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_2_1_concat_2_1_0_split":0,
@@ -395,7 +395,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv2_3/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -410,7 +410,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv2_3/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -425,7 +425,7 @@
         "type":"activity",
         "name":"relu2_3/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv2_3/x1/scale":0
@@ -443,7 +443,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,128,1,1]
@@ -456,7 +456,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv2_3/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -471,7 +471,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv2_3/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -486,7 +486,7 @@
         "type":"activity",
         "name":"relu2_3/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv2_3/x2/scale":0
@@ -504,7 +504,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -517,7 +517,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_2_3",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_2_2_concat_2_2_0_split":0,
@@ -537,7 +537,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv2_4/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[160,1,1,1],
@@ -552,7 +552,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv2_4/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[160,1,1,1],
@@ -567,7 +567,7 @@
         "type":"activity",
         "name":"relu2_4/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv2_4/x1/scale":0
@@ -585,7 +585,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,160,1,1]
@@ -598,7 +598,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv2_4/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -613,7 +613,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv2_4/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -628,7 +628,7 @@
         "type":"activity",
         "name":"relu2_4/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv2_4/x2/scale":0
@@ -646,7 +646,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -659,7 +659,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_2_4",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_2_3_concat_2_3_0_split":0,
@@ -679,7 +679,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv2_5/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[192,1,1,1],
@@ -694,7 +694,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv2_5/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -709,7 +709,7 @@
         "type":"activity",
         "name":"relu2_5/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv2_5/x1/scale":0
@@ -727,7 +727,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,192,1,1]
@@ -740,7 +740,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv2_5/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -755,7 +755,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv2_5/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -770,7 +770,7 @@
         "type":"activity",
         "name":"relu2_5/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv2_5/x2/scale":0
@@ -788,7 +788,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -801,7 +801,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_2_5",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_2_4_concat_2_4_0_split":0,
@@ -821,7 +821,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv2_6/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[224,1,1,1],
@@ -836,7 +836,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv2_6/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[224,1,1,1],
@@ -851,7 +851,7 @@
         "type":"activity",
         "name":"relu2_6/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv2_6/x1/scale":0
@@ -869,7 +869,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,224,1,1]
@@ -882,7 +882,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv2_6/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -897,7 +897,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv2_6/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -912,7 +912,7 @@
         "type":"activity",
         "name":"relu2_6/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv2_6/x2/scale":0
@@ -930,7 +930,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -943,7 +943,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_2_6",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_2_5_concat_2_5_0_split":0,
@@ -954,7 +954,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv2_blk/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[256,1,1,1],
@@ -969,7 +969,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv2_blk/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -984,7 +984,7 @@
         "type":"activity",
         "name":"relu2_blk",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv2_blk/scale":0
@@ -1002,7 +1002,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,256,1,1]
@@ -1019,7 +1019,7 @@
         "kernel_size":2,
         "method":"avg",
         "pad":0,
-        "stride":2,
+        "stride":2
       },
       "inputs":{
         "conv2_blk":0
@@ -1038,7 +1038,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_1/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -1053,7 +1053,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_1/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -1068,7 +1068,7 @@
         "type":"activity",
         "name":"relu3_1/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_1/x1/scale":0
@@ -1086,7 +1086,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,128,1,1]
@@ -1099,7 +1099,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_1/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -1114,7 +1114,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_1/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -1129,7 +1129,7 @@
         "type":"activity",
         "name":"relu3_1/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_1/x2/scale":0
@@ -1147,7 +1147,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -1160,7 +1160,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_3_1",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "conv3_1/x2":1,
@@ -1180,7 +1180,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_2/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[160,1,1,1],
@@ -1195,7 +1195,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_2/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[160,1,1,1],
@@ -1210,7 +1210,7 @@
         "type":"activity",
         "name":"relu3_2/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_2/x1/scale":0
@@ -1228,7 +1228,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,160,1,1]
@@ -1241,7 +1241,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_2/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -1256,7 +1256,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_2/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -1271,7 +1271,7 @@
         "type":"activity",
         "name":"relu3_2/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_2/x2/scale":0
@@ -1289,7 +1289,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -1302,7 +1302,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_3_2",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_3_1_concat_3_1_0_split":0,
@@ -1322,7 +1322,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_3/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[192,1,1,1],
@@ -1337,7 +1337,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_3/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -1352,7 +1352,7 @@
         "type":"activity",
         "name":"relu3_3/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_3/x1/scale":0
@@ -1370,7 +1370,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,192,1,1]
@@ -1383,7 +1383,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_3/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -1398,7 +1398,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_3/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -1413,7 +1413,7 @@
         "type":"activity",
         "name":"relu3_3/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_3/x2/scale":0
@@ -1431,7 +1431,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -1444,7 +1444,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_3_3",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_3_2_concat_3_2_0_split":0,
@@ -1464,7 +1464,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_4/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[224,1,1,1],
@@ -1479,7 +1479,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_4/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[224,1,1,1],
@@ -1494,7 +1494,7 @@
         "type":"activity",
         "name":"relu3_4/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_4/x1/scale":0
@@ -1512,7 +1512,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,224,1,1]
@@ -1525,7 +1525,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_4/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -1540,7 +1540,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_4/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -1555,7 +1555,7 @@
         "type":"activity",
         "name":"relu3_4/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_4/x2/scale":0
@@ -1573,7 +1573,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -1586,7 +1586,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_3_4",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_3_3_concat_3_3_0_split":0,
@@ -1606,7 +1606,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_5/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[256,1,1,1],
@@ -1621,7 +1621,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_5/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -1636,7 +1636,7 @@
         "type":"activity",
         "name":"relu3_5/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_5/x1/scale":0
@@ -1654,7 +1654,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,256,1,1]
@@ -1667,7 +1667,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_5/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -1682,7 +1682,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_5/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -1697,7 +1697,7 @@
         "type":"activity",
         "name":"relu3_5/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_5/x2/scale":0
@@ -1715,7 +1715,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -1728,7 +1728,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_3_5",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_3_4_concat_3_4_0_split":0,
@@ -1748,7 +1748,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_6/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[288,1,1,1],
@@ -1763,7 +1763,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_6/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[288,1,1,1],
@@ -1778,7 +1778,7 @@
         "type":"activity",
         "name":"relu3_6/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_6/x1/scale":0
@@ -1796,7 +1796,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,288,1,1]
@@ -1809,7 +1809,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_6/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -1824,7 +1824,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_6/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -1839,7 +1839,7 @@
         "type":"activity",
         "name":"relu3_6/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_6/x2/scale":0
@@ -1857,7 +1857,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -1870,7 +1870,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_3_6",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_3_5_concat_3_5_0_split":0,
@@ -1890,7 +1890,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_7/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[320,1,1,1],
@@ -1905,7 +1905,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_7/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[320,1,1,1],
@@ -1920,7 +1920,7 @@
         "type":"activity",
         "name":"relu3_7/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_7/x1/scale":0
@@ -1938,7 +1938,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,320,1,1]
@@ -1951,7 +1951,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_7/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -1966,7 +1966,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_7/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -1981,7 +1981,7 @@
         "type":"activity",
         "name":"relu3_7/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_7/x2/scale":0
@@ -1999,7 +1999,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -2012,7 +2012,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_3_7",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_3_6_concat_3_6_0_split":0,
@@ -2032,7 +2032,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_8/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[352,1,1,1],
@@ -2047,7 +2047,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_8/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[352,1,1,1],
@@ -2062,7 +2062,7 @@
         "type":"activity",
         "name":"relu3_8/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_8/x1/scale":0
@@ -2080,7 +2080,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,352,1,1]
@@ -2093,7 +2093,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_8/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -2108,7 +2108,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_8/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -2123,7 +2123,7 @@
         "type":"activity",
         "name":"relu3_8/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_8/x2/scale":0
@@ -2141,7 +2141,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -2154,7 +2154,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_3_8",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_3_7_concat_3_7_0_split":0,
@@ -2174,7 +2174,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_9/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[384,1,1,1],
@@ -2189,7 +2189,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_9/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[384,1,1,1],
@@ -2204,7 +2204,7 @@
         "type":"activity",
         "name":"relu3_9/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_9/x1/scale":0
@@ -2222,7 +2222,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,384,1,1]
@@ -2235,7 +2235,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_9/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -2250,7 +2250,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_9/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -2265,7 +2265,7 @@
         "type":"activity",
         "name":"relu3_9/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_9/x2/scale":0
@@ -2283,7 +2283,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -2296,7 +2296,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_3_9",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_3_8_concat_3_8_0_split":0,
@@ -2316,7 +2316,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_10/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[416,1,1,1],
@@ -2331,7 +2331,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_10/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[416,1,1,1],
@@ -2346,7 +2346,7 @@
         "type":"activity",
         "name":"relu3_10/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_10/x1/scale":0
@@ -2364,7 +2364,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,416,1,1]
@@ -2377,7 +2377,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_10/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -2392,7 +2392,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_10/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -2407,7 +2407,7 @@
         "type":"activity",
         "name":"relu3_10/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_10/x2/scale":0
@@ -2425,7 +2425,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -2438,7 +2438,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_3_10",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_3_9_concat_3_9_0_split":0,
@@ -2458,7 +2458,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_11/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[448,1,1,1],
@@ -2473,7 +2473,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_11/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[448,1,1,1],
@@ -2488,7 +2488,7 @@
         "type":"activity",
         "name":"relu3_11/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_11/x1/scale":0
@@ -2506,7 +2506,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,448,1,1]
@@ -2519,7 +2519,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_11/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -2534,7 +2534,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_11/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -2549,7 +2549,7 @@
         "type":"activity",
         "name":"relu3_11/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_11/x2/scale":0
@@ -2567,7 +2567,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -2580,7 +2580,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_3_11",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_3_10_concat_3_10_0_split":0,
@@ -2600,7 +2600,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_12/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[480,1,1,1],
@@ -2615,7 +2615,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_12/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[480,1,1,1],
@@ -2630,7 +2630,7 @@
         "type":"activity",
         "name":"relu3_12/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_12/x1/scale":0
@@ -2648,7 +2648,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,480,1,1]
@@ -2661,7 +2661,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_12/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -2676,7 +2676,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_12/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -2691,7 +2691,7 @@
         "type":"activity",
         "name":"relu3_12/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_12/x2/scale":0
@@ -2709,7 +2709,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -2722,7 +2722,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_3_12",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_3_11_concat_3_11_0_split":0,
@@ -2733,7 +2733,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_blk/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[512,1,1,1],
@@ -2748,7 +2748,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_blk/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[512,1,1,1],
@@ -2763,7 +2763,7 @@
         "type":"activity",
         "name":"relu3_blk",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_blk/scale":0
@@ -2781,7 +2781,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,512,1,1]
@@ -2798,7 +2798,7 @@
         "kernel_size":2,
         "method":"avg",
         "pad":0,
-        "stride":2,
+        "stride":2
       },
       "inputs":{
         "conv3_blk":0
@@ -2817,7 +2817,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_1/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[256,1,1,1],
@@ -2832,7 +2832,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_1/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -2847,7 +2847,7 @@
         "type":"activity",
         "name":"relu4_1/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_1/x1/scale":0
@@ -2865,7 +2865,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,256,1,1]
@@ -2878,7 +2878,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_1/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -2893,7 +2893,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_1/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -2908,7 +2908,7 @@
         "type":"activity",
         "name":"relu4_1/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_1/x2/scale":0
@@ -2926,7 +2926,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -2939,7 +2939,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_4_1",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "conv4_1/x2":1,
@@ -2959,7 +2959,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_2/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[288,1,1,1],
@@ -2974,7 +2974,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_2/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[288,1,1,1],
@@ -2989,7 +2989,7 @@
         "type":"activity",
         "name":"relu4_2/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_2/x1/scale":0
@@ -3007,7 +3007,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,288,1,1]
@@ -3020,7 +3020,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_2/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -3035,7 +3035,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_2/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -3050,7 +3050,7 @@
         "type":"activity",
         "name":"relu4_2/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_2/x2/scale":0
@@ -3068,7 +3068,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -3081,7 +3081,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_4_2",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_4_1_concat_4_1_0_split":0,
@@ -3101,7 +3101,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_3/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[320,1,1,1],
@@ -3116,7 +3116,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_3/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[320,1,1,1],
@@ -3131,7 +3131,7 @@
         "type":"activity",
         "name":"relu4_3/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_3/x1/scale":0
@@ -3149,7 +3149,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,320,1,1]
@@ -3162,7 +3162,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_3/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -3177,7 +3177,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_3/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -3192,7 +3192,7 @@
         "type":"activity",
         "name":"relu4_3/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_3/x2/scale":0
@@ -3210,7 +3210,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -3223,7 +3223,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_4_3",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_4_2_concat_4_2_0_split":0,
@@ -3243,7 +3243,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_4/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[352,1,1,1],
@@ -3258,7 +3258,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_4/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[352,1,1,1],
@@ -3273,7 +3273,7 @@
         "type":"activity",
         "name":"relu4_4/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_4/x1/scale":0
@@ -3291,7 +3291,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,352,1,1]
@@ -3304,7 +3304,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_4/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -3319,7 +3319,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_4/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -3334,7 +3334,7 @@
         "type":"activity",
         "name":"relu4_4/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_4/x2/scale":0
@@ -3352,7 +3352,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -3365,7 +3365,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_4_4",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_4_3_concat_4_3_0_split":0,
@@ -3385,7 +3385,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_5/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[384,1,1,1],
@@ -3400,7 +3400,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_5/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[384,1,1,1],
@@ -3415,7 +3415,7 @@
         "type":"activity",
         "name":"relu4_5/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_5/x1/scale":0
@@ -3433,7 +3433,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,384,1,1]
@@ -3446,7 +3446,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_5/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -3461,7 +3461,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_5/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -3476,7 +3476,7 @@
         "type":"activity",
         "name":"relu4_5/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_5/x2/scale":0
@@ -3494,7 +3494,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -3507,7 +3507,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_4_5",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_4_4_concat_4_4_0_split":0,
@@ -3527,7 +3527,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_6/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[416,1,1,1],
@@ -3542,7 +3542,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_6/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[416,1,1,1],
@@ -3557,7 +3557,7 @@
         "type":"activity",
         "name":"relu4_6/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_6/x1/scale":0
@@ -3575,7 +3575,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,416,1,1]
@@ -3588,7 +3588,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_6/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -3603,7 +3603,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_6/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -3618,7 +3618,7 @@
         "type":"activity",
         "name":"relu4_6/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_6/x2/scale":0
@@ -3636,7 +3636,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -3649,7 +3649,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_4_6",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_4_5_concat_4_5_0_split":0,
@@ -3669,7 +3669,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_7/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[448,1,1,1],
@@ -3684,7 +3684,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_7/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[448,1,1,1],
@@ -3699,7 +3699,7 @@
         "type":"activity",
         "name":"relu4_7/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_7/x1/scale":0
@@ -3717,7 +3717,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,448,1,1]
@@ -3730,7 +3730,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_7/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -3745,7 +3745,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_7/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -3760,7 +3760,7 @@
         "type":"activity",
         "name":"relu4_7/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_7/x2/scale":0
@@ -3778,7 +3778,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -3791,7 +3791,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_4_7",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_4_6_concat_4_6_0_split":0,
@@ -3811,7 +3811,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_8/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[480,1,1,1],
@@ -3826,7 +3826,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_8/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[480,1,1,1],
@@ -3841,7 +3841,7 @@
         "type":"activity",
         "name":"relu4_8/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_8/x1/scale":0
@@ -3859,7 +3859,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,480,1,1]
@@ -3872,7 +3872,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_8/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -3887,7 +3887,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_8/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -3902,7 +3902,7 @@
         "type":"activity",
         "name":"relu4_8/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_8/x2/scale":0
@@ -3920,7 +3920,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -3933,7 +3933,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_4_8",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_4_7_concat_4_7_0_split":0,
@@ -3953,7 +3953,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_9/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[512,1,1,1],
@@ -3968,7 +3968,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_9/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[512,1,1,1],
@@ -3983,7 +3983,7 @@
         "type":"activity",
         "name":"relu4_9/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_9/x1/scale":0
@@ -4001,7 +4001,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,512,1,1]
@@ -4014,7 +4014,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_9/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -4029,7 +4029,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_9/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -4044,7 +4044,7 @@
         "type":"activity",
         "name":"relu4_9/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_9/x2/scale":0
@@ -4062,7 +4062,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -4075,7 +4075,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_4_9",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_4_8_concat_4_8_0_split":0,
@@ -4095,7 +4095,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_10/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[544,1,1,1],
@@ -4110,7 +4110,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_10/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[544,1,1,1],
@@ -4125,7 +4125,7 @@
         "type":"activity",
         "name":"relu4_10/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_10/x1/scale":0
@@ -4143,7 +4143,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,544,1,1]
@@ -4156,7 +4156,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_10/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -4171,7 +4171,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_10/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -4186,7 +4186,7 @@
         "type":"activity",
         "name":"relu4_10/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_10/x2/scale":0
@@ -4204,7 +4204,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -4217,7 +4217,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_4_10",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_4_9_concat_4_9_0_split":0,
@@ -4237,7 +4237,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_11/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[576,1,1,1],
@@ -4252,7 +4252,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_11/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[576,1,1,1],
@@ -4267,7 +4267,7 @@
         "type":"activity",
         "name":"relu4_11/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_11/x1/scale":0
@@ -4285,7 +4285,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,576,1,1]
@@ -4298,7 +4298,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_11/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -4313,7 +4313,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_11/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -4328,7 +4328,7 @@
         "type":"activity",
         "name":"relu4_11/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_11/x2/scale":0
@@ -4346,7 +4346,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -4359,7 +4359,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_4_11",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_4_10_concat_4_10_0_split":0,
@@ -4379,7 +4379,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_12/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[608,1,1,1],
@@ -4394,7 +4394,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_12/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[608,1,1,1],
@@ -4409,7 +4409,7 @@
         "type":"activity",
         "name":"relu4_12/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_12/x1/scale":0
@@ -4427,7 +4427,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,608,1,1]
@@ -4440,7 +4440,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_12/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -4455,7 +4455,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_12/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -4470,7 +4470,7 @@
         "type":"activity",
         "name":"relu4_12/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_12/x2/scale":0
@@ -4488,7 +4488,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -4501,7 +4501,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_4_12",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_4_11_concat_4_11_0_split":0,
@@ -4521,7 +4521,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_13/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[640,1,1,1],
@@ -4536,7 +4536,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_13/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[640,1,1,1],
@@ -4551,7 +4551,7 @@
         "type":"activity",
         "name":"relu4_13/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_13/x1/scale":0
@@ -4569,7 +4569,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,640,1,1]
@@ -4582,7 +4582,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_13/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -4597,7 +4597,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_13/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -4612,7 +4612,7 @@
         "type":"activity",
         "name":"relu4_13/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_13/x2/scale":0
@@ -4630,7 +4630,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -4643,7 +4643,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_4_13",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_4_12_concat_4_12_0_split":0,
@@ -4663,7 +4663,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_14/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[672,1,1,1],
@@ -4678,7 +4678,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_14/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[672,1,1,1],
@@ -4693,7 +4693,7 @@
         "type":"activity",
         "name":"relu4_14/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_14/x1/scale":0
@@ -4711,7 +4711,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,672,1,1]
@@ -4724,7 +4724,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_14/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -4739,7 +4739,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_14/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -4754,7 +4754,7 @@
         "type":"activity",
         "name":"relu4_14/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_14/x2/scale":0
@@ -4772,7 +4772,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -4785,7 +4785,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_4_14",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_4_13_concat_4_13_0_split":0,
@@ -4805,7 +4805,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_15/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[704,1,1,1],
@@ -4820,7 +4820,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_15/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[704,1,1,1],
@@ -4835,7 +4835,7 @@
         "type":"activity",
         "name":"relu4_15/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_15/x1/scale":0
@@ -4853,7 +4853,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,704,1,1]
@@ -4866,7 +4866,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_15/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -4881,7 +4881,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_15/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -4896,7 +4896,7 @@
         "type":"activity",
         "name":"relu4_15/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_15/x2/scale":0
@@ -4914,7 +4914,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -4927,7 +4927,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_4_15",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_4_14_concat_4_14_0_split":0,
@@ -4947,7 +4947,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_16/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[736,1,1,1],
@@ -4962,7 +4962,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_16/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[736,1,1,1],
@@ -4977,7 +4977,7 @@
         "type":"activity",
         "name":"relu4_16/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_16/x1/scale":0
@@ -4995,7 +4995,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,736,1,1]
@@ -5008,7 +5008,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_16/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -5023,7 +5023,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_16/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -5038,7 +5038,7 @@
         "type":"activity",
         "name":"relu4_16/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_16/x2/scale":0
@@ -5056,7 +5056,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -5069,7 +5069,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_4_16",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_4_15_concat_4_15_0_split":0,
@@ -5089,7 +5089,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_17/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[768,1,1,1],
@@ -5104,7 +5104,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_17/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[768,1,1,1],
@@ -5119,7 +5119,7 @@
         "type":"activity",
         "name":"relu4_17/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_17/x1/scale":0
@@ -5137,7 +5137,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,768,1,1]
@@ -5150,7 +5150,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_17/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -5165,7 +5165,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_17/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -5180,7 +5180,7 @@
         "type":"activity",
         "name":"relu4_17/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_17/x2/scale":0
@@ -5198,7 +5198,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -5211,7 +5211,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_4_17",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_4_16_concat_4_16_0_split":0,
@@ -5231,7 +5231,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_18/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[800,1,1,1],
@@ -5246,7 +5246,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_18/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[800,1,1,1],
@@ -5261,7 +5261,7 @@
         "type":"activity",
         "name":"relu4_18/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_18/x1/scale":0
@@ -5279,7 +5279,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,800,1,1]
@@ -5292,7 +5292,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_18/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -5307,7 +5307,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_18/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -5322,7 +5322,7 @@
         "type":"activity",
         "name":"relu4_18/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_18/x2/scale":0
@@ -5340,7 +5340,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -5353,7 +5353,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_4_18",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_4_17_concat_4_17_0_split":0,
@@ -5373,7 +5373,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_19/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[832,1,1,1],
@@ -5388,7 +5388,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_19/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[832,1,1,1],
@@ -5403,7 +5403,7 @@
         "type":"activity",
         "name":"relu4_19/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_19/x1/scale":0
@@ -5421,7 +5421,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,832,1,1]
@@ -5434,7 +5434,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_19/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -5449,7 +5449,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_19/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -5464,7 +5464,7 @@
         "type":"activity",
         "name":"relu4_19/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_19/x2/scale":0
@@ -5482,7 +5482,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -5495,7 +5495,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_4_19",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_4_18_concat_4_18_0_split":0,
@@ -5515,7 +5515,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_20/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[864,1,1,1],
@@ -5530,7 +5530,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_20/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[864,1,1,1],
@@ -5545,7 +5545,7 @@
         "type":"activity",
         "name":"relu4_20/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_20/x1/scale":0
@@ -5563,7 +5563,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,864,1,1]
@@ -5576,7 +5576,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_20/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -5591,7 +5591,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_20/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -5606,7 +5606,7 @@
         "type":"activity",
         "name":"relu4_20/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_20/x2/scale":0
@@ -5624,7 +5624,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -5637,7 +5637,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_4_20",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_4_19_concat_4_19_0_split":0,
@@ -5657,7 +5657,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_21/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[896,1,1,1],
@@ -5672,7 +5672,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_21/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[896,1,1,1],
@@ -5687,7 +5687,7 @@
         "type":"activity",
         "name":"relu4_21/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_21/x1/scale":0
@@ -5705,7 +5705,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,896,1,1]
@@ -5718,7 +5718,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_21/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -5733,7 +5733,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_21/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -5748,7 +5748,7 @@
         "type":"activity",
         "name":"relu4_21/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_21/x2/scale":0
@@ -5766,7 +5766,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -5779,7 +5779,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_4_21",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_4_20_concat_4_20_0_split":0,
@@ -5799,7 +5799,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_22/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[928,1,1,1],
@@ -5814,7 +5814,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_22/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[928,1,1,1],
@@ -5829,7 +5829,7 @@
         "type":"activity",
         "name":"relu4_22/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_22/x1/scale":0
@@ -5847,7 +5847,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,928,1,1]
@@ -5860,7 +5860,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_22/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -5875,7 +5875,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_22/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -5890,7 +5890,7 @@
         "type":"activity",
         "name":"relu4_22/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_22/x2/scale":0
@@ -5908,7 +5908,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -5921,7 +5921,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_4_22",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_4_21_concat_4_21_0_split":0,
@@ -5941,7 +5941,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_23/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[960,1,1,1],
@@ -5956,7 +5956,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_23/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[960,1,1,1],
@@ -5971,7 +5971,7 @@
         "type":"activity",
         "name":"relu4_23/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_23/x1/scale":0
@@ -5989,7 +5989,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,960,1,1]
@@ -6002,7 +6002,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_23/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -6017,7 +6017,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_23/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -6032,7 +6032,7 @@
         "type":"activity",
         "name":"relu4_23/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_23/x2/scale":0
@@ -6050,7 +6050,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -6063,7 +6063,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_4_23",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_4_22_concat_4_22_0_split":0,
@@ -6083,7 +6083,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_24/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[992,1,1,1],
@@ -6098,7 +6098,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_24/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[992,1,1,1],
@@ -6113,7 +6113,7 @@
         "type":"activity",
         "name":"relu4_24/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_24/x1/scale":0
@@ -6131,7 +6131,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,992,1,1]
@@ -6144,7 +6144,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_24/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -6159,7 +6159,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_24/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -6174,7 +6174,7 @@
         "type":"activity",
         "name":"relu4_24/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_24/x2/scale":0
@@ -6192,7 +6192,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -6205,7 +6205,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_4_24",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_4_23_concat_4_23_0_split":0,
@@ -6216,7 +6216,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv4_blk/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[1024,1,1,1],
@@ -6231,7 +6231,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv4_blk/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[1024,1,1,1],
@@ -6246,7 +6246,7 @@
         "type":"activity",
         "name":"relu4_blk",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv4_blk/scale":0
@@ -6264,7 +6264,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[512,1024,1,1]
@@ -6281,7 +6281,7 @@
         "kernel_size":2,
         "method":"avg",
         "pad":0,
-        "stride":2,
+        "stride":2
       },
       "inputs":{
         "conv4_blk":0
@@ -6300,7 +6300,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_1/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[512,1,1,1],
@@ -6315,7 +6315,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_1/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[512,1,1,1],
@@ -6330,7 +6330,7 @@
         "type":"activity",
         "name":"relu5_1/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_1/x1/scale":0
@@ -6348,7 +6348,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,512,1,1]
@@ -6361,7 +6361,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_1/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -6376,7 +6376,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_1/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -6391,7 +6391,7 @@
         "type":"activity",
         "name":"relu5_1/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_1/x2/scale":0
@@ -6409,7 +6409,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -6422,7 +6422,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_5_1",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "conv5_1/x2":1,
@@ -6442,7 +6442,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_2/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[544,1,1,1],
@@ -6457,7 +6457,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_2/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[544,1,1,1],
@@ -6472,7 +6472,7 @@
         "type":"activity",
         "name":"relu5_2/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_2/x1/scale":0
@@ -6490,7 +6490,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,544,1,1]
@@ -6503,7 +6503,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_2/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -6518,7 +6518,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_2/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -6533,7 +6533,7 @@
         "type":"activity",
         "name":"relu5_2/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_2/x2/scale":0
@@ -6551,7 +6551,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -6564,7 +6564,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_5_2",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_5_1_concat_5_1_0_split":0,
@@ -6584,7 +6584,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_3/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[576,1,1,1],
@@ -6599,7 +6599,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_3/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[576,1,1,1],
@@ -6614,7 +6614,7 @@
         "type":"activity",
         "name":"relu5_3/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_3/x1/scale":0
@@ -6632,7 +6632,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,576,1,1]
@@ -6645,7 +6645,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_3/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -6660,7 +6660,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_3/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -6675,7 +6675,7 @@
         "type":"activity",
         "name":"relu5_3/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_3/x2/scale":0
@@ -6693,7 +6693,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -6706,7 +6706,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_5_3",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_5_2_concat_5_2_0_split":0,
@@ -6726,7 +6726,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_4/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[608,1,1,1],
@@ -6741,7 +6741,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_4/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[608,1,1,1],
@@ -6756,7 +6756,7 @@
         "type":"activity",
         "name":"relu5_4/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_4/x1/scale":0
@@ -6774,7 +6774,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,608,1,1]
@@ -6787,7 +6787,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_4/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -6802,7 +6802,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_4/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -6817,7 +6817,7 @@
         "type":"activity",
         "name":"relu5_4/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_4/x2/scale":0
@@ -6835,7 +6835,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -6848,7 +6848,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_5_4",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_5_3_concat_5_3_0_split":0,
@@ -6868,7 +6868,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_5/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[640,1,1,1],
@@ -6883,7 +6883,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_5/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[640,1,1,1],
@@ -6898,7 +6898,7 @@
         "type":"activity",
         "name":"relu5_5/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_5/x1/scale":0
@@ -6916,7 +6916,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,640,1,1]
@@ -6929,7 +6929,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_5/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -6944,7 +6944,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_5/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -6959,7 +6959,7 @@
         "type":"activity",
         "name":"relu5_5/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_5/x2/scale":0
@@ -6977,7 +6977,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -6990,7 +6990,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_5_5",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_5_4_concat_5_4_0_split":0,
@@ -7010,7 +7010,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_6/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[672,1,1,1],
@@ -7025,7 +7025,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_6/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[672,1,1,1],
@@ -7040,7 +7040,7 @@
         "type":"activity",
         "name":"relu5_6/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_6/x1/scale":0
@@ -7058,7 +7058,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,672,1,1]
@@ -7071,7 +7071,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_6/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -7086,7 +7086,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_6/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -7101,7 +7101,7 @@
         "type":"activity",
         "name":"relu5_6/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_6/x2/scale":0
@@ -7119,7 +7119,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -7132,7 +7132,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_5_6",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_5_5_concat_5_5_0_split":0,
@@ -7152,7 +7152,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_7/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[704,1,1,1],
@@ -7167,7 +7167,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_7/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[704,1,1,1],
@@ -7182,7 +7182,7 @@
         "type":"activity",
         "name":"relu5_7/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_7/x1/scale":0
@@ -7200,7 +7200,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,704,1,1]
@@ -7213,7 +7213,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_7/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -7228,7 +7228,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_7/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -7243,7 +7243,7 @@
         "type":"activity",
         "name":"relu5_7/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_7/x2/scale":0
@@ -7261,7 +7261,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -7274,7 +7274,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_5_7",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_5_6_concat_5_6_0_split":0,
@@ -7294,7 +7294,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_8/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[736,1,1,1],
@@ -7309,7 +7309,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_8/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[736,1,1,1],
@@ -7324,7 +7324,7 @@
         "type":"activity",
         "name":"relu5_8/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_8/x1/scale":0
@@ -7342,7 +7342,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,736,1,1]
@@ -7355,7 +7355,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_8/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -7370,7 +7370,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_8/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -7385,7 +7385,7 @@
         "type":"activity",
         "name":"relu5_8/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_8/x2/scale":0
@@ -7403,7 +7403,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -7416,7 +7416,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_5_8",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_5_7_concat_5_7_0_split":0,
@@ -7436,7 +7436,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_9/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[768,1,1,1],
@@ -7451,7 +7451,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_9/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[768,1,1,1],
@@ -7466,7 +7466,7 @@
         "type":"activity",
         "name":"relu5_9/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_9/x1/scale":0
@@ -7484,7 +7484,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,768,1,1]
@@ -7497,7 +7497,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_9/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -7512,7 +7512,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_9/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -7527,7 +7527,7 @@
         "type":"activity",
         "name":"relu5_9/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_9/x2/scale":0
@@ -7545,7 +7545,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -7558,7 +7558,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_5_9",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_5_8_concat_5_8_0_split":0,
@@ -7578,7 +7578,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_10/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[800,1,1,1],
@@ -7593,7 +7593,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_10/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[800,1,1,1],
@@ -7608,7 +7608,7 @@
         "type":"activity",
         "name":"relu5_10/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_10/x1/scale":0
@@ -7626,7 +7626,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,800,1,1]
@@ -7639,7 +7639,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_10/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -7654,7 +7654,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_10/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -7669,7 +7669,7 @@
         "type":"activity",
         "name":"relu5_10/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_10/x2/scale":0
@@ -7687,7 +7687,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -7700,7 +7700,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_5_10",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_5_9_concat_5_9_0_split":0,
@@ -7720,7 +7720,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_11/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[832,1,1,1],
@@ -7735,7 +7735,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_11/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[832,1,1,1],
@@ -7750,7 +7750,7 @@
         "type":"activity",
         "name":"relu5_11/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_11/x1/scale":0
@@ -7768,7 +7768,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,832,1,1]
@@ -7781,7 +7781,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_11/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -7796,7 +7796,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_11/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -7811,7 +7811,7 @@
         "type":"activity",
         "name":"relu5_11/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_11/x2/scale":0
@@ -7829,7 +7829,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -7842,7 +7842,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_5_11",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_5_10_concat_5_10_0_split":0,
@@ -7862,7 +7862,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_12/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[864,1,1,1],
@@ -7877,7 +7877,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_12/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[864,1,1,1],
@@ -7892,7 +7892,7 @@
         "type":"activity",
         "name":"relu5_12/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_12/x1/scale":0
@@ -7910,7 +7910,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,864,1,1]
@@ -7923,7 +7923,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_12/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -7938,7 +7938,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_12/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -7953,7 +7953,7 @@
         "type":"activity",
         "name":"relu5_12/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_12/x2/scale":0
@@ -7971,7 +7971,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -7984,7 +7984,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_5_12",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_5_11_concat_5_11_0_split":0,
@@ -8004,7 +8004,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_13/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[896,1,1,1],
@@ -8019,7 +8019,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_13/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[896,1,1,1],
@@ -8034,7 +8034,7 @@
         "type":"activity",
         "name":"relu5_13/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_13/x1/scale":0
@@ -8052,7 +8052,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,896,1,1]
@@ -8065,7 +8065,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_13/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -8080,7 +8080,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_13/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -8095,7 +8095,7 @@
         "type":"activity",
         "name":"relu5_13/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_13/x2/scale":0
@@ -8113,7 +8113,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -8126,7 +8126,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_5_13",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_5_12_concat_5_12_0_split":0,
@@ -8146,7 +8146,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_14/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[928,1,1,1],
@@ -8161,7 +8161,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_14/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[928,1,1,1],
@@ -8176,7 +8176,7 @@
         "type":"activity",
         "name":"relu5_14/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_14/x1/scale":0
@@ -8194,7 +8194,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,928,1,1]
@@ -8207,7 +8207,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_14/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -8222,7 +8222,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_14/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -8237,7 +8237,7 @@
         "type":"activity",
         "name":"relu5_14/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_14/x2/scale":0
@@ -8255,7 +8255,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -8268,7 +8268,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_5_14",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_5_13_concat_5_13_0_split":0,
@@ -8288,7 +8288,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_15/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[960,1,1,1],
@@ -8303,7 +8303,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_15/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[960,1,1,1],
@@ -8318,7 +8318,7 @@
         "type":"activity",
         "name":"relu5_15/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_15/x1/scale":0
@@ -8336,7 +8336,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,960,1,1]
@@ -8349,7 +8349,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_15/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -8364,7 +8364,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_15/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -8379,7 +8379,7 @@
         "type":"activity",
         "name":"relu5_15/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_15/x2/scale":0
@@ -8397,7 +8397,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -8410,7 +8410,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_5_15",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_5_14_concat_5_14_0_split":0,
@@ -8430,7 +8430,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_16/x1/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[992,1,1,1],
@@ -8445,7 +8445,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_16/x1/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[992,1,1,1],
@@ -8460,7 +8460,7 @@
         "type":"activity",
         "name":"relu5_16/x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_16/x1/scale":0
@@ -8478,7 +8478,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,992,1,1]
@@ -8491,7 +8491,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_16/x2/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -8506,7 +8506,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_16/x2/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -8521,7 +8521,7 @@
         "type":"activity",
         "name":"relu5_16/x2",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_16/x2/scale":0
@@ -8539,7 +8539,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,128,3,3]
@@ -8552,7 +8552,7 @@
       "attrs":{
         "type":"concat",
         "name":"concat_5_16",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "concat_5_15_concat_5_15_0_split":0,
@@ -8563,7 +8563,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv5_blk/bn",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[1024,1,1,1],
@@ -8578,7 +8578,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv5_blk/scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[1024,1,1,1],
@@ -8593,7 +8593,7 @@
         "type":"activity",
         "name":"relu5_blk",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv5_blk/scale":0
@@ -8606,7 +8606,7 @@
         "global":1,
         "method":"avg",
         "pad":0,
-        "stride":1,
+        "stride":1
       },
       "inputs":{
         "relu5_blk":0
@@ -8624,7 +8624,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[1000,1,1,1],
@@ -8638,7 +8638,7 @@
       "attrs":{
         "type":"loss",
         "name":"loss",
-        "method":"softmax",
+        "method":"softmax"
       },
       "inputs":{
         "fc6":0,

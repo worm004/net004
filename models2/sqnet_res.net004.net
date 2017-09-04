@@ -35,7 +35,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":2,
-        "stride_w":2,
+        "stride_w":2
       },
       "params":{
         "bias":[96,1,1,1],
@@ -50,7 +50,7 @@
         "type":"activity",
         "name":"relu_conv1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv1":0
@@ -64,7 +64,7 @@
         "kernel_size":3,
         "method":"max",
         "pad":0,
-        "stride":2,
+        "stride":2
       },
       "inputs":{
         "relu_conv1":0
@@ -82,7 +82,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[16,1,1,1],
@@ -97,7 +97,7 @@
         "type":"activity",
         "name":"fire2/relu_squeeze1x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fire2/squeeze1x1":0
@@ -124,7 +124,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -139,7 +139,7 @@
         "type":"activity",
         "name":"fire2/relu_expand1x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fire2/expand1x1":0
@@ -157,7 +157,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -172,7 +172,7 @@
         "type":"activity",
         "name":"fire2/relu_expand3x3",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fire2/expand3x3":0
@@ -182,7 +182,7 @@
       "attrs":{
         "type":"concat",
         "name":"fire2/concat",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "fire2/relu_expand1x1":0,
@@ -210,7 +210,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[16,1,1,1],
@@ -225,7 +225,7 @@
         "type":"activity",
         "name":"fire3/relu_squeeze1x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fire3/squeeze1x1":0
@@ -252,7 +252,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -267,7 +267,7 @@
         "type":"activity",
         "name":"fire3/relu_expand1x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fire3/expand1x1":0
@@ -285,7 +285,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -300,7 +300,7 @@
         "type":"activity",
         "name":"fire3/relu_expand3x3",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fire3/expand3x3":0
@@ -310,7 +310,7 @@
       "attrs":{
         "type":"concat",
         "name":"fire3/concat",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "fire3/relu_expand1x1":0,
@@ -323,7 +323,7 @@
         "name":"bypass_23",
         "coeff0":1,
         "coeff1":1,
-        "method":"sum",
+        "method":"sum"
       },
       "inputs":{
         "fire2/concat_fire2/concat_0_split":0,
@@ -342,7 +342,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[32,1,1,1],
@@ -357,7 +357,7 @@
         "type":"activity",
         "name":"fire4/relu_squeeze1x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fire4/squeeze1x1":0
@@ -384,7 +384,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -399,7 +399,7 @@
         "type":"activity",
         "name":"fire4/relu_expand1x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fire4/expand1x1":0
@@ -417,7 +417,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -432,7 +432,7 @@
         "type":"activity",
         "name":"fire4/relu_expand3x3",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fire4/expand3x3":0
@@ -442,7 +442,7 @@
       "attrs":{
         "type":"concat",
         "name":"fire4/concat",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "fire4/relu_expand1x1":0,
@@ -457,7 +457,7 @@
         "kernel_size":3,
         "method":"max",
         "pad":0,
-        "stride":2,
+        "stride":2
       },
       "inputs":{
         "fire4/concat":0
@@ -484,7 +484,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[32,1,1,1],
@@ -499,7 +499,7 @@
         "type":"activity",
         "name":"fire5/relu_squeeze1x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fire5/squeeze1x1":0
@@ -526,7 +526,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -541,7 +541,7 @@
         "type":"activity",
         "name":"fire5/relu_expand1x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fire5/expand1x1":0
@@ -559,7 +559,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -574,7 +574,7 @@
         "type":"activity",
         "name":"fire5/relu_expand3x3",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fire5/expand3x3":0
@@ -584,7 +584,7 @@
       "attrs":{
         "type":"concat",
         "name":"fire5/concat",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "fire5/relu_expand1x1":0,
@@ -597,7 +597,7 @@
         "name":"bypass_45",
         "coeff0":1,
         "coeff1":1,
-        "method":"sum",
+        "method":"sum"
       },
       "inputs":{
         "fire5/concat":1,
@@ -616,7 +616,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[48,1,1,1],
@@ -631,7 +631,7 @@
         "type":"activity",
         "name":"fire6/relu_squeeze1x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fire6/squeeze1x1":0
@@ -658,7 +658,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -673,7 +673,7 @@
         "type":"activity",
         "name":"fire6/relu_expand1x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fire6/expand1x1":0
@@ -691,7 +691,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -706,7 +706,7 @@
         "type":"activity",
         "name":"fire6/relu_expand3x3",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fire6/expand3x3":0
@@ -716,7 +716,7 @@
       "attrs":{
         "type":"concat",
         "name":"fire6/concat",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "fire6/relu_expand1x1":0,
@@ -744,7 +744,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[48,1,1,1],
@@ -759,7 +759,7 @@
         "type":"activity",
         "name":"fire7/relu_squeeze1x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fire7/squeeze1x1":0
@@ -786,7 +786,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -801,7 +801,7 @@
         "type":"activity",
         "name":"fire7/relu_expand1x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fire7/expand1x1":0
@@ -819,7 +819,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -834,7 +834,7 @@
         "type":"activity",
         "name":"fire7/relu_expand3x3",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fire7/expand3x3":0
@@ -844,7 +844,7 @@
       "attrs":{
         "type":"concat",
         "name":"fire7/concat",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "fire7/relu_expand1x1":0,
@@ -857,7 +857,7 @@
         "name":"bypass_67",
         "coeff0":1,
         "coeff1":1,
-        "method":"sum",
+        "method":"sum"
       },
       "inputs":{
         "fire6/concat_fire6/concat_0_split":0,
@@ -876,7 +876,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -891,7 +891,7 @@
         "type":"activity",
         "name":"fire8/relu_squeeze1x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fire8/squeeze1x1":0
@@ -918,7 +918,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -933,7 +933,7 @@
         "type":"activity",
         "name":"fire8/relu_expand1x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fire8/expand1x1":0
@@ -951,7 +951,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -966,7 +966,7 @@
         "type":"activity",
         "name":"fire8/relu_expand3x3",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fire8/expand3x3":0
@@ -976,7 +976,7 @@
       "attrs":{
         "type":"concat",
         "name":"fire8/concat",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "fire8/relu_expand1x1":0,
@@ -991,7 +991,7 @@
         "kernel_size":3,
         "method":"max",
         "pad":0,
-        "stride":2,
+        "stride":2
       },
       "inputs":{
         "fire8/concat":0
@@ -1018,7 +1018,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -1033,7 +1033,7 @@
         "type":"activity",
         "name":"fire9/relu_squeeze1x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fire9/squeeze1x1":0
@@ -1060,7 +1060,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -1075,7 +1075,7 @@
         "type":"activity",
         "name":"fire9/relu_expand1x1",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fire9/expand1x1":0
@@ -1093,7 +1093,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -1108,7 +1108,7 @@
         "type":"activity",
         "name":"fire9/relu_expand3x3",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "fire9/expand3x3":0
@@ -1118,7 +1118,7 @@
       "attrs":{
         "type":"concat",
         "name":"fire9/concat",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "fire9/relu_expand1x1":0,
@@ -1131,7 +1131,7 @@
         "name":"bypass_89",
         "coeff0":1,
         "coeff1":1,
-        "method":"sum",
+        "method":"sum"
       },
       "inputs":{
         "fire9/concat":1,
@@ -1150,7 +1150,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "bias":[1000,1,1,1],
@@ -1165,7 +1165,7 @@
         "type":"activity",
         "name":"relu_conv10",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv10":0
@@ -1178,7 +1178,7 @@
         "global":1,
         "method":"avg",
         "pad":0,
-        "stride":1,
+        "stride":1
       },
       "inputs":{
         "relu_conv10":0
@@ -1188,7 +1188,7 @@
       "attrs":{
         "type":"loss",
         "name":"loss",
-        "method":"softmax",
+        "method":"softmax"
       },
       "inputs":{
         "input_label":1,

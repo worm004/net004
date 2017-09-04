@@ -35,7 +35,7 @@
         "pad_h":3,
         "pad_w":3,
         "stride_h":2,
-        "stride_w":2,
+        "stride_w":2
       },
       "params":{
         "bias":[64,1,1,1],
@@ -49,7 +49,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn_conv1",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[64,1,1,1],
@@ -64,7 +64,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale_conv1",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -79,7 +79,7 @@
         "type":"activity",
         "name":"conv1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale_conv1":0
@@ -93,7 +93,7 @@
         "kernel_size":3,
         "method":"max",
         "pad":0,
-        "stride":2,
+        "stride":2
       },
       "inputs":{
         "conv1_relu":0
@@ -120,7 +120,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,64,1,1]
@@ -133,7 +133,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn2a_branch1",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[256,1,1,1],
@@ -148,7 +148,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale2a_branch1",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -170,7 +170,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[64,64,1,1]
@@ -183,7 +183,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn2a_branch2a",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[64,1,1,1],
@@ -198,7 +198,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale2a_branch2a",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -213,7 +213,7 @@
         "type":"activity",
         "name":"res2a_branch2a_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale2a_branch2a":0
@@ -231,7 +231,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[64,64,3,3]
@@ -244,7 +244,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn2a_branch2b",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[64,1,1,1],
@@ -259,7 +259,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale2a_branch2b",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -274,7 +274,7 @@
         "type":"activity",
         "name":"res2a_branch2b_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale2a_branch2b":0
@@ -292,7 +292,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,64,1,1]
@@ -305,7 +305,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn2a_branch2c",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[256,1,1,1],
@@ -320,7 +320,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale2a_branch2c",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -336,7 +336,7 @@
         "name":"res2a",
         "coeff0":1,
         "coeff1":1,
-        "method":"sum",
+        "method":"sum"
       },
       "inputs":{
         "scale2a_branch1":0,
@@ -348,7 +348,7 @@
         "type":"activity",
         "name":"res2a_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "res2a":0
@@ -375,7 +375,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[64,256,1,1]
@@ -388,7 +388,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn2b_branch2a",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[64,1,1,1],
@@ -403,7 +403,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale2b_branch2a",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -418,7 +418,7 @@
         "type":"activity",
         "name":"res2b_branch2a_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale2b_branch2a":0
@@ -436,7 +436,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[64,64,3,3]
@@ -449,7 +449,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn2b_branch2b",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[64,1,1,1],
@@ -464,7 +464,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale2b_branch2b",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -479,7 +479,7 @@
         "type":"activity",
         "name":"res2b_branch2b_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale2b_branch2b":0
@@ -497,7 +497,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,64,1,1]
@@ -510,7 +510,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn2b_branch2c",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[256,1,1,1],
@@ -525,7 +525,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale2b_branch2c",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -541,7 +541,7 @@
         "name":"res2b",
         "coeff0":1,
         "coeff1":1,
-        "method":"sum",
+        "method":"sum"
       },
       "inputs":{
         "res2a_res2a_relu_0_split":0,
@@ -553,7 +553,7 @@
         "type":"activity",
         "name":"res2b_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "res2b":0
@@ -580,7 +580,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[64,256,1,1]
@@ -593,7 +593,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn2c_branch2a",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[64,1,1,1],
@@ -608,7 +608,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale2c_branch2a",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -623,7 +623,7 @@
         "type":"activity",
         "name":"res2c_branch2a_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale2c_branch2a":0
@@ -641,7 +641,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[64,64,3,3]
@@ -654,7 +654,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn2c_branch2b",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[64,1,1,1],
@@ -669,7 +669,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale2c_branch2b",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -684,7 +684,7 @@
         "type":"activity",
         "name":"res2c_branch2b_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale2c_branch2b":0
@@ -702,7 +702,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,64,1,1]
@@ -715,7 +715,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn2c_branch2c",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[256,1,1,1],
@@ -730,7 +730,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale2c_branch2c",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -746,7 +746,7 @@
         "name":"res2c",
         "coeff0":1,
         "coeff1":1,
-        "method":"sum",
+        "method":"sum"
       },
       "inputs":{
         "res2b_res2b_relu_0_split":0,
@@ -758,7 +758,7 @@
         "type":"activity",
         "name":"res2c_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "res2c":0
@@ -785,7 +785,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":2,
-        "stride_w":2,
+        "stride_w":2
       },
       "params":{
         "weight":[512,256,1,1]
@@ -798,7 +798,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn3a_branch1",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[512,1,1,1],
@@ -813,7 +813,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale3a_branch1",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[512,1,1,1],
@@ -835,7 +835,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":2,
-        "stride_w":2,
+        "stride_w":2
       },
       "params":{
         "weight":[128,256,1,1]
@@ -848,7 +848,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn3a_branch2a",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -863,7 +863,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale3a_branch2a",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -878,7 +878,7 @@
         "type":"activity",
         "name":"res3a_branch2a_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale3a_branch2a":0
@@ -896,7 +896,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,128,3,3]
@@ -909,7 +909,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn3a_branch2b",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -924,7 +924,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale3a_branch2b",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -939,7 +939,7 @@
         "type":"activity",
         "name":"res3a_branch2b_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale3a_branch2b":0
@@ -957,7 +957,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[512,128,1,1]
@@ -970,7 +970,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn3a_branch2c",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[512,1,1,1],
@@ -985,7 +985,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale3a_branch2c",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[512,1,1,1],
@@ -1001,7 +1001,7 @@
         "name":"res3a",
         "coeff0":1,
         "coeff1":1,
-        "method":"sum",
+        "method":"sum"
       },
       "inputs":{
         "scale3a_branch1":0,
@@ -1013,7 +1013,7 @@
         "type":"activity",
         "name":"res3a_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "res3a":0
@@ -1040,7 +1040,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,512,1,1]
@@ -1053,7 +1053,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn3b_branch2a",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -1068,7 +1068,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale3b_branch2a",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -1083,7 +1083,7 @@
         "type":"activity",
         "name":"res3b_branch2a_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale3b_branch2a":0
@@ -1101,7 +1101,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,128,3,3]
@@ -1114,7 +1114,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn3b_branch2b",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -1129,7 +1129,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale3b_branch2b",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -1144,7 +1144,7 @@
         "type":"activity",
         "name":"res3b_branch2b_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale3b_branch2b":0
@@ -1162,7 +1162,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[512,128,1,1]
@@ -1175,7 +1175,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn3b_branch2c",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[512,1,1,1],
@@ -1190,7 +1190,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale3b_branch2c",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[512,1,1,1],
@@ -1206,7 +1206,7 @@
         "name":"res3b",
         "coeff0":1,
         "coeff1":1,
-        "method":"sum",
+        "method":"sum"
       },
       "inputs":{
         "res3a_res3a_relu_0_split":0,
@@ -1218,7 +1218,7 @@
         "type":"activity",
         "name":"res3b_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "res3b":0
@@ -1245,7 +1245,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,512,1,1]
@@ -1258,7 +1258,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn3c_branch2a",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -1273,7 +1273,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale3c_branch2a",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -1288,7 +1288,7 @@
         "type":"activity",
         "name":"res3c_branch2a_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale3c_branch2a":0
@@ -1306,7 +1306,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,128,3,3]
@@ -1319,7 +1319,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn3c_branch2b",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -1334,7 +1334,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale3c_branch2b",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -1349,7 +1349,7 @@
         "type":"activity",
         "name":"res3c_branch2b_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale3c_branch2b":0
@@ -1367,7 +1367,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[512,128,1,1]
@@ -1380,7 +1380,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn3c_branch2c",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[512,1,1,1],
@@ -1395,7 +1395,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale3c_branch2c",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[512,1,1,1],
@@ -1411,7 +1411,7 @@
         "name":"res3c",
         "coeff0":1,
         "coeff1":1,
-        "method":"sum",
+        "method":"sum"
       },
       "inputs":{
         "res3b_res3b_relu_0_split":0,
@@ -1423,7 +1423,7 @@
         "type":"activity",
         "name":"res3c_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "res3c":0
@@ -1450,7 +1450,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,512,1,1]
@@ -1463,7 +1463,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn3d_branch2a",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -1478,7 +1478,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale3d_branch2a",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -1493,7 +1493,7 @@
         "type":"activity",
         "name":"res3d_branch2a_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale3d_branch2a":0
@@ -1511,7 +1511,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,128,3,3]
@@ -1524,7 +1524,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn3d_branch2b",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[128,1,1,1],
@@ -1539,7 +1539,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale3d_branch2b",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -1554,7 +1554,7 @@
         "type":"activity",
         "name":"res3d_branch2b_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale3d_branch2b":0
@@ -1572,7 +1572,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[512,128,1,1]
@@ -1585,7 +1585,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn3d_branch2c",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[512,1,1,1],
@@ -1600,7 +1600,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale3d_branch2c",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[512,1,1,1],
@@ -1616,7 +1616,7 @@
         "name":"res3d",
         "coeff0":1,
         "coeff1":1,
-        "method":"sum",
+        "method":"sum"
       },
       "inputs":{
         "res3c_res3c_relu_0_split":0,
@@ -1628,7 +1628,7 @@
         "type":"activity",
         "name":"res3d_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "res3d":0
@@ -1655,7 +1655,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":2,
-        "stride_w":2,
+        "stride_w":2
       },
       "params":{
         "weight":[1024,512,1,1]
@@ -1668,7 +1668,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn4a_branch1",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[1024,1,1,1],
@@ -1683,7 +1683,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale4a_branch1",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[1024,1,1,1],
@@ -1705,7 +1705,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":2,
-        "stride_w":2,
+        "stride_w":2
       },
       "params":{
         "weight":[256,512,1,1]
@@ -1718,7 +1718,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn4a_branch2a",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[256,1,1,1],
@@ -1733,7 +1733,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale4a_branch2a",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -1748,7 +1748,7 @@
         "type":"activity",
         "name":"res4a_branch2a_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale4a_branch2a":0
@@ -1766,7 +1766,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,256,3,3]
@@ -1779,7 +1779,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn4a_branch2b",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[256,1,1,1],
@@ -1794,7 +1794,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale4a_branch2b",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -1809,7 +1809,7 @@
         "type":"activity",
         "name":"res4a_branch2b_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale4a_branch2b":0
@@ -1827,7 +1827,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[1024,256,1,1]
@@ -1840,7 +1840,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn4a_branch2c",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[1024,1,1,1],
@@ -1855,7 +1855,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale4a_branch2c",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[1024,1,1,1],
@@ -1871,7 +1871,7 @@
         "name":"res4a",
         "coeff0":1,
         "coeff1":1,
-        "method":"sum",
+        "method":"sum"
       },
       "inputs":{
         "scale4a_branch1":0,
@@ -1883,7 +1883,7 @@
         "type":"activity",
         "name":"res4a_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "res4a":0
@@ -1910,7 +1910,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,1024,1,1]
@@ -1923,7 +1923,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn4b_branch2a",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[256,1,1,1],
@@ -1938,7 +1938,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale4b_branch2a",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -1953,7 +1953,7 @@
         "type":"activity",
         "name":"res4b_branch2a_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale4b_branch2a":0
@@ -1971,7 +1971,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,256,3,3]
@@ -1984,7 +1984,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn4b_branch2b",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[256,1,1,1],
@@ -1999,7 +1999,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale4b_branch2b",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -2014,7 +2014,7 @@
         "type":"activity",
         "name":"res4b_branch2b_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale4b_branch2b":0
@@ -2032,7 +2032,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[1024,256,1,1]
@@ -2045,7 +2045,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn4b_branch2c",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[1024,1,1,1],
@@ -2060,7 +2060,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale4b_branch2c",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[1024,1,1,1],
@@ -2076,7 +2076,7 @@
         "name":"res4b",
         "coeff0":1,
         "coeff1":1,
-        "method":"sum",
+        "method":"sum"
       },
       "inputs":{
         "res4a_res4a_relu_0_split":0,
@@ -2088,7 +2088,7 @@
         "type":"activity",
         "name":"res4b_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "res4b":0
@@ -2115,7 +2115,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,1024,1,1]
@@ -2128,7 +2128,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn4c_branch2a",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[256,1,1,1],
@@ -2143,7 +2143,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale4c_branch2a",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -2158,7 +2158,7 @@
         "type":"activity",
         "name":"res4c_branch2a_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale4c_branch2a":0
@@ -2176,7 +2176,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,256,3,3]
@@ -2189,7 +2189,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn4c_branch2b",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[256,1,1,1],
@@ -2204,7 +2204,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale4c_branch2b",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -2219,7 +2219,7 @@
         "type":"activity",
         "name":"res4c_branch2b_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale4c_branch2b":0
@@ -2237,7 +2237,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[1024,256,1,1]
@@ -2250,7 +2250,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn4c_branch2c",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[1024,1,1,1],
@@ -2265,7 +2265,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale4c_branch2c",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[1024,1,1,1],
@@ -2281,7 +2281,7 @@
         "name":"res4c",
         "coeff0":1,
         "coeff1":1,
-        "method":"sum",
+        "method":"sum"
       },
       "inputs":{
         "res4b_res4b_relu_0_split":0,
@@ -2293,7 +2293,7 @@
         "type":"activity",
         "name":"res4c_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "res4c":0
@@ -2320,7 +2320,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,1024,1,1]
@@ -2333,7 +2333,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn4d_branch2a",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[256,1,1,1],
@@ -2348,7 +2348,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale4d_branch2a",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -2363,7 +2363,7 @@
         "type":"activity",
         "name":"res4d_branch2a_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale4d_branch2a":0
@@ -2381,7 +2381,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,256,3,3]
@@ -2394,7 +2394,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn4d_branch2b",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[256,1,1,1],
@@ -2409,7 +2409,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale4d_branch2b",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -2424,7 +2424,7 @@
         "type":"activity",
         "name":"res4d_branch2b_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale4d_branch2b":0
@@ -2442,7 +2442,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[1024,256,1,1]
@@ -2455,7 +2455,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn4d_branch2c",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[1024,1,1,1],
@@ -2470,7 +2470,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale4d_branch2c",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[1024,1,1,1],
@@ -2486,7 +2486,7 @@
         "name":"res4d",
         "coeff0":1,
         "coeff1":1,
-        "method":"sum",
+        "method":"sum"
       },
       "inputs":{
         "res4c_res4c_relu_0_split":0,
@@ -2498,7 +2498,7 @@
         "type":"activity",
         "name":"res4d_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "res4d":0
@@ -2525,7 +2525,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,1024,1,1]
@@ -2538,7 +2538,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn4e_branch2a",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[256,1,1,1],
@@ -2553,7 +2553,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale4e_branch2a",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -2568,7 +2568,7 @@
         "type":"activity",
         "name":"res4e_branch2a_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale4e_branch2a":0
@@ -2586,7 +2586,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,256,3,3]
@@ -2599,7 +2599,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn4e_branch2b",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[256,1,1,1],
@@ -2614,7 +2614,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale4e_branch2b",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -2629,7 +2629,7 @@
         "type":"activity",
         "name":"res4e_branch2b_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale4e_branch2b":0
@@ -2647,7 +2647,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[1024,256,1,1]
@@ -2660,7 +2660,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn4e_branch2c",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[1024,1,1,1],
@@ -2675,7 +2675,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale4e_branch2c",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[1024,1,1,1],
@@ -2691,7 +2691,7 @@
         "name":"res4e",
         "coeff0":1,
         "coeff1":1,
-        "method":"sum",
+        "method":"sum"
       },
       "inputs":{
         "res4d_res4d_relu_0_split":0,
@@ -2703,7 +2703,7 @@
         "type":"activity",
         "name":"res4e_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "res4e":0
@@ -2730,7 +2730,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,1024,1,1]
@@ -2743,7 +2743,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn4f_branch2a",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[256,1,1,1],
@@ -2758,7 +2758,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale4f_branch2a",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -2773,7 +2773,7 @@
         "type":"activity",
         "name":"res4f_branch2a_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale4f_branch2a":0
@@ -2791,7 +2791,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,256,3,3]
@@ -2804,7 +2804,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn4f_branch2b",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[256,1,1,1],
@@ -2819,7 +2819,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale4f_branch2b",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -2834,7 +2834,7 @@
         "type":"activity",
         "name":"res4f_branch2b_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale4f_branch2b":0
@@ -2852,7 +2852,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[1024,256,1,1]
@@ -2865,7 +2865,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn4f_branch2c",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[1024,1,1,1],
@@ -2880,7 +2880,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale4f_branch2c",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[1024,1,1,1],
@@ -2896,7 +2896,7 @@
         "name":"res4f",
         "coeff0":1,
         "coeff1":1,
-        "method":"sum",
+        "method":"sum"
       },
       "inputs":{
         "res4e_res4e_relu_0_split":0,
@@ -2908,7 +2908,7 @@
         "type":"activity",
         "name":"res4f_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "res4f":0
@@ -2935,7 +2935,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":2,
-        "stride_w":2,
+        "stride_w":2
       },
       "params":{
         "weight":[2048,1024,1,1]
@@ -2948,7 +2948,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn5a_branch1",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[2048,1,1,1],
@@ -2963,7 +2963,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale5a_branch1",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[2048,1,1,1],
@@ -2985,7 +2985,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":2,
-        "stride_w":2,
+        "stride_w":2
       },
       "params":{
         "weight":[512,1024,1,1]
@@ -2998,7 +2998,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn5a_branch2a",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[512,1,1,1],
@@ -3013,7 +3013,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale5a_branch2a",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[512,1,1,1],
@@ -3028,7 +3028,7 @@
         "type":"activity",
         "name":"res5a_branch2a_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale5a_branch2a":0
@@ -3046,7 +3046,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[512,512,3,3]
@@ -3059,7 +3059,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn5a_branch2b",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[512,1,1,1],
@@ -3074,7 +3074,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale5a_branch2b",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[512,1,1,1],
@@ -3089,7 +3089,7 @@
         "type":"activity",
         "name":"res5a_branch2b_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale5a_branch2b":0
@@ -3107,7 +3107,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[2048,512,1,1]
@@ -3120,7 +3120,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn5a_branch2c",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[2048,1,1,1],
@@ -3135,7 +3135,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale5a_branch2c",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[2048,1,1,1],
@@ -3151,7 +3151,7 @@
         "name":"res5a",
         "coeff0":1,
         "coeff1":1,
-        "method":"sum",
+        "method":"sum"
       },
       "inputs":{
         "scale5a_branch1":0,
@@ -3163,7 +3163,7 @@
         "type":"activity",
         "name":"res5a_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "res5a":0
@@ -3190,7 +3190,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[512,2048,1,1]
@@ -3203,7 +3203,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn5b_branch2a",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[512,1,1,1],
@@ -3218,7 +3218,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale5b_branch2a",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[512,1,1,1],
@@ -3233,7 +3233,7 @@
         "type":"activity",
         "name":"res5b_branch2a_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale5b_branch2a":0
@@ -3251,7 +3251,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[512,512,3,3]
@@ -3264,7 +3264,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn5b_branch2b",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[512,1,1,1],
@@ -3279,7 +3279,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale5b_branch2b",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[512,1,1,1],
@@ -3294,7 +3294,7 @@
         "type":"activity",
         "name":"res5b_branch2b_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale5b_branch2b":0
@@ -3312,7 +3312,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[2048,512,1,1]
@@ -3325,7 +3325,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn5b_branch2c",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[2048,1,1,1],
@@ -3340,7 +3340,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale5b_branch2c",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[2048,1,1,1],
@@ -3356,7 +3356,7 @@
         "name":"res5b",
         "coeff0":1,
         "coeff1":1,
-        "method":"sum",
+        "method":"sum"
       },
       "inputs":{
         "res5a_res5a_relu_0_split":0,
@@ -3368,7 +3368,7 @@
         "type":"activity",
         "name":"res5b_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "res5b":0
@@ -3395,7 +3395,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[512,2048,1,1]
@@ -3408,7 +3408,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn5c_branch2a",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[512,1,1,1],
@@ -3423,7 +3423,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale5c_branch2a",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[512,1,1,1],
@@ -3438,7 +3438,7 @@
         "type":"activity",
         "name":"res5c_branch2a_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale5c_branch2a":0
@@ -3456,7 +3456,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[512,512,3,3]
@@ -3469,7 +3469,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn5c_branch2b",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[512,1,1,1],
@@ -3484,7 +3484,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale5c_branch2b",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[512,1,1,1],
@@ -3499,7 +3499,7 @@
         "type":"activity",
         "name":"res5c_branch2b_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "scale5c_branch2b":0
@@ -3517,7 +3517,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[2048,512,1,1]
@@ -3530,7 +3530,7 @@
       "attrs":{
         "type":"bn",
         "name":"bn5c_branch2c",
-        "eps":1e-05,
+        "eps":1e-05
       },
       "params":{
         "mean":[2048,1,1,1],
@@ -3545,7 +3545,7 @@
       "attrs":{
         "type":"scale",
         "name":"scale5c_branch2c",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[2048,1,1,1],
@@ -3561,7 +3561,7 @@
         "name":"res5c",
         "coeff0":1,
         "coeff1":1,
-        "method":"sum",
+        "method":"sum"
       },
       "inputs":{
         "res5b_res5b_relu_0_split":0,
@@ -3573,7 +3573,7 @@
         "type":"activity",
         "name":"res5c_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "res5c":0
@@ -3587,7 +3587,7 @@
         "kernel_size":7,
         "method":"avg",
         "pad":0,
-        "stride":1,
+        "stride":1
       },
       "inputs":{
         "res5c_relu":0
@@ -3598,7 +3598,7 @@
         "type":"fc",
         "name":"fc1000",
         "bias":1,
-        "num":1000,
+        "num":1000
       },
       "params":{
         "bias":[1000,1,1,1],
@@ -3612,7 +3612,7 @@
       "attrs":{
         "type":"loss",
         "name":"loss",
-        "method":"softmax",
+        "method":"softmax"
       },
       "inputs":{
         "fc1000":0,

@@ -35,7 +35,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":2,
-        "stride_w":2,
+        "stride_w":2
       },
       "params":{
         "weight":[32,3,3,3]
@@ -48,7 +48,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv1_3x3_s2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[32,1,1,1],
@@ -63,7 +63,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv1_3x3_s2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[32,1,1,1],
@@ -78,7 +78,7 @@
         "type":"activity",
         "name":"conv1_3x3_s2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv1_3x3_s2_scale":0
@@ -96,7 +96,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[32,32,3,3]
@@ -109,7 +109,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv2_3x3_s1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[32,1,1,1],
@@ -124,7 +124,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv2_3x3_s1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[32,1,1,1],
@@ -139,7 +139,7 @@
         "type":"activity",
         "name":"conv2_3x3_s1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv2_3x3_s1_scale":0
@@ -157,7 +157,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[64,32,3,3]
@@ -170,7 +170,7 @@
       "attrs":{
         "type":"bn",
         "name":"conv3_3x3_s1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[64,1,1,1],
@@ -185,7 +185,7 @@
       "attrs":{
         "type":"scale",
         "name":"conv3_3x3_s1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -200,7 +200,7 @@
         "type":"activity",
         "name":"conv3_3x3_s1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "conv3_3x3_s1_scale":0
@@ -227,7 +227,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":2,
-        "stride_w":2,
+        "stride_w":2
       },
       "params":{
         "weight":[96,64,3,3]
@@ -240,7 +240,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_stem1_3x3_s2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[96,1,1,1],
@@ -255,7 +255,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_stem1_3x3_s2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[96,1,1,1],
@@ -270,7 +270,7 @@
         "type":"activity",
         "name":"inception_stem1_3x3_s2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_stem1_3x3_s2_scale":0
@@ -284,7 +284,7 @@
         "kernel_size":3,
         "method":"max",
         "pad":0,
-        "stride":2,
+        "stride":2
       },
       "inputs":{
         "conv3_3x3_s1_conv3_3x3_s1_relu_0_split":0
@@ -294,7 +294,7 @@
       "attrs":{
         "type":"concat",
         "name":"inception_stem1",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "inception_stem1_3x3_s2_relu":1,
@@ -322,7 +322,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[64,160,1,1]
@@ -335,7 +335,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_stem2_3x3_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[64,1,1,1],
@@ -350,7 +350,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_stem2_3x3_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -365,7 +365,7 @@
         "type":"activity",
         "name":"inception_stem2_3x3_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_stem2_3x3_reduce_scale":0
@@ -383,7 +383,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[96,64,3,3]
@@ -396,7 +396,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_stem2_3x3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[96,1,1,1],
@@ -411,7 +411,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_stem2_3x3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[96,1,1,1],
@@ -426,7 +426,7 @@
         "type":"activity",
         "name":"inception_stem2_3x3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_stem2_3x3_scale":0
@@ -444,7 +444,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[64,160,1,1]
@@ -457,7 +457,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_stem2_1x7_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[64,1,1,1],
@@ -472,7 +472,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_stem2_1x7_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -487,7 +487,7 @@
         "type":"activity",
         "name":"inception_stem2_1x7_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_stem2_1x7_reduce_scale":0
@@ -505,7 +505,7 @@
         "pad_h":0,
         "pad_w":3,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[64,64,1,7]
@@ -518,7 +518,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_stem2_1x7_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[64,1,1,1],
@@ -533,7 +533,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_stem2_1x7_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -548,7 +548,7 @@
         "type":"activity",
         "name":"inception_stem2_1x7_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_stem2_1x7_scale":0
@@ -566,7 +566,7 @@
         "pad_h":3,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[64,64,7,1]
@@ -579,7 +579,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_stem2_7x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[64,1,1,1],
@@ -594,7 +594,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_stem2_7x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -609,7 +609,7 @@
         "type":"activity",
         "name":"inception_stem2_7x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_stem2_7x1_scale":0
@@ -627,7 +627,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[96,64,3,3]
@@ -640,7 +640,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_stem2_3x3_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[96,1,1,1],
@@ -655,7 +655,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_stem2_3x3_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[96,1,1,1],
@@ -670,7 +670,7 @@
         "type":"activity",
         "name":"inception_stem2_3x3_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_stem2_3x3_2_scale":0
@@ -680,7 +680,7 @@
       "attrs":{
         "type":"concat",
         "name":"inception_stem2",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "inception_stem2_3x3_2_relu":1,
@@ -708,7 +708,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":2,
-        "stride_w":2,
+        "stride_w":2
       },
       "params":{
         "weight":[192,192,3,3]
@@ -721,7 +721,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_stem3_3x3_s2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[192,1,1,1],
@@ -736,7 +736,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_stem3_3x3_s2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -751,7 +751,7 @@
         "type":"activity",
         "name":"inception_stem3_3x3_s2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_stem3_3x3_s2_scale":0
@@ -765,7 +765,7 @@
         "kernel_size":3,
         "method":"max",
         "pad":0,
-        "stride":2,
+        "stride":2
       },
       "inputs":{
         "inception_stem2_inception_stem2_0_split":0
@@ -775,7 +775,7 @@
       "attrs":{
         "type":"concat",
         "name":"inception_stem3",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "inception_stem3_3x3_s2_relu":0,
@@ -803,7 +803,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[96,384,1,1]
@@ -816,7 +816,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a1_1x1_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[96,1,1,1],
@@ -831,7 +831,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a1_1x1_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[96,1,1,1],
@@ -846,7 +846,7 @@
         "type":"activity",
         "name":"inception_a1_1x1_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a1_1x1_2_scale":0
@@ -864,7 +864,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[64,384,1,1]
@@ -877,7 +877,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a1_3x3_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[64,1,1,1],
@@ -892,7 +892,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a1_3x3_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -907,7 +907,7 @@
         "type":"activity",
         "name":"inception_a1_3x3_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a1_3x3_reduce_scale":0
@@ -925,7 +925,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[96,64,3,3]
@@ -938,7 +938,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a1_3x3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[96,1,1,1],
@@ -953,7 +953,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a1_3x3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[96,1,1,1],
@@ -968,7 +968,7 @@
         "type":"activity",
         "name":"inception_a1_3x3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a1_3x3_scale":0
@@ -986,7 +986,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[64,384,1,1]
@@ -999,7 +999,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a1_3x3_2_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[64,1,1,1],
@@ -1014,7 +1014,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a1_3x3_2_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -1029,7 +1029,7 @@
         "type":"activity",
         "name":"inception_a1_3x3_2_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a1_3x3_2_reduce_scale":0
@@ -1047,7 +1047,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[96,64,3,3]
@@ -1060,7 +1060,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a1_3x3_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[96,1,1,1],
@@ -1075,7 +1075,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a1_3x3_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[96,1,1,1],
@@ -1090,7 +1090,7 @@
         "type":"activity",
         "name":"inception_a1_3x3_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a1_3x3_2_scale":0
@@ -1108,7 +1108,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[96,96,3,3]
@@ -1121,7 +1121,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a1_3x3_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[96,1,1,1],
@@ -1136,7 +1136,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a1_3x3_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[96,1,1,1],
@@ -1151,7 +1151,7 @@
         "type":"activity",
         "name":"inception_a1_3x3_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a1_3x3_3_scale":0
@@ -1165,7 +1165,7 @@
         "kernel_size":3,
         "method":"avg",
         "pad":1,
-        "stride":1,
+        "stride":1
       },
       "inputs":{
         "inception_stem3_inception_stem3_0_split":0
@@ -1183,7 +1183,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[96,384,1,1]
@@ -1196,7 +1196,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a1_1x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[96,1,1,1],
@@ -1211,7 +1211,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a1_1x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[96,1,1,1],
@@ -1226,7 +1226,7 @@
         "type":"activity",
         "name":"inception_a1_1x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a1_1x1_scale":0
@@ -1236,7 +1236,7 @@
       "attrs":{
         "type":"concat",
         "name":"inception_a1_concat",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "inception_a1_1x1_2_relu":0,
@@ -1266,7 +1266,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[96,384,1,1]
@@ -1279,7 +1279,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a2_1x1_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[96,1,1,1],
@@ -1294,7 +1294,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a2_1x1_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[96,1,1,1],
@@ -1309,7 +1309,7 @@
         "type":"activity",
         "name":"inception_a2_1x1_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a2_1x1_2_scale":0
@@ -1327,7 +1327,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[64,384,1,1]
@@ -1340,7 +1340,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a2_3x3_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[64,1,1,1],
@@ -1355,7 +1355,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a2_3x3_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -1370,7 +1370,7 @@
         "type":"activity",
         "name":"inception_a2_3x3_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a2_3x3_reduce_scale":0
@@ -1388,7 +1388,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[96,64,3,3]
@@ -1401,7 +1401,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a2_3x3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[96,1,1,1],
@@ -1416,7 +1416,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a2_3x3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[96,1,1,1],
@@ -1431,7 +1431,7 @@
         "type":"activity",
         "name":"inception_a2_3x3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a2_3x3_scale":0
@@ -1449,7 +1449,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[64,384,1,1]
@@ -1462,7 +1462,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a2_3x3_2_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[64,1,1,1],
@@ -1477,7 +1477,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a2_3x3_2_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -1492,7 +1492,7 @@
         "type":"activity",
         "name":"inception_a2_3x3_2_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a2_3x3_2_reduce_scale":0
@@ -1510,7 +1510,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[96,64,3,3]
@@ -1523,7 +1523,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a2_3x3_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[96,1,1,1],
@@ -1538,7 +1538,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a2_3x3_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[96,1,1,1],
@@ -1553,7 +1553,7 @@
         "type":"activity",
         "name":"inception_a2_3x3_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a2_3x3_2_scale":0
@@ -1571,7 +1571,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[96,96,3,3]
@@ -1584,7 +1584,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a2_3x3_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[96,1,1,1],
@@ -1599,7 +1599,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a2_3x3_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[96,1,1,1],
@@ -1614,7 +1614,7 @@
         "type":"activity",
         "name":"inception_a2_3x3_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a2_3x3_3_scale":0
@@ -1628,7 +1628,7 @@
         "kernel_size":3,
         "method":"avg",
         "pad":1,
-        "stride":1,
+        "stride":1
       },
       "inputs":{
         "inception_a1_concat_inception_a1_concat_0_split":0
@@ -1646,7 +1646,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[96,384,1,1]
@@ -1659,7 +1659,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a2_1x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[96,1,1,1],
@@ -1674,7 +1674,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a2_1x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[96,1,1,1],
@@ -1689,7 +1689,7 @@
         "type":"activity",
         "name":"inception_a2_1x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a2_1x1_scale":0
@@ -1699,7 +1699,7 @@
       "attrs":{
         "type":"concat",
         "name":"inception_a2_concat",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "inception_a2_1x1_2_relu":0,
@@ -1729,7 +1729,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[96,384,1,1]
@@ -1742,7 +1742,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a3_1x1_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[96,1,1,1],
@@ -1757,7 +1757,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a3_1x1_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[96,1,1,1],
@@ -1772,7 +1772,7 @@
         "type":"activity",
         "name":"inception_a3_1x1_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a3_1x1_2_scale":0
@@ -1790,7 +1790,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[64,384,1,1]
@@ -1803,7 +1803,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a3_3x3_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[64,1,1,1],
@@ -1818,7 +1818,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a3_3x3_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -1833,7 +1833,7 @@
         "type":"activity",
         "name":"inception_a3_3x3_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a3_3x3_reduce_scale":0
@@ -1851,7 +1851,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[96,64,3,3]
@@ -1864,7 +1864,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a3_3x3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[96,1,1,1],
@@ -1879,7 +1879,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a3_3x3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[96,1,1,1],
@@ -1894,7 +1894,7 @@
         "type":"activity",
         "name":"inception_a3_3x3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a3_3x3_scale":0
@@ -1912,7 +1912,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[64,384,1,1]
@@ -1925,7 +1925,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a3_3x3_2_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[64,1,1,1],
@@ -1940,7 +1940,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a3_3x3_2_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -1955,7 +1955,7 @@
         "type":"activity",
         "name":"inception_a3_3x3_2_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a3_3x3_2_reduce_scale":0
@@ -1973,7 +1973,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[96,64,3,3]
@@ -1986,7 +1986,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a3_3x3_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[96,1,1,1],
@@ -2001,7 +2001,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a3_3x3_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[96,1,1,1],
@@ -2016,7 +2016,7 @@
         "type":"activity",
         "name":"inception_a3_3x3_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a3_3x3_2_scale":0
@@ -2034,7 +2034,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[96,96,3,3]
@@ -2047,7 +2047,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a3_3x3_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[96,1,1,1],
@@ -2062,7 +2062,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a3_3x3_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[96,1,1,1],
@@ -2077,7 +2077,7 @@
         "type":"activity",
         "name":"inception_a3_3x3_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a3_3x3_3_scale":0
@@ -2091,7 +2091,7 @@
         "kernel_size":3,
         "method":"avg",
         "pad":1,
-        "stride":1,
+        "stride":1
       },
       "inputs":{
         "inception_a2_concat_inception_a2_concat_0_split":0
@@ -2109,7 +2109,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[96,384,1,1]
@@ -2122,7 +2122,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a3_1x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[96,1,1,1],
@@ -2137,7 +2137,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a3_1x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[96,1,1,1],
@@ -2152,7 +2152,7 @@
         "type":"activity",
         "name":"inception_a3_1x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a3_1x1_scale":0
@@ -2162,7 +2162,7 @@
       "attrs":{
         "type":"concat",
         "name":"inception_a3_concat",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "inception_a3_1x1_2_relu":0,
@@ -2192,7 +2192,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[96,384,1,1]
@@ -2205,7 +2205,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a4_1x1_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[96,1,1,1],
@@ -2220,7 +2220,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a4_1x1_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[96,1,1,1],
@@ -2235,7 +2235,7 @@
         "type":"activity",
         "name":"inception_a4_1x1_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a4_1x1_2_scale":0
@@ -2253,7 +2253,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[64,384,1,1]
@@ -2266,7 +2266,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a4_3x3_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[64,1,1,1],
@@ -2281,7 +2281,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a4_3x3_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -2296,7 +2296,7 @@
         "type":"activity",
         "name":"inception_a4_3x3_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a4_3x3_reduce_scale":0
@@ -2314,7 +2314,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[96,64,3,3]
@@ -2327,7 +2327,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a4_3x3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[96,1,1,1],
@@ -2342,7 +2342,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a4_3x3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[96,1,1,1],
@@ -2357,7 +2357,7 @@
         "type":"activity",
         "name":"inception_a4_3x3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a4_3x3_scale":0
@@ -2375,7 +2375,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[64,384,1,1]
@@ -2388,7 +2388,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a4_3x3_2_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[64,1,1,1],
@@ -2403,7 +2403,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a4_3x3_2_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[64,1,1,1],
@@ -2418,7 +2418,7 @@
         "type":"activity",
         "name":"inception_a4_3x3_2_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a4_3x3_2_reduce_scale":0
@@ -2436,7 +2436,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[96,64,3,3]
@@ -2449,7 +2449,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a4_3x3_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[96,1,1,1],
@@ -2464,7 +2464,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a4_3x3_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[96,1,1,1],
@@ -2479,7 +2479,7 @@
         "type":"activity",
         "name":"inception_a4_3x3_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a4_3x3_2_scale":0
@@ -2497,7 +2497,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[96,96,3,3]
@@ -2510,7 +2510,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a4_3x3_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[96,1,1,1],
@@ -2525,7 +2525,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a4_3x3_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[96,1,1,1],
@@ -2540,7 +2540,7 @@
         "type":"activity",
         "name":"inception_a4_3x3_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a4_3x3_3_scale":0
@@ -2554,7 +2554,7 @@
         "kernel_size":3,
         "method":"avg",
         "pad":1,
-        "stride":1,
+        "stride":1
       },
       "inputs":{
         "inception_a3_concat_inception_a3_concat_0_split":0
@@ -2572,7 +2572,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[96,384,1,1]
@@ -2585,7 +2585,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_a4_1x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[96,1,1,1],
@@ -2600,7 +2600,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_a4_1x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[96,1,1,1],
@@ -2615,7 +2615,7 @@
         "type":"activity",
         "name":"inception_a4_1x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_a4_1x1_scale":0
@@ -2625,7 +2625,7 @@
       "attrs":{
         "type":"concat",
         "name":"inception_a4_concat",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "inception_a4_1x1_2_relu":0,
@@ -2655,7 +2655,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":2,
-        "stride_w":2,
+        "stride_w":2
       },
       "params":{
         "weight":[384,384,3,3]
@@ -2668,7 +2668,7 @@
       "attrs":{
         "type":"bn",
         "name":"reduction_a_3x3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[384,1,1,1],
@@ -2683,7 +2683,7 @@
       "attrs":{
         "type":"scale",
         "name":"reduction_a_3x3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[384,1,1,1],
@@ -2698,7 +2698,7 @@
         "type":"activity",
         "name":"reduction_a_3x3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "reduction_a_3x3_scale":0
@@ -2716,7 +2716,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[192,384,1,1]
@@ -2729,7 +2729,7 @@
       "attrs":{
         "type":"bn",
         "name":"reduction_a_3x3_2_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[192,1,1,1],
@@ -2744,7 +2744,7 @@
       "attrs":{
         "type":"scale",
         "name":"reduction_a_3x3_2_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -2759,7 +2759,7 @@
         "type":"activity",
         "name":"reduction_a_3x3_2_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "reduction_a_3x3_2_reduce_scale":0
@@ -2777,7 +2777,7 @@
         "pad_h":1,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[224,192,3,3]
@@ -2790,7 +2790,7 @@
       "attrs":{
         "type":"bn",
         "name":"reduction_a_3x3_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[224,1,1,1],
@@ -2805,7 +2805,7 @@
       "attrs":{
         "type":"scale",
         "name":"reduction_a_3x3_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[224,1,1,1],
@@ -2820,7 +2820,7 @@
         "type":"activity",
         "name":"reduction_a_3x3_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "reduction_a_3x3_2_scale":0
@@ -2838,7 +2838,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":2,
-        "stride_w":2,
+        "stride_w":2
       },
       "params":{
         "weight":[256,224,3,3]
@@ -2851,7 +2851,7 @@
       "attrs":{
         "type":"bn",
         "name":"reduction_a_3x3_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -2866,7 +2866,7 @@
       "attrs":{
         "type":"scale",
         "name":"reduction_a_3x3_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -2881,7 +2881,7 @@
         "type":"activity",
         "name":"reduction_a_3x3_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "reduction_a_3x3_3_scale":0
@@ -2895,7 +2895,7 @@
         "kernel_size":3,
         "method":"max",
         "pad":0,
-        "stride":2,
+        "stride":2
       },
       "inputs":{
         "inception_a4_concat_inception_a4_concat_0_split":0
@@ -2905,7 +2905,7 @@
       "attrs":{
         "type":"concat",
         "name":"reduction_a_concat",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "reduction_a_3x3_3_relu":1,
@@ -2934,7 +2934,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[384,1024,1,1]
@@ -2947,7 +2947,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b1_1x1_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[384,1,1,1],
@@ -2962,7 +2962,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b1_1x1_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[384,1,1,1],
@@ -2977,7 +2977,7 @@
         "type":"activity",
         "name":"inception_b1_1x1_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b1_1x1_2_scale":0
@@ -2995,7 +2995,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[192,1024,1,1]
@@ -3008,7 +3008,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b1_1x7_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[192,1,1,1],
@@ -3023,7 +3023,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b1_1x7_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -3038,7 +3038,7 @@
         "type":"activity",
         "name":"inception_b1_1x7_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b1_1x7_reduce_scale":0
@@ -3056,7 +3056,7 @@
         "pad_h":0,
         "pad_w":3,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[224,192,1,7]
@@ -3069,7 +3069,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b1_1x7_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[224,1,1,1],
@@ -3084,7 +3084,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b1_1x7_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[224,1,1,1],
@@ -3099,7 +3099,7 @@
         "type":"activity",
         "name":"inception_b1_1x7_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b1_1x7_scale":0
@@ -3117,7 +3117,7 @@
         "pad_h":3,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,224,7,1]
@@ -3130,7 +3130,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b1_7x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -3145,7 +3145,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b1_7x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -3160,7 +3160,7 @@
         "type":"activity",
         "name":"inception_b1_7x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b1_7x1_scale":0
@@ -3178,7 +3178,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[192,1024,1,1]
@@ -3191,7 +3191,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b1_7x1_2_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[192,1,1,1],
@@ -3206,7 +3206,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b1_7x1_2_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -3221,7 +3221,7 @@
         "type":"activity",
         "name":"inception_b1_7x1_2_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b1_7x1_2_reduce_scale":0
@@ -3239,7 +3239,7 @@
         "pad_h":3,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[192,192,7,1]
@@ -3252,7 +3252,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b1_7x1_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[192,1,1,1],
@@ -3267,7 +3267,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b1_7x1_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -3282,7 +3282,7 @@
         "type":"activity",
         "name":"inception_b1_7x1_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b1_7x1_2_scale":0
@@ -3300,7 +3300,7 @@
         "pad_h":0,
         "pad_w":3,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[224,192,1,7]
@@ -3313,7 +3313,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b1_1x7_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[224,1,1,1],
@@ -3328,7 +3328,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b1_1x7_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[224,1,1,1],
@@ -3343,7 +3343,7 @@
         "type":"activity",
         "name":"inception_b1_1x7_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b1_1x7_2_scale":0
@@ -3361,7 +3361,7 @@
         "pad_h":3,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[224,224,7,1]
@@ -3374,7 +3374,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b1_7x1_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[224,1,1,1],
@@ -3389,7 +3389,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b1_7x1_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[224,1,1,1],
@@ -3404,7 +3404,7 @@
         "type":"activity",
         "name":"inception_b1_7x1_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b1_7x1_3_scale":0
@@ -3422,7 +3422,7 @@
         "pad_h":0,
         "pad_w":3,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,224,1,7]
@@ -3435,7 +3435,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b1_1x7_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -3450,7 +3450,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b1_1x7_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -3465,7 +3465,7 @@
         "type":"activity",
         "name":"inception_b1_1x7_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b1_1x7_3_scale":0
@@ -3479,7 +3479,7 @@
         "kernel_size":3,
         "method":"avg",
         "pad":1,
-        "stride":1,
+        "stride":1
       },
       "inputs":{
         "reduction_a_concat_reduction_a_concat_0_split":0
@@ -3497,7 +3497,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,1024,1,1]
@@ -3510,7 +3510,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b1_1x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[128,1,1,1],
@@ -3525,7 +3525,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b1_1x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -3540,7 +3540,7 @@
         "type":"activity",
         "name":"inception_b1_1x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b1_1x1_scale":0
@@ -3550,7 +3550,7 @@
       "attrs":{
         "type":"concat",
         "name":"inception_b1_concat",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "inception_b1_1x1_2_relu":0,
@@ -3580,7 +3580,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[384,1024,1,1]
@@ -3593,7 +3593,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b2_1x1_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[384,1,1,1],
@@ -3608,7 +3608,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b2_1x1_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[384,1,1,1],
@@ -3623,7 +3623,7 @@
         "type":"activity",
         "name":"inception_b2_1x1_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b2_1x1_2_scale":0
@@ -3641,7 +3641,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[192,1024,1,1]
@@ -3654,7 +3654,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b2_1x7_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[192,1,1,1],
@@ -3669,7 +3669,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b2_1x7_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -3684,7 +3684,7 @@
         "type":"activity",
         "name":"inception_b2_1x7_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b2_1x7_reduce_scale":0
@@ -3702,7 +3702,7 @@
         "pad_h":0,
         "pad_w":3,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[224,192,1,7]
@@ -3715,7 +3715,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b2_1x7_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[224,1,1,1],
@@ -3730,7 +3730,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b2_1x7_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[224,1,1,1],
@@ -3745,7 +3745,7 @@
         "type":"activity",
         "name":"inception_b2_1x7_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b2_1x7_scale":0
@@ -3763,7 +3763,7 @@
         "pad_h":3,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,224,7,1]
@@ -3776,7 +3776,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b2_7x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -3791,7 +3791,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b2_7x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -3806,7 +3806,7 @@
         "type":"activity",
         "name":"inception_b2_7x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b2_7x1_scale":0
@@ -3824,7 +3824,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[192,1024,1,1]
@@ -3837,7 +3837,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b2_7x1_2_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[192,1,1,1],
@@ -3852,7 +3852,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b2_7x1_2_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -3867,7 +3867,7 @@
         "type":"activity",
         "name":"inception_b2_7x1_2_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b2_7x1_2_reduce_scale":0
@@ -3885,7 +3885,7 @@
         "pad_h":3,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[192,192,7,1]
@@ -3898,7 +3898,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b2_7x1_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[192,1,1,1],
@@ -3913,7 +3913,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b2_7x1_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -3928,7 +3928,7 @@
         "type":"activity",
         "name":"inception_b2_7x1_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b2_7x1_2_scale":0
@@ -3946,7 +3946,7 @@
         "pad_h":0,
         "pad_w":3,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[224,192,1,7]
@@ -3959,7 +3959,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b2_1x7_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[224,1,1,1],
@@ -3974,7 +3974,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b2_1x7_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[224,1,1,1],
@@ -3989,7 +3989,7 @@
         "type":"activity",
         "name":"inception_b2_1x7_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b2_1x7_2_scale":0
@@ -4007,7 +4007,7 @@
         "pad_h":3,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[224,224,7,1]
@@ -4020,7 +4020,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b2_7x1_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[224,1,1,1],
@@ -4035,7 +4035,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b2_7x1_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[224,1,1,1],
@@ -4050,7 +4050,7 @@
         "type":"activity",
         "name":"inception_b2_7x1_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b2_7x1_3_scale":0
@@ -4068,7 +4068,7 @@
         "pad_h":0,
         "pad_w":3,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,224,1,7]
@@ -4081,7 +4081,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b2_1x7_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -4096,7 +4096,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b2_1x7_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -4111,7 +4111,7 @@
         "type":"activity",
         "name":"inception_b2_1x7_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b2_1x7_3_scale":0
@@ -4125,7 +4125,7 @@
         "kernel_size":3,
         "method":"avg",
         "pad":1,
-        "stride":1,
+        "stride":1
       },
       "inputs":{
         "inception_b1_concat_inception_b1_concat_0_split":0
@@ -4143,7 +4143,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,1024,1,1]
@@ -4156,7 +4156,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b2_1x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[128,1,1,1],
@@ -4171,7 +4171,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b2_1x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -4186,7 +4186,7 @@
         "type":"activity",
         "name":"inception_b2_1x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b2_1x1_scale":0
@@ -4196,7 +4196,7 @@
       "attrs":{
         "type":"concat",
         "name":"inception_b2_concat",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "inception_b2_1x1_2_relu":0,
@@ -4226,7 +4226,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[384,1024,1,1]
@@ -4239,7 +4239,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b3_1x1_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[384,1,1,1],
@@ -4254,7 +4254,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b3_1x1_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[384,1,1,1],
@@ -4269,7 +4269,7 @@
         "type":"activity",
         "name":"inception_b3_1x1_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b3_1x1_2_scale":0
@@ -4287,7 +4287,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[192,1024,1,1]
@@ -4300,7 +4300,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b3_1x7_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[192,1,1,1],
@@ -4315,7 +4315,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b3_1x7_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -4330,7 +4330,7 @@
         "type":"activity",
         "name":"inception_b3_1x7_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b3_1x7_reduce_scale":0
@@ -4348,7 +4348,7 @@
         "pad_h":0,
         "pad_w":3,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[224,192,1,7]
@@ -4361,7 +4361,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b3_1x7_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[224,1,1,1],
@@ -4376,7 +4376,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b3_1x7_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[224,1,1,1],
@@ -4391,7 +4391,7 @@
         "type":"activity",
         "name":"inception_b3_1x7_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b3_1x7_scale":0
@@ -4409,7 +4409,7 @@
         "pad_h":3,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,224,7,1]
@@ -4422,7 +4422,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b3_7x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -4437,7 +4437,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b3_7x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -4452,7 +4452,7 @@
         "type":"activity",
         "name":"inception_b3_7x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b3_7x1_scale":0
@@ -4470,7 +4470,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[192,1024,1,1]
@@ -4483,7 +4483,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b3_7x1_2_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[192,1,1,1],
@@ -4498,7 +4498,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b3_7x1_2_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -4513,7 +4513,7 @@
         "type":"activity",
         "name":"inception_b3_7x1_2_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b3_7x1_2_reduce_scale":0
@@ -4531,7 +4531,7 @@
         "pad_h":3,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[192,192,7,1]
@@ -4544,7 +4544,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b3_7x1_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[192,1,1,1],
@@ -4559,7 +4559,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b3_7x1_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -4574,7 +4574,7 @@
         "type":"activity",
         "name":"inception_b3_7x1_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b3_7x1_2_scale":0
@@ -4592,7 +4592,7 @@
         "pad_h":0,
         "pad_w":3,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[224,192,1,7]
@@ -4605,7 +4605,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b3_1x7_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[224,1,1,1],
@@ -4620,7 +4620,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b3_1x7_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[224,1,1,1],
@@ -4635,7 +4635,7 @@
         "type":"activity",
         "name":"inception_b3_1x7_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b3_1x7_2_scale":0
@@ -4653,7 +4653,7 @@
         "pad_h":3,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[224,224,7,1]
@@ -4666,7 +4666,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b3_7x1_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[224,1,1,1],
@@ -4681,7 +4681,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b3_7x1_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[224,1,1,1],
@@ -4696,7 +4696,7 @@
         "type":"activity",
         "name":"inception_b3_7x1_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b3_7x1_3_scale":0
@@ -4714,7 +4714,7 @@
         "pad_h":0,
         "pad_w":3,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,224,1,7]
@@ -4727,7 +4727,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b3_1x7_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -4742,7 +4742,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b3_1x7_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -4757,7 +4757,7 @@
         "type":"activity",
         "name":"inception_b3_1x7_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b3_1x7_3_scale":0
@@ -4771,7 +4771,7 @@
         "kernel_size":3,
         "method":"avg",
         "pad":1,
-        "stride":1,
+        "stride":1
       },
       "inputs":{
         "inception_b2_concat_inception_b2_concat_0_split":0
@@ -4789,7 +4789,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,1024,1,1]
@@ -4802,7 +4802,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b3_1x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[128,1,1,1],
@@ -4817,7 +4817,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b3_1x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -4832,7 +4832,7 @@
         "type":"activity",
         "name":"inception_b3_1x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b3_1x1_scale":0
@@ -4842,7 +4842,7 @@
       "attrs":{
         "type":"concat",
         "name":"inception_b3_concat",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "inception_b3_1x1_2_relu":0,
@@ -4872,7 +4872,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[384,1024,1,1]
@@ -4885,7 +4885,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b4_1x1_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[384,1,1,1],
@@ -4900,7 +4900,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b4_1x1_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[384,1,1,1],
@@ -4915,7 +4915,7 @@
         "type":"activity",
         "name":"inception_b4_1x1_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b4_1x1_2_scale":0
@@ -4933,7 +4933,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[192,1024,1,1]
@@ -4946,7 +4946,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b4_1x7_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[192,1,1,1],
@@ -4961,7 +4961,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b4_1x7_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -4976,7 +4976,7 @@
         "type":"activity",
         "name":"inception_b4_1x7_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b4_1x7_reduce_scale":0
@@ -4994,7 +4994,7 @@
         "pad_h":0,
         "pad_w":3,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[224,192,1,7]
@@ -5007,7 +5007,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b4_1x7_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[224,1,1,1],
@@ -5022,7 +5022,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b4_1x7_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[224,1,1,1],
@@ -5037,7 +5037,7 @@
         "type":"activity",
         "name":"inception_b4_1x7_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b4_1x7_scale":0
@@ -5055,7 +5055,7 @@
         "pad_h":3,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,224,7,1]
@@ -5068,7 +5068,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b4_7x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -5083,7 +5083,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b4_7x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -5098,7 +5098,7 @@
         "type":"activity",
         "name":"inception_b4_7x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b4_7x1_scale":0
@@ -5116,7 +5116,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[192,1024,1,1]
@@ -5129,7 +5129,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b4_7x1_2_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[192,1,1,1],
@@ -5144,7 +5144,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b4_7x1_2_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -5159,7 +5159,7 @@
         "type":"activity",
         "name":"inception_b4_7x1_2_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b4_7x1_2_reduce_scale":0
@@ -5177,7 +5177,7 @@
         "pad_h":3,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[192,192,7,1]
@@ -5190,7 +5190,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b4_7x1_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[192,1,1,1],
@@ -5205,7 +5205,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b4_7x1_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -5220,7 +5220,7 @@
         "type":"activity",
         "name":"inception_b4_7x1_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b4_7x1_2_scale":0
@@ -5238,7 +5238,7 @@
         "pad_h":0,
         "pad_w":3,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[224,192,1,7]
@@ -5251,7 +5251,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b4_1x7_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[224,1,1,1],
@@ -5266,7 +5266,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b4_1x7_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[224,1,1,1],
@@ -5281,7 +5281,7 @@
         "type":"activity",
         "name":"inception_b4_1x7_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b4_1x7_2_scale":0
@@ -5299,7 +5299,7 @@
         "pad_h":3,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[224,224,7,1]
@@ -5312,7 +5312,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b4_7x1_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[224,1,1,1],
@@ -5327,7 +5327,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b4_7x1_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[224,1,1,1],
@@ -5342,7 +5342,7 @@
         "type":"activity",
         "name":"inception_b4_7x1_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b4_7x1_3_scale":0
@@ -5360,7 +5360,7 @@
         "pad_h":0,
         "pad_w":3,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,224,1,7]
@@ -5373,7 +5373,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b4_1x7_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -5388,7 +5388,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b4_1x7_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -5403,7 +5403,7 @@
         "type":"activity",
         "name":"inception_b4_1x7_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b4_1x7_3_scale":0
@@ -5417,7 +5417,7 @@
         "kernel_size":3,
         "method":"avg",
         "pad":1,
-        "stride":1,
+        "stride":1
       },
       "inputs":{
         "inception_b3_concat_inception_b3_concat_0_split":0
@@ -5435,7 +5435,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,1024,1,1]
@@ -5448,7 +5448,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b4_1x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[128,1,1,1],
@@ -5463,7 +5463,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b4_1x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -5478,7 +5478,7 @@
         "type":"activity",
         "name":"inception_b4_1x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b4_1x1_scale":0
@@ -5488,7 +5488,7 @@
       "attrs":{
         "type":"concat",
         "name":"inception_b4_concat",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "inception_b4_1x1_2_relu":0,
@@ -5518,7 +5518,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[384,1024,1,1]
@@ -5531,7 +5531,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b5_1x1_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[384,1,1,1],
@@ -5546,7 +5546,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b5_1x1_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[384,1,1,1],
@@ -5561,7 +5561,7 @@
         "type":"activity",
         "name":"inception_b5_1x1_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b5_1x1_2_scale":0
@@ -5579,7 +5579,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[192,1024,1,1]
@@ -5592,7 +5592,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b5_1x7_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[192,1,1,1],
@@ -5607,7 +5607,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b5_1x7_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -5622,7 +5622,7 @@
         "type":"activity",
         "name":"inception_b5_1x7_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b5_1x7_reduce_scale":0
@@ -5640,7 +5640,7 @@
         "pad_h":0,
         "pad_w":3,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[224,192,1,7]
@@ -5653,7 +5653,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b5_1x7_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[224,1,1,1],
@@ -5668,7 +5668,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b5_1x7_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[224,1,1,1],
@@ -5683,7 +5683,7 @@
         "type":"activity",
         "name":"inception_b5_1x7_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b5_1x7_scale":0
@@ -5701,7 +5701,7 @@
         "pad_h":3,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,224,7,1]
@@ -5714,7 +5714,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b5_7x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -5729,7 +5729,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b5_7x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -5744,7 +5744,7 @@
         "type":"activity",
         "name":"inception_b5_7x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b5_7x1_scale":0
@@ -5762,7 +5762,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[192,1024,1,1]
@@ -5775,7 +5775,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b5_7x1_2_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[192,1,1,1],
@@ -5790,7 +5790,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b5_7x1_2_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -5805,7 +5805,7 @@
         "type":"activity",
         "name":"inception_b5_7x1_2_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b5_7x1_2_reduce_scale":0
@@ -5823,7 +5823,7 @@
         "pad_h":3,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[192,192,7,1]
@@ -5836,7 +5836,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b5_7x1_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[192,1,1,1],
@@ -5851,7 +5851,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b5_7x1_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -5866,7 +5866,7 @@
         "type":"activity",
         "name":"inception_b5_7x1_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b5_7x1_2_scale":0
@@ -5884,7 +5884,7 @@
         "pad_h":0,
         "pad_w":3,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[224,192,1,7]
@@ -5897,7 +5897,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b5_1x7_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[224,1,1,1],
@@ -5912,7 +5912,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b5_1x7_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[224,1,1,1],
@@ -5927,7 +5927,7 @@
         "type":"activity",
         "name":"inception_b5_1x7_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b5_1x7_2_scale":0
@@ -5945,7 +5945,7 @@
         "pad_h":3,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[224,224,7,1]
@@ -5958,7 +5958,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b5_7x1_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[224,1,1,1],
@@ -5973,7 +5973,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b5_7x1_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[224,1,1,1],
@@ -5988,7 +5988,7 @@
         "type":"activity",
         "name":"inception_b5_7x1_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b5_7x1_3_scale":0
@@ -6006,7 +6006,7 @@
         "pad_h":0,
         "pad_w":3,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,224,1,7]
@@ -6019,7 +6019,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b5_1x7_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -6034,7 +6034,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b5_1x7_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -6049,7 +6049,7 @@
         "type":"activity",
         "name":"inception_b5_1x7_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b5_1x7_3_scale":0
@@ -6063,7 +6063,7 @@
         "kernel_size":3,
         "method":"avg",
         "pad":1,
-        "stride":1,
+        "stride":1
       },
       "inputs":{
         "inception_b4_concat_inception_b4_concat_0_split":0
@@ -6081,7 +6081,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,1024,1,1]
@@ -6094,7 +6094,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b5_1x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[128,1,1,1],
@@ -6109,7 +6109,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b5_1x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -6124,7 +6124,7 @@
         "type":"activity",
         "name":"inception_b5_1x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b5_1x1_scale":0
@@ -6134,7 +6134,7 @@
       "attrs":{
         "type":"concat",
         "name":"inception_b5_concat",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "inception_b5_1x1_2_relu":0,
@@ -6164,7 +6164,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[384,1024,1,1]
@@ -6177,7 +6177,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b6_1x1_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[384,1,1,1],
@@ -6192,7 +6192,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b6_1x1_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[384,1,1,1],
@@ -6207,7 +6207,7 @@
         "type":"activity",
         "name":"inception_b6_1x1_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b6_1x1_2_scale":0
@@ -6225,7 +6225,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[192,1024,1,1]
@@ -6238,7 +6238,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b6_1x7_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[192,1,1,1],
@@ -6253,7 +6253,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b6_1x7_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -6268,7 +6268,7 @@
         "type":"activity",
         "name":"inception_b6_1x7_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b6_1x7_reduce_scale":0
@@ -6286,7 +6286,7 @@
         "pad_h":0,
         "pad_w":3,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[224,192,1,7]
@@ -6299,7 +6299,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b6_1x7_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[224,1,1,1],
@@ -6314,7 +6314,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b6_1x7_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[224,1,1,1],
@@ -6329,7 +6329,7 @@
         "type":"activity",
         "name":"inception_b6_1x7_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b6_1x7_scale":0
@@ -6347,7 +6347,7 @@
         "pad_h":3,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,224,7,1]
@@ -6360,7 +6360,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b6_7x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -6375,7 +6375,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b6_7x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -6390,7 +6390,7 @@
         "type":"activity",
         "name":"inception_b6_7x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b6_7x1_scale":0
@@ -6408,7 +6408,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[192,1024,1,1]
@@ -6421,7 +6421,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b6_7x1_2_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[192,1,1,1],
@@ -6436,7 +6436,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b6_7x1_2_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -6451,7 +6451,7 @@
         "type":"activity",
         "name":"inception_b6_7x1_2_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b6_7x1_2_reduce_scale":0
@@ -6469,7 +6469,7 @@
         "pad_h":3,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[192,192,7,1]
@@ -6482,7 +6482,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b6_7x1_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[192,1,1,1],
@@ -6497,7 +6497,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b6_7x1_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -6512,7 +6512,7 @@
         "type":"activity",
         "name":"inception_b6_7x1_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b6_7x1_2_scale":0
@@ -6530,7 +6530,7 @@
         "pad_h":0,
         "pad_w":3,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[224,192,1,7]
@@ -6543,7 +6543,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b6_1x7_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[224,1,1,1],
@@ -6558,7 +6558,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b6_1x7_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[224,1,1,1],
@@ -6573,7 +6573,7 @@
         "type":"activity",
         "name":"inception_b6_1x7_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b6_1x7_2_scale":0
@@ -6591,7 +6591,7 @@
         "pad_h":3,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[224,224,7,1]
@@ -6604,7 +6604,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b6_7x1_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[224,1,1,1],
@@ -6619,7 +6619,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b6_7x1_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[224,1,1,1],
@@ -6634,7 +6634,7 @@
         "type":"activity",
         "name":"inception_b6_7x1_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b6_7x1_3_scale":0
@@ -6652,7 +6652,7 @@
         "pad_h":0,
         "pad_w":3,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,224,1,7]
@@ -6665,7 +6665,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b6_1x7_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -6680,7 +6680,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b6_1x7_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -6695,7 +6695,7 @@
         "type":"activity",
         "name":"inception_b6_1x7_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b6_1x7_3_scale":0
@@ -6709,7 +6709,7 @@
         "kernel_size":3,
         "method":"avg",
         "pad":1,
-        "stride":1,
+        "stride":1
       },
       "inputs":{
         "inception_b5_concat_inception_b5_concat_0_split":0
@@ -6727,7 +6727,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,1024,1,1]
@@ -6740,7 +6740,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b6_1x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[128,1,1,1],
@@ -6755,7 +6755,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b6_1x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -6770,7 +6770,7 @@
         "type":"activity",
         "name":"inception_b6_1x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b6_1x1_scale":0
@@ -6780,7 +6780,7 @@
       "attrs":{
         "type":"concat",
         "name":"inception_b6_concat",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "inception_b6_1x1_2_relu":0,
@@ -6810,7 +6810,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[384,1024,1,1]
@@ -6823,7 +6823,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b7_1x1_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[384,1,1,1],
@@ -6838,7 +6838,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b7_1x1_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[384,1,1,1],
@@ -6853,7 +6853,7 @@
         "type":"activity",
         "name":"inception_b7_1x1_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b7_1x1_2_scale":0
@@ -6871,7 +6871,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[192,1024,1,1]
@@ -6884,7 +6884,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b7_1x7_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[192,1,1,1],
@@ -6899,7 +6899,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b7_1x7_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -6914,7 +6914,7 @@
         "type":"activity",
         "name":"inception_b7_1x7_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b7_1x7_reduce_scale":0
@@ -6932,7 +6932,7 @@
         "pad_h":0,
         "pad_w":3,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[224,192,1,7]
@@ -6945,7 +6945,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b7_1x7_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[224,1,1,1],
@@ -6960,7 +6960,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b7_1x7_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[224,1,1,1],
@@ -6975,7 +6975,7 @@
         "type":"activity",
         "name":"inception_b7_1x7_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b7_1x7_scale":0
@@ -6993,7 +6993,7 @@
         "pad_h":3,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,224,7,1]
@@ -7006,7 +7006,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b7_7x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -7021,7 +7021,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b7_7x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -7036,7 +7036,7 @@
         "type":"activity",
         "name":"inception_b7_7x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b7_7x1_scale":0
@@ -7054,7 +7054,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[192,1024,1,1]
@@ -7067,7 +7067,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b7_7x1_2_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[192,1,1,1],
@@ -7082,7 +7082,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b7_7x1_2_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -7097,7 +7097,7 @@
         "type":"activity",
         "name":"inception_b7_7x1_2_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b7_7x1_2_reduce_scale":0
@@ -7115,7 +7115,7 @@
         "pad_h":3,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[192,192,7,1]
@@ -7128,7 +7128,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b7_7x1_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[192,1,1,1],
@@ -7143,7 +7143,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b7_7x1_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -7158,7 +7158,7 @@
         "type":"activity",
         "name":"inception_b7_7x1_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b7_7x1_2_scale":0
@@ -7176,7 +7176,7 @@
         "pad_h":0,
         "pad_w":3,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[224,192,1,7]
@@ -7189,7 +7189,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b7_1x7_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[224,1,1,1],
@@ -7204,7 +7204,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b7_1x7_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[224,1,1,1],
@@ -7219,7 +7219,7 @@
         "type":"activity",
         "name":"inception_b7_1x7_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b7_1x7_2_scale":0
@@ -7237,7 +7237,7 @@
         "pad_h":3,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[224,224,7,1]
@@ -7250,7 +7250,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b7_7x1_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[224,1,1,1],
@@ -7265,7 +7265,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b7_7x1_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[224,1,1,1],
@@ -7280,7 +7280,7 @@
         "type":"activity",
         "name":"inception_b7_7x1_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b7_7x1_3_scale":0
@@ -7298,7 +7298,7 @@
         "pad_h":0,
         "pad_w":3,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,224,1,7]
@@ -7311,7 +7311,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b7_1x7_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -7326,7 +7326,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b7_1x7_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -7341,7 +7341,7 @@
         "type":"activity",
         "name":"inception_b7_1x7_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b7_1x7_3_scale":0
@@ -7355,7 +7355,7 @@
         "kernel_size":3,
         "method":"avg",
         "pad":1,
-        "stride":1,
+        "stride":1
       },
       "inputs":{
         "inception_b6_concat_inception_b6_concat_0_split":0
@@ -7373,7 +7373,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[128,1024,1,1]
@@ -7386,7 +7386,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_b7_1x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[128,1,1,1],
@@ -7401,7 +7401,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_b7_1x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[128,1,1,1],
@@ -7416,7 +7416,7 @@
         "type":"activity",
         "name":"inception_b7_1x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_b7_1x1_scale":0
@@ -7426,7 +7426,7 @@
       "attrs":{
         "type":"concat",
         "name":"inception_b7_concat",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "inception_b7_1x1_2_relu":0,
@@ -7456,7 +7456,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[192,1024,1,1]
@@ -7469,7 +7469,7 @@
       "attrs":{
         "type":"bn",
         "name":"reduction_b_3x3_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[192,1,1,1],
@@ -7484,7 +7484,7 @@
       "attrs":{
         "type":"scale",
         "name":"reduction_b_3x3_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -7499,7 +7499,7 @@
         "type":"activity",
         "name":"reduction_b_3x3_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "reduction_b_3x3_reduce_scale":0
@@ -7517,7 +7517,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":2,
-        "stride_w":2,
+        "stride_w":2
       },
       "params":{
         "weight":[192,192,3,3]
@@ -7530,7 +7530,7 @@
       "attrs":{
         "type":"bn",
         "name":"reduction_b_3x3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[192,1,1,1],
@@ -7545,7 +7545,7 @@
       "attrs":{
         "type":"scale",
         "name":"reduction_b_3x3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[192,1,1,1],
@@ -7560,7 +7560,7 @@
         "type":"activity",
         "name":"reduction_b_3x3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "reduction_b_3x3_scale":0
@@ -7578,7 +7578,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,1024,1,1]
@@ -7591,7 +7591,7 @@
       "attrs":{
         "type":"bn",
         "name":"reduction_b_1x7_reduce_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -7606,7 +7606,7 @@
       "attrs":{
         "type":"scale",
         "name":"reduction_b_1x7_reduce_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -7621,7 +7621,7 @@
         "type":"activity",
         "name":"reduction_b_1x7_reduce_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "reduction_b_1x7_reduce_scale":0
@@ -7639,7 +7639,7 @@
         "pad_h":0,
         "pad_w":3,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,256,1,7]
@@ -7652,7 +7652,7 @@
       "attrs":{
         "type":"bn",
         "name":"reduction_b_1x7_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -7667,7 +7667,7 @@
       "attrs":{
         "type":"scale",
         "name":"reduction_b_1x7_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -7682,7 +7682,7 @@
         "type":"activity",
         "name":"reduction_b_1x7_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "reduction_b_1x7_scale":0
@@ -7700,7 +7700,7 @@
         "pad_h":3,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[320,256,7,1]
@@ -7713,7 +7713,7 @@
       "attrs":{
         "type":"bn",
         "name":"reduction_b_7x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[320,1,1,1],
@@ -7728,7 +7728,7 @@
       "attrs":{
         "type":"scale",
         "name":"reduction_b_7x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[320,1,1,1],
@@ -7743,7 +7743,7 @@
         "type":"activity",
         "name":"reduction_b_7x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "reduction_b_7x1_scale":0
@@ -7761,7 +7761,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":2,
-        "stride_w":2,
+        "stride_w":2
       },
       "params":{
         "weight":[320,320,3,3]
@@ -7774,7 +7774,7 @@
       "attrs":{
         "type":"bn",
         "name":"reduction_b_3x3_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[320,1,1,1],
@@ -7789,7 +7789,7 @@
       "attrs":{
         "type":"scale",
         "name":"reduction_b_3x3_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[320,1,1,1],
@@ -7804,7 +7804,7 @@
         "type":"activity",
         "name":"reduction_b_3x3_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "reduction_b_3x3_2_scale":0
@@ -7818,7 +7818,7 @@
         "kernel_size":3,
         "method":"max",
         "pad":0,
-        "stride":2,
+        "stride":2
       },
       "inputs":{
         "inception_b7_concat_inception_b7_concat_0_split":0
@@ -7828,7 +7828,7 @@
       "attrs":{
         "type":"concat",
         "name":"reduction_b_concat",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "reduction_b_3x3_2_relu":1,
@@ -7857,7 +7857,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,1536,1,1]
@@ -7870,7 +7870,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c1_1x1_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -7885,7 +7885,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c1_1x1_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -7900,7 +7900,7 @@
         "type":"activity",
         "name":"inception_c1_1x1_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c1_1x1_2_scale":0
@@ -7918,7 +7918,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[384,1536,1,1]
@@ -7931,7 +7931,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c1_1x1_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[384,1,1,1],
@@ -7946,7 +7946,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c1_1x1_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[384,1,1,1],
@@ -7961,7 +7961,7 @@
         "type":"activity",
         "name":"inception_c1_1x1_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c1_1x1_3_scale":0
@@ -7988,7 +7988,7 @@
         "pad_h":0,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,384,1,3]
@@ -8001,7 +8001,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c1_1x3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -8016,7 +8016,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c1_1x3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -8031,7 +8031,7 @@
         "type":"activity",
         "name":"inception_c1_1x3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c1_1x3_scale":0
@@ -8049,7 +8049,7 @@
         "pad_h":1,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,384,3,1]
@@ -8062,7 +8062,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c1_3x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -8077,7 +8077,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c1_3x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -8092,7 +8092,7 @@
         "type":"activity",
         "name":"inception_c1_3x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c1_3x1_scale":0
@@ -8110,7 +8110,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[384,1536,1,1]
@@ -8123,7 +8123,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c1_1x1_4_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[384,1,1,1],
@@ -8138,7 +8138,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c1_1x1_4_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[384,1,1,1],
@@ -8153,7 +8153,7 @@
         "type":"activity",
         "name":"inception_c1_1x1_4_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c1_1x1_4_scale":0
@@ -8171,7 +8171,7 @@
         "pad_h":1,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[448,384,3,1]
@@ -8184,7 +8184,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c1_3x1_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[448,1,1,1],
@@ -8199,7 +8199,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c1_3x1_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[448,1,1,1],
@@ -8214,7 +8214,7 @@
         "type":"activity",
         "name":"inception_c1_3x1_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c1_3x1_2_scale":0
@@ -8232,7 +8232,7 @@
         "pad_h":0,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[512,448,1,3]
@@ -8245,7 +8245,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c1_1x3_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[512,1,1,1],
@@ -8260,7 +8260,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c1_1x3_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[512,1,1,1],
@@ -8275,7 +8275,7 @@
         "type":"activity",
         "name":"inception_c1_1x3_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c1_1x3_2_scale":0
@@ -8302,7 +8302,7 @@
         "pad_h":0,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,512,1,3]
@@ -8315,7 +8315,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c1_1x3_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -8330,7 +8330,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c1_1x3_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -8345,7 +8345,7 @@
         "type":"activity",
         "name":"inception_c1_1x3_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c1_1x3_3_scale":0
@@ -8363,7 +8363,7 @@
         "pad_h":1,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,512,3,1]
@@ -8376,7 +8376,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c1_3x1_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -8391,7 +8391,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c1_3x1_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -8406,7 +8406,7 @@
         "type":"activity",
         "name":"inception_c1_3x1_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c1_3x1_3_scale":0
@@ -8420,7 +8420,7 @@
         "kernel_size":3,
         "method":"avg",
         "pad":1,
-        "stride":1,
+        "stride":1
       },
       "inputs":{
         "reduction_b_concat_reduction_b_concat_0_split":0
@@ -8438,7 +8438,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,1536,1,1]
@@ -8451,7 +8451,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c1_1x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -8466,7 +8466,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c1_1x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -8481,7 +8481,7 @@
         "type":"activity",
         "name":"inception_c1_1x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c1_1x1_scale":0
@@ -8491,7 +8491,7 @@
       "attrs":{
         "type":"concat",
         "name":"inception_c1_concat",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "inception_c1_1x1_2_relu":0,
@@ -8523,7 +8523,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,1536,1,1]
@@ -8536,7 +8536,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c2_1x1_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -8551,7 +8551,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c2_1x1_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -8566,7 +8566,7 @@
         "type":"activity",
         "name":"inception_c2_1x1_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c2_1x1_2_scale":0
@@ -8584,7 +8584,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[384,1536,1,1]
@@ -8597,7 +8597,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c2_1x1_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[384,1,1,1],
@@ -8612,7 +8612,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c2_1x1_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[384,1,1,1],
@@ -8627,7 +8627,7 @@
         "type":"activity",
         "name":"inception_c2_1x1_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c2_1x1_3_scale":0
@@ -8654,7 +8654,7 @@
         "pad_h":0,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,384,1,3]
@@ -8667,7 +8667,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c2_1x3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -8682,7 +8682,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c2_1x3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -8697,7 +8697,7 @@
         "type":"activity",
         "name":"inception_c2_1x3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c2_1x3_scale":0
@@ -8715,7 +8715,7 @@
         "pad_h":1,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,384,3,1]
@@ -8728,7 +8728,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c2_3x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -8743,7 +8743,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c2_3x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -8758,7 +8758,7 @@
         "type":"activity",
         "name":"inception_c2_3x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c2_3x1_scale":0
@@ -8776,7 +8776,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[384,1536,1,1]
@@ -8789,7 +8789,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c2_1x1_4_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[384,1,1,1],
@@ -8804,7 +8804,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c2_1x1_4_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[384,1,1,1],
@@ -8819,7 +8819,7 @@
         "type":"activity",
         "name":"inception_c2_1x1_4_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c2_1x1_4_scale":0
@@ -8837,7 +8837,7 @@
         "pad_h":1,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[448,384,3,1]
@@ -8850,7 +8850,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c2_3x1_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[448,1,1,1],
@@ -8865,7 +8865,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c2_3x1_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[448,1,1,1],
@@ -8880,7 +8880,7 @@
         "type":"activity",
         "name":"inception_c2_3x1_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c2_3x1_2_scale":0
@@ -8898,7 +8898,7 @@
         "pad_h":0,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[512,448,1,3]
@@ -8911,7 +8911,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c2_1x3_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[512,1,1,1],
@@ -8926,7 +8926,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c2_1x3_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[512,1,1,1],
@@ -8941,7 +8941,7 @@
         "type":"activity",
         "name":"inception_c2_1x3_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c2_1x3_2_scale":0
@@ -8968,7 +8968,7 @@
         "pad_h":0,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,512,1,3]
@@ -8981,7 +8981,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c2_1x3_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -8996,7 +8996,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c2_1x3_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -9011,7 +9011,7 @@
         "type":"activity",
         "name":"inception_c2_1x3_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c2_1x3_3_scale":0
@@ -9029,7 +9029,7 @@
         "pad_h":1,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,512,3,1]
@@ -9042,7 +9042,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c2_3x1_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -9057,7 +9057,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c2_3x1_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -9072,7 +9072,7 @@
         "type":"activity",
         "name":"inception_c2_3x1_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c2_3x1_3_scale":0
@@ -9086,7 +9086,7 @@
         "kernel_size":3,
         "method":"avg",
         "pad":1,
-        "stride":1,
+        "stride":1
       },
       "inputs":{
         "inception_c1_concat_inception_c1_concat_0_split":0
@@ -9104,7 +9104,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,1536,1,1]
@@ -9117,7 +9117,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c2_1x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -9132,7 +9132,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c2_1x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -9147,7 +9147,7 @@
         "type":"activity",
         "name":"inception_c2_1x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c2_1x1_scale":0
@@ -9157,7 +9157,7 @@
       "attrs":{
         "type":"concat",
         "name":"inception_c2_concat",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "inception_c2_1x1_2_relu":0,
@@ -9189,7 +9189,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,1536,1,1]
@@ -9202,7 +9202,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c3_1x1_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -9217,7 +9217,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c3_1x1_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -9232,7 +9232,7 @@
         "type":"activity",
         "name":"inception_c3_1x1_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c3_1x1_2_scale":0
@@ -9250,7 +9250,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[384,1536,1,1]
@@ -9263,7 +9263,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c3_1x1_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[384,1,1,1],
@@ -9278,7 +9278,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c3_1x1_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[384,1,1,1],
@@ -9293,7 +9293,7 @@
         "type":"activity",
         "name":"inception_c3_1x1_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c3_1x1_3_scale":0
@@ -9320,7 +9320,7 @@
         "pad_h":0,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,384,1,3]
@@ -9333,7 +9333,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c3_1x3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -9348,7 +9348,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c3_1x3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -9363,7 +9363,7 @@
         "type":"activity",
         "name":"inception_c3_1x3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c3_1x3_scale":0
@@ -9381,7 +9381,7 @@
         "pad_h":1,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,384,3,1]
@@ -9394,7 +9394,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c3_3x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -9409,7 +9409,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c3_3x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -9424,7 +9424,7 @@
         "type":"activity",
         "name":"inception_c3_3x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c3_3x1_scale":0
@@ -9442,7 +9442,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[384,1536,1,1]
@@ -9455,7 +9455,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c3_1x1_4_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[384,1,1,1],
@@ -9470,7 +9470,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c3_1x1_4_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[384,1,1,1],
@@ -9485,7 +9485,7 @@
         "type":"activity",
         "name":"inception_c3_1x1_4_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c3_1x1_4_scale":0
@@ -9503,7 +9503,7 @@
         "pad_h":1,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[448,384,3,1]
@@ -9516,7 +9516,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c3_3x1_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[448,1,1,1],
@@ -9531,7 +9531,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c3_3x1_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[448,1,1,1],
@@ -9546,7 +9546,7 @@
         "type":"activity",
         "name":"inception_c3_3x1_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c3_3x1_2_scale":0
@@ -9564,7 +9564,7 @@
         "pad_h":0,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[512,448,1,3]
@@ -9577,7 +9577,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c3_1x3_2_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[512,1,1,1],
@@ -9592,7 +9592,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c3_1x3_2_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[512,1,1,1],
@@ -9607,7 +9607,7 @@
         "type":"activity",
         "name":"inception_c3_1x3_2_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c3_1x3_2_scale":0
@@ -9634,7 +9634,7 @@
         "pad_h":0,
         "pad_w":1,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,512,1,3]
@@ -9647,7 +9647,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c3_1x3_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -9662,7 +9662,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c3_1x3_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -9677,7 +9677,7 @@
         "type":"activity",
         "name":"inception_c3_1x3_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c3_1x3_3_scale":0
@@ -9695,7 +9695,7 @@
         "pad_h":1,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,512,3,1]
@@ -9708,7 +9708,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c3_3x1_3_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -9723,7 +9723,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c3_3x1_3_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -9738,7 +9738,7 @@
         "type":"activity",
         "name":"inception_c3_3x1_3_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c3_3x1_3_scale":0
@@ -9752,7 +9752,7 @@
         "kernel_size":3,
         "method":"avg",
         "pad":1,
-        "stride":1,
+        "stride":1
       },
       "inputs":{
         "inception_c2_concat_inception_c2_concat_0_split":0
@@ -9770,7 +9770,7 @@
         "pad_h":0,
         "pad_w":0,
         "stride_h":1,
-        "stride_w":1,
+        "stride_w":1
       },
       "params":{
         "weight":[256,1536,1,1]
@@ -9783,7 +9783,7 @@
       "attrs":{
         "type":"bn",
         "name":"inception_c3_1x1_bn",
-        "eps":0.001,
+        "eps":0.001
       },
       "params":{
         "mean":[256,1,1,1],
@@ -9798,7 +9798,7 @@
       "attrs":{
         "type":"scale",
         "name":"inception_c3_1x1_scale",
-        "bias":1,
+        "bias":1
       },
       "params":{
         "bias":[256,1,1,1],
@@ -9813,7 +9813,7 @@
         "type":"activity",
         "name":"inception_c3_1x1_relu",
         "method":"relu",
-        "neg_slope":0,
+        "neg_slope":0
       },
       "inputs":{
         "inception_c3_1x1_scale":0
@@ -9823,7 +9823,7 @@
       "attrs":{
         "type":"concat",
         "name":"inception_c3_concat",
-        "method":"channel",
+        "method":"channel"
       },
       "inputs":{
         "inception_c3_1x1_2_relu":0,
@@ -9841,7 +9841,7 @@
         "global":1,
         "method":"avg",
         "pad":0,
-        "stride":1,
+        "stride":1
       },
       "inputs":{
         "inception_c3_concat":0
@@ -9852,7 +9852,7 @@
         "type":"fc",
         "name":"classifier",
         "bias":1,
-        "num":1000,
+        "num":1000
       },
       "params":{
         "bias":[1000,1,1,1],
@@ -9866,7 +9866,7 @@
       "attrs":{
         "type":"loss",
         "name":"loss",
-        "method":"softmax",
+        "method":"softmax"
       },
       "inputs":{
         "classifier":0,
