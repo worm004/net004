@@ -5,5 +5,5 @@ include_directories("../include2")
 include_directories(${vecLib_INCLUDE_DIR})
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 add_library(net004 STATIC Parser.cpp Net004.cpp Layers.cpp Blob.cpp im2col.cpp
-			BaseLayer.cpp ConvLayer.cpp FCLayer.cpp ActivityLayer.cpp LossLayer.cpp DataLayer.cpp PoolLayer.cpp LRNLayer.cpp SplitLayer.cpp ConcatLayer.cpp BNLayer.cpp ScaleLayer.cpp EltwiseLayer.cpp SoftmaxLayer.cpp ReshapeLayer.cpp ProposalLayer.cpp RoipoolLayer.cpp)
+			BaseLayer.cpp ConvLayer.cpp FCLayer.cpp ActivityLayer.cpp LossLayer.cpp DataLayer.cpp PoolLayer.cpp LRNLayer.cpp SplitLayer.cpp ConcatLayer.cpp BNLayer.cpp ScaleLayer.cpp EltwiseLayer.cpp SoftmaxLayer.cpp ReshapeLayer.cpp ProposalLayer.cpp RoipoolLayer.cpp CropLayer.cpp DConvLayer.cpp)
 target_link_libraries(net004 ${vecLib_LINKER_LIBS})

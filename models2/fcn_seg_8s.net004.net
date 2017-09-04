@@ -628,7 +628,7 @@
     },
     {
       "attrs":{
-        "type":"conv",
+        "type":"dconv",
         "name":"upscore2",
         "bias":0,
         "group":1,
@@ -718,7 +718,7 @@
     },
     {
       "attrs":{
-        "type":"conv",
+        "type":"dconv",
         "name":"upscore_pool4",
         "bias":0,
         "group":1,
@@ -808,7 +808,7 @@
     },
     {
       "attrs":{
-        "type":"conv",
+        "type":"dconv",
         "name":"upscore8",
         "bias":0,
         "group":1,

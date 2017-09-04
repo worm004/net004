@@ -17,6 +17,8 @@
 #include "SoftmaxLayer.h"
 #include "RoipoolLayer.h"
 #include "ProposalLayer.h"
+#include "DConvLayer.h"
+#include "CropLayer.h"
 using namespace std;
 
 template<typename T> 
@@ -41,7 +43,9 @@ Layers::Layers(){
 		{"reshape",&create_layer<ReshapeLayer>},
 		{"softmax",&create_layer<SoftmaxLayer>},
 		{"roipooling",&create_layer<RoipoolLayer>},
-		{"proposal",&create_layer<ProposalLayer>}
+		{"proposal",&create_layer<ProposalLayer>},
+		{"dconv",&create_layer<DConvLayer>},
+		{"crop",&create_layer<CropLayer>}
 	};
 }
 void Layers::add(const LayerUnit& u){
