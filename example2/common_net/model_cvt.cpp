@@ -35,14 +35,12 @@ int main(int argc, char**argv){
 		"../models2/cifar.net004.net",
 		"../models2/cifar.net004.data"
 		};
-
 	maps["alexnet"] = {
 		"../caffe_models/bvlc_alexnet.prototxt",
 		"../caffe_models/bvlc_alexnet.caffemodel",
 		"../models2/alexnet.net004.net",
 		"../models2/alexnet.net004.data"
 	};
-	
 	maps["vgg16"] = {
 		"../caffe_models/VGG_ILSVRC_16_layers_deploy.prototxt",
 		"../caffe_models/VGG_ILSVRC_16_layers.caffemodel",
@@ -54,6 +52,66 @@ int main(int argc, char**argv){
 		"../caffe_models/bvlc_googlenet.caffemodel",
 		"../models2/gnetv1.net004.net",
 		"../models2/gnetv1.net004.data"
+	};
+	maps["resnet50"] = {
+		"../caffe_models/ResNet-50-deploy.prototxt",
+		"../caffe_models/ResNet-50-model.caffemodel",
+		"../models2/resnet50.net004.net",
+		"../models2/resnet50.net004.data"
+	};
+	maps["resnet101"] = {
+		"../caffe_models/ResNet-101-deploy.prototxt",
+		"../caffe_models/ResNet-101-model.caffemodel",
+		"../models2/resnet101.net004.net",
+		"../models2/resnet101.net004.data"
+	};
+	maps["resnet152"] = {
+		"../caffe_models/ResNet-152-deploy.prototxt",
+		"../caffe_models/ResNet-152-model.caffemodel",
+		"../models2/resnet152.net004.net",
+		"../models2/resnet152.net004.data"
+	};
+	maps["sqnet1.0"] = {
+		"../caffe_models/sqnet1.0.prototxt",
+		"../caffe_models/sqnet1.0.caffemodel",
+		"../models2/sqnet1.0.net004.net",
+		"../models2/sqnet1.0.net004.data"
+	};
+	maps["sqnet1.1"] = {
+		"../caffe_models/sqnet1.1.prototxt",
+		"../caffe_models/sqnet1.1.caffemodel",
+		"../models2/sqnet1.1.net004.net",
+		"../models2/sqnet1.1.net004.data"
+	};
+	maps["sqnet_res"] = {
+		"../caffe_models/sqnet_res.prototxt",
+		"../caffe_models/sqnet_res.caffemodel",
+		"../models2/sqnet_res.net004.net",
+		"../models2/sqnet_res.net004.data"
+	};
+	maps["gnetv3"] = {
+		"../caffe_models/deploy_inception-v3.prototxt",
+		"../caffe_models/inception-v3.caffemodel",
+		"../models2/gnetv3.net004.net",
+		"../models2/gnetv3.net004.data"
+	};
+	maps["gnetv4"] = {
+		"../caffe_models/deploy_inception-v4.prototxt",
+		"../caffe_models/inception-v4.caffemodel",
+		"../models2/gnetv4.net004.net",
+		"../models2/gnetv4.net004.data"
+	};
+	maps["dense121"] = {
+		"../caffe_models/DenseNet_121.prototxt",
+		"../caffe_models/DenseNet_121.caffemodel",
+		"../models2/dense121.net004.net",
+		"../models2/dense121.net004.data"
+	};
+	maps["in-res-v2"] = {
+		"../caffe_models/deploy_inception-resnet-v2.prototxt",
+		"../caffe_models/inception-resnet-v2.caffemodel",
+		"../models2/inception-res-v2.net004.net",
+		"../models2/inception-res-v2.net004.data"
 	};
 
 	string name = argv[1];

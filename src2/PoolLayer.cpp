@@ -4,7 +4,8 @@ PoolLayer::PoolLayer(){}
 PoolLayer::PoolLayer(const LayerUnit& u):Layer(u){
 	float v;
 	u.geta("global",v); global = v;
-	u.geta("kernel_size",v); kernel = v;
+	if(!global) {u.geta("kernel_size",v); kernel = v;}
+	else kernel = -1;
 	u.geta("pad",v); pad = v;
 	u.geta("stride",v); stride = v;
 	u.geta("method",method);
@@ -27,6 +28,7 @@ void PoolLayer::show(){
 	}
 }
 void PoolLayer::setup_outputs(){
+	if(kernel == -1) kernel = inputs[0].h;
 	int ih = inputs[0].h, 
 	    iw = inputs[0].w,
 	    oh = i2o_ceil(ih,kernel,stride,pad),

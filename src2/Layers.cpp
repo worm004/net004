@@ -10,6 +10,9 @@
 #include "LRNLayer.h"
 #include "SplitLayer.h"
 #include "ConcatLayer.h"
+#include "BNLayer.h"
+#include "ScaleLayer.h"
+#include "EltwiseLayer.h"
 using namespace std;
 
 template<typename T> 
@@ -27,7 +30,10 @@ Layers::Layers(){
 		{"pool",&create_layer<PoolLayer>},
 		{"lrn",&create_layer<LRNLayer>},
 		{"split",&create_layer<SplitLayer>},
-		{"concat",&create_layer<ConcatLayer>}
+		{"concat",&create_layer<ConcatLayer>},
+		{"bn",&create_layer<BNLayer>},
+		{"scale",&create_layer<ScaleLayer>},
+		{"eltwise",&create_layer<EltwiseLayer>}
 	};
 }
 void Layers::add(const LayerUnit& u){
@@ -49,11 +55,11 @@ void Layers::init(){
 	init_inplace();
 }
 void Layers::init_inplace(){
-	//TODO
 	for(int i=0;i<layers.size();++i){
 		string name = layers[i]->name;
-		//layers[i]->set_inplace((cs[name].size() == 1) && (layers[i]->inputs.size() == 1));
-		layers[i]->set_inplace(false);
+		const vector<string>& ns = cs[name];
+		if(ns.size() == 1) 
+			layers[n2i[ns[0]]]->set_inplace(true);
 	}
 }
 void Layers::init_n2i(){

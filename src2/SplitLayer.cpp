@@ -9,7 +9,6 @@ void SplitLayer::show(){
 }
 void SplitLayer::setup_outputs(){
 	outputs[0].set_shape(inputs[0]);
-	inplace = true;
 	setup_outputs_data();
 }
 void SplitLayer::forward(){
