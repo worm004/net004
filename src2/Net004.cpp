@@ -44,6 +44,7 @@ void Net004::pre_alloc(){
 }
 void Net004::forward(){
 	for(int i=0;i<ls.size();++i){
+		//printf("%s\n",ls[i]->name.c_str());
 		ls[i]->forward();
 	}
 }

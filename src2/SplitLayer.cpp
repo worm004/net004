@@ -12,4 +12,5 @@ void SplitLayer::setup_outputs(){
 	setup_outputs_data();
 }
 void SplitLayer::forward(){
+	//show_outputs();
 }

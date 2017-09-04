@@ -13,6 +13,10 @@
 #include "BNLayer.h"
 #include "ScaleLayer.h"
 #include "EltwiseLayer.h"
+#include "ReshapeLayer.h"
+#include "SoftmaxLayer.h"
+#include "RoipoolLayer.h"
+#include "ProposalLayer.h"
 using namespace std;
 
 template<typename T> 
@@ -33,7 +37,11 @@ Layers::Layers(){
 		{"concat",&create_layer<ConcatLayer>},
 		{"bn",&create_layer<BNLayer>},
 		{"scale",&create_layer<ScaleLayer>},
-		{"eltwise",&create_layer<EltwiseLayer>}
+		{"eltwise",&create_layer<EltwiseLayer>},
+		{"reshape",&create_layer<ReshapeLayer>},
+		{"softmax",&create_layer<SoftmaxLayer>},
+		{"roipooling",&create_layer<RoipoolLayer>},
+		{"proposal",&create_layer<ProposalLayer>}
 	};
 }
 void Layers::add(const LayerUnit& u){

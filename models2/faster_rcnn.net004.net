@@ -4,7 +4,7 @@
     {
       "attrs":{
         "type":"data",
-        "name":"data_data",
+        "name":"data",
         "c":3,
         "h":224,
         "method":"data",
@@ -15,7 +15,7 @@
     {
       "attrs":{
         "type":"data",
-        "name":"data_im_info",
+        "name":"im_info",
         "c":3,
         "h":1,
         "method":"im_info",
@@ -40,6 +40,9 @@
       "params":{
         "bias":[64,1,1,1],
         "weight":[64,3,3,3]
+      },
+      "inputs":{
+        "data":0
       }
     },
     {
@@ -642,6 +645,7 @@
         "feat_stride":16
       },
       "inputs":{
+        "im_info":2,
         "rpn_bbox_pred":1,
         "rpn_cls_prob_reshape":0
       }

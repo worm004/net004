@@ -120,7 +120,7 @@ void Layer::show_outputs(){
 	}
 }
 void Layer::setup_outputs_data(){
-	if(inplace && outputs[0].is_shape_same(inputs[0]))
+	if(inplace && (outputs[0].nchw() == inputs[0].nchw()))
 		outputs[0].set_data(inputs[0].data);
 	else {
 		inplace = false;
