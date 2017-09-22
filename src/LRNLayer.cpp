@@ -3,11 +3,11 @@
 #include "LRNLayer.h"
 LRNLayer::LRNLayer(){
 }
-LRNLayer::LRNLayer(const LayerUnit& u):Layer(u){
-	float v;
-	u.geta("alpha",v); alpha = v;
-	u.geta("beta",v); beta = v;
-	u.geta("local_size",v); local_size = v;
+LRNLayer::LRNLayer(const JsonValue& j):Layer(j){
+	const JsonValue& attrs = j.jobj.at("attrs");
+	alpha = attrs.jobj.at("alpha").jv.d;
+	beta = attrs.jobj.at("beta").jv.d;
+	local_size = attrs.jobj.at("local_size").jv.d;
 }
 void LRNLayer::show(){
 	Layer::show();

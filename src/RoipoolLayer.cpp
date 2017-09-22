@@ -3,11 +3,11 @@
 #include "stdlib.h"
 #include "RoipoolLayer.h"
 RoipoolLayer::RoipoolLayer(){}
-RoipoolLayer::RoipoolLayer(const LayerUnit& u):Layer(u){
-	float v;
-	u.geta("h",v); h = v;
-	u.geta("w",v); w = v;
-	u.geta("s",s);
+RoipoolLayer::RoipoolLayer(const JsonValue& j):Layer(j){
+	const JsonValue& attrs = j.jobj.at("attrs");
+	h = attrs.jobj.at("h").jv.d;
+	w = attrs.jobj.at("w").jv.d;
+	s = attrs.jobj.at("s").jv.d;
 }
 void RoipoolLayer::show(){
 	Layer::show();

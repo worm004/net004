@@ -4,7 +4,7 @@
 class ReshapeLayer: public Layer{
 	public:
 	ReshapeLayer();
-	ReshapeLayer(const LayerUnit& u);
+	ReshapeLayer(const JsonValue& j);
 	virtual void show();
 	virtual void setup_outputs();
 	virtual void forward();

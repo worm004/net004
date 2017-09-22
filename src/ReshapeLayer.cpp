@@ -2,12 +2,12 @@
 #include "stdlib.h"
 #include "ReshapeLayer.h"
 ReshapeLayer::ReshapeLayer(){}
-ReshapeLayer::ReshapeLayer(const LayerUnit& u):Layer(u){
-	float v;
-	u.geta("d0",v); shape[0] = v;
-	u.geta("d1",v); shape[1] = v;
-	u.geta("d2",v); shape[2] = v;
-	u.geta("d3",v); shape[3] = v;
+ReshapeLayer::ReshapeLayer(const JsonValue& j):Layer(j){
+	const JsonValue& attrs = j.jobj.at("attrs");
+	shape[0] = attrs.jobj.at("d0").jv.d;
+	shape[1] = attrs.jobj.at("d1").jv.d;
+	shape[2] = attrs.jobj.at("d2").jv.d;
+	shape[3] = attrs.jobj.at("d3").jv.d;
 }
 void ReshapeLayer::show(){
 	Layer::show();

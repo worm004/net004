@@ -4,7 +4,7 @@
 class ConcatLayer: public Layer{
 	public:
 	ConcatLayer();
-	ConcatLayer(const LayerUnit& u);
+	ConcatLayer(const JsonValue& j);
 	virtual void show();
 	virtual void setup_outputs();
 	virtual void forward();

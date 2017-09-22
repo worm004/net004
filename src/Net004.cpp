@@ -1,14 +1,16 @@
 #include "stdlib.h"
 #include "Net004.h"
 #include "Parser.h"
+#include "JsonParser.h"
 using namespace std;
 void Net004::load(const std::string& net_path, const std::string& model_path){
-	NetParser nparser;
-	nparser.read_net(net_path);
-	is_train = nparser.get_net_mode();
-	name = nparser.get_net_name();
-	const std::vector<LayerUnit>& layers = nparser.get_layers();
-	for(int i=0;i<layers.size();++i) ls.add(layers[i]);
+	JsonParser nparser;	
+	nparser.read(net_path);
+	name = nparser.j.jobj["net_name"].jv.s;
+	std::vector<LayerUnit> layers;
+	for(int i=0;i<nparser.j.jobj["layers"].jarray.size();++i){
+		ls.add(nparser.j.jobj["layers"].jarray[i]);
+	}
 	ls.init();
 	ModelParser mparser;
 	mparser.read_model(model_path, this);
@@ -29,9 +31,11 @@ void Net004::pre_alloc(){
 	for(int i=0;i<ls.size();++i){
 		Layer* l = ls[i];
 		if(l->type == "data") continue;
-		for(const auto& j:l->u.inputs){
+		
+		if(l->j_.jobj.find("inputs") != l->j_.jobj.end())
+		for(const auto& j:l->j_.jobj.at("inputs").jobj){
 			Layer* l1 = ls[j.first];
-			int index = j.second;
+			int index = j.second.jv.d;
 			//printf("%s <- %s %d\n",l->name.c_str(), l1->name.c_str(),index);
 			Blob &b = l->inputs[index];
 			Blob &b1 = l1->outputs[0];

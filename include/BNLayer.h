@@ -4,7 +4,7 @@
 class BNLayer: public Layer{
 	public:
 	BNLayer();
-	BNLayer(const LayerUnit& u);
+	BNLayer(const JsonValue& j);
 	virtual void show();
 	virtual void setup_outputs();
 	virtual void forward();

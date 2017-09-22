@@ -5,19 +5,20 @@
 #include "Accelerate/Accelerate.h"
 
 DConvLayer::DConvLayer(){}
-DConvLayer::DConvLayer(const LayerUnit& u):Layer(u){
-	float v;	
-	u.geta("bias",v); bias = v;
-	u.geta("group",v); group = v;
-	u.geta("num",v); num = v;
-	u.geta("kernel_size_h",v); kernel_size_h = v;
-	u.geta("kernel_size_w",v); kernel_size_w = v;
-	u.geta("pad_h",v); pad_h = v;
-	u.geta("pad_w",v); pad_w = v;
-	u.geta("stride_h",v); stride_h = v;
-	u.geta("stride_w",v); stride_w = v;
-	if(bias != (params.find("bias") != params.end())){
-		printf("conv parameter wrong: bias\n");
+DConvLayer::DConvLayer(const JsonValue& j):Layer(j){
+	const JsonValue& attrs = j.jobj.at("attrs");
+	bias  = attrs.jobj.at("bias").jv.d;
+	group = attrs.jobj.at("group").jv.d;
+	num   = attrs.jobj.at("num").jv.d;
+	kernel_size_h = attrs.jobj.at("kernel_size_h").jv.d;
+	kernel_size_w = attrs.jobj.at("kernel_size_w").jv.d;
+	pad_h = attrs.jobj.at("pad_h").jv.d;
+	pad_w = attrs.jobj.at("pad_w").jv.d;
+	stride_h = attrs.jobj.at("stride_h").jv.d;
+	stride_w = attrs.jobj.at("stride_w").jv.d;
+
+	if(bias != ((j.jobj.find("params")!=j.jobj.end())&&(j.jobj.at("params").jobj.find("bias")!=j.jobj.at("params").jobj.end()))){
+		printf("dconv parameter wrong: bias\n");
 		exit(0);
 	}
 }

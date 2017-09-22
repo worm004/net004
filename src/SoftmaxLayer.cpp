@@ -2,7 +2,7 @@
 #include "stdlib.h"
 #include "SoftmaxLayer.h"
 SoftmaxLayer::SoftmaxLayer(){}
-SoftmaxLayer::SoftmaxLayer(const LayerUnit& u):Layer(u){
+SoftmaxLayer::SoftmaxLayer(const JsonValue& j):Layer(j){
 }
 void SoftmaxLayer::show(){
 	Layer::show();

@@ -2,8 +2,9 @@
 #include <cfloat>
 #include "LossLayer.h"
 LossLayer::LossLayer(){}
-LossLayer::LossLayer(const LayerUnit& u):Layer(u){
-	u.geta("method",method);
+LossLayer::LossLayer(const JsonValue& j):Layer(j){
+	const JsonValue& attrs = j.jobj.at("attrs");
+	method = attrs.jobj.at("method").jv.s;
 	if(method == "softmax"){
 		forward_f = &LossLayer::forward_softmax;
 		init_f = &LossLayer::init_softmax;

@@ -3,9 +3,9 @@
 #include "ProposalLayer.h"
 using namespace std;
 ProposalLayer::ProposalLayer(){}
-ProposalLayer::ProposalLayer(const LayerUnit& u):Layer(u){
-	float v;
-	u.geta("feat_stride",v); feat_stride = v;
+ProposalLayer::ProposalLayer(const JsonValue& j):Layer(j){
+	const JsonValue& attrs = j.jobj.at("attrs");
+	feat_stride = attrs.jobj.at("feat_stride").jv.d;
 	generate_anchors();
 }
 void ProposalLayer::show(){

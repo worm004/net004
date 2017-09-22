@@ -1,9 +1,10 @@
 #include "stdlib.h"
 #include "ActivityLayer.h"
 ActivityLayer::ActivityLayer(){}
-ActivityLayer::ActivityLayer(const LayerUnit& u):Layer(u){
-	u.geta("neg_slope",neg_slope);
-	u.geta("method",method);
+ActivityLayer::ActivityLayer(const JsonValue& j):Layer(j){
+	const JsonValue& attrs = j.jobj.at("attrs");
+	neg_slope  = attrs.jobj.at("neg_slope").jv.d;
+	method  = attrs.jobj.at("method").jv.s;
 	if(method != "relu"){
 		printf("not implement %s method in activity layer\n",method.c_str());
 		exit(0);

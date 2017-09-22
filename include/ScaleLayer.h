@@ -4,7 +4,7 @@
 class ScaleLayer: public Layer{
 	public:
 	ScaleLayer();
-	ScaleLayer(const LayerUnit& u);
+	ScaleLayer(const JsonValue& j);
 	virtual void show();
 	virtual void setup_outputs();
 	virtual void forward();

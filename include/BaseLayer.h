@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "Blob.h"
+#include "JsonParser.h"
 struct ParamUnit{
 	ParamUnit();
 	ParamUnit(float v);
@@ -30,7 +31,7 @@ int i2o_ceil(int w, int kernel, int stride, int padding);
 class Layer{
 	public:
 	Layer();
-	Layer(const LayerUnit& u);
+	Layer(const JsonValue& j);
 	virtual ~Layer();
 	void set_inplace(bool inplace);
 	void show_inputs();
@@ -45,7 +46,7 @@ class Layer{
 	std::vector<Blob> inputs, outputs;
 	std::map<std::string, Blob> params;
 
-	LayerUnit u;
+	JsonValue j_;
 	bool inplace = false;
 };
 #endif

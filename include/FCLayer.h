@@ -4,7 +4,7 @@
 class FCLayer: public Layer{
 	public:
 	FCLayer();
-	FCLayer(const LayerUnit& u);
+	FCLayer(const JsonValue& j);
 	virtual void show();
 	virtual void setup_outputs();
 	virtual void forward();

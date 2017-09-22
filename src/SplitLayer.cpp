@@ -1,7 +1,7 @@
 #include "stdlib.h"
 #include "SplitLayer.h"
 SplitLayer::SplitLayer(){}
-SplitLayer::SplitLayer(const LayerUnit& u):Layer(u){
+SplitLayer::SplitLayer(const JsonValue& j):Layer(j){
 }
 
 void SplitLayer::show(){

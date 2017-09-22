@@ -1,12 +1,12 @@
 #include "DataLayer.h"
 DataLayer::DataLayer(){}
-DataLayer::DataLayer(const LayerUnit& u):Layer(u){
-	float v;	
-	u.geta("n",v); n = v;
-	u.geta("c",v); c = v;
-	u.geta("h",v); h = v;
-	u.geta("w",v); w = v;
-	u.geta("method",method);
+DataLayer::DataLayer(const JsonValue& j):Layer(j){
+	const JsonValue& attrs = j.jobj.at("attrs");
+	n = attrs.jobj.at("n").jv.d;
+	c = attrs.jobj.at("c").jv.d;
+	h = attrs.jobj.at("h").jv.d;
+	w = attrs.jobj.at("w").jv.d;
+	method = attrs.jobj.at("method").jv.s;
 }
 void DataLayer::show(){
 	Layer::show();

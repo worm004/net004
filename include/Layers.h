@@ -10,7 +10,7 @@ class Layer;
 class Layers{
 	public:
 	Layers();
-	void add(const LayerUnit& u);
+	void add(const JsonValue& json);
 	void init();
 	void show();
 
@@ -27,7 +27,7 @@ class Layers{
 	std::map<std::string, std::vector<std::string>> cs;
 
 	private:
-	typedef std::map<std::string, Layer*(*)(const LayerUnit&)> LayerTypeMap;
+	typedef std::map<std::string, Layer*(*)(const JsonValue&)> LayerTypeMap;
 	LayerTypeMap layer_type_map;
 };
 #endif

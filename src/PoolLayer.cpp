@@ -1,15 +1,14 @@
 #include "stdlib.h"
 #include "PoolLayer.h"
 PoolLayer::PoolLayer(){}
-PoolLayer::PoolLayer(const LayerUnit& u):Layer(u){
-	float v;
-	u.geta("global",v); global = v;
-	if(!global) {u.geta("kernel_size",v); kernel = v;}
+PoolLayer::PoolLayer(const JsonValue& j):Layer(j){
+	const JsonValue& attrs = j.jobj.at("attrs");
+	global  = attrs.jobj.at("global").jv.d;
+	if(!global) kernel = attrs.jobj.at("kernel_size").jv.d;
 	else kernel = -1;
-	u.geta("pad",v); pad = v;
-	u.geta("stride",v); stride = v;
-	u.geta("method",method);
-
+	pad  = attrs.jobj.at("pad").jv.d;
+	stride  = attrs.jobj.at("stride").jv.d;
+	method  = attrs.jobj.at("method").jv.s;
 	if(method == "max") f = &PoolLayer::forward_max;
 	else if(method == "avg") f = &PoolLayer::forward_avg;
 	else{

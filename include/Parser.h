@@ -4,8 +4,16 @@
 #include <string>
 #include <map>
 #include "BaseLayer.h"
-
-class Net004;
+#include "BaseRun.h"
+class GameParser{
+	public:
+	void read(const std::string& path);
+	std::string name,type,net_path;
+	int batch_size,max_iter;
+	std::vector<RunUnit> runs;
+	std::vector<LayerUnit> layers;
+	private:
+};
 class NetParser{
 	public:
 	void read_net(const std::string& path);
@@ -13,17 +21,14 @@ class NetParser{
 
 	void add_layer(const LayerUnit& u);
 	void set_net_name(const std::string& name);
-	void set_net_mode(bool is_train);
 	std::string get_net_name();
-	bool get_net_mode();
 	const std::vector<LayerUnit>& get_layers();
 	
 	private:
 	std::vector<LayerUnit> layers;
 	std::string net_name;
-	bool is_train = false;
 };
-
+class Net004;
 class ModelParser{
 	public:
 	ModelParser();

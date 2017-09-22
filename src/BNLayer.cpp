@@ -2,9 +2,9 @@
 #include "stdlib.h"
 #include "BNLayer.h"
 BNLayer::BNLayer(){}
-BNLayer::BNLayer(const LayerUnit& u):Layer(u){
-	float v;
-	u.geta("eps",v); eps = v;
+BNLayer::BNLayer(const JsonValue& j):Layer(j){
+	const JsonValue& attrs = j.jobj.at("attrs");
+	eps = attrs.jobj.at("eps").jv.d;
 }
 void BNLayer::show(){
 	Layer::show();

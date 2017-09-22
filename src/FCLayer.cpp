@@ -1,10 +1,10 @@
 #include "FCLayer.h"
 #include "Accelerate/Accelerate.h"
 FCLayer::FCLayer(){}
-FCLayer::FCLayer(const LayerUnit& u):Layer(u){
-	float v;	
-	u.geta("bias",v); bias = v;
-	u.geta("num",v); num = v;
+FCLayer::FCLayer(const JsonValue& j):Layer(j){
+	const JsonValue& attrs = j.jobj.at("attrs");
+	bias  = attrs.jobj.at("bias").jv.d;
+	num  = attrs.jobj.at("num").jv.d;
 }
 void FCLayer::show(){
 	Layer::show();

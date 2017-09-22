@@ -22,8 +22,8 @@
 using namespace std;
 
 template<typename T> 
-Layer* create_layer(const LayerUnit& u){
-	return new T(u);
+Layer* create_layer(const JsonValue& j){
+	return new T(j);
 }
 
 Layers::Layers(){
@@ -48,14 +48,14 @@ Layers::Layers(){
 		{"crop",&create_layer<CropLayer>}
 	};
 }
-void Layers::add(const LayerUnit& u){
+void Layers::add(const JsonValue& json){
 	string type;
-	u.geta("type",type);
+	type = json.jobj.at("attrs").jobj.at("type").jv.s;
 	if(layer_type_map.find(type) == layer_type_map.end()){
 		printf("unknown layer: %s\n",type.c_str());
 		exit(0);
 	}
-	layers.push_back(layer_type_map[type](u));
+	layers.push_back(layer_type_map[type](json));
 }
 void Layers::show(){
 	for(int i=0;i<layers.size();++i)
@@ -84,12 +84,22 @@ void Layers::init_forder(){
 	map<string, int> ins;
 	for(int i=0;i<layers.size();++i){
 		string name = layers[i]->name;
-		ins[name] = layers[i]->u.inputs.size();
-		for(const auto& j:layers[i]->u.inputs){
+		ins[name] = layers[i]->inputs.size();
+		if(layers[i]->j_.jobj.find("inputs") != layers[i]->j_.jobj.end())
+		for(const auto& j:layers[i]->j_.jobj.at("inputs").jobj){
 			if(cs.find(j.first) == cs.end()) cs[j.first];
 			cs[j.first].push_back(name);
 		}
 	}
+	//for(auto i:ins){
+	//	printf("%s %d\n",i.first.c_str(),i.second);
+	//}
+	//for(auto i:cs){
+	//	printf("%s->\n",i.first.c_str());
+	//	for(auto j:i.second)
+	//		printf("\t%s\n",j.c_str());
+	//}
+	//getchar();
 	set<string> noins;
 	for(const auto& l: ins)
 		if(l.second == 0) noins.insert(l.first);

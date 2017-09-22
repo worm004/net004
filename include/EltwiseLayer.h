@@ -4,7 +4,7 @@
 class EltwiseLayer: public Layer{
 	public:
 	EltwiseLayer();
-	EltwiseLayer(const LayerUnit& u);
+	EltwiseLayer(const JsonValue& j);
 	virtual void show();
 	virtual void setup_outputs();
 	virtual void forward();

@@ -4,7 +4,7 @@
 class ActivityLayer: public Layer{
 	public:
 	ActivityLayer();
-	ActivityLayer(const LayerUnit& u);
+	ActivityLayer(const JsonValue& j);
 	virtual void show();
 	virtual void setup_outputs();
 	virtual void forward();

@@ -2,9 +2,9 @@
 #include "stdlib.h"
 #include "ScaleLayer.h"
 ScaleLayer::ScaleLayer(){}
-ScaleLayer::ScaleLayer(const LayerUnit& u):Layer(u){
-	float v;
-	u.geta("bias",v); bias = v;
+ScaleLayer::ScaleLayer(const JsonValue& j):Layer(j){
+	const JsonValue& attrs = j.jobj.at("attrs");
+	bias = attrs.jobj.at("bias").jv.d;
 	if(bias) f = &ScaleLayer::forward_bias;
 	else f = &ScaleLayer::forward_nbias;
 }

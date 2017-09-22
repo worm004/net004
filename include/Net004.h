@@ -15,7 +15,6 @@ class Net004{
 	Layers ls;
 	private:
 	std::string name;
-	bool is_train;
 };
 #endif
 

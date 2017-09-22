@@ -2,10 +2,11 @@
 #include "stdlib.h"
 #include "EltwiseLayer.h"
 EltwiseLayer::EltwiseLayer(){}
-EltwiseLayer::EltwiseLayer(const LayerUnit& u):Layer(u){
-	u.geta("coeff0",coef0);
-	u.geta("coeff1",coef1);
-	u.geta("method",method);
+EltwiseLayer::EltwiseLayer(const JsonValue& j):Layer(j){
+	const JsonValue& attrs = j.jobj.at("attrs");
+	coef0 = attrs.jobj.at("coeff0").jv.d;
+	coef1 = attrs.jobj.at("coeff1").jv.d;
+	method = attrs.jobj.at("method").jv.s;
 	if(method == "sum") f = &EltwiseLayer::forward_sum;
 	else{
 		printf("not implemented method %s in eltwise layer\n",method.c_str());

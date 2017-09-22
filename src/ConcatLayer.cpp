@@ -1,8 +1,9 @@
 #include "stdlib.h"
 #include "ConcatLayer.h"
 ConcatLayer::ConcatLayer(){}
-ConcatLayer::ConcatLayer(const LayerUnit& u):Layer(u){
-	u.geta("method",method);
+ConcatLayer::ConcatLayer(const JsonValue& j):Layer(j){
+	const JsonValue& attrs = j.jobj.at("attrs");
+	method = attrs.jobj.at("method").jv.s;
 	if(method == "channel") f = &ConcatLayer::forward_channel;
 	else{
 		printf("no method: %s in concat layer\n",method.c_str());

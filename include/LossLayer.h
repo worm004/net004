@@ -4,7 +4,7 @@
 class LossLayer: public Layer{
 	public:
 	LossLayer();
-	LossLayer(const LayerUnit& u);
+	LossLayer(const JsonValue& j);
 	virtual void show();
 	virtual void setup_outputs();
 	virtual void forward();

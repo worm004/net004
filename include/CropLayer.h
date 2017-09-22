@@ -4,7 +4,7 @@
 class CropLayer: public Layer{
 	public:
 	CropLayer();
-	CropLayer(const LayerUnit& u);
+	CropLayer(const JsonValue& j);
 	virtual void show();
 	virtual void setup_outputs();
 	virtual void forward();

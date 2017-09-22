@@ -2,11 +2,10 @@
 #include "stdlib.h"
 #include "CropLayer.h"
 CropLayer::CropLayer(){}
-CropLayer::CropLayer(const LayerUnit& u):Layer(u){
-	float v;
-	u.geta("axis",v); axis = v;
-	u.geta("offset",v); offset = v;
-
+CropLayer::CropLayer(const JsonValue& j):Layer(j){
+	const JsonValue& attrs = j.jobj.at("attrs");
+	axis = attrs.jobj.at("axis").jv.d;
+	offset = attrs.jobj.at("offset").jv.d;
 	offsets.push_back(offset);
 	for(int i=axis+1;i<4;++i) offsets.push_back(offset);
 }

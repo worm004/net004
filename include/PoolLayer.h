@@ -4,7 +4,7 @@
 class PoolLayer: public Layer{
 	public:
 	PoolLayer();
-	PoolLayer(const LayerUnit& u);
+	PoolLayer(const JsonValue& j);
 	virtual void show();
 	virtual void setup_outputs();
 	virtual void forward();

@@ -4,7 +4,7 @@
 class ConvLayer: public Layer{
 	public:
 	ConvLayer();
-	ConvLayer(const LayerUnit& u);
+	ConvLayer(const JsonValue& j);
 	virtual ~ConvLayer();
 	virtual void show();
 	virtual void setup_outputs();

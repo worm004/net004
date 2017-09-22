@@ -5,6 +5,8 @@
 #include <stack>
 using namespace std;
 
+void GameParser::read(const std::string& path){
+}
 void NetParser::add_layer(const LayerUnit& u){
 	layers.push_back(u);
 }
@@ -179,14 +181,8 @@ void NetParser::read_net(const std::string& path){
 void NetParser::set_net_name(const std::string& name){
 	net_name = name;
 }
-void NetParser::set_net_mode(bool is_train){
-	this->is_train = is_train;
-}
 std::string NetParser::get_net_name(){
 	return net_name;
-}
-bool NetParser::get_net_mode(){
-	return is_train;
 }
 const std::vector<LayerUnit>& NetParser::get_layers(){
 	return layers;

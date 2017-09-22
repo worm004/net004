@@ -4,7 +4,7 @@
 class DConvLayer: public Layer{
 	public:
 	DConvLayer();
-	DConvLayer(const LayerUnit& u);
+	DConvLayer(const JsonValue& j);
 	virtual void show();
 	virtual void setup_outputs();
 	virtual void forward();
