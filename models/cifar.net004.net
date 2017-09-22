@@ -1,209 +1,280 @@
 {
-  "net_name":"CIFAR10_quick",
   "layers":[
     {
       "attrs":{
-        "type":"data",
-        "name":"input_data",
-        "c":3,
-        "h":32,
+        "c":3.000000,
+        "h":32.000000,
         "method":"data",
-        "n":1,
-        "w":32
-      }
-    },
-    {
-      "attrs":{
+        "n":1.000000,
+        "name":"input_data",
         "type":"data",
-        "name":"input_label",
-        "c":1,
-        "h":1,
+        "w":32.000000
+      }
+    },
+    {
+      "attrs":{
+        "c":1.000000,
+        "h":1.000000,
         "method":"label",
-        "n":1,
-        "w":1
+        "n":1.000000,
+        "name":"input_label",
+        "type":"data",
+        "w":1.000000
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":5.000000,
+        "kernel_size_w":5.000000,
         "name":"conv1",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":5,
-        "kernel_size_w":5,
-        "num":32,
-        "pad_h":2,
-        "pad_w":2,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[32,1,1,1],
-        "weight":[32,3,5,5]
+        "num":32.000000,
+        "pad_h":2.000000,
+        "pad_w":2.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "input_data":0
+        "input_data":0.000000
+      },
+      "params":{
+        "bias":[
+          32.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          32.000000,
+          3.000000,
+          5.000000,
+          5.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"pool",
-        "name":"pool1",
-        "global":0,
-        "kernel_size":3,
+        "global":0.000000,
+        "kernel_size":3.000000,
         "method":"max",
-        "pad":0,
-        "stride":2
+        "name":"pool1",
+        "pad":0.000000,
+        "stride":2.000000,
+        "type":"pool"
       },
       "inputs":{
-        "conv1":0
+        "conv1":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu1",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "pool1":0
+        "pool1":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":5.000000,
+        "kernel_size_w":5.000000,
         "name":"conv2",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":5,
-        "kernel_size_w":5,
-        "num":32,
-        "pad_h":2,
-        "pad_w":2,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[32,1,1,1],
-        "weight":[32,32,5,5]
+        "num":32.000000,
+        "pad_h":2.000000,
+        "pad_w":2.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "relu1":0
+        "relu1":0.000000
+      },
+      "params":{
+        "bias":[
+          32.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          32.000000,
+          32.000000,
+          5.000000,
+          5.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu2",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv2":0
+        "conv2":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"pool",
+        "global":0.000000,
+        "kernel_size":3.000000,
+        "method":"avg",
         "name":"pool2",
-        "global":0,
-        "kernel_size":3,
-        "method":"avg",
-        "pad":0,
-        "stride":2
+        "pad":0.000000,
+        "stride":2.000000,
+        "type":"pool"
       },
       "inputs":{
-        "relu2":0
+        "relu2":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":5.000000,
+        "kernel_size_w":5.000000,
         "name":"conv3",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":5,
-        "kernel_size_w":5,
-        "num":64,
-        "pad_h":2,
-        "pad_w":2,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[64,1,1,1],
-        "weight":[64,32,5,5]
+        "num":64.000000,
+        "pad_h":2.000000,
+        "pad_w":2.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "pool2":0
+        "pool2":0.000000
+      },
+      "params":{
+        "bias":[
+          64.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          64.000000,
+          32.000000,
+          5.000000,
+          5.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
-        "name":"relu3",
         "method":"relu",
-        "neg_slope":0
+        "name":"relu3",
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv3":0
+        "conv3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"pool",
-        "name":"pool3",
-        "global":0,
-        "kernel_size":3,
+        "global":0.000000,
+        "kernel_size":3.000000,
         "method":"avg",
-        "pad":0,
-        "stride":2
+        "name":"pool3",
+        "pad":0.000000,
+        "stride":2.000000,
+        "type":"pool"
       },
       "inputs":{
-        "relu3":0
+        "relu3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"fc",
+        "bias":1.000000,
         "name":"ip1",
-        "bias":1,
-        "num":64
-      },
-      "params":{
-        "bias":[64,1,1,1],
-        "weight":[64,1024,1,1]
+        "num":64.000000,
+        "type":"fc"
       },
       "inputs":{
-        "pool3":0
+        "pool3":0.000000
+      },
+      "params":{
+        "bias":[
+          64.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          64.000000,
+          1024.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"fc",
+        "bias":1.000000,
         "name":"ip2",
-        "bias":1,
-        "num":10
-      },
-      "params":{
-        "bias":[10,1,1,1],
-        "weight":[10,64,1,1]
+        "num":10.000000,
+        "type":"fc"
       },
       "inputs":{
-        "ip1":0
+        "ip1":0.000000
+      },
+      "params":{
+        "bias":[
+          10.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          10.000000,
+          64.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"loss",
+        "method":"softmax",
         "name":"loss",
-        "method":"softmax"
+        "type":"loss"
       },
       "inputs":{
-        "input_label":1,
-        "ip2":0
+        "input_label":1.000000,
+        "ip2":0.000000
+      },
+      "params":{
+
       }
     }
-  ]
+  ],
+  "net_name":"CIFAR10_quick"
 }

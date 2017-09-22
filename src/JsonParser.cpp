@@ -1,9 +1,36 @@
+#include "stdlib.h"
 #include <fstream>
 #include <unordered_set>
-#include "JsonParser.h"
 #include <stack>
+#include "JsonParser.h"
 using namespace std;
 JsonValue::JsonValue(){
+}
+JsonValue::JsonValue(const std::string& type){
+	if((type == "null") || (type == "v") || (type == "array") || (type == "obj"))
+		this->type = type;
+	else {
+		printf("not valid type\n");
+		exit(0);
+	}
+}
+JsonValue::JsonValue(const std::string& type, double d){
+	if(type != "v"){
+		printf("only v uses this constructor\n");
+		exit(0);
+	}
+	this->type = type;
+	jv.type = "num";
+	jv.d = d;
+}
+JsonValue::JsonValue(const std::string& type, const std::string& s){
+	if(type != "v"){
+		printf("only v uses this constructor\n");
+		exit(0);
+	}
+	this->type = type;
+	jv.type = "string";
+	jv.s = s;
 }
 std::string JsonPrimitiveValue::to_str(){
 	if(type == "string") return "\""+s+"\"";
@@ -120,9 +147,15 @@ void JsonValue::set_by_type(const std::string& type, JsonValue& obj, const char*
 	while((c<=e) && ((*c == ' ') || (*c == ',') || (*c == ']') || (*c == '}')))++c;
 }
 void JsonValue::set_array(const char* b, int n, std::queue<int>& helper){
-	helper.pop();
 	type = "array";
+	//if(n == helper.front()-1){
+	//	helper.pop();
+	//	return;
+	//}
+	helper.pop();
 	const char*c = b,*e = b+n-1;
+	while((c <= e) && (*c == ' ')) ++c;
+	if(*c == ']') return;
 	while(c <= e){
 		int val_b, val_e;
 		string ctype = check_type(c,e,val_b, val_e,false);
@@ -131,9 +164,16 @@ void JsonValue::set_array(const char* b, int n, std::queue<int>& helper){
 	}
 }
 void JsonValue::set_obj(const char*b, int n, std::queue<int>& helper){
-	helper.pop();
 	type = "obj";
+	//if(n == helper.front()-1){
+	//	helper.pop();
+	//	return;
+	//}
+	helper.pop();
 	const char*c = b,*e = b+n-1;
+	while((c <= e) && (*c == ' ')) ++c;
+	if(*c == '}') return;
+
 	while(c <= e){
 		int key_b, key_e;
 		find_str(c,e,key_b,key_e);

@@ -15,14 +15,20 @@ struct JsonPrimitiveValue{
 class JsonValue{
 	public:
 	JsonValue();
+	JsonValue(const std::string& type);
+	JsonValue(const std::string& type, double d);
+	JsonValue(const std::string& type, const std::string& s);
+	void set_array(const char* b, int n,std::queue<int>& helper);
+	void set_obj(const char*b, int n,std::queue<int>& helper);
+	std::string to_str(int level);
+
+	public:
 	std::map<std::string, JsonValue> jobj;
 	std::vector<JsonValue> jarray;
 	JsonPrimitiveValue jv;
 	//obj/array/v/null
 	std::string type;
-	void set_array(const char* b, int n,std::queue<int>& helper);
-	void set_obj(const char*b, int n,std::queue<int>& helper);
-	std::string to_str(int level);
+
 	private:
 	void set_val(const std::string& v);
 	void set_null();
