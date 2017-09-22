@@ -20,7 +20,7 @@ class NetGame{
 	Net004 net;
 
 	private:
-	typedef std::map<std::string, Run*(*)(const RunUnit&)> RunTypeMap;
+	typedef std::map<std::string, Run*(*)(const JsonValue&)> RunTypeMap;
 	RunTypeMap run_type_map;
 };
 class NetTrain:public NetGame{

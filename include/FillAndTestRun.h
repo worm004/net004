@@ -4,7 +4,7 @@
 class FillAndTestRun:public FillAndForwardRun{
 	public:
 	FillAndTestRun();
-	FillAndTestRun(const RunUnit& u);
+	FillAndTestRun(const JsonValue& j);
 	virtual void operator()(Net004& net, int cur);
 };
 #endif

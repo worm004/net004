@@ -10,7 +10,7 @@ struct InputData{
 class FillAndForwardRun:public Run{
 	public:
 	FillAndForwardRun();
-	FillAndForwardRun(const RunUnit& u);
+	FillAndForwardRun(const JsonValue& j);
 	
 	InputData data;
 	virtual void operator()(Net004& net, int cur);

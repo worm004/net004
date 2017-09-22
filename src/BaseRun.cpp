@@ -1,5 +1,5 @@
 #include "BaseRun.h"
 Run::Run(){
 }
-Run::Run(const RunUnit& u){
+Run::Run(const JsonValue& j){
 }

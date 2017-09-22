@@ -11,7 +11,7 @@
 
 using namespace std;
 template<typename T> 
-Run* create_run(const RunUnit& u){
+Run* create_run(const JsonValue& u){
 	return new T(u);
 }
 NetGame::NetGame(){
@@ -25,15 +25,15 @@ NetGame::NetGame(){
 	};
 }
 void NetGame::load(const std::string& path){
-	GameParser gparser;
-	gparser.read(path);
-	name = gparser.name;
-	type = gparser.type;
-	net_path = gparser.net_path;
-	batch_size = gparser.batch_size;
-	max_iter = gparser.max_iter;
-	for(const auto& run:gparser.runs)
-		runs[run.type] = run_type_map[run.type](run);
+	//GameParser gparser;
+	//gparser.read(path);
+	//name = gparser.name;
+	//type = gparser.type;
+	//net_path = gparser.net_path;
+	//batch_size = gparser.batch_size;
+	//max_iter = gparser.max_iter;
+	//for(const auto& run:gparser.runs)
+	//	runs[run.type] = run_type_map[run.type](run);
 }
 void NetGame::run(){
 	for(const auto& i : runlist)

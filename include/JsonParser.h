@@ -10,7 +10,7 @@ struct JsonPrimitiveValue{
 	std::string type;
 	std::string s;
 	double d;
-	void show();
+	std::string to_str();
 };
 class JsonValue{
 	public:
@@ -22,7 +22,7 @@ class JsonValue{
 	std::string type;
 	void set_array(const char* b, int n,std::queue<int>& helper);
 	void set_obj(const char*b, int n,std::queue<int>& helper);
-	void show();
+	std::string to_str(int level);
 	private:
 	void set_val(const std::string& v);
 	void set_null();

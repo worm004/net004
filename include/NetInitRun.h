@@ -4,7 +4,7 @@
 class NetInitRun:public Run{
 	public:
 	NetInitRun();
-	NetInitRun(const RunUnit& u);
+	NetInitRun(const JsonValue& j);
 	virtual void operator()(Net004& net, int cur);
 };
 

@@ -1,6 +1,7 @@
 #include <string>
 #include "caffe/caffe.hpp"
 #include "Parser.h"
+#include "JsonParser.h"
 class CaffeParser{
 	public:
 	CaffeParser();
@@ -44,6 +45,7 @@ class CaffeParser{
 #undef func_param
 
 	private:
+	JsonParser jparser;
 	NetParser parser;
 	std::shared_ptr<caffe::Net<float> > net;
 	bool is_train = false;

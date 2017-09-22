@@ -4,7 +4,7 @@
 class UpdateRun:public Run{
 	public:
 	UpdateRun();
-	UpdateRun(const RunUnit& u);
+	UpdateRun(const JsonValue& j);
 	std::string solver;
 	double momentum, weight_decay, base_lr;
 	virtual void operator()(Net004& net, int cur);

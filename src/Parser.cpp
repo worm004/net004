@@ -5,8 +5,6 @@
 #include <stack>
 using namespace std;
 
-void GameParser::read(const std::string& path){
-}
 void NetParser::add_layer(const LayerUnit& u){
 	layers.push_back(u);
 }

@@ -86,7 +86,6 @@ void CaffeParser::convert(){
 	const vector<string>& layer_names = net->layer_names(), &blob_names = net->blob_names();
 	const vector<vector<caffe::Blob<float> *> >& tops = net->top_vecs();
 	parser.set_net_name(net->name());
-	parser.set_net_mode(false);//TODO
 	for(int i=0;i<layers.size();++i){
 		if(layers[i]->type() != string("Input")) continue;
 		string layer_name = layer_names[i];

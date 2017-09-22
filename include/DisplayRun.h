@@ -4,7 +4,7 @@
 struct DisplayRun:public Run{
 	public:
 	DisplayRun();
-	DisplayRun(const RunUnit& u);
+	DisplayRun(const JsonValue& j);
 	virtual void operator()(Net004& net, int cur);
 };
 #endif

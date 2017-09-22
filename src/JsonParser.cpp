@@ -1,4 +1,3 @@
-#include "stdlib.h"
 #include <fstream>
 #include <unordered_set>
 #include "JsonParser.h"
@@ -6,9 +5,13 @@
 using namespace std;
 JsonValue::JsonValue(){
 }
-void JsonPrimitiveValue::show(){
-	if(type == "string") printf("\"%s\"",s.c_str());
-	else if(type == "num") printf("%lf",d);
+std::string JsonPrimitiveValue::to_str(){
+	if(type == "string") return "\""+s+"\"";
+	else if(type == "num") return to_string(d);
+	else{
+		printf("error: should not reach here\n");
+		exit(0);
+	}
 }
 void find_str(const char*b, const char*e,int &ib, int&ie){
 	const char*c = b;
@@ -141,27 +144,38 @@ void JsonValue::set_obj(const char*b, int n, std::queue<int>& helper){
 		set_by_type(ctype, jobj[ckey], c,e,val_b,val_e,helper);
 	}
 }
-void JsonValue::show(){
-	if(type == "null")
-		printf("null");	
-	else if(type == "v")
-		jv.show();
+std::string JsonValue::to_str(int level){
+	if(type == "null") return "null";
+	else if(type == "v") return jv.to_str();
 	else if(type == "obj"){
-		printf("{\n");
+		string ret;
+		ret += "{\n";
 		for(auto it = jobj.begin(); it!= jobj.end();++it){
-			if(it!=jobj.begin()) printf(",\n");
-			printf("\"%s\":",it->first.c_str());
-			it->second.show();
+			if(it!=jobj.begin()) ret += ",\n";
+			for(int i=0;i<level;++i) ret += "  ";
+			ret += "\"" + it->first + "\":" + it->second.to_str(level+1);
 		}
-		printf("\n}");
+		ret += "\n";
+		for(int i=1;i<level;++i) ret += "  ";
+		ret += "}";
+		return ret;
 	}
 	else if(type == "array"){
-		printf("[\n");
+		string ret;
+		ret += "[\n";
 		for(int i=0;i<jarray.size();++i){
-			if(i != 0) printf(",\n");
-			jarray[i].show();
+			if(i != 0) ret += ",\n";
+			for(int j=0;j<level;++j) ret += "  ";
+			ret += jarray[i].to_str(level + 1);
 		}
-		printf("\n]");
+		ret += "\n";
+		for(int i=1;i<level;++i) ret += "  ";
+		ret += "]";
+		return ret;
+	}
+	else{
+		printf("error: should not reach here\n");
+		exit(0);
 	}
 }
 void JsonParser::read(const std::string& path){
@@ -185,13 +199,6 @@ void JsonParser::read(const std::string& path){
 	if(s1[0] == '{') j.set_obj(p,len,helper);
 	else if(s1[0] == '[') j.set_array(p,len,helper);
 	else return;
-}
-void JsonParser::write(const std::string& path){
-
-}
-void JsonParser::show(){
-	j.show();
-	printf("\n");
 }
 void JsonParser::gen_helper(const char*b, const char*e){
 	stack<char> cs;
@@ -224,4 +231,11 @@ void JsonParser::gen_helper(const char*b, const char*e){
 		    return i.second < j.second;
 	});
 	for(auto i:ret) helper.push(i.first);
+}
+void JsonParser::show(){
+	printf("%s\n",j.to_str(1).c_str());
+}
+void JsonParser::write(const std::string& path){
+	ofstream file(path);
+	file << j.to_str(1)<<endl;
 }

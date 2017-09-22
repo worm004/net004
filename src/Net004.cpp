@@ -7,7 +7,6 @@ void Net004::load(const std::string& net_path, const std::string& model_path){
 	JsonParser nparser;	
 	nparser.read(net_path);
 	name = nparser.j.jobj["net_name"].jv.s;
-	std::vector<LayerUnit> layers;
 	for(int i=0;i<nparser.j.jobj["layers"].jarray.size();++i){
 		ls.add(nparser.j.jobj["layers"].jarray[i]);
 	}
