@@ -13,7 +13,6 @@ class Net004{
 	void show();
 
 	Layers ls;
-	private:
 	std::string name;
 };
 #endif

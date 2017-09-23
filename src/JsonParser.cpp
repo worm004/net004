@@ -32,7 +32,7 @@ JsonValue::JsonValue(const std::string& type, const std::string& s){
 	jv.type = "string";
 	jv.s = s;
 }
-std::string JsonPrimitiveValue::to_str(){
+std::string JsonPrimitiveValue::to_str() const{
 	if(type == "string") return "\""+s+"\"";
 	else if(type == "num") return to_string(d);
 	else{
@@ -44,6 +44,7 @@ void find_str(const char*b, const char*e,int &ib, int&ie){
 	const char*c = b;
 	while((c <= e) && (*c == ' ')) ++c;
 	if(*c != '"'){
+		printf("%s\n",b);
 		printf("error1: there are chars before \"string\"\n");
 		exit(0);
 	}
@@ -184,7 +185,7 @@ void JsonValue::set_obj(const char*b, int n, std::queue<int>& helper){
 		set_by_type(ctype, jobj[ckey], c,e,val_b,val_e,helper);
 	}
 }
-std::string JsonValue::to_str(int level){
+std::string JsonValue::to_str(int level) const{
 	if(type == "null") return "null";
 	else if(type == "v") return jv.to_str();
 	else if(type == "obj"){
@@ -220,6 +221,10 @@ std::string JsonValue::to_str(int level){
 }
 void JsonParser::read(const std::string& path){
 	ifstream ifile(path);
+	if(!ifile.is_open()){
+		printf("cannot open file %s\n",path.c_str());
+		exit(0);
+	}
 	string s0((std::istreambuf_iterator<char>(ifile)), (std::istreambuf_iterator<char>()));
 	int b = 0, e = s0.size()-1;
 	while((b <= e) && ((s0[b] != '{') && (s0[b] != '['))) ++b;
@@ -258,6 +263,8 @@ void JsonParser::gen_helper(const char*b, const char*e){
 		else if((*c == ']')||(*c == '}')){
 			char left = cs.top();
 			if(*c != left+2){
+				printf("%s\n",b);
+				printf("%s\n",c);
 				printf("error: [ { and } ] not matched\n");
 				exit(0);
 			}
@@ -272,7 +279,7 @@ void JsonParser::gen_helper(const char*b, const char*e){
 	});
 	for(auto i:ret) helper.push(i.first);
 }
-void JsonParser::show(){
+void JsonParser::show() const{
 	printf("%s\n",j.to_str(1).c_str());
 }
 void JsonParser::write(const std::string& path){
