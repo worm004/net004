@@ -1,6 +1,7 @@
 #include <string>
 #include "caffe/caffe.hpp"
 #include "Parser.h"
+#include "JsonParser.h"
 class CaffeParser{
 	public:
 	CaffeParser();
@@ -17,18 +18,25 @@ class CaffeParser{
 		const std::vector<int>& bottom_ids, 
 		std::map<std::string, int>& inputs,
 		int cur_layer);
+	void find_inputs(
+		const std::vector<boost::shared_ptr<caffe::Layer<float> >>& layers,
+		const std::vector<std::string>& layer_names, 
+		const std::vector<std::string>& blob_names, 
+		const std::vector<int>& bottom_ids, 
+		JsonValue& inputs,
+		int cur_layer);
 	void find_params(
 		const std::string& type, 
 		const std::vector<boost::shared_ptr<caffe::Blob<float> > >& param_blobs,
-		std::map<std::string, std::vector<int> >&  params);
+		JsonValue& params);
 	void find_attrs(
 		const std::string& type,
 		const caffe::LayerParameter& caffe_attr,
-		std::map<std::string, ParamUnit>& attrs);
+		JsonValue& attrs);
 	void write_model(const std::string& model_path);
 	void write_blob(const std::string& layer_name, const std::string& blob_name, const caffe::Blob<float> *blob, FILE* file);
 
-#define func_param const caffe::LayerParameter& param, std::map<std::string, ParamUnit>& params
+#define func_param const caffe::LayerParameter& param, JsonValue& params
 	typedef void (CaffeParser::*find_attrs_func) (func_param);
 	void find_conv_attrs(func_param);
 	void find_pooling_attrs(func_param);
@@ -42,15 +50,18 @@ class CaffeParser{
 	void find_scale_attrs(func_param);
 	void find_eltwise_attrs(func_param);
 	void find_softmax_attrs(func_param);
+	void find_crop_attrs(func_param);
+	void find_dconv_attrs(func_param);
 	void find_python_attrs(func_param);
 	void find_reshape_attrs(func_param);
 	void find_roipooling_attrs(func_param);
 #undef func_param
 
 	private:
-	NetParser parser;
+	JsonParser jparser;
 	std::shared_ptr<caffe::Net<float> > net;
 	bool is_train = false;
 	std::map<std::string,std::vector<std::string> > caffe_param_table;
 	std::map<std::string, find_attrs_func> find_attrs_funcs;
+
 };

@@ -5,6 +5,7 @@ using namespace std;
 CaffeParser::CaffeParser(){
 	caffe_param_table = {
 		{"Convolution", {"weight","bias"}},
+		{"Deconvolution", {"weight","bias"}},
 		{"InnerProduct", {"weight","bias"}},
 		{"BatchNorm", {"mean","variance","scale"}},
 		{"Scale", {"scale","bias"}}
@@ -20,7 +21,14 @@ CaffeParser::CaffeParser(){
 		{"Concat", &CaffeParser::find_concat_attrs},
 		{"BatchNorm", &CaffeParser::find_bn_attrs},
 		{"Scale", &CaffeParser::find_scale_attrs},
-		{"Eltwise", &CaffeParser::find_eltwise_attrs}
+		{"Eltwise", &CaffeParser::find_eltwise_attrs},
+		{"Softmax", &CaffeParser::find_softmax_attrs},
+		{"Crop", &CaffeParser::find_crop_attrs},
+		{"Deconvolution", &CaffeParser::find_dconv_attrs},
+		{"Reshape", &CaffeParser::find_reshape_attrs},
+		{"Softmax", &CaffeParser::find_softmax_attrs},
+		{"Python", &CaffeParser::find_python_attrs},
+		{"ROIPooling", &CaffeParser::find_roipooling_attrs}
 		};
 }
 void CaffeParser::load_caffe_model(
@@ -96,6 +104,39 @@ void CaffeParser::convert(){
 	jparser.j = JsonValue("obj");
 	jparser.j.jobj["net_name"] = {"v",net->name()};
 	jparser.j.jobj["layers"] = JsonValue("array");
+
+	//
+	//faster rcnn only
+	//{
+	//	JsonValue jo("obj");
+	//	jo.jobj["attrs"] = JsonValue("obj");
+	//	jo.jobj["attrs"].jobj = {
+	//		{"type",{"v","data"}},
+	//		{"name", {"v","data"}},
+	//		{"method",{"v","data"}},
+	//		{"n",{"v",double(net->input_blobs()[0]->num())}},
+	//		{"c",{"v",double(net->input_blobs()[0]->channels())}},
+	//		{"h",{"v",double(net->input_blobs()[0]->height())}},
+	//		{"w",{"v",double(net->input_blobs()[0]->width())}},
+	//	};
+	//	jparser.j.jobj["layers"].jarray.push_back(jo);
+	//}
+	//{
+	//	JsonValue jo("obj");
+	//	jo.jobj["attrs"] = JsonValue("obj");
+	//	jo.jobj["attrs"].jobj = {
+	//		{"type",{"v","data"}},
+	//		{"name", {"v","im_info"}},
+	//		{"method",{"v","im_info"}},
+	//		{"n",{"v",double(net->input_blobs()[1]->num())}},
+	//		{"c",{"v",double(net->input_blobs()[1]->channels())}},
+	//		{"h",{"v",double(net->input_blobs()[1]->height())}},
+	//		{"w",{"v",double(net->input_blobs()[1]->width())}},
+	//	};
+	//	jparser.j.jobj["layers"].jarray.push_back(jo);
+	//}
+	
+	// 
 	for(int i=0;i<layers.size();++i){
 		if(layers[i]->type() != string("Input")) continue;
 		string layer_name = layer_names[i];
@@ -264,4 +305,74 @@ void CaffeParser::find_eltwise_attrs(const caffe::LayerParameter& caffe_attr, Js
 		{"coeff0",{"v",(double)coeff0}},
 		{"coeff1",{"v",(double)coeff1}}
 		});
+}
+void CaffeParser::find_softmax_attrs(const caffe::LayerParameter& caffe_attr, JsonValue& attrs){
+	attrs.jobj.insert({{"type",{"v","softmax"}}});
+}
+void CaffeParser::find_crop_attrs(const caffe::LayerParameter& caffe_attr, JsonValue& attrs){
+	const caffe::CropParameter& p = caffe_attr.crop_param();
+	if(p.offset().size() != 1){
+		printf("cannot process offset > 1 in crop\n");
+		exit(0);
+	}
+	attrs.jobj.insert({
+		{"type",{"v","crop"}},
+		{"axis",{"v",double(p.axis())}},
+		{"offset",{"v",double(p.offset()[0])}},
+		});
+}
+void CaffeParser::find_dconv_attrs(const caffe::LayerParameter& caffe_attr, JsonValue& attrs){
+	const caffe::ConvolutionParameter& p = caffe_attr.convolution_param();
+	int kernel_size = p.kernel_size().size() == 1?p.kernel_size()[0]:1,
+	    pad = p.pad().size() == 1? p.pad()[0]:0,
+	    stride = p.stride().size() == 1? p.stride()[0]:1;
+	attrs.jobj.insert({
+		{"type", {"v","dconv"}},
+		{"num", {"v",double(p.num_output())}},
+		{"kernel_size_h", {"v",double(p.has_kernel_h()?p.kernel_h():kernel_size)}},
+		{"kernel_size_w", {"v",double(p.has_kernel_w()?p.kernel_w():kernel_size)}},
+		{"pad_h", {"v",double(p.has_pad_h()?p.pad_h():pad)}},
+		{"pad_w", {"v",double(p.has_pad_w()?p.pad_w():pad)}},
+		{"stride_h", {"v",double(p.has_stride_h()?p.stride_h():stride)}},
+		{"stride_w", {"v",double(p.has_stride_w()?p.stride_w():stride)}},
+		{"bias", {"v",double(p.bias_term())}},
+		{"group", {"v",double(p.group())}}
+		});
+}
+void CaffeParser::find_python_attrs(const caffe::LayerParameter& caffe_attr, JsonValue& attrs){
+	const caffe::PythonParameter& p = caffe_attr.python_param();
+	if(p.layer()!="ProposalLayer"){
+		printf("cannot parser python layer != ProposalLayer\n");
+		exit(0);
+	}
+	string feat_stride_param = p.param_str();
+	int feat_stride = atoi(feat_stride_param.substr(feat_stride_param.find_last_of(' '),feat_stride_param.size()-feat_stride_param.find_last_of(' ')+1).c_str());
+	attrs.jobj.insert({
+		{"type",{"v","proposal"}},
+		{"feat_stride",{"v",double(feat_stride)}},
+		});
+}
+void CaffeParser::find_reshape_attrs(const caffe::LayerParameter& caffe_attr, JsonValue& attrs){
+	const caffe::ReshapeParameter& p = caffe_attr.reshape_param();
+	if(p.shape().dim().size()!=4){
+		printf("cannot parser reshape dim != 4\n");
+		exit(0);
+	}
+	attrs.jobj.insert({
+		{"type",{"v","reshape"}},
+		{"d0",{"v",double(p.shape().dim()[0])}},
+		{"d1",{"v",double(p.shape().dim()[1])}},
+		{"d2",{"v",double(p.shape().dim()[2])}},
+		{"d3",{"v",double(p.shape().dim()[3])}},
+		});
+}
+void CaffeParser::find_roipooling_attrs(const caffe::LayerParameter& caffe_attr, JsonValue& attrs){
+	//faster rcnn only
+	//const caffe::ROIPoolingParameter& p = caffe_attr.roi_pooling_param();
+	//attrs.jobj.insert({
+	//	{"type",{"v","roipooling"}},
+	//	{"h",{"v",double(p.pooled_h())}},
+	//	{"w",{"v",double(p.pooled_w())}},
+	//	{"s",{"v",double(p.spatial_scale())}}
+	//	});
 }

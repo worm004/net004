@@ -49,6 +49,12 @@ class CaffeParser{
 	void find_bn_attrs(func_param);
 	void find_scale_attrs(func_param);
 	void find_eltwise_attrs(func_param);
+	void find_softmax_attrs(func_param);
+	void find_crop_attrs(func_param);
+	void find_dconv_attrs(func_param);
+	void find_python_attrs(func_param);
+	void find_reshape_attrs(func_param);
+	void find_roipooling_attrs(func_param);
 #undef func_param
 
 	private:

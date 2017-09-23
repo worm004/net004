@@ -1,2417 +1,3306 @@
 {
-  "net_name":"gnet_yolo",
   "layers":[
     {
       "attrs":{
-        "type":"data",
-        "name":"input_data",
-        "c":3,
-        "h":448,
+        "c":3.000000,
+        "h":448.000000,
         "method":"data",
-        "n":1,
-        "w":448
+        "n":1.000000,
+        "name":"input_data",
+        "type":"data",
+        "w":448.000000
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":7.000000,
+        "kernel_size_w":7.000000,
         "name":"conv1/7x7_s2",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":7,
-        "kernel_size_w":7,
-        "num":64,
-        "pad_h":3,
-        "pad_w":3,
-        "stride_h":2,
-        "stride_w":2
-      },
-      "params":{
-        "bias":[64,1,1,1],
-        "weight":[64,3,7,7]
+        "num":64.000000,
+        "pad_h":3.000000,
+        "pad_w":3.000000,
+        "stride_h":2.000000,
+        "stride_w":2.000000,
+        "type":"conv"
       },
       "inputs":{
-        "input_data":0
+        "input_data":0.000000
+      },
+      "params":{
+        "bias":[
+          64.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          64.000000,
+          3.000000,
+          7.000000,
+          7.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"conv1/relu_7x7",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv1/7x7_s2":0
+        "conv1/7x7_s2":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"pool",
+        "global":0.000000,
+        "kernel_size":3.000000,
+        "method":"max",
         "name":"pool1/3x3_s2",
-        "global":0,
-        "kernel_size":3,
-        "method":"max",
-        "pad":0,
-        "stride":2
+        "pad":0.000000,
+        "stride":2.000000,
+        "type":"pool"
       },
       "inputs":{
-        "conv1/relu_7x7":0
+        "conv1/relu_7x7":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"lrn",
+        "alpha":0.000100,
+        "beta":0.750000,
+        "local_size":5.000000,
         "name":"pool1/norm1",
-        "alpha":0.0001,
-        "beta":0.75,
-        "local_size":5
+        "type":"lrn"
       },
       "inputs":{
-        "pool1/3x3_s2":0
+        "pool1/3x3_s2":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"conv2/3x3_reduce",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":64,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[64,1,1,1],
-        "weight":[64,64,1,1]
+        "num":64.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "pool1/norm1":0
+        "pool1/norm1":0.000000
+      },
+      "params":{
+        "bias":[
+          64.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          64.000000,
+          64.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"conv2/relu_3x3_reduce",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv2/3x3_reduce":0
+        "conv2/3x3_reduce":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv2/3x3",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":192,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[192,1,1,1],
-        "weight":[192,64,3,3]
+        "num":192.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "conv2/relu_3x3_reduce":0
+        "conv2/relu_3x3_reduce":0.000000
+      },
+      "params":{
+        "bias":[
+          192.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          192.000000,
+          64.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"conv2/relu_3x3",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv2/3x3":0
+        "conv2/3x3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"lrn",
+        "alpha":0.000100,
+        "beta":0.750000,
+        "local_size":5.000000,
         "name":"conv2/norm2",
-        "alpha":0.0001,
-        "beta":0.75,
-        "local_size":5
+        "type":"lrn"
       },
       "inputs":{
-        "conv2/relu_3x3":0
+        "conv2/relu_3x3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"pool",
+        "global":0.000000,
+        "kernel_size":3.000000,
+        "method":"max",
         "name":"pool2/3x3_s2",
-        "global":0,
-        "kernel_size":3,
-        "method":"max",
-        "pad":0,
-        "stride":2
+        "pad":0.000000,
+        "stride":2.000000,
+        "type":"pool"
       },
       "inputs":{
-        "conv2/norm2":0
+        "conv2/norm2":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"split",
-        "name":"pool2/3x3_s2_pool2/3x3_s2_0_split"
+        "name":"pool2/3x3_s2_pool2/3x3_s2_0_split",
+        "type":"split"
       },
       "inputs":{
-        "pool2/3x3_s2":0
+        "pool2/3x3_s2":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_3a/1x1",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":64,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[64,1,1,1],
-        "weight":[64,192,1,1]
+        "num":64.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "pool2/3x3_s2_pool2/3x3_s2_0_split":0
+        "pool2/3x3_s2_pool2/3x3_s2_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          64.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          64.000000,
+          192.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_3a/relu_1x1",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_3a/1x1":0
+        "inception_3a/1x1":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_3a/3x3_reduce",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":96,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[96,1,1,1],
-        "weight":[96,192,1,1]
+        "num":96.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "pool2/3x3_s2_pool2/3x3_s2_0_split":0
+        "pool2/3x3_s2_pool2/3x3_s2_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          96.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          96.000000,
+          192.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_3a/relu_3x3_reduce",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_3a/3x3_reduce":0
+        "inception_3a/3x3_reduce":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"inception_3a/3x3",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":128,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[128,1,1,1],
-        "weight":[128,96,3,3]
+        "num":128.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_3a/relu_3x3_reduce":0
+        "inception_3a/relu_3x3_reduce":0.000000
+      },
+      "params":{
+        "bias":[
+          128.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          128.000000,
+          96.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_3a/relu_3x3",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_3a/3x3":0
+        "inception_3a/3x3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_3a/5x5_reduce",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":16,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[16,1,1,1],
-        "weight":[16,192,1,1]
+        "num":16.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "pool2/3x3_s2_pool2/3x3_s2_0_split":0
+        "pool2/3x3_s2_pool2/3x3_s2_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          16.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          16.000000,
+          192.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_3a/relu_5x5_reduce",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_3a/5x5_reduce":0
+        "inception_3a/5x5_reduce":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":5.000000,
+        "kernel_size_w":5.000000,
         "name":"inception_3a/5x5",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":5,
-        "kernel_size_w":5,
-        "num":32,
-        "pad_h":2,
-        "pad_w":2,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[32,1,1,1],
-        "weight":[32,16,5,5]
+        "num":32.000000,
+        "pad_h":2.000000,
+        "pad_w":2.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_3a/relu_5x5_reduce":0
+        "inception_3a/relu_5x5_reduce":0.000000
+      },
+      "params":{
+        "bias":[
+          32.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          32.000000,
+          16.000000,
+          5.000000,
+          5.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_3a/relu_5x5",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_3a/5x5":0
+        "inception_3a/5x5":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"pool",
+        "global":0.000000,
+        "kernel_size":3.000000,
+        "method":"max",
         "name":"inception_3a/pool",
-        "global":0,
-        "kernel_size":3,
-        "method":"max",
-        "pad":1,
-        "stride":1
+        "pad":1.000000,
+        "stride":1.000000,
+        "type":"pool"
       },
       "inputs":{
-        "pool2/3x3_s2_pool2/3x3_s2_0_split":0
+        "pool2/3x3_s2_pool2/3x3_s2_0_split":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_3a/pool_proj",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":32,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[32,1,1,1],
-        "weight":[32,192,1,1]
+        "num":32.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_3a/pool":0
+        "inception_3a/pool":0.000000
+      },
+      "params":{
+        "bias":[
+          32.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          32.000000,
+          192.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_3a/relu_pool_proj",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_3a/pool_proj":0
+        "inception_3a/pool_proj":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"concat",
+        "method":"channel",
         "name":"inception_3a/output",
-        "method":"channel"
+        "type":"concat"
       },
       "inputs":{
-        "inception_3a/relu_1x1":0,
-        "inception_3a/relu_3x3":1,
-        "inception_3a/relu_5x5":2,
-        "inception_3a/relu_pool_proj":3
+        "inception_3a/relu_1x1":0.000000,
+        "inception_3a/relu_3x3":1.000000,
+        "inception_3a/relu_5x5":2.000000,
+        "inception_3a/relu_pool_proj":3.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"split",
-        "name":"inception_3a/output_inception_3a/output_0_split"
+        "name":"inception_3a/output_inception_3a/output_0_split",
+        "type":"split"
       },
       "inputs":{
-        "inception_3a/output":0
+        "inception_3a/output":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_3b/1x1",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":128,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[128,1,1,1],
-        "weight":[128,256,1,1]
+        "num":128.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_3a/output_inception_3a/output_0_split":0
+        "inception_3a/output_inception_3a/output_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          128.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          128.000000,
+          256.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_3b/relu_1x1",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_3b/1x1":0
+        "inception_3b/1x1":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_3b/3x3_reduce",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":128,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[128,1,1,1],
-        "weight":[128,256,1,1]
+        "num":128.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_3a/output_inception_3a/output_0_split":0
+        "inception_3a/output_inception_3a/output_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          128.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          128.000000,
+          256.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_3b/relu_3x3_reduce",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_3b/3x3_reduce":0
+        "inception_3b/3x3_reduce":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"inception_3b/3x3",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":192,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[192,1,1,1],
-        "weight":[192,128,3,3]
+        "num":192.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_3b/relu_3x3_reduce":0
+        "inception_3b/relu_3x3_reduce":0.000000
+      },
+      "params":{
+        "bias":[
+          192.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          192.000000,
+          128.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_3b/relu_3x3",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_3b/3x3":0
+        "inception_3b/3x3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_3b/5x5_reduce",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":32,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[32,1,1,1],
-        "weight":[32,256,1,1]
+        "num":32.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_3a/output_inception_3a/output_0_split":0
+        "inception_3a/output_inception_3a/output_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          32.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          32.000000,
+          256.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_3b/relu_5x5_reduce",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_3b/5x5_reduce":0
+        "inception_3b/5x5_reduce":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":5.000000,
+        "kernel_size_w":5.000000,
         "name":"inception_3b/5x5",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":5,
-        "kernel_size_w":5,
-        "num":96,
-        "pad_h":2,
-        "pad_w":2,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[96,1,1,1],
-        "weight":[96,32,5,5]
+        "num":96.000000,
+        "pad_h":2.000000,
+        "pad_w":2.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_3b/relu_5x5_reduce":0
+        "inception_3b/relu_5x5_reduce":0.000000
+      },
+      "params":{
+        "bias":[
+          96.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          96.000000,
+          32.000000,
+          5.000000,
+          5.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_3b/relu_5x5",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_3b/5x5":0
+        "inception_3b/5x5":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"pool",
+        "global":0.000000,
+        "kernel_size":3.000000,
+        "method":"max",
         "name":"inception_3b/pool",
-        "global":0,
-        "kernel_size":3,
-        "method":"max",
-        "pad":1,
-        "stride":1
+        "pad":1.000000,
+        "stride":1.000000,
+        "type":"pool"
       },
       "inputs":{
-        "inception_3a/output_inception_3a/output_0_split":0
+        "inception_3a/output_inception_3a/output_0_split":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_3b/pool_proj",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":64,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[64,1,1,1],
-        "weight":[64,256,1,1]
+        "num":64.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_3b/pool":0
+        "inception_3b/pool":0.000000
+      },
+      "params":{
+        "bias":[
+          64.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          64.000000,
+          256.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_3b/relu_pool_proj",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_3b/pool_proj":0
+        "inception_3b/pool_proj":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"concat",
+        "method":"channel",
         "name":"inception_3b/output",
-        "method":"channel"
+        "type":"concat"
       },
       "inputs":{
-        "inception_3b/relu_1x1":0,
-        "inception_3b/relu_3x3":1,
-        "inception_3b/relu_5x5":2,
-        "inception_3b/relu_pool_proj":3
+        "inception_3b/relu_1x1":0.000000,
+        "inception_3b/relu_3x3":1.000000,
+        "inception_3b/relu_5x5":2.000000,
+        "inception_3b/relu_pool_proj":3.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"pool",
+        "global":0.000000,
+        "kernel_size":3.000000,
+        "method":"max",
         "name":"pool3/3x3_s2",
-        "global":0,
-        "kernel_size":3,
-        "method":"max",
-        "pad":0,
-        "stride":2
+        "pad":0.000000,
+        "stride":2.000000,
+        "type":"pool"
       },
       "inputs":{
-        "inception_3b/output":0
+        "inception_3b/output":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"split",
-        "name":"pool3/3x3_s2_pool3/3x3_s2_0_split"
+        "name":"pool3/3x3_s2_pool3/3x3_s2_0_split",
+        "type":"split"
       },
       "inputs":{
-        "pool3/3x3_s2":0
+        "pool3/3x3_s2":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_4a/1x1",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":192,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[192,1,1,1],
-        "weight":[192,480,1,1]
+        "num":192.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "pool3/3x3_s2_pool3/3x3_s2_0_split":0
+        "pool3/3x3_s2_pool3/3x3_s2_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          192.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          192.000000,
+          480.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4a/relu_1x1",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4a/1x1":0
+        "inception_4a/1x1":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_4a/3x3_reduce",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":96,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[96,1,1,1],
-        "weight":[96,480,1,1]
+        "num":96.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "pool3/3x3_s2_pool3/3x3_s2_0_split":0
+        "pool3/3x3_s2_pool3/3x3_s2_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          96.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          96.000000,
+          480.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4a/relu_3x3_reduce",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4a/3x3_reduce":0
+        "inception_4a/3x3_reduce":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"inception_4a/3x3",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":208,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[208,1,1,1],
-        "weight":[208,96,3,3]
+        "num":208.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4a/relu_3x3_reduce":0
+        "inception_4a/relu_3x3_reduce":0.000000
+      },
+      "params":{
+        "bias":[
+          208.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          208.000000,
+          96.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4a/relu_3x3",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4a/3x3":0
+        "inception_4a/3x3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_4a/5x5_reduce",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":16,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[16,1,1,1],
-        "weight":[16,480,1,1]
+        "num":16.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "pool3/3x3_s2_pool3/3x3_s2_0_split":0
+        "pool3/3x3_s2_pool3/3x3_s2_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          16.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          16.000000,
+          480.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4a/relu_5x5_reduce",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4a/5x5_reduce":0
+        "inception_4a/5x5_reduce":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":5.000000,
+        "kernel_size_w":5.000000,
         "name":"inception_4a/5x5",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":5,
-        "kernel_size_w":5,
-        "num":48,
-        "pad_h":2,
-        "pad_w":2,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[48,1,1,1],
-        "weight":[48,16,5,5]
+        "num":48.000000,
+        "pad_h":2.000000,
+        "pad_w":2.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4a/relu_5x5_reduce":0
+        "inception_4a/relu_5x5_reduce":0.000000
+      },
+      "params":{
+        "bias":[
+          48.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          48.000000,
+          16.000000,
+          5.000000,
+          5.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4a/relu_5x5",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4a/5x5":0
+        "inception_4a/5x5":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"pool",
+        "global":0.000000,
+        "kernel_size":3.000000,
+        "method":"max",
         "name":"inception_4a/pool",
-        "global":0,
-        "kernel_size":3,
-        "method":"max",
-        "pad":1,
-        "stride":1
+        "pad":1.000000,
+        "stride":1.000000,
+        "type":"pool"
       },
       "inputs":{
-        "pool3/3x3_s2_pool3/3x3_s2_0_split":0
+        "pool3/3x3_s2_pool3/3x3_s2_0_split":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_4a/pool_proj",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":64,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[64,1,1,1],
-        "weight":[64,480,1,1]
+        "num":64.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4a/pool":0
+        "inception_4a/pool":0.000000
+      },
+      "params":{
+        "bias":[
+          64.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          64.000000,
+          480.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4a/relu_pool_proj",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4a/pool_proj":0
+        "inception_4a/pool_proj":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"concat",
+        "method":"channel",
         "name":"inception_4a/output",
-        "method":"channel"
+        "type":"concat"
       },
       "inputs":{
-        "inception_4a/relu_1x1":0,
-        "inception_4a/relu_3x3":1,
-        "inception_4a/relu_5x5":2,
-        "inception_4a/relu_pool_proj":3
+        "inception_4a/relu_1x1":0.000000,
+        "inception_4a/relu_3x3":1.000000,
+        "inception_4a/relu_5x5":2.000000,
+        "inception_4a/relu_pool_proj":3.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"split",
-        "name":"inception_4a/output_inception_4a/output_0_split"
+        "name":"inception_4a/output_inception_4a/output_0_split",
+        "type":"split"
       },
       "inputs":{
-        "inception_4a/output":0
+        "inception_4a/output":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_4b/1x1",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":160,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[160,1,1,1],
-        "weight":[160,512,1,1]
+        "num":160.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4a/output_inception_4a/output_0_split":0
+        "inception_4a/output_inception_4a/output_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          160.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          160.000000,
+          512.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4b/relu_1x1",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4b/1x1":0
+        "inception_4b/1x1":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_4b/3x3_reduce",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":112,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[112,1,1,1],
-        "weight":[112,512,1,1]
+        "num":112.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4a/output_inception_4a/output_0_split":0
+        "inception_4a/output_inception_4a/output_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          112.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          112.000000,
+          512.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4b/relu_3x3_reduce",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4b/3x3_reduce":0
+        "inception_4b/3x3_reduce":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"inception_4b/3x3",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":224,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[224,1,1,1],
-        "weight":[224,112,3,3]
+        "num":224.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4b/relu_3x3_reduce":0
+        "inception_4b/relu_3x3_reduce":0.000000
+      },
+      "params":{
+        "bias":[
+          224.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          224.000000,
+          112.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4b/relu_3x3",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4b/3x3":0
+        "inception_4b/3x3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_4b/5x5_reduce",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":24,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[24,1,1,1],
-        "weight":[24,512,1,1]
+        "num":24.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4a/output_inception_4a/output_0_split":0
+        "inception_4a/output_inception_4a/output_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          24.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          24.000000,
+          512.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4b/relu_5x5_reduce",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4b/5x5_reduce":0
+        "inception_4b/5x5_reduce":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":5.000000,
+        "kernel_size_w":5.000000,
         "name":"inception_4b/5x5",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":5,
-        "kernel_size_w":5,
-        "num":64,
-        "pad_h":2,
-        "pad_w":2,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[64,1,1,1],
-        "weight":[64,24,5,5]
+        "num":64.000000,
+        "pad_h":2.000000,
+        "pad_w":2.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4b/relu_5x5_reduce":0
+        "inception_4b/relu_5x5_reduce":0.000000
+      },
+      "params":{
+        "bias":[
+          64.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          64.000000,
+          24.000000,
+          5.000000,
+          5.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4b/relu_5x5",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4b/5x5":0
+        "inception_4b/5x5":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"pool",
+        "global":0.000000,
+        "kernel_size":3.000000,
+        "method":"max",
         "name":"inception_4b/pool",
-        "global":0,
-        "kernel_size":3,
-        "method":"max",
-        "pad":1,
-        "stride":1
+        "pad":1.000000,
+        "stride":1.000000,
+        "type":"pool"
       },
       "inputs":{
-        "inception_4a/output_inception_4a/output_0_split":0
+        "inception_4a/output_inception_4a/output_0_split":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_4b/pool_proj",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":64,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[64,1,1,1],
-        "weight":[64,512,1,1]
+        "num":64.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4b/pool":0
+        "inception_4b/pool":0.000000
+      },
+      "params":{
+        "bias":[
+          64.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          64.000000,
+          512.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4b/relu_pool_proj",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4b/pool_proj":0
+        "inception_4b/pool_proj":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"concat",
+        "method":"channel",
         "name":"inception_4b/output",
-        "method":"channel"
+        "type":"concat"
       },
       "inputs":{
-        "inception_4b/relu_1x1":0,
-        "inception_4b/relu_3x3":1,
-        "inception_4b/relu_5x5":2,
-        "inception_4b/relu_pool_proj":3
+        "inception_4b/relu_1x1":0.000000,
+        "inception_4b/relu_3x3":1.000000,
+        "inception_4b/relu_5x5":2.000000,
+        "inception_4b/relu_pool_proj":3.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"split",
-        "name":"inception_4b/output_inception_4b/output_0_split"
+        "name":"inception_4b/output_inception_4b/output_0_split",
+        "type":"split"
       },
       "inputs":{
-        "inception_4b/output":0
+        "inception_4b/output":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_4c/1x1",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":128,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[128,1,1,1],
-        "weight":[128,512,1,1]
+        "num":128.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4b/output_inception_4b/output_0_split":0
+        "inception_4b/output_inception_4b/output_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          128.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          128.000000,
+          512.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4c/relu_1x1",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4c/1x1":0
+        "inception_4c/1x1":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_4c/3x3_reduce",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":128,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[128,1,1,1],
-        "weight":[128,512,1,1]
+        "num":128.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4b/output_inception_4b/output_0_split":0
+        "inception_4b/output_inception_4b/output_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          128.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          128.000000,
+          512.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4c/relu_3x3_reduce",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4c/3x3_reduce":0
+        "inception_4c/3x3_reduce":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"inception_4c/3x3",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":256,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[256,1,1,1],
-        "weight":[256,128,3,3]
+        "num":256.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4c/relu_3x3_reduce":0
+        "inception_4c/relu_3x3_reduce":0.000000
+      },
+      "params":{
+        "bias":[
+          256.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          256.000000,
+          128.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4c/relu_3x3",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4c/3x3":0
+        "inception_4c/3x3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_4c/5x5_reduce",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":24,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[24,1,1,1],
-        "weight":[24,512,1,1]
+        "num":24.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4b/output_inception_4b/output_0_split":0
+        "inception_4b/output_inception_4b/output_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          24.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          24.000000,
+          512.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4c/relu_5x5_reduce",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4c/5x5_reduce":0
+        "inception_4c/5x5_reduce":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":5.000000,
+        "kernel_size_w":5.000000,
         "name":"inception_4c/5x5",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":5,
-        "kernel_size_w":5,
-        "num":64,
-        "pad_h":2,
-        "pad_w":2,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[64,1,1,1],
-        "weight":[64,24,5,5]
+        "num":64.000000,
+        "pad_h":2.000000,
+        "pad_w":2.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4c/relu_5x5_reduce":0
+        "inception_4c/relu_5x5_reduce":0.000000
+      },
+      "params":{
+        "bias":[
+          64.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          64.000000,
+          24.000000,
+          5.000000,
+          5.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4c/relu_5x5",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4c/5x5":0
+        "inception_4c/5x5":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"pool",
+        "global":0.000000,
+        "kernel_size":3.000000,
+        "method":"max",
         "name":"inception_4c/pool",
-        "global":0,
-        "kernel_size":3,
-        "method":"max",
-        "pad":1,
-        "stride":1
+        "pad":1.000000,
+        "stride":1.000000,
+        "type":"pool"
       },
       "inputs":{
-        "inception_4b/output_inception_4b/output_0_split":0
+        "inception_4b/output_inception_4b/output_0_split":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_4c/pool_proj",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":64,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[64,1,1,1],
-        "weight":[64,512,1,1]
+        "num":64.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4c/pool":0
+        "inception_4c/pool":0.000000
+      },
+      "params":{
+        "bias":[
+          64.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          64.000000,
+          512.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4c/relu_pool_proj",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4c/pool_proj":0
+        "inception_4c/pool_proj":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"concat",
+        "method":"channel",
         "name":"inception_4c/output",
-        "method":"channel"
+        "type":"concat"
       },
       "inputs":{
-        "inception_4c/relu_1x1":0,
-        "inception_4c/relu_3x3":1,
-        "inception_4c/relu_5x5":2,
-        "inception_4c/relu_pool_proj":3
+        "inception_4c/relu_1x1":0.000000,
+        "inception_4c/relu_3x3":1.000000,
+        "inception_4c/relu_5x5":2.000000,
+        "inception_4c/relu_pool_proj":3.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"split",
-        "name":"inception_4c/output_inception_4c/output_0_split"
+        "name":"inception_4c/output_inception_4c/output_0_split",
+        "type":"split"
       },
       "inputs":{
-        "inception_4c/output":0
+        "inception_4c/output":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_4d/1x1",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":112,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[112,1,1,1],
-        "weight":[112,512,1,1]
+        "num":112.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4c/output_inception_4c/output_0_split":0
+        "inception_4c/output_inception_4c/output_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          112.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          112.000000,
+          512.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4d/relu_1x1",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4d/1x1":0
+        "inception_4d/1x1":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_4d/3x3_reduce",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":144,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[144,1,1,1],
-        "weight":[144,512,1,1]
+        "num":144.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4c/output_inception_4c/output_0_split":0
+        "inception_4c/output_inception_4c/output_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          144.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          144.000000,
+          512.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4d/relu_3x3_reduce",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4d/3x3_reduce":0
+        "inception_4d/3x3_reduce":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"inception_4d/3x3",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":288,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[288,1,1,1],
-        "weight":[288,144,3,3]
+        "num":288.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4d/relu_3x3_reduce":0
+        "inception_4d/relu_3x3_reduce":0.000000
+      },
+      "params":{
+        "bias":[
+          288.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          288.000000,
+          144.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4d/relu_3x3",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4d/3x3":0
+        "inception_4d/3x3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_4d/5x5_reduce",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":32,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[32,1,1,1],
-        "weight":[32,512,1,1]
+        "num":32.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4c/output_inception_4c/output_0_split":0
+        "inception_4c/output_inception_4c/output_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          32.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          32.000000,
+          512.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4d/relu_5x5_reduce",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4d/5x5_reduce":0
+        "inception_4d/5x5_reduce":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":5.000000,
+        "kernel_size_w":5.000000,
         "name":"inception_4d/5x5",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":5,
-        "kernel_size_w":5,
-        "num":64,
-        "pad_h":2,
-        "pad_w":2,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[64,1,1,1],
-        "weight":[64,32,5,5]
+        "num":64.000000,
+        "pad_h":2.000000,
+        "pad_w":2.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4d/relu_5x5_reduce":0
+        "inception_4d/relu_5x5_reduce":0.000000
+      },
+      "params":{
+        "bias":[
+          64.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          64.000000,
+          32.000000,
+          5.000000,
+          5.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4d/relu_5x5",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4d/5x5":0
+        "inception_4d/5x5":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"pool",
+        "global":0.000000,
+        "kernel_size":3.000000,
+        "method":"max",
         "name":"inception_4d/pool",
-        "global":0,
-        "kernel_size":3,
-        "method":"max",
-        "pad":1,
-        "stride":1
+        "pad":1.000000,
+        "stride":1.000000,
+        "type":"pool"
       },
       "inputs":{
-        "inception_4c/output_inception_4c/output_0_split":0
+        "inception_4c/output_inception_4c/output_0_split":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_4d/pool_proj",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":64,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[64,1,1,1],
-        "weight":[64,512,1,1]
+        "num":64.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4d/pool":0
+        "inception_4d/pool":0.000000
+      },
+      "params":{
+        "bias":[
+          64.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          64.000000,
+          512.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4d/relu_pool_proj",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4d/pool_proj":0
+        "inception_4d/pool_proj":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"concat",
+        "method":"channel",
         "name":"inception_4d/output",
-        "method":"channel"
+        "type":"concat"
       },
       "inputs":{
-        "inception_4d/relu_1x1":0,
-        "inception_4d/relu_3x3":1,
-        "inception_4d/relu_5x5":2,
-        "inception_4d/relu_pool_proj":3
+        "inception_4d/relu_1x1":0.000000,
+        "inception_4d/relu_3x3":1.000000,
+        "inception_4d/relu_5x5":2.000000,
+        "inception_4d/relu_pool_proj":3.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"split",
-        "name":"inception_4d/output_inception_4d/output_0_split"
+        "name":"inception_4d/output_inception_4d/output_0_split",
+        "type":"split"
       },
       "inputs":{
-        "inception_4d/output":0
+        "inception_4d/output":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_4e/1x1",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":256,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[256,1,1,1],
-        "weight":[256,528,1,1]
+        "num":256.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4d/output_inception_4d/output_0_split":0
+        "inception_4d/output_inception_4d/output_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          256.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          256.000000,
+          528.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4e/relu_1x1",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4e/1x1":0
+        "inception_4e/1x1":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_4e/3x3_reduce",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":160,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[160,1,1,1],
-        "weight":[160,528,1,1]
+        "num":160.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4d/output_inception_4d/output_0_split":0
+        "inception_4d/output_inception_4d/output_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          160.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          160.000000,
+          528.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4e/relu_3x3_reduce",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4e/3x3_reduce":0
+        "inception_4e/3x3_reduce":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"inception_4e/3x3",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":320,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[320,1,1,1],
-        "weight":[320,160,3,3]
+        "num":320.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4e/relu_3x3_reduce":0
+        "inception_4e/relu_3x3_reduce":0.000000
+      },
+      "params":{
+        "bias":[
+          320.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          320.000000,
+          160.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4e/relu_3x3",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4e/3x3":0
+        "inception_4e/3x3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_4e/5x5_reduce",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":32,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[32,1,1,1],
-        "weight":[32,528,1,1]
+        "num":32.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4d/output_inception_4d/output_0_split":0
+        "inception_4d/output_inception_4d/output_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          32.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          32.000000,
+          528.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4e/relu_5x5_reduce",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4e/5x5_reduce":0
+        "inception_4e/5x5_reduce":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":5.000000,
+        "kernel_size_w":5.000000,
         "name":"inception_4e/5x5",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":5,
-        "kernel_size_w":5,
-        "num":128,
-        "pad_h":2,
-        "pad_w":2,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[128,1,1,1],
-        "weight":[128,32,5,5]
+        "num":128.000000,
+        "pad_h":2.000000,
+        "pad_w":2.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4e/relu_5x5_reduce":0
+        "inception_4e/relu_5x5_reduce":0.000000
+      },
+      "params":{
+        "bias":[
+          128.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          128.000000,
+          32.000000,
+          5.000000,
+          5.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4e/relu_5x5",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4e/5x5":0
+        "inception_4e/5x5":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"pool",
+        "global":0.000000,
+        "kernel_size":3.000000,
+        "method":"max",
         "name":"inception_4e/pool",
-        "global":0,
-        "kernel_size":3,
-        "method":"max",
-        "pad":1,
-        "stride":1
+        "pad":1.000000,
+        "stride":1.000000,
+        "type":"pool"
       },
       "inputs":{
-        "inception_4d/output_inception_4d/output_0_split":0
+        "inception_4d/output_inception_4d/output_0_split":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_4e/pool_proj",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":128,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[128,1,1,1],
-        "weight":[128,528,1,1]
+        "num":128.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_4e/pool":0
+        "inception_4e/pool":0.000000
+      },
+      "params":{
+        "bias":[
+          128.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          128.000000,
+          528.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_4e/relu_pool_proj",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_4e/pool_proj":0
+        "inception_4e/pool_proj":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"concat",
+        "method":"channel",
         "name":"inception_4e/output",
-        "method":"channel"
+        "type":"concat"
       },
       "inputs":{
-        "inception_4e/relu_1x1":0,
-        "inception_4e/relu_3x3":1,
-        "inception_4e/relu_5x5":2,
-        "inception_4e/relu_pool_proj":3
+        "inception_4e/relu_1x1":0.000000,
+        "inception_4e/relu_3x3":1.000000,
+        "inception_4e/relu_5x5":2.000000,
+        "inception_4e/relu_pool_proj":3.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"pool",
+        "global":0.000000,
+        "kernel_size":3.000000,
+        "method":"max",
         "name":"pool4/3x3_s2",
-        "global":0,
-        "kernel_size":3,
-        "method":"max",
-        "pad":0,
-        "stride":2
+        "pad":0.000000,
+        "stride":2.000000,
+        "type":"pool"
       },
       "inputs":{
-        "inception_4e/output":0
+        "inception_4e/output":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"split",
-        "name":"pool4/3x3_s2_pool4/3x3_s2_0_split"
+        "name":"pool4/3x3_s2_pool4/3x3_s2_0_split",
+        "type":"split"
       },
       "inputs":{
-        "pool4/3x3_s2":0
+        "pool4/3x3_s2":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_5a/1x1",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":256,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[256,1,1,1],
-        "weight":[256,832,1,1]
+        "num":256.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "pool4/3x3_s2_pool4/3x3_s2_0_split":0
+        "pool4/3x3_s2_pool4/3x3_s2_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          256.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          256.000000,
+          832.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_5a/relu_1x1",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_5a/1x1":0
+        "inception_5a/1x1":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_5a/3x3_reduce",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":160,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[160,1,1,1],
-        "weight":[160,832,1,1]
+        "num":160.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "pool4/3x3_s2_pool4/3x3_s2_0_split":0
+        "pool4/3x3_s2_pool4/3x3_s2_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          160.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          160.000000,
+          832.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_5a/relu_3x3_reduce",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_5a/3x3_reduce":0
+        "inception_5a/3x3_reduce":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"inception_5a/3x3",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":320,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[320,1,1,1],
-        "weight":[320,160,3,3]
+        "num":320.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_5a/relu_3x3_reduce":0
+        "inception_5a/relu_3x3_reduce":0.000000
+      },
+      "params":{
+        "bias":[
+          320.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          320.000000,
+          160.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_5a/relu_3x3",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_5a/3x3":0
+        "inception_5a/3x3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_5a/5x5_reduce",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":32,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[32,1,1,1],
-        "weight":[32,832,1,1]
+        "num":32.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "pool4/3x3_s2_pool4/3x3_s2_0_split":0
+        "pool4/3x3_s2_pool4/3x3_s2_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          32.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          32.000000,
+          832.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_5a/relu_5x5_reduce",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_5a/5x5_reduce":0
+        "inception_5a/5x5_reduce":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":5.000000,
+        "kernel_size_w":5.000000,
         "name":"inception_5a/5x5",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":5,
-        "kernel_size_w":5,
-        "num":128,
-        "pad_h":2,
-        "pad_w":2,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[128,1,1,1],
-        "weight":[128,32,5,5]
+        "num":128.000000,
+        "pad_h":2.000000,
+        "pad_w":2.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_5a/relu_5x5_reduce":0
+        "inception_5a/relu_5x5_reduce":0.000000
+      },
+      "params":{
+        "bias":[
+          128.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          128.000000,
+          32.000000,
+          5.000000,
+          5.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_5a/relu_5x5",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_5a/5x5":0
+        "inception_5a/5x5":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"pool",
+        "global":0.000000,
+        "kernel_size":3.000000,
+        "method":"max",
         "name":"inception_5a/pool",
-        "global":0,
-        "kernel_size":3,
-        "method":"max",
-        "pad":1,
-        "stride":1
+        "pad":1.000000,
+        "stride":1.000000,
+        "type":"pool"
       },
       "inputs":{
-        "pool4/3x3_s2_pool4/3x3_s2_0_split":0
+        "pool4/3x3_s2_pool4/3x3_s2_0_split":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_5a/pool_proj",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":128,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[128,1,1,1],
-        "weight":[128,832,1,1]
+        "num":128.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_5a/pool":0
+        "inception_5a/pool":0.000000
+      },
+      "params":{
+        "bias":[
+          128.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          128.000000,
+          832.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_5a/relu_pool_proj",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_5a/pool_proj":0
+        "inception_5a/pool_proj":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"concat",
+        "method":"channel",
         "name":"inception_5a/output",
-        "method":"channel"
+        "type":"concat"
       },
       "inputs":{
-        "inception_5a/relu_1x1":0,
-        "inception_5a/relu_3x3":1,
-        "inception_5a/relu_5x5":2,
-        "inception_5a/relu_pool_proj":3
+        "inception_5a/relu_1x1":0.000000,
+        "inception_5a/relu_3x3":1.000000,
+        "inception_5a/relu_5x5":2.000000,
+        "inception_5a/relu_pool_proj":3.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"split",
-        "name":"inception_5a/output_inception_5a/output_0_split"
+        "name":"inception_5a/output_inception_5a/output_0_split",
+        "type":"split"
       },
       "inputs":{
-        "inception_5a/output":0
+        "inception_5a/output":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_5b/1x1",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":384,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[384,1,1,1],
-        "weight":[384,832,1,1]
+        "num":384.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_5a/output_inception_5a/output_0_split":0
+        "inception_5a/output_inception_5a/output_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          384.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          384.000000,
+          832.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_5b/relu_1x1",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_5b/1x1":0
+        "inception_5b/1x1":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_5b/3x3_reduce",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":192,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[192,1,1,1],
-        "weight":[192,832,1,1]
+        "num":192.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_5a/output_inception_5a/output_0_split":0
+        "inception_5a/output_inception_5a/output_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          192.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          192.000000,
+          832.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_5b/relu_3x3_reduce",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_5b/3x3_reduce":0
+        "inception_5b/3x3_reduce":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"inception_5b/3x3",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":384,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[384,1,1,1],
-        "weight":[384,192,3,3]
+        "num":384.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_5b/relu_3x3_reduce":0
+        "inception_5b/relu_3x3_reduce":0.000000
+      },
+      "params":{
+        "bias":[
+          384.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          384.000000,
+          192.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_5b/relu_3x3",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_5b/3x3":0
+        "inception_5b/3x3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_5b/5x5_reduce",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":48,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[48,1,1,1],
-        "weight":[48,832,1,1]
+        "num":48.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_5a/output_inception_5a/output_0_split":0
+        "inception_5a/output_inception_5a/output_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          48.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          48.000000,
+          832.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_5b/relu_5x5_reduce",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_5b/5x5_reduce":0
+        "inception_5b/5x5_reduce":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":5.000000,
+        "kernel_size_w":5.000000,
         "name":"inception_5b/5x5",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":5,
-        "kernel_size_w":5,
-        "num":128,
-        "pad_h":2,
-        "pad_w":2,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[128,1,1,1],
-        "weight":[128,48,5,5]
+        "num":128.000000,
+        "pad_h":2.000000,
+        "pad_w":2.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_5b/relu_5x5_reduce":0
+        "inception_5b/relu_5x5_reduce":0.000000
+      },
+      "params":{
+        "bias":[
+          128.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          128.000000,
+          48.000000,
+          5.000000,
+          5.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_5b/relu_5x5",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_5b/5x5":0
+        "inception_5b/5x5":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"pool",
+        "global":0.000000,
+        "kernel_size":3.000000,
+        "method":"max",
         "name":"inception_5b/pool",
-        "global":0,
-        "kernel_size":3,
-        "method":"max",
-        "pad":1,
-        "stride":1
+        "pad":1.000000,
+        "stride":1.000000,
+        "type":"pool"
       },
       "inputs":{
-        "inception_5a/output_inception_5a/output_0_split":0
+        "inception_5a/output_inception_5a/output_0_split":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"inception_5b/pool_proj",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":128,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[128,1,1,1],
-        "weight":[128,832,1,1]
+        "num":128.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "inception_5b/pool":0
+        "inception_5b/pool":0.000000
+      },
+      "params":{
+        "bias":[
+          128.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          128.000000,
+          832.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"inception_5b/relu_pool_proj",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "inception_5b/pool_proj":0
+        "inception_5b/pool_proj":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"concat",
+        "method":"channel",
         "name":"inception_5b/output",
-        "method":"channel"
+        "type":"concat"
       },
       "inputs":{
-        "inception_5b/relu_1x1":0,
-        "inception_5b/relu_3x3":1,
-        "inception_5b/relu_5x5":2,
-        "inception_5b/relu_pool_proj":3
+        "inception_5b/relu_1x1":0.000000,
+        "inception_5b/relu_3x3":1.000000,
+        "inception_5b/relu_5x5":2.000000,
+        "inception_5b/relu_pool_proj":3.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"scale",
+        "bias":1.000000,
         "name":"scale",
-        "bias":1
-      },
-      "params":{
-        "bias":[1024,1,1,1],
-        "scale":[1024,1,1,1]
+        "type":"scale"
       },
       "inputs":{
-        "inception_5b/output":0
+        "inception_5b/output":0.000000
+      },
+      "params":{
+        "bias":[
+          1024.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "scale":[
+          1024.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"pool",
-        "name":"pool5",
-        "global":0,
-        "kernel_size":3,
+        "global":0.000000,
+        "kernel_size":3.000000,
         "method":"max",
-        "pad":0,
-        "stride":2
+        "name":"pool5",
+        "pad":0.000000,
+        "stride":2.000000,
+        "type":"pool"
       },
       "inputs":{
-        "scale":0
+        "scale":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"add_conv1",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":1024,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[1024,1,1,1],
-        "weight":[1024,1024,3,3]
+        "num":1024.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "pool5":0
+        "pool5":0.000000
+      },
+      "params":{
+        "bias":[
+          1024.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          1024.000000,
+          1024.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"conv1_relu",
-        "method":"relu",
-        "neg_slope":0.1
+        "neg_slope":0.100000,
+        "type":"activity"
       },
       "inputs":{
-        "add_conv1":0
+        "add_conv1":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"add_conv2",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":1024,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[1024,1,1,1],
-        "weight":[1024,1024,3,3]
+        "num":1024.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "conv1_relu":0
+        "conv1_relu":0.000000
+      },
+      "params":{
+        "bias":[
+          1024.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          1024.000000,
+          1024.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
-        "name":"conv2_relu",
         "method":"relu",
-        "neg_slope":0.1
+        "name":"conv2_relu",
+        "neg_slope":0.100000,
+        "type":"activity"
       },
       "inputs":{
-        "add_conv2":0
+        "add_conv2":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv_reg",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":30,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[30,1,1,1],
-        "weight":[30,1024,3,3]
+        "num":30.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "conv2_relu":0
+        "conv2_relu":0.000000
+      },
+      "params":{
+        "bias":[
+          30.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          30.000000,
+          1024.000000,
+          3.000000,
+          3.000000
+        ]
       }
     }
-  ]
+  ],
+  "net_name":"gnet_yolo"
 }

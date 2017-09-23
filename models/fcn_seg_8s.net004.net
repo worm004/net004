@@ -1,852 +1,1150 @@
 {
-  "net_name":"FCN8s",
   "layers":[
     {
       "attrs":{
-        "type":"data",
-        "name":"input_data",
-        "c":3,
-        "h":224,
+        "c":3.000000,
+        "h":224.000000,
         "method":"data",
-        "n":1,
-        "w":224
+        "n":1.000000,
+        "name":"input_data",
+        "type":"data",
+        "w":224.000000
       }
     },
     {
       "attrs":{
-        "type":"split",
-        "name":"data_input_0_split"
+        "name":"data_input_0_split",
+        "type":"split"
       },
       "inputs":{
-        "input_data":0
+        "input_data":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv1_1",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":64,
-        "pad_h":100,
-        "pad_w":100,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[64,1,1,1],
-        "weight":[64,3,3,3]
+        "num":64.000000,
+        "pad_h":100.000000,
+        "pad_w":100.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "data_input_0_split":0
+        "data_input_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          64.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          64.000000,
+          3.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu1_1",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv1_1":0
+        "conv1_1":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv1_2",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":64,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[64,1,1,1],
-        "weight":[64,64,3,3]
+        "num":64.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "relu1_1":0
+        "relu1_1":0.000000
+      },
+      "params":{
+        "bias":[
+          64.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          64.000000,
+          64.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu1_2",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv1_2":0
+        "conv1_2":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"pool",
+        "global":0.000000,
+        "kernel_size":2.000000,
+        "method":"max",
         "name":"pool1",
-        "global":0,
-        "kernel_size":2,
-        "method":"max",
-        "pad":0,
-        "stride":2
+        "pad":0.000000,
+        "stride":2.000000,
+        "type":"pool"
       },
       "inputs":{
-        "relu1_2":0
+        "relu1_2":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv2_1",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":128,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[128,1,1,1],
-        "weight":[128,64,3,3]
+        "num":128.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "pool1":0
+        "pool1":0.000000
+      },
+      "params":{
+        "bias":[
+          128.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          128.000000,
+          64.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu2_1",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv2_1":0
+        "conv2_1":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv2_2",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":128,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[128,1,1,1],
-        "weight":[128,128,3,3]
+        "num":128.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "relu2_1":0
+        "relu2_1":0.000000
+      },
+      "params":{
+        "bias":[
+          128.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          128.000000,
+          128.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu2_2",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv2_2":0
+        "conv2_2":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"pool",
+        "global":0.000000,
+        "kernel_size":2.000000,
+        "method":"max",
         "name":"pool2",
-        "global":0,
-        "kernel_size":2,
-        "method":"max",
-        "pad":0,
-        "stride":2
+        "pad":0.000000,
+        "stride":2.000000,
+        "type":"pool"
       },
       "inputs":{
-        "relu2_2":0
+        "relu2_2":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv3_1",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":256,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[256,1,1,1],
-        "weight":[256,128,3,3]
+        "num":256.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "pool2":0
+        "pool2":0.000000
+      },
+      "params":{
+        "bias":[
+          256.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          256.000000,
+          128.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu3_1",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv3_1":0
+        "conv3_1":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv3_2",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":256,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[256,1,1,1],
-        "weight":[256,256,3,3]
+        "num":256.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "relu3_1":0
+        "relu3_1":0.000000
+      },
+      "params":{
+        "bias":[
+          256.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          256.000000,
+          256.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu3_2",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv3_2":0
+        "conv3_2":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv3_3",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":256,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[256,1,1,1],
-        "weight":[256,256,3,3]
+        "num":256.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "relu3_2":0
+        "relu3_2":0.000000
+      },
+      "params":{
+        "bias":[
+          256.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          256.000000,
+          256.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu3_3",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv3_3":0
+        "conv3_3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"pool",
+        "global":0.000000,
+        "kernel_size":2.000000,
+        "method":"max",
         "name":"pool3",
-        "global":0,
-        "kernel_size":2,
-        "method":"max",
-        "pad":0,
-        "stride":2
+        "pad":0.000000,
+        "stride":2.000000,
+        "type":"pool"
       },
       "inputs":{
-        "relu3_3":0
+        "relu3_3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"split",
-        "name":"pool3_pool3_0_split"
+        "name":"pool3_pool3_0_split",
+        "type":"split"
       },
       "inputs":{
-        "pool3":0
+        "pool3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv4_1",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":512,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[512,1,1,1],
-        "weight":[512,256,3,3]
+        "num":512.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "pool3_pool3_0_split":0
+        "pool3_pool3_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          512.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          512.000000,
+          256.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu4_1",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv4_1":0
+        "conv4_1":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv4_2",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":512,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[512,1,1,1],
-        "weight":[512,512,3,3]
+        "num":512.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "relu4_1":0
+        "relu4_1":0.000000
+      },
+      "params":{
+        "bias":[
+          512.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          512.000000,
+          512.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu4_2",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv4_2":0
+        "conv4_2":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv4_3",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":512,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[512,1,1,1],
-        "weight":[512,512,3,3]
+        "num":512.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "relu4_2":0
+        "relu4_2":0.000000
+      },
+      "params":{
+        "bias":[
+          512.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          512.000000,
+          512.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu4_3",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv4_3":0
+        "conv4_3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"pool",
+        "global":0.000000,
+        "kernel_size":2.000000,
+        "method":"max",
         "name":"pool4",
-        "global":0,
-        "kernel_size":2,
-        "method":"max",
-        "pad":0,
-        "stride":2
+        "pad":0.000000,
+        "stride":2.000000,
+        "type":"pool"
       },
       "inputs":{
-        "relu4_3":0
+        "relu4_3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"split",
-        "name":"pool4_pool4_0_split"
+        "name":"pool4_pool4_0_split",
+        "type":"split"
       },
       "inputs":{
-        "pool4":0
+        "pool4":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv5_1",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":512,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[512,1,1,1],
-        "weight":[512,512,3,3]
+        "num":512.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "pool4_pool4_0_split":0
+        "pool4_pool4_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          512.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          512.000000,
+          512.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu5_1",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv5_1":0
+        "conv5_1":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv5_2",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":512,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[512,1,1,1],
-        "weight":[512,512,3,3]
+        "num":512.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "relu5_1":0
+        "relu5_1":0.000000
+      },
+      "params":{
+        "bias":[
+          512.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          512.000000,
+          512.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu5_2",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv5_2":0
+        "conv5_2":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv5_3",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":512,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[512,1,1,1],
-        "weight":[512,512,3,3]
+        "num":512.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "relu5_2":0
+        "relu5_2":0.000000
+      },
+      "params":{
+        "bias":[
+          512.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          512.000000,
+          512.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu5_3",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv5_3":0
+        "conv5_3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"pool",
-        "name":"pool5",
-        "global":0,
-        "kernel_size":2,
+        "global":0.000000,
+        "kernel_size":2.000000,
         "method":"max",
-        "pad":0,
-        "stride":2
+        "name":"pool5",
+        "pad":0.000000,
+        "stride":2.000000,
+        "type":"pool"
       },
       "inputs":{
-        "relu5_3":0
+        "relu5_3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":7.000000,
+        "kernel_size_w":7.000000,
         "name":"fc6",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":7,
-        "kernel_size_w":7,
-        "num":4096,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[4096,1,1,1],
-        "weight":[4096,512,7,7]
+        "num":4096.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "pool5":0
+        "pool5":0.000000
+      },
+      "params":{
+        "bias":[
+          4096.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          4096.000000,
+          512.000000,
+          7.000000,
+          7.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu6",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "fc6":0
+        "fc6":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"fc7",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":4096,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[4096,1,1,1],
-        "weight":[4096,4096,1,1]
+        "num":4096.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "relu6":0
+        "relu6":0.000000
+      },
+      "params":{
+        "bias":[
+          4096.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          4096.000000,
+          4096.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
-        "name":"relu7",
         "method":"relu",
-        "neg_slope":0
+        "name":"relu7",
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "fc7":0
+        "fc7":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"score_fr",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":21,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[21,1,1,1],
-        "weight":[21,4096,1,1]
+        "num":21.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "relu7":0
+        "relu7":0.000000
+      },
+      "params":{
+        "bias":[
+          21.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          21.000000,
+          4096.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"dconv",
+        "bias":0.000000,
+        "group":1.000000,
+        "kernel_size_h":4.000000,
+        "kernel_size_w":4.000000,
         "name":"upscore2",
-        "bias":0,
-        "group":1,
-        "kernel_size_h":4,
-        "kernel_size_w":4,
-        "num":21,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":2,
-        "stride_w":2
+        "num":21.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":2.000000,
+        "stride_w":2.000000,
+        "type":"dconv"
+      },
+      "inputs":{
+        "score_fr":0.000000
       },
       "params":{
-        "weight":[21,21,4,4]
-      },
-      "inputs":{
-        "score_fr":0
+        "weight":[
+          21.000000,
+          21.000000,
+          4.000000,
+          4.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"split",
-        "name":"upscore2_upscore2_0_split"
+        "name":"upscore2_upscore2_0_split",
+        "type":"split"
       },
       "inputs":{
-        "upscore2":0
+        "upscore2":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"scale",
+        "bias":0.000000,
         "name":"scale_pool4",
-        "bias":0
-      },
-      "params":{
-        "scale":[512,1,1,1]
+        "type":"scale"
       },
       "inputs":{
-        "pool4_pool4_0_split":0
+        "pool4_pool4_0_split":0.000000
+      },
+      "params":{
+        "scale":[
+          512.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"score_pool4",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":21,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[21,1,1,1],
-        "weight":[21,512,1,1]
+        "num":21.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "scale_pool4":0
+        "scale_pool4":0.000000
+      },
+      "params":{
+        "bias":[
+          21.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          21.000000,
+          512.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"crop",
+        "axis":2.000000,
         "name":"score_pool4c",
-        "axis":2,
-        "offset":5
+        "offset":5.000000,
+        "type":"crop"
       },
       "inputs":{
-        "score_pool4":0,
-        "upscore2_upscore2_0_split":1
+        "score_pool4":0.000000,
+        "upscore2_upscore2_0_split":1.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"eltwise",
+        "coeff0":1.000000,
+        "coeff1":1.000000,
+        "method":"sum",
         "name":"fuse_pool4",
-        "coeff0":1,
-        "coeff1":1,
-        "method":"sum"
+        "type":"eltwise"
       },
       "inputs":{
-        "score_pool4c":1,
-        "upscore2_upscore2_0_split":0
+        "score_pool4c":1.000000,
+        "upscore2_upscore2_0_split":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"dconv",
+        "bias":0.000000,
+        "group":1.000000,
+        "kernel_size_h":4.000000,
+        "kernel_size_w":4.000000,
         "name":"upscore_pool4",
-        "bias":0,
-        "group":1,
-        "kernel_size_h":4,
-        "kernel_size_w":4,
-        "num":21,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":2,
-        "stride_w":2
+        "num":21.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":2.000000,
+        "stride_w":2.000000,
+        "type":"dconv"
+      },
+      "inputs":{
+        "fuse_pool4":0.000000
       },
       "params":{
-        "weight":[21,21,4,4]
-      },
-      "inputs":{
-        "fuse_pool4":0
+        "weight":[
+          21.000000,
+          21.000000,
+          4.000000,
+          4.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"split",
-        "name":"upscore_pool4_upscore_pool4_0_split"
+        "name":"upscore_pool4_upscore_pool4_0_split",
+        "type":"split"
       },
       "inputs":{
-        "upscore_pool4":0
+        "upscore_pool4":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"scale",
+        "bias":0.000000,
         "name":"scale_pool3",
-        "bias":0
-      },
-      "params":{
-        "scale":[256,1,1,1]
+        "type":"scale"
       },
       "inputs":{
-        "pool3_pool3_0_split":0
+        "pool3_pool3_0_split":0.000000
+      },
+      "params":{
+        "scale":[
+          256.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"score_pool3",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":21,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[21,1,1,1],
-        "weight":[21,256,1,1]
+        "num":21.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "scale_pool3":0
+        "scale_pool3":0.000000
+      },
+      "params":{
+        "bias":[
+          21.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          21.000000,
+          256.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"crop",
+        "axis":2.000000,
         "name":"score_pool3c",
-        "axis":2,
-        "offset":9
+        "offset":9.000000,
+        "type":"crop"
       },
       "inputs":{
-        "score_pool3":0,
-        "upscore_pool4_upscore_pool4_0_split":1
-      }
-    },
-    {
-      "attrs":{
-        "type":"eltwise",
-        "name":"fuse_pool3",
-        "coeff0":1,
-        "coeff1":1,
-        "method":"sum"
-      },
-      "inputs":{
-        "score_pool3c":1,
-        "upscore_pool4_upscore_pool4_0_split":0
-      }
-    },
-    {
-      "attrs":{
-        "type":"dconv",
-        "name":"upscore8",
-        "bias":0,
-        "group":1,
-        "kernel_size_h":16,
-        "kernel_size_w":16,
-        "num":21,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":8,
-        "stride_w":8
+        "score_pool3":0.000000,
+        "upscore_pool4_upscore_pool4_0_split":1.000000
       },
       "params":{
-        "weight":[21,21,16,16]
-      },
-      "inputs":{
-        "fuse_pool3":0
+
       }
     },
     {
       "attrs":{
-        "type":"crop",
+        "coeff0":1.000000,
+        "coeff1":1.000000,
+        "method":"sum",
+        "name":"fuse_pool3",
+        "type":"eltwise"
+      },
+      "inputs":{
+        "score_pool3c":1.000000,
+        "upscore_pool4_upscore_pool4_0_split":0.000000
+      },
+      "params":{
+
+      }
+    },
+    {
+      "attrs":{
+        "bias":0.000000,
+        "group":1.000000,
+        "kernel_size_h":16.000000,
+        "kernel_size_w":16.000000,
+        "name":"upscore8",
+        "num":21.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":8.000000,
+        "stride_w":8.000000,
+        "type":"dconv"
+      },
+      "inputs":{
+        "fuse_pool3":0.000000
+      },
+      "params":{
+        "weight":[
+          21.000000,
+          21.000000,
+          16.000000,
+          16.000000
+        ]
+      }
+    },
+    {
+      "attrs":{
+        "axis":2.000000,
         "name":"score",
-        "axis":2,
-        "offset":31
+        "offset":31.000000,
+        "type":"crop"
       },
       "inputs":{
-        "data_input_0_split":1,
-        "upscore8":0
+        "data_input_0_split":1.000000,
+        "upscore8":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"softmax",
-        "name":"sm"
+        "name":"sm",
+        "type":"softmax"
       },
       "inputs":{
-        "score":0
+        "score":0.000000
+      },
+      "params":{
+
       }
     }
-  ]
+  ],
+  "net_name":"FCN8s"
 }

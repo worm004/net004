@@ -1,767 +1,1054 @@
 {
-  "net_name":"faster_rcnn_vgg16",
   "layers":[
     {
       "attrs":{
-        "type":"data",
-        "name":"data",
-        "c":3,
-        "h":224,
+        "c":3.000000,
+        "h":224.000000,
         "method":"data",
-        "n":1,
-        "w":224
-      }
-    },
-    {
-      "attrs":{
+        "n":1.000000,
+        "name":"data",
         "type":"data",
-        "name":"im_info",
-        "c":3,
-        "h":1,
+        "w":224.000000
+      }
+    },
+    {
+      "attrs":{
+        "c":3.000000,
+        "h":1.000000,
         "method":"im_info",
-        "n":1,
-        "w":1
+        "n":1.000000,
+        "name":"im_info",
+        "type":"data",
+        "w":1.000000
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv1_1",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":64,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[64,1,1,1],
-        "weight":[64,3,3,3]
+        "num":64.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "data":0
+        "data":0.000000
+      },
+      "params":{
+        "bias":[
+          64.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          64.000000,
+          3.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu1_1",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv1_1":0
+        "conv1_1":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv1_2",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":64,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[64,1,1,1],
-        "weight":[64,64,3,3]
+        "num":64.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "relu1_1":0
+        "relu1_1":0.000000
+      },
+      "params":{
+        "bias":[
+          64.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          64.000000,
+          64.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu1_2",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv1_2":0
+        "conv1_2":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"pool",
+        "global":0.000000,
+        "kernel_size":2.000000,
+        "method":"max",
         "name":"pool1",
-        "global":0,
-        "kernel_size":2,
-        "method":"max",
-        "pad":0,
-        "stride":2
+        "pad":0.000000,
+        "stride":2.000000,
+        "type":"pool"
       },
       "inputs":{
-        "relu1_2":0
+        "relu1_2":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv2_1",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":128,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[128,1,1,1],
-        "weight":[128,64,3,3]
+        "num":128.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "pool1":0
+        "pool1":0.000000
+      },
+      "params":{
+        "bias":[
+          128.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          128.000000,
+          64.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu2_1",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv2_1":0
+        "conv2_1":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv2_2",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":128,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[128,1,1,1],
-        "weight":[128,128,3,3]
+        "num":128.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "relu2_1":0
+        "relu2_1":0.000000
+      },
+      "params":{
+        "bias":[
+          128.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          128.000000,
+          128.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu2_2",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv2_2":0
+        "conv2_2":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"pool",
+        "global":0.000000,
+        "kernel_size":2.000000,
+        "method":"max",
         "name":"pool2",
-        "global":0,
-        "kernel_size":2,
-        "method":"max",
-        "pad":0,
-        "stride":2
+        "pad":0.000000,
+        "stride":2.000000,
+        "type":"pool"
       },
       "inputs":{
-        "relu2_2":0
+        "relu2_2":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv3_1",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":256,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[256,1,1,1],
-        "weight":[256,128,3,3]
+        "num":256.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "pool2":0
+        "pool2":0.000000
+      },
+      "params":{
+        "bias":[
+          256.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          256.000000,
+          128.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu3_1",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv3_1":0
+        "conv3_1":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv3_2",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":256,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[256,1,1,1],
-        "weight":[256,256,3,3]
+        "num":256.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "relu3_1":0
+        "relu3_1":0.000000
+      },
+      "params":{
+        "bias":[
+          256.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          256.000000,
+          256.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu3_2",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv3_2":0
+        "conv3_2":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv3_3",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":256,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[256,1,1,1],
-        "weight":[256,256,3,3]
+        "num":256.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "relu3_2":0
+        "relu3_2":0.000000
+      },
+      "params":{
+        "bias":[
+          256.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          256.000000,
+          256.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu3_3",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv3_3":0
+        "conv3_3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"pool",
+        "global":0.000000,
+        "kernel_size":2.000000,
+        "method":"max",
         "name":"pool3",
-        "global":0,
-        "kernel_size":2,
-        "method":"max",
-        "pad":0,
-        "stride":2
+        "pad":0.000000,
+        "stride":2.000000,
+        "type":"pool"
       },
       "inputs":{
-        "relu3_3":0
+        "relu3_3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv4_1",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":512,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[512,1,1,1],
-        "weight":[512,256,3,3]
+        "num":512.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "pool3":0
+        "pool3":0.000000
+      },
+      "params":{
+        "bias":[
+          512.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          512.000000,
+          256.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu4_1",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv4_1":0
+        "conv4_1":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv4_2",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":512,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[512,1,1,1],
-        "weight":[512,512,3,3]
+        "num":512.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "relu4_1":0
+        "relu4_1":0.000000
+      },
+      "params":{
+        "bias":[
+          512.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          512.000000,
+          512.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu4_2",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv4_2":0
+        "conv4_2":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv4_3",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":512,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[512,1,1,1],
-        "weight":[512,512,3,3]
+        "num":512.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "relu4_2":0
+        "relu4_2":0.000000
+      },
+      "params":{
+        "bias":[
+          512.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          512.000000,
+          512.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu4_3",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv4_3":0
+        "conv4_3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"pool",
-        "name":"pool4",
-        "global":0,
-        "kernel_size":2,
+        "global":0.000000,
+        "kernel_size":2.000000,
         "method":"max",
-        "pad":0,
-        "stride":2
+        "name":"pool4",
+        "pad":0.000000,
+        "stride":2.000000,
+        "type":"pool"
       },
       "inputs":{
-        "relu4_3":0
+        "relu4_3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv5_1",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":512,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[512,1,1,1],
-        "weight":[512,512,3,3]
+        "num":512.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "pool4":0
+        "pool4":0.000000
+      },
+      "params":{
+        "bias":[
+          512.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          512.000000,
+          512.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu5_1",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv5_1":0
+        "conv5_1":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv5_2",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":512,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[512,1,1,1],
-        "weight":[512,512,3,3]
+        "num":512.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "relu5_1":0
+        "relu5_1":0.000000
+      },
+      "params":{
+        "bias":[
+          512.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          512.000000,
+          512.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu5_2",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv5_2":0
+        "conv5_2":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"conv5_3",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":512,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[512,1,1,1],
-        "weight":[512,512,3,3]
+        "num":512.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "relu5_2":0
+        "relu5_2":0.000000
+      },
+      "params":{
+        "bias":[
+          512.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          512.000000,
+          512.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu5_3",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "conv5_3":0
+        "conv5_3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"split",
-        "name":"conv5_3_relu5_3_0_split"
+        "name":"conv5_3_relu5_3_0_split",
+        "type":"split"
       },
       "inputs":{
-        "relu5_3":0
+        "relu5_3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":3.000000,
+        "kernel_size_w":3.000000,
         "name":"rpn_conv/3x3",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":3,
-        "kernel_size_w":3,
-        "num":512,
-        "pad_h":1,
-        "pad_w":1,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[512,1,1,1],
-        "weight":[512,512,3,3]
+        "num":512.000000,
+        "pad_h":1.000000,
+        "pad_w":1.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "conv5_3_relu5_3_0_split":0
+        "conv5_3_relu5_3_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          512.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          512.000000,
+          512.000000,
+          3.000000,
+          3.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"rpn_relu/3x3",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "rpn_conv/3x3":0
+        "rpn_conv/3x3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"split",
-        "name":"rpn/output_rpn_relu/3x3_0_split"
+        "name":"rpn/output_rpn_relu/3x3_0_split",
+        "type":"split"
       },
       "inputs":{
-        "rpn_relu/3x3":0
+        "rpn_relu/3x3":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"rpn_cls_score",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":18,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[18,1,1,1],
-        "weight":[18,512,1,1]
+        "num":18.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "rpn/output_rpn_relu/3x3_0_split":0
+        "rpn/output_rpn_relu/3x3_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          18.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          18.000000,
+          512.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"conv",
+        "bias":1.000000,
+        "group":1.000000,
+        "kernel_size_h":1.000000,
+        "kernel_size_w":1.000000,
         "name":"rpn_bbox_pred",
-        "bias":1,
-        "group":1,
-        "kernel_size_h":1,
-        "kernel_size_w":1,
-        "num":36,
-        "pad_h":0,
-        "pad_w":0,
-        "stride_h":1,
-        "stride_w":1
-      },
-      "params":{
-        "bias":[36,1,1,1],
-        "weight":[36,512,1,1]
+        "num":36.000000,
+        "pad_h":0.000000,
+        "pad_w":0.000000,
+        "stride_h":1.000000,
+        "stride_w":1.000000,
+        "type":"conv"
       },
       "inputs":{
-        "rpn/output_rpn_relu/3x3_0_split":0
+        "rpn/output_rpn_relu/3x3_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          36.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          36.000000,
+          512.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"reshape",
+        "d0":0.000000,
+        "d1":2.000000,
+        "d2":-1.000000,
+        "d3":0.000000,
         "name":"rpn_cls_score_reshape",
-        "d0":0,
-        "d1":2,
-        "d2":-1,
-        "d3":0
+        "type":"reshape"
       },
       "inputs":{
-        "rpn_cls_score":0
+        "rpn_cls_score":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"softmax",
-        "name":"rpn_cls_prob"
+        "name":"rpn_cls_prob",
+        "type":"softmax"
       },
       "inputs":{
-        "rpn_cls_score_reshape":0
+        "rpn_cls_score_reshape":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"reshape",
+        "d0":0.000000,
+        "d1":18.000000,
+        "d2":-1.000000,
+        "d3":0.000000,
         "name":"rpn_cls_prob_reshape",
-        "d0":0,
-        "d1":18,
-        "d2":-1,
-        "d3":0
+        "type":"reshape"
       },
       "inputs":{
-        "rpn_cls_prob":0
+        "rpn_cls_prob":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"proposal",
+        "feat_stride":16.000000,
         "name":"proposal",
-        "feat_stride":16
+        "type":"proposal"
       },
       "inputs":{
-        "im_info":2,
-        "rpn_bbox_pred":1,
-        "rpn_cls_prob_reshape":0
+        "im_info":2.000000,
+        "rpn_bbox_pred":1.000000,
+        "rpn_cls_prob_reshape":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"roipooling",
+        "h":7.000000,
         "name":"roi_pool5",
-        "h":7,
-        "s":0.0625,
-        "w":7
+        "s":0.062500,
+        "type":"roipooling",
+        "w":7.000000
       },
       "inputs":{
-        "conv5_3_relu5_3_0_split":0,
-        "proposal":1
+        "conv5_3_relu5_3_0_split":0.000000,
+        "proposal":1.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"fc",
+        "bias":1.000000,
         "name":"fc6",
-        "bias":1,
-        "num":4096
-      },
-      "params":{
-        "bias":[4096,1,1,1],
-        "weight":[4096,25088,1,1]
+        "num":4096.000000,
+        "type":"fc"
       },
       "inputs":{
-        "roi_pool5":0
+        "roi_pool5":0.000000
+      },
+      "params":{
+        "bias":[
+          4096.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          4096.000000,
+          25088.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
+        "method":"relu",
         "name":"relu6",
-        "method":"relu",
-        "neg_slope":0
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "fc6":0
+        "fc6":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"fc",
+        "bias":1.000000,
         "name":"fc7",
-        "bias":1,
-        "num":4096
-      },
-      "params":{
-        "bias":[4096,1,1,1],
-        "weight":[4096,4096,1,1]
+        "num":4096.000000,
+        "type":"fc"
       },
       "inputs":{
-        "relu6":0
+        "relu6":0.000000
+      },
+      "params":{
+        "bias":[
+          4096.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          4096.000000,
+          4096.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"activity",
-        "name":"relu7",
         "method":"relu",
-        "neg_slope":0
+        "name":"relu7",
+        "neg_slope":0.000000,
+        "type":"activity"
       },
       "inputs":{
-        "fc7":0
+        "fc7":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"split",
-        "name":"fc7_relu7_0_split"
+        "name":"fc7_relu7_0_split",
+        "type":"split"
       },
       "inputs":{
-        "relu7":0
+        "relu7":0.000000
+      },
+      "params":{
+
       }
     },
     {
       "attrs":{
-        "type":"fc",
+        "bias":1.000000,
         "name":"cls_score",
-        "bias":1,
-        "num":21
-      },
-      "params":{
-        "bias":[21,1,1,1],
-        "weight":[21,4096,1,1]
+        "num":21.000000,
+        "type":"fc"
       },
       "inputs":{
-        "fc7_relu7_0_split":0
+        "fc7_relu7_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          21.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          21.000000,
+          4096.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"fc",
+        "bias":1.000000,
         "name":"bbox_pred",
-        "bias":1,
-        "num":84
-      },
-      "params":{
-        "bias":[84,1,1,1],
-        "weight":[84,4096,1,1]
+        "num":84.000000,
+        "type":"fc"
       },
       "inputs":{
-        "fc7_relu7_0_split":0
+        "fc7_relu7_0_split":0.000000
+      },
+      "params":{
+        "bias":[
+          84.000000,
+          1.000000,
+          1.000000,
+          1.000000
+        ],
+        "weight":[
+          84.000000,
+          4096.000000,
+          1.000000,
+          1.000000
+        ]
       }
     },
     {
       "attrs":{
-        "type":"softmax",
-        "name":"cls_prob"
+        "name":"cls_prob",
+        "type":"softmax"
       },
       "inputs":{
-        "cls_score":0
+        "cls_score":0.000000
+      },
+      "params":{
+
       }
     }
-  ]
+  ],
+  "net_name":"faster_rcnn_vgg16"
 }
