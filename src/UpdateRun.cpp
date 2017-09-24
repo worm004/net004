@@ -61,4 +61,5 @@ void UpdateRun::check(const Net004& net)const{
 
 }
 void UpdateRun::operator()(Net004& net, int cur){
+	printf("[%d]run: update\n",cur);
 }

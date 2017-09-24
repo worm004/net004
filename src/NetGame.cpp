@@ -51,24 +51,16 @@ void NetGame::load(const std::string& path){
 		net.ls.add(nparser.j.jobj["layers"].jarray[i]);
 	}
 	net.ls.init();
-
 	for(const auto&run:runs) run.second->check(net);
-
-
-	exit(0);
 }
 void NetGame::run(){
-	for(const auto& i : runlist)
-		if(runs.find(i) == runs.end()){
-			printf("ERROR: not find run %s\n",i.c_str());
-			exit(0);
-		}
 	for(int iter = 0;iter<max_iter;++iter)
-		for(const auto& i:runlist)
+		for(const auto& i:runlist){
+			if(i.)
 			runs[i]->operator()(net,iter);
+		}
 }
 void NetTrain::init(){
-	runlist = {"fill_and_forward","update","display","save","fill_and_test"};
-	if(runs.find("init_layer_params") == runs.end()) return;
-	runs["init_layer_params"]->operator()(net,0);
+	runlist = {"train_step","update","display","save","test_step"};
+	runs["init"]->operator()(net,0);
 }

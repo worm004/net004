@@ -25,4 +25,5 @@ void SaveRun::check(const Net004& net)const{
 	}
 }
 void SaveRun::operator()(Net004& net, int cur){
+	printf("[%d]run: save\n",cur);
 }

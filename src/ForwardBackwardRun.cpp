@@ -19,6 +19,7 @@ ForwardBackwardRun::ForwardBackwardRun(const JsonValue& j):Run(j){
 
 }
 void ForwardBackwardRun::operator()(Net004& net, int cur) {
+	printf("[%d]run: train step\n",cur);
 }
 void ForwardBackwardRun::show()const{
 	Run::show();

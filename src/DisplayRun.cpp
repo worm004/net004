@@ -23,4 +23,5 @@ void DisplayRun::check(const Net004& net)const{
 		}
 }
 void DisplayRun::operator()(Net004& net, int cur){
+	printf("[%d]run: display\n",cur);
 }

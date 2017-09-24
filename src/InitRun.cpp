@@ -21,6 +21,7 @@ InitRun::InitRun(const JsonValue& j):Run(j){
 	}
 }
 void InitRun::operator()(Net004& net, int cur){
+	printf("[%d]run: init\n",cur);
 }
 void InitRun::show()const{
 	Run::show();
