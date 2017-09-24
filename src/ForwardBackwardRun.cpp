@@ -18,9 +18,6 @@ ForwardBackwardRun::ForwardBackwardRun(const JsonValue& j):Run(j){
 		layer_map[i.first] = i.second.jv.s;
 
 }
-void ForwardBackwardRun::operator()(Net004& net, int cur) {
-	printf("[%d]run: train step\n",cur);
-}
 void ForwardBackwardRun::show()const{
 	Run::show();
 	printf("  (data)\n");
@@ -49,4 +46,8 @@ void ForwardBackwardRun::check(const Net004& net)const{
 			exit(0);
 		}
 	}
+}
+void ForwardBackwardRun::operator()(Net004& net, int cur) {
+	if(cur%iter_interval != 0) return;
+	printf("[%d]run: train step\n",cur);
 }

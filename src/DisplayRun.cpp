@@ -23,5 +23,6 @@ void DisplayRun::check(const Net004& net)const{
 		}
 }
 void DisplayRun::operator()(Net004& net, int cur){
+	if(cur%iter_interval != 0) return;
 	printf("[%d]run: display\n",cur);
 }

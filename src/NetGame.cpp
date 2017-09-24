@@ -55,10 +55,8 @@ void NetGame::load(const std::string& path){
 }
 void NetGame::run(){
 	for(int iter = 0;iter<max_iter;++iter)
-		for(const auto& i:runlist){
-			if(i.)
+		for(const auto& i:runlist)
 			runs[i]->operator()(net,iter);
-		}
 }
 void NetTrain::init(){
 	runlist = {"train_step","update","display","save","test_step"};

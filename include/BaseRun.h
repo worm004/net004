@@ -10,7 +10,7 @@ class Run{
 	virtual void show()const;
 	virtual void check(const Net004& net) const;
 
-	private:
+	protected:
 	std::string type, name;
 	int iter = 1, iter_interval = 1;
 	JsonValue j_;
