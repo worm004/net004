@@ -8,6 +8,7 @@
 #include "InitRun.h"
 #include "ForwardBackwardRun.h"
 #include "ForwardTestRun.h"
+#include "DataLayer.h"
 
 using namespace std;
 template<typename T> 
@@ -60,5 +61,8 @@ void NetGame::run(){
 }
 void NetTrain::init(){
 	runlist = {"train_step","update","display","save","test_step"};
+	for(const auto& i:net.ls.input_layers)
+		((DataLayer*)net.ls[i])->n = batch_size;
+	net.pre_alloc();
 	runs["init"]->operator()(net,0);
 }

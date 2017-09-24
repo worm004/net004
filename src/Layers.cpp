@@ -91,9 +91,8 @@ void Layers::init_forder(){
 			cs[j.first].push_back(name);
 		}
 	}
-	//for(auto i:ins){
-	//	printf("%s %d\n",i.first.c_str(),i.second);
-	//}
+	for(auto i:ins) if(i.second == 0) input_layers.push_back(i.first);
+
 	//for(auto i:cs){
 	//	printf("%s->\n",i.first.c_str());
 	//	for(auto j:i.second)

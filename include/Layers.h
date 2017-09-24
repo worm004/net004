@@ -26,6 +26,8 @@ class Layers{
 	std::vector<int> forder;
 	std::map<std::string, std::vector<std::string>> cs;
 
+	std::vector<std::string> input_layers;
+
 	private:
 	typedef std::map<std::string, Layer*(*)(const JsonValue&)> LayerTypeMap;
 	LayerTypeMap layer_type_map;
