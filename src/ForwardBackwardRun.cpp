@@ -32,7 +32,7 @@ void Cifar10Data::init(){
 std::string& Cifar10Data::label_name(int label){
 	return label_map[label];
 }
-void Cifar10Data::fill_batch(float*& layer_data, int n, int c, int h ,int w, int index){
+void Cifar10Data::fill_data(float*& layer_data, int n, int c, int h ,int w, int index){
 	index %= count;
 	int left = n;
 	while(left>0){
@@ -42,7 +42,7 @@ void Cifar10Data::fill_batch(float*& layer_data, int n, int c, int h ,int w, int
 		index += to_be_filled;;
 	}
 }
-void Cifar10Data::get_labels(int*& label_data, int n, int index){
+void Cifar10Data::fill_labels(float*& label_data, int n, int index){
 	index %= count;
 	int left = n;
 	while(left>0){
@@ -54,10 +54,10 @@ void Cifar10Data::get_labels(int*& label_data, int n, int index){
 }
 void Cifar10Data::load(const std::vector<std::string>& list){
 	int count = 10000, hw = 32*32, step = hw*3+1, len = count*step;
-	labels = new int[count * list.size()];
+	labels = new float[count * list.size()];
 	data = new float[count * list.size() * (32*32*3)];
 	unsigned char * buffer = new unsigned char[len];
-	int *pl = labels;
+	float *pl = labels;
 	float *pd = data;
 	unsigned char *pb = buffer;
 	for(const auto& l : list){

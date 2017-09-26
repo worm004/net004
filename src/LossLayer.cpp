@@ -56,8 +56,9 @@ void LossLayer::forward_softmax(){
 			for(int k=0;k<hw;++k)
 				softmaxdata[j*hw +k] /= sumdata[k];
 		for(int j=0;j<c;++j)
-			for(int k=0;k<hw;++k)
+			for(int k=0;k<hw;++k){
 				loss -= log(std::max(softmaxdata[int(gdata[k]) * hw + k], FLT_MIN));
+			}
 		pdata += c*hw;
 		gdata += inputs[1].chw();
 	}
