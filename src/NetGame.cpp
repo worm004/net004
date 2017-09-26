@@ -63,6 +63,7 @@ void NetTrain::init(){
 	runlist = {"train_step","update","display","save","test_step"};
 	for(const auto& i:net.ls.input_layers)
 		((DataLayer*)net.ls[i])->n = batch_size;
-	net.pre_alloc();
 	runs["init"]->operator()(net,0);
+	net.pre_alloc();
+	for(const auto& i:runlist) runs[i]->init(net);
 }

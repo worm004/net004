@@ -6,5 +6,8 @@ class ForwardTestRun:public ForwardBackwardRun{
 	ForwardTestRun();
 	ForwardTestRun(const JsonValue& j);
 	virtual void operator()(Net004& net, int cur);
+	virtual void init(const Net004& net);
+
+	private:
 };
 #endif

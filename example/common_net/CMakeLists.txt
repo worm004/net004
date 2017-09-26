@@ -22,3 +22,6 @@ target_link_libraries(caffe_show net004 ${OpenCV_LIBRARIES} ${Caffe_LIBRARIES})
 
 add_executable(net_train net_train.cpp)
 target_link_libraries(net_train net004 ${OpenCV_LIBRARIES})
+
+add_executable(caffe_train caffe_train.cpp)
+target_link_libraries(caffe_train net004 ${OpenCV_LIBRARIES} ${Caffe_LIBRARIES})

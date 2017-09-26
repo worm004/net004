@@ -11,6 +11,8 @@ Run::Run(const JsonValue& j){
 		iter = o.at("iter").jv.d;
 	if(o.find("iter_interval") != o.end())
 		iter_interval = o.at("iter_interval").jv.d;
+	if(o.find("omit")!=o.end())
+		omit = o.at("omit").jv.d;
 }
 void Run::show()const{
 	printf("(type name) %s %s\n",type.c_str(),name.c_str());
@@ -21,4 +23,6 @@ void Run::check(const Net004& net)const{
 		printf("name and type cannot be empty\n");
 		exit(0);
 	}
+}
+void Run::init(const Net004& net){
 }

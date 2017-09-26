@@ -5,14 +5,17 @@
 using namespace std;
 SaveRun::SaveRun(){ }
 SaveRun::SaveRun(const JsonValue& j):Run(j){
+	if(omit) return;
 	const auto& o = j.jobj.at("attrs").jobj;
 	dir = o.at("dir").jv.s;
 }
 void SaveRun::show()const{
+	if(omit) return;
 	Run::show();
 	printf("  (dir) %s\n",dir.c_str());
 }
 void SaveRun::check(const Net004& net)const{
+	if(omit) return;
 	Run::check(net);
 	struct stat info;
 	if( stat( dir.c_str(), &info ) != 0 ){
@@ -25,6 +28,7 @@ void SaveRun::check(const Net004& net)const{
 	}
 }
 void SaveRun::operator()(Net004& net, int cur){
+	if(omit) return;
 	if(cur%iter_interval != 0) return;
 	printf("[%d]run: save\n",cur);
 }

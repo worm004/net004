@@ -13,7 +13,6 @@
 using namespace cv;
 using namespace std;
 
-
 struct TestParameter{
 	TestParameter(){}
 	TestParameter(const std::string& cmp, const std::string& cnp, 

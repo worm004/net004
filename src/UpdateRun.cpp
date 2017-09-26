@@ -3,6 +3,7 @@
 using namespace std;
 UpdateRun::UpdateRun(){}
 UpdateRun::UpdateRun(const JsonValue& j):Run(j){
+	if(omit) return;
 	const auto& o = j.jobj.at("attrs").jobj;
 	solver = o.at("solver").jv.s;
 	momentum = o.at("momentum").jv.d;
@@ -27,6 +28,7 @@ UpdateRun::UpdateRun(const JsonValue& j):Run(j){
 	}
 }
 void UpdateRun::show()const{
+	if(omit) return;
 	Run::show();
 	printf("  (solver) %s\n", solver.c_str());
 	printf("  (momentum) %lf\n", momentum);
@@ -43,6 +45,7 @@ void UpdateRun::show()const{
 	}
 }
 void UpdateRun::check(const Net004& net)const{
+	if(omit) return;
 	Run::check(net);
 	for(const auto& l:lr.mults){
 		const string& lname = l.first;
@@ -61,6 +64,7 @@ void UpdateRun::check(const Net004& net)const{
 
 }
 void UpdateRun::operator()(Net004& net, int cur){
+	if(omit) return;
 	if(cur%iter_interval != 0) return;
 	printf("[%d]run: update\n",cur);
 }

@@ -2,10 +2,12 @@
 #include "DisplayRun.h"
 DisplayRun::DisplayRun(){}
 DisplayRun::DisplayRun(const JsonValue& j):Run(j){
+	if(omit) return;
 	const auto& a = j.jobj.at("attrs").jobj.at("layers").jarray;
 	for(const auto& i: a) layers.push_back(i.jv.s);
 }
 void DisplayRun::show()const{
+	if(omit) return;
 	Run::show();
 	printf("  (layers) ");
 	for(int i=0;i<layers.size();++i){
@@ -15,6 +17,7 @@ void DisplayRun::show()const{
 	printf("\n");
 }
 void DisplayRun::check(const Net004& net)const{
+	if(omit) return;
 	Run::check(net);
 	for(const auto& i: layers)
 		if (net.ls.n2i.find(i) == net.ls.n2i.end()){
@@ -23,6 +26,7 @@ void DisplayRun::check(const Net004& net)const{
 		}
 }
 void DisplayRun::operator()(Net004& net, int cur){
+	if(omit) return;
 	if(cur%iter_interval != 0) return;
 	printf("[%d]run: display\n",cur);
 }
