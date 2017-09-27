@@ -4,6 +4,7 @@
 using namespace std;
 ForwardTestRun::ForwardTestRun(){}
 ForwardTestRun::ForwardTestRun(const JsonValue& j): ForwardBackwardRun(j){
+	cur_index = 0;
 }
 void ForwardTestRun::operator()(Net004& net, int cur) {
 	if(omit) return;
@@ -25,15 +26,15 @@ void ForwardTestRun::operator()(Net004& net, int cur) {
 
 	int acc_top_1 = 0, all = 0;
 	for(int i=0;i<iter;++i){
-		input_data->fill_data(img_layer_data,batch_size,c,h,w,i*batch_size);
-		input_data->fill_labels(label_layer_data,batch_size,i*batch_size);
+		input_data->fill_data(img_layer_data,batch_size,c,h,w,cur_index);
+		input_data->fill_labels(label_layer_data,batch_size,cur_index);
+		cur_index += batch_size;
 		net.forward();
 		for(int j=0;j<batch_size;++j){
 			int max_label = -1;
 			float max_val = 0.0;
 			for(int k=0;k<label_num;++k){
 				float val = predict_layer_data[j*label_num+k];
-				//printf(" %.2f",val);
 				if( val > max_val){
 					max_val = val;
 					max_label = k;
@@ -46,12 +47,11 @@ void ForwardTestRun::operator()(Net004& net, int cur) {
 			//	max_label,input_data->label_name(max_label).c_str(),
 			//	int(label_layer_data[j]),input_data->label_name(label_layer_data[j]).c_str());
 		}
-		//getchar();
-		printf("[0->%d]top_1 %f\n",i*batch_size,float(acc_top_1)/float(all));
 	}
+	printf("Accuracy(top1) in [%d,%d): %f\n",cur_index-iter*batch_size,cur_index,float(acc_top_1)/float(all));
+	fflush(stdout);
 }
 void ForwardTestRun::init(const Net004& net){
 	if(omit) return;
-	//printf("init: ForwardTestRun\n");
 	input_data->init();
 }
