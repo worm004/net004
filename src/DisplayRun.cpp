@@ -28,5 +28,18 @@ void DisplayRun::check(const Net004& net)const{
 void DisplayRun::operator()(Net004& net, int cur){
 	if(omit) return;
 	if(cur%iter_interval != 0) return;
-	printf("[%d]run: display\n",cur);
+	for(auto ln:layers){
+		Layer* layer = net[ln];
+		for(int i=0;i<layer->outputs.size();++i){
+			int chw = layer->outputs[i].chw();
+			float *data = layer->outputs[i].data;
+			int batch_size = layer->outputs[i].n;
+			for(int b=0;b<batch_size;++b){
+				printf("[iter %d] [display] [layer %s] [output %d] [batch %d]:",cur,ln.c_str(),i,b);
+				for(int j=0;j<chw;++j)
+					printf(" %.2f",data[j+b*chw]);
+				printf("\n");
+			}
+		}
+	}
 }

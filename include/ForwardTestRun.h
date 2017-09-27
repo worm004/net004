@@ -8,7 +8,5 @@ class ForwardTestRun:public ForwardBackwardRun{
 	virtual void operator()(Net004& net, int cur);
 	virtual void init(const Net004& net);
 
-	private:
-	int cur_index = 0;
 };
 #endif

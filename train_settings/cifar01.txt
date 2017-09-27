@@ -1,0 +1,108 @@
+{
+	"name":"CIFAR10_quick_01",
+	"type":"train",
+	"net_path":"../models/cifar.net004.net",
+	"batch_size":100,
+	"max_iter":1000,
+	"runs":[
+		{ 
+			"attrs":{ 
+				"name":"save", 
+				"type":"save", 
+				"prefix":"cifar.net004.",
+				"dir":"save",
+				"iter_interval":1000,
+				"omit":1
+				} 
+		},
+		{ 
+			"attrs":{ 
+				"name":"display", 
+				"type":"display", 
+				"layers":["loss"], 
+				"omit":1,
+				"iter_interval": 100
+				} 
+			},
+		{
+			"attrs":{
+				"name":"update",
+				"type":"update",
+				"solver":"sgd",
+				"momentum":0.9,
+				"weight_decay":0.004,
+				"omit":1,
+				"lr":{
+					"type":"fixed",
+					"base":0.001,
+					"mults":[
+						{ "name":"conv1", "weight": 1, "bias": 2 },
+						{ "name":"conv2", "weight": 1, "bias": 2 },
+						{ "name":"conv3", "weight": 1, "bias": 2 },
+						{ "name":"ip1", "weight": 1, "bias": 2 },
+						{ "name":"ip2", "weight": 1, "bias": 2 }
+					]
+				}
+			},
+		},
+		{
+			"attrs":{ 
+				"name":"init", 
+				"type":"init", 
+				"method":"model",
+				"path":"../models/cifar.net004.data",
+				"layers":[
+					{ "name":"conv1", "weight":{ "init_type":"guassian", "std":0.0001, "mean":0 }, "bias":{ "init_type":"constant", "val":0 } },
+					{ "name":"conv2", "weight":{ "init_type":"guassian", "std":0.01, "mean":0 }, "bias":{ "init_type":"constant", "val":0 } },
+					{ "name":"conv3", "weight":{ "init_type":"guassian", "std":0.01, "mean":0 }, "bias":{ "init_type":"constant", "val":0 } },
+					{ "name":"ip1", "weight":{ "init_type":"guassian", "std":0.1, "mean":0 }, "bias":{ "init_type":"constant", "val":0 } },
+					{ "name":"ip2", "weight":{ "init_type":"guassian", "std":0.1, "mean":0 }, "bias":{ "init_type":"constant", "val":0 } }
+				]
+			}
+		},
+		{
+			"attrs":{
+				"name":"train_step",
+				"type":"forward_backward",
+				"data":{ 
+					"name":"train_data", 
+					"type":"cifar10",
+					"method":"train"
+					"path":"/Users/worm004/Projects/net004/dataset/cifar10",
+					"mean":[127,127,127],
+					"std":[1,1,1]
+				}
+				"omit":1,
+				"layer_map":{
+					"img":"input_data",
+					"label":"input_label"
+					"loss":"loss"
+				}
+			}
+
+		},
+		{
+			"attrs":{
+				"name":"test_step",
+				"type":"forward_test",
+				"iter": 1,
+				"iter_interval": 10,
+				"omit":1,
+				"data":{ 
+					"name":"test_data", 
+					"type":"cifar10",
+					"method":"test"
+					"path":"/Users/worm004/Projects/net004/dataset/cifar10",
+					"mean":[127,127,127],
+					"std":[1,1,1],
+				}
+				"layer_map":{
+					"img":"input_data",
+					"label":"input_label",
+					"predict":"ip2",
+					"loss":"loss"
+				}
+			}
+		}
+	]
+}

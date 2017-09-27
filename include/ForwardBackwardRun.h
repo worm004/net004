@@ -39,5 +39,8 @@ class ForwardBackwardRun:public Run{
 	
 	InputData* input_data;
 	std::map<std::string, std::string> layer_map;
+
+	protected:
+	int cur_index = 0;
 };
 #endif

@@ -111,7 +111,7 @@ void InitRun::init_by_model(Net004& net){
 }
 void InitRun::operator()(Net004& net, int cur){
 	if(omit) return;
-	printf("[%d]run: init\n",cur);
+	printf("[iter %d] [init] [%s%s]\n",cur,method.c_str(),(method == "model")?(" "+path).c_str():"");
 	if(method == "random") init_by_random(net);
 	else if(method == "model") init_by_model(net);
 	else{

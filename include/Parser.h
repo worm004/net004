@@ -8,5 +8,6 @@ class ModelParser{
 	public:
 	ModelParser();
 	void read_model(const std::string& path, Net004* net);
+	void write_model(const std::string& path, Net004* net);
 };
 #endif

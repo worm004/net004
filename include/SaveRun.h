@@ -9,6 +9,6 @@ class SaveRun:public Run{
 	virtual void show()const;
 	virtual void check(const Net004& net)const;
 
-	std::string dir;
+	std::string prefix,dir;
 };
 #endif

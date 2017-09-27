@@ -2,6 +2,7 @@
 #include <fstream>
 #include "stdlib.h"
 #include "ForwardBackwardRun.h"
+#include "DataLayer.h"
 using namespace std;
 Cifar10Data::Cifar10Data(){
 	type = "cifar10";
@@ -53,13 +54,12 @@ void Cifar10Data::fill_labels(float*& label_data, int n, int index){
 	}
 }
 void Cifar10Data::load(const std::vector<std::string>& list){
-	int count = 10000, hw = 32*32, step = hw*3+1, len = count*step;
+	const int count = 10000, hw = 32*32, step = hw*3+1, len = count*step;
 	labels = new float[count * list.size()];
 	data = new float[count * list.size() * (32*32*3)];
 	unsigned char * buffer = new unsigned char[len];
 	float *pl = labels;
 	float *pd = data;
-	unsigned char *pb = buffer;
 	for(const auto& l : list){
 		string filepath = path + "/" + l;
 		ifstream file(filepath,ios::binary);
@@ -73,23 +73,23 @@ void Cifar10Data::load(const std::vector<std::string>& list){
 			exit(0);
 		}
 		file.close();
+		unsigned char *pb = buffer;
 		for(int i=0;i<count;++i){
 			*pl++ = *pb++;
 			for(int c=0;c<3;++c){
 				float m = mean[c], s = std[c];
-				float* channel_data = pd + c*hw;
 				for(int j=0;j<hw;++j)
-					channel_data[j] = (float(*pb++)-m)/s;
+					*pd++ = (float(*pb++)-m)/s;
 			}
-			pd += 3*hw;
 		}
 	}
 	delete []buffer;
 	this->count = list.size()*count;
 }
 void Cifar10Data::load_train(){
-	printf("init_train\n");
-	load({"data_batch_1.bin", "data_batch_2.bin", "data_batch_3.bin", "data_batch_4.bin", "data_batch_5.bin"});
+	//printf("init_train\n");
+	//load({"data_batch_1.bin", "data_batch_2.bin", "data_batch_3.bin", "data_batch_4.bin", "data_batch_5.bin"});
+	load({"data_batch_1.bin"});
 }
 void Cifar10Data::load_test(){
 	//printf("init_test\n");
@@ -162,11 +162,25 @@ void ForwardBackwardRun::check(const Net004& net)const{
 void ForwardBackwardRun::operator()(Net004& net, int cur) {
 	if(omit) return;
 	if(cur%iter_interval != 0) return;
-	printf("[%d]run: train step\n",cur);
-	
+	//printf("[iter %d] [train]:\n",cur);
+
+	DataLayer* img_layer = (DataLayer*)net[layer_map["img"]], *label_layer = (DataLayer*)net[layer_map["label"]];
+	Layer* loss_layer = net[layer_map["loss"]];
+	float * img_layer_data = img_layer->outputs[0].data, 
+		* label_layer_data = label_layer->outputs[0].data,
+		* loss_layer_data = loss_layer->outputs[0].data;
+	int batch_size = img_layer->n, c = img_layer->c, h = img_layer->h, w = img_layer->w;
+	float loss = 0.0f;
+	for(int i=0;i<iter;++i){
+		input_data->fill_data(img_layer_data,batch_size,c,h,w,cur_index);
+		input_data->fill_labels(label_layer_data,batch_size,cur_index);
+		cur_index += batch_size;
+		net.forward();
+		loss += loss_layer_data[0];
+	}
+	printf("[iter %07d] [train] [data index %08d - %08d] [train_loss %.3f]\n",cur,cur_index - iter*batch_size, cur_index-1,loss/iter);
 }
 void ForwardBackwardRun::init(const Net004& net){
 	if(omit) return;
-	printf("init: ForwardBackwardRun\n");
 	input_data->init();
 }
