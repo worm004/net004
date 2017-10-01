@@ -8,11 +8,13 @@ class LossLayer: public Layer{
 	virtual void show();
 	virtual void setup_outputs();
 	virtual void forward();
+	virtual void backward();
 	void init_softmax();
 	void forward_softmax();
+	void backward_softmax();
 
 	typedef void (LossLayer::*FUNCTION)();
-	FUNCTION forward_f, init_f;
+	FUNCTION forward_f, init_f, backward_f;
 	std::string method;
 
 	// softmax

@@ -9,7 +9,7 @@ ForwardTestRun::ForwardTestRun(const JsonValue& j): ForwardBackwardRun(j){
 void ForwardTestRun::operator()(Net004& net, int cur) {
 	if(omit) return;
 	if(cur%iter_interval != 0) return;
-	printf("[%d]run: test\n",cur);
+	//printf("[%d]run: test\n",cur);
 
 	DataLayer* img_layer = (DataLayer*)net[layer_map["img"]], *label_layer = (DataLayer*)net[layer_map["label"]];
 	Layer* predict_layer = net[layer_map["predict"]], * loss_layer = net[layer_map["loss"]];

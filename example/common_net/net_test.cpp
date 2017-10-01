@@ -148,10 +148,9 @@ float net004_forward(const std::string& img_path, const TestParameter& param, bo
 		cout<<"forward: "<<cal_duration(t1,t2)<<endl;
 		show_ret_net004(net,param.list_path,param.nlabel,param.nshow);
 	}
+	net.backward();
 	return net[net.ls.size()-1]->outputs[0].data[0];
 }
-
-
 void test(const std::string& img_path, const std::string& net_name, const TestParameter & param, bool show){
 	printf("[TEST] [forwrad] %s\n", net_name.c_str());
 	float caffe_score = caffe_forward(img_path, param, show);

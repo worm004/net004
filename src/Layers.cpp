@@ -56,6 +56,7 @@ void Layers::add(const JsonValue& json){
 		exit(0);
 	}
 	layers.push_back(layer_type_map[type](json));
+	if(train) layers.back()->init_train();
 }
 void Layers::show(){
 	for(int i=0;i<layers.size();++i)

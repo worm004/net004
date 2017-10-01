@@ -19,14 +19,23 @@ class Layer{
 	virtual void show();
 	virtual void setup_outputs() = 0;
 	virtual void forward() = 0;
+	virtual void backward();
 	void setup_outputs_data();
+	bool is_inplace();
+	virtual void init_train();
 
 	public:
 	std::string name, type;
+	// test
 	std::vector<Blob> inputs, outputs;
 	std::map<std::string, Blob> params;
 
+	// train
+	std::vector<Blob> diff_inputs, diff_outputs;
+	std::map<std::string, Blob> diff_params;
+
 	JsonValue j_;
 	bool inplace = false;
+	bool train = false;
 };
 #endif

@@ -32,6 +32,16 @@ Layer::Layer(const JsonValue& j){
 		inputs.resize(j.jobj.at("inputs").jobj.size());
 	outputs.resize(1);
 }
+void Layer::init_train(){
+	train = true;
+	for(const auto& i:params){
+		diff_params[i.first];
+		diff_params[i.first].set_shape(i.second);
+		diff_params[i.first].alloc();
+	}
+	diff_inputs.resize(inputs.size());
+	diff_outputs.resize(1);
+}
 Layer::~Layer(){
 	for(int i=0;i<inputs.size();++i)
 		inputs[i].clear();
@@ -42,6 +52,18 @@ Layer::~Layer(){
 	inputs.clear();
 	outputs.clear();
 	params.clear();
+
+	if(train){
+		for(int i=0;i<diff_inputs.size();++i)
+			diff_inputs[i].clear();
+		for(int i=0;i<diff_outputs.size();++i)
+			diff_outputs[i].clear();
+		for(auto& i:diff_params)
+			i.second.clear();
+		diff_inputs.clear();
+		diff_outputs.clear();
+		diff_params.clear();
+	}
 }
 void Layer::set_inplace(bool inplace){
 	this->inplace = inplace;
@@ -85,11 +107,32 @@ void Layer::show_outputs(){
 		printf("\n");
 	}
 }
+bool Layer::is_inplace(){
+	if(train && params.size()) return false;
+	return inplace && (outputs[0].nchw() == inputs[0].nchw());
+}
 void Layer::setup_outputs_data(){
-	if(inplace && (outputs[0].nchw() == inputs[0].nchw()))
+	if(is_inplace()){
 		outputs[0].set_data(inputs[0].data);
+	}
 	else {
 		inplace = false;
 		outputs[0].alloc();
 	}
+	if(!train) return;
+	if(type == "data") return;
+	diff_outputs[0].set_shape(outputs[0]);
+	if(inplace) diff_outputs[0].set_data(diff_inputs[0].data);
+	else diff_outputs[0].alloc();
+	if(type == "loss") diff_outputs[0].data[0]=1.0f;
+}
+void Layer::backward(){
+	//printf("\tinputs: %d\n",inputs.size());
+	//for(int i=0;i<inputs.size();++i)inputs[i].show();
+	//printf("\tdiff inputs: %d\n",diff_inputs.size());
+	//for(int i=0;i<diff_inputs.size();++i)diff_inputs[i].show();
+	//printf("\toutputs: %d\n",outputs.size());
+	//for(int i=0;i<outputs.size();++i)outputs[i].show();
+	//printf("\tdiff outputs: %d\n",diff_outputs.size());
+	//for(int i=0;i<diff_outputs.size();++i)diff_outputs[i].show();
 }

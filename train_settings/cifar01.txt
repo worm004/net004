@@ -2,8 +2,9 @@
 	"name":"CIFAR10_quick_01",
 	"type":"train",
 	"net_path":"../models/cifar.net004.net",
-	"batch_size":100,
-	"max_iter":1000,
+	"batch_size":1,
+	"max_iter":1,
+	"train":1,
 	"runs":[
 		{ 
 			"attrs":{ 
@@ -21,7 +22,7 @@
 				"type":"display", 
 				"layers":["loss"], 
 				"omit":1,
-				"iter_interval": 100
+				"iter_interval": 10
 				} 
 			},
 		{
@@ -67,15 +68,16 @@
 				"data":{ 
 					"name":"train_data", 
 					"type":"cifar10",
-					"method":"train"
+					"method":"train",
 					"path":"/Users/worm004/Projects/net004/dataset/cifar10",
 					"mean":[127,127,127],
 					"std":[1,1,1]
 				}
-				"omit":1,
+				"omit":0,
+				"iter":1,
 				"layer_map":{
 					"img":"input_data",
-					"label":"input_label"
+					"label":"input_label",
 					"loss":"loss"
 				}
 			}
@@ -91,7 +93,7 @@
 				"data":{ 
 					"name":"test_data", 
 					"type":"cifar10",
-					"method":"test"
+					"method":"test",
 					"path":"/Users/worm004/Projects/net004/dataset/cifar10",
 					"mean":[127,127,127],
 					"std":[1,1,1],

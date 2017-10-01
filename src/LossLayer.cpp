@@ -7,6 +7,7 @@ LossLayer::LossLayer(const JsonValue& j):Layer(j){
 	method = attrs.jobj.at("method").jv.s;
 	if(method == "softmax"){
 		forward_f = &LossLayer::forward_softmax;
+		backward_f = &LossLayer::backward_softmax;
 		init_f = &LossLayer::init_softmax;
 	}
 }
@@ -22,6 +23,9 @@ void LossLayer::setup_outputs(){
 }
 void LossLayer::forward(){
 	(this->*forward_f)();
+}
+void LossLayer::backward(){
+	(this->*backward_f)();
 }
 void LossLayer::init_softmax(){
 	Blob &ib = inputs[0];
@@ -53,16 +57,37 @@ void LossLayer::forward_softmax(){
 				sumdata[k] += softmaxdata[j*hw + k];
 		}
 		for(int j=0;j<c;++j)
-			for(int k=0;k<hw;++k)
-				softmaxdata[j*hw +k] /= sumdata[k];
-		for(int j=0;j<c;++j)
 			for(int k=0;k<hw;++k){
-				loss -= log(std::max(softmaxdata[int(gdata[k]) * hw + k], FLT_MIN));
+				softmaxdata[j*hw +k] /= sumdata[k];
+				//printf("%f\n",softmaxdata[j*hw +k]);
 			}
+		for(int k=0;k<hw;++k){
+			loss -= log(std::max(softmaxdata[int(gdata[k]) * hw + k], FLT_MIN));
+		}
 		pdata += c*hw;
 		gdata += inputs[1].chw();
 	}
-	odata[0] = loss/inputs[0].c/inputs[0].n;
+	odata[0] = loss/inputs[0].n;
 	//show_inputs();
 	//show_outputs();
+}
+void LossLayer::backward_softmax(){
+	//printf("softmax backward\n");
+	Blob& diff_blob = diff_inputs[0], &label_blob = inputs[1];
+
+	int batch_size = label_blob.n, hw = label_blob.hw(), nchw = softmaxblob.nchw();
+	memcpy(diff_blob.data,softmaxblob.data,nchw * sizeof(float));
+
+	float *diff_data = diff_blob.data, *label_data = label_blob.data;
+	for(int i=0;i<batch_size;++i){
+		for(int k=0;k<hw;++k)
+			diff_data[int(label_data[k]) * hw + k] -= 1.0f;
+		label_data += label_blob.chw();
+		diff_data += diff_blob.chw();
+	}
+	float weight = diff_outputs[0].data[0]/batch_size;
+	for(int i=0;i<nchw;++i){
+		diff_blob.data[i] *= weight;
+		//printf("%.20f\n",diff_blob.data[i]);
+	}
 }

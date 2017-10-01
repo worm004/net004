@@ -27,6 +27,7 @@ class Layers{
 	std::map<std::string, std::vector<std::string>> cs;
 
 	std::vector<std::string> input_layers;
+	bool train = false;
 
 	private:
 	typedef std::map<std::string, Layer*(*)(const JsonValue&)> LayerTypeMap;

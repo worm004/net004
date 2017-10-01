@@ -48,22 +48,25 @@ void NetGame::load(const std::string& path){
 		printf("no layers found\n");
 		exit(0);
 	}
+	if(o.find("train")!=o.end()) net.ls.train = o.at("train").jv.d;
 	for(int i=0;i<nparser.j.jobj["layers"].jarray.size();++i){
 		net.ls.add(nparser.j.jobj["layers"].jarray[i]);
 	}
 	net.ls.init();
 	for(const auto&run:runs) run.second->check(net);
 }
+void NetTrain::init(){
+	runs["init"]->operator()(net,0);
+
+	for(const auto& i:net.ls.input_layers)
+		((DataLayer*)net.ls[i])->n = batch_size;
+	net.pre_alloc();
+
+	runlist = {"test_step","train_step","update","display","save"};
+	for(const auto& i:runlist) runs[i]->init(net);
+}
 void NetGame::run(){
 	for(int iter = 0;iter<max_iter;++iter)
 		for(const auto& i:runlist)
 			runs[i]->operator()(net,iter);
-}
-void NetTrain::init(){
-	runlist = {"train_step","update","display","save","test_step"};
-	for(const auto& i:net.ls.input_layers)
-		((DataLayer*)net.ls[i])->n = batch_size;
-	runs["init"]->operator()(net,0);
-	net.pre_alloc();
-	for(const auto& i:runlist) runs[i]->init(net);
 }

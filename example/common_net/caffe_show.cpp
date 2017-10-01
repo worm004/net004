@@ -195,11 +195,11 @@ int main(int argc, char** argv){
 	google::SetCommandLineOption("GLOG_minloglevel", "2");
 
 	// cifar10
-	//int label = 8;
-	//float mean_r = 127 ,mean_g = 127 ,mean_b = 127;
-	//float std_r = 1, std_g = 1, std_b = 1;
-	//string net_path = "../caffe_models/cifar10_quick_train_test.prototxt",
-	//       model_path = "../caffe_models/cifar10_quick_iter_5000.caffemodel.h5";
+	int label = 8;
+	float mean_r = 127 ,mean_g = 127 ,mean_b = 127;
+	float std_r = 1, std_g = 1, std_b = 1;
+	string net_path = "../caffe_models/cifar10_quick_train_test.prototxt",
+	       model_path = "../caffe_models/cifar10_quick_iter_5000.caffemodel.h5";
 	
 	// vgg16
 	//int label = 628;
@@ -215,11 +215,11 @@ int main(int argc, char** argv){
 	//       model_path = "../caffe_models/bvlc_alexnet.caffemodel";
 	
 	// gnet
-	int label = 628;
-	float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
-	float std_r = 1, std_g = 1, std_b = 1;
-	string net_path = "../caffe_models/bvlc_googlenet_deploy.prototxt",
-	       model_path = "../caffe_models/bvlc_googlenet.caffemodel";
+	//int label = 628;
+	//float mean_r = 123.68, mean_g = 116.779, mean_b = 103.939;
+	//float std_r = 1, std_g = 1, std_b = 1;
+	//string net_path = "../caffe_models/bvlc_googlenet_deploy.prototxt",
+	//       model_path = "../caffe_models/bvlc_googlenet.caffemodel";
 
 	// resnet
 	//int label = 628;
@@ -243,7 +243,7 @@ int main(int argc, char** argv){
 	string model_text_path = "model.txt", forward_text_path = "forwrad.txt", backward_text_path = "backward.txt";
   	std::shared_ptr<caffe::Net<float> > net;
 	caffe::Caffe::set_mode(caffe::Caffe::CPU);
-	net = make_shared<caffe::Net<float>> (net_path, caffe::TEST);
+	net = make_shared<caffe::Net<float>> (net_path, caffe::TRAIN);
 	net->CopyTrainedLayersFrom(model_path);
 	//show_model(net, model_text_path);
 
@@ -251,10 +251,18 @@ int main(int argc, char** argv){
 	//string img_path = "../imgs/person.jpg";//for detection
 	load_img(net,img_path,label,mean_r,mean_g,mean_b,std_r,std_g,std_b);//for classification
 	//load_det_img(net,img_path,mean_r,mean_g,mean_b,std_r,std_g,std_b);// for detection
-	net->Forward();
-	show_forward(net, forward_text_path);
-	//net->Backward();
-	//show_backward(net, backward_text_path);
+	caffe::Blob<float>* blob = net->Forward()[0];
+
+	const vector<vector<caffe::Blob<float> *> >& tops = net->top_vecs();
+	const vector<vector<caffe::Blob<float> *> >& bottoms = net->bottom_vecs();
+	const vector<boost::shared_ptr<caffe::Layer<float> >> layers = net->layers();
+	caffe::Blob<float>* loss_blob = tops[tops.size()-1][0];
+	loss_blob->mutable_cpu_data()[0] = 0.000024;
+	//printf("%f\n",loss_blob->cpu_data()[0]);
+	//printf("%f\n",blob->cpu_data()[0]);
+	//show_forward(net, forward_text_path);
+	net->Backward();
+	show_backward(net, backward_text_path);
 
 	return 0;
 }

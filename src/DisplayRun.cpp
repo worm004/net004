@@ -35,9 +35,9 @@ void DisplayRun::operator()(Net004& net, int cur){
 			float *data = layer->outputs[i].data;
 			int batch_size = layer->outputs[i].n;
 			for(int b=0;b<batch_size;++b){
-				printf("[iter %d] [display] [layer %s] [output %d] [batch %d]:",cur,ln.c_str(),i,b);
+				printf("[iter %07d] [display] [layer %s] [output %d] [batch %d]:",cur,ln.c_str(),i,b);
 				for(int j=0;j<chw;++j)
-					printf(" %.2f",data[j+b*chw]);
+					printf(" %.5f",data[j+b*chw]);
 				printf("\n");
 			}
 		}
