@@ -8,10 +8,12 @@ class ActivityLayer: public Layer{
 	virtual void show();
 	virtual void setup_outputs();
 	virtual void forward();
+	virtual void backward();
 	void forward_relu();
+	void backward_relu();
 	float neg_slope;
 	std::string method;
 	typedef void (ActivityLayer::*FORWARD_FUNC)();
-	FORWARD_FUNC f = 0;
+	FORWARD_FUNC f = 0, bf = 0;
 };
 #endif

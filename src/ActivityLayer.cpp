@@ -9,7 +9,10 @@ ActivityLayer::ActivityLayer(const JsonValue& j):Layer(j){
 		printf("not implement %s method in activity layer\n",method.c_str());
 		exit(0);
 	}
-	else f = &ActivityLayer::forward_relu;
+	else {
+		f = &ActivityLayer::forward_relu;
+		bf = &ActivityLayer::backward_relu;
+	}
 }
 void ActivityLayer::show(){
 	Layer::show();
@@ -32,4 +35,18 @@ void ActivityLayer::forward_relu(){
 		if (idata[i] < 0.0f) odata[i] = neg_slope * idata[i];
 		else odata[i] = idata[i];
 	}
+}
+void ActivityLayer::backward_relu(){
+	float *idata = inputs[0].data;
+	float *input_data = diff_inputs[0].data, *output_data = diff_outputs[0].data;
+	int nchw = diff_inputs[0].nchw();
+	for(int i=0;i<nchw;++i){
+		bool pos = idata[i] > 0;
+		input_data[i] = output_data[i]*(pos + (!pos)*neg_slope);
+	}
+}
+void ActivityLayer::backward(){
+	//show_diff_outputs();
+	(this->*bf)();
+	//show_diff_inputs();
 }

@@ -8,6 +8,7 @@ class FCLayer: public Layer{
 	virtual void show();
 	virtual void setup_outputs();
 	virtual void forward();
+	virtual void backward();
 
 	bool bias;
 	int num;

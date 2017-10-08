@@ -2,7 +2,7 @@
 	"name":"CIFAR10_quick_01",
 	"type":"train",
 	"net_path":"../models/cifar.net004.net",
-	"batch_size":1,
+	"batch_size":2,
 	"max_iter":1,
 	"train":1,
 	"runs":[

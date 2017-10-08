@@ -16,6 +16,10 @@ class Layer{
 	void set_inplace(bool inplace);
 	void show_inputs();
 	void show_outputs();
+	void show_diff_inputs();
+	void show_diff_outputs();
+	void show_params();
+	void show_diff_params();
 	virtual void show();
 	virtual void setup_outputs() = 0;
 	virtual void forward() = 0;

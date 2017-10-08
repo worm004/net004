@@ -39,3 +39,40 @@ void FCLayer::forward(){
 	}
 	//show_outputs();
 }
+void FCLayer::backward(){
+	//show_diff_outputs();
+	if(bias){
+		Blob& diff_bias = diff_params["bias"], &diff_output = diff_outputs[0];
+		int batch_size = diff_output.n, n = diff_bias.n;
+		float *output_data = diff_output.data, *bias_data = diff_bias.data;
+		for(int i=0;i<n;++i){
+			float sum = output_data[i];
+			for(int b = 1; b<batch_size; ++b)
+				sum += output_data[b*n+i];
+			bias_data[i] = sum;
+		}
+	}
+	int w = inputs[0].chw();
+	Blob& diff_weight = diff_params["weight"], &diff_output = diff_outputs[0];
+	cblas_sgemm(CblasRowMajor, 
+			CblasTrans, CblasNoTrans, 
+			num,w, diff_output.n,
+			1.0f,
+			diff_output.data, num,
+			inputs[0].data, w,
+			0.0,
+			diff_weight.data, w);
+	if(diff_inputs[0].data){
+		Blob& weight = params["weight"];
+		cblas_sgemm(CblasRowMajor, 
+				CblasNoTrans, CblasNoTrans, 
+				diff_output.n, w, num,
+				1.0f,
+				diff_output.data, num,
+				weight.data, w,
+				0.0,
+				diff_inputs[0].data, w);
+	}
+	//show_diff_inputs();
+	//show_diff_params();
+}

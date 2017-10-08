@@ -47,6 +47,23 @@ void Blob::alloc(){
 void Blob::show() const{
 	printf("n = %d, c = %d, h = %d, w = %d, type: %s\n", n, c, h, w, type.c_str());
 }
+void Blob::show_data(bool flat) const{
+	show();
+	if(!flat){
+		int chw = this->chw();
+		for(int b=0;b<n;++b){
+			printf("[batch %d] ",b);
+			for(int k=0;k<chw;++k)
+				printf("%g ", data[b*chw + k]);
+			printf("\n");
+		}
+	}else{
+		int nchw = this->nchw();
+		for(int i=0;i<nchw;++i)
+			printf("%g ",data[i]);
+		printf("\n");
+	}
+}
 bool Blob::is_shape_same(const Blob&b){
 	return (n == b.n) && (c == b.c) && (h == b.h) && (w == b.w);
 }

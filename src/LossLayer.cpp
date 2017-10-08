@@ -22,10 +22,14 @@ void LossLayer::setup_outputs(){
 	(this->*init_f)();
 }
 void LossLayer::forward(){
+	//show_inputs();
 	(this->*forward_f)();
+	//show_outputs();
 }
 void LossLayer::backward(){
+	//show_diff_outputs();
 	(this->*backward_f)();
+	//show_diff_inputs();
 }
 void LossLayer::init_softmax(){
 	Blob &ib = inputs[0];
@@ -33,7 +37,7 @@ void LossLayer::init_softmax(){
 	maxs.alloc();
 	sums.set_shape(1,1,ib.h,ib.w);
 	sums.alloc();
-	softmaxblob.set_shape(1,ib.c,ib.h,ib.w);
+	softmaxblob.set_shape(ib.n,ib.c,ib.h,ib.w);
 	softmaxblob.alloc();
 }
 void LossLayer::forward_softmax(){
@@ -61,23 +65,18 @@ void LossLayer::forward_softmax(){
 				softmaxdata[j*hw +k] /= sumdata[k];
 				//printf("%f\n",softmaxdata[j*hw +k]);
 			}
-		for(int k=0;k<hw;++k){
+		for(int k=0;k<hw;++k)
 			loss -= log(std::max(softmaxdata[int(gdata[k]) * hw + k], FLT_MIN));
-		}
 		pdata += c*hw;
 		gdata += inputs[1].chw();
+		softmaxdata += softmaxblob.chw();
 	}
 	odata[0] = loss/inputs[0].n;
-	//show_inputs();
-	//show_outputs();
 }
 void LossLayer::backward_softmax(){
-	//printf("softmax backward\n");
 	Blob& diff_blob = diff_inputs[0], &label_blob = inputs[1];
-
 	int batch_size = label_blob.n, hw = label_blob.hw(), nchw = softmaxblob.nchw();
 	memcpy(diff_blob.data,softmaxblob.data,nchw * sizeof(float));
-
 	float *diff_data = diff_blob.data, *label_data = label_blob.data;
 	for(int i=0;i<batch_size;++i){
 		for(int k=0;k<hw;++k)
@@ -86,8 +85,5 @@ void LossLayer::backward_softmax(){
 		diff_data += diff_blob.chw();
 	}
 	float weight = diff_outputs[0].data[0]/batch_size;
-	for(int i=0;i<nchw;++i){
-		diff_blob.data[i] *= weight;
-		//printf("%.20f\n",diff_blob.data[i]);
-	}
+	for(int i=0;i<nchw;++i) diff_blob.data[i] *= weight;
 }

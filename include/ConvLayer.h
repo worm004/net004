@@ -9,6 +9,8 @@ class ConvLayer: public Layer{
 	virtual void show();
 	virtual void setup_outputs();
 	virtual void forward();
+	virtual void backward();
+	void backward_params();
 	bool bias;
 	int group, 
 	    num,

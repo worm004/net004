@@ -61,7 +61,7 @@ void Net004::forward(){
 }
 void Net004::backward(){
 	for(int i=ls.size()-1;i>=0;--i){
-		printf("backward: %s\n",ls[i]->name.c_str());
+		//printf("backward: %s\n",ls[i]->name.c_str());
 		ls[i]->backward();
 	}
 }

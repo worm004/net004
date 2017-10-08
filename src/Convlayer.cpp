@@ -92,3 +92,83 @@ void ConvLayer::forward(){
 	}
 	//show_outputs();
 }
+void ConvLayer::backward_params(){
+	// weight
+	Blob &input = inputs[0], &output = diff_outputs[0];
+	int istep = input.chw(), 
+	    ncol = kernel_size_h * kernel_size_w * output.hw() * input.c,
+	    w = kernel_size_h * kernel_size_w * input.c, 
+	    nloc = output.hw();
+	float * idata = input.data, 
+	      * odata = output.data,
+	      * col_data = col,
+	      * weight_data = diff_params["weight"].data;
+	memset(weight_data,0,sizeof(float)*diff_params["weight"].nchw());
+	for(int b = 0;b < input.n; ++b){
+		for(int g=0;g<group;++g){
+			im2col2(idata + input.chw()/group*g, 
+					table, 
+					col_data + ncol/group * g, 
+					kernel_size_h * kernel_size_w * outputs[0].hw() * inputs[0].c/group);
+			cblas_sgemm(CblasRowMajor, 
+					CblasNoTrans, CblasNoTrans, 
+					num/group, w /group, nloc,
+					1.0f,
+					odata + output.chw()/group * g, nloc,
+					col_data + ncol/group * g, w/group,
+					1.0f,
+					weight_data + g * params["weight"].nchw()/group, w/group);
+		}
+		idata += istep;
+		odata += output.chw();
+		col_data += ncol;
+	}
+	if(bias){
+		float * bias_data = diff_params["bias"].data, * odata = output.data;
+		memset(bias_data,0,sizeof(float)*diff_params["bias"].nchw());
+		for(int b = 0;b < output.n; ++b){
+			for(int i = 0; i < num; ++i)
+			for(int j = 0; j < nloc; ++j)
+				bias_data[i] += odata[i*nloc +j];
+			odata += output.chw();
+		}
+	}
+}
+void ConvLayer::backward(){
+	//show_diff_outputs();
+
+	backward_params();
+	if(diff_inputs[0].data){
+		Blob &input = diff_inputs[0], &output = diff_outputs[0];
+		memset(input.data,0,sizeof(float)*input.nchw());
+
+		int istep = input.chw(), 
+		    ncol = kernel_size_h * kernel_size_w * output.hw() * input.c,
+		    w = kernel_size_h * kernel_size_w * input.c, 
+		    nloc = output.hw();
+		float * idata = input.data, 
+		      * odata = output.data,
+		      * col_data = col,
+		      * weight_data = params["weight"].data;
+		      
+		for(int b = 0;b < input.n; ++b){
+			for(int g=0;g<group;++g){
+				cblas_sgemm(CblasRowMajor, 
+						CblasTrans, CblasNoTrans, 
+						nloc, w/group, num/group,
+						1.0f,
+						odata + output.chw()/group * g, nloc,
+						weight_data + g * params["weight"].nchw()/group, w/group,
+						0.0,
+						col_data + ncol/group * g, w/group);
+			}
+			col2im(input.c, input.h, input.w, idata,col_data, kernel_size_h, kernel_size_w, stride_h, stride_w, pad_h, pad_w);
+
+			idata += istep;
+			odata += output.chw();
+			col_data += ncol;
+		}
+	}
+	//show_diff_params();
+	//show_diff_inputs();
+}

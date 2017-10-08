@@ -10,6 +10,7 @@ struct Blob{
 	void alloc();
 	void clear();
 	void show() const;
+	void show_data(bool flat = false) const;
 	int nchw() const;
 	int chw() const;
 	int hw() const;

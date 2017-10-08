@@ -77,34 +77,46 @@ void Layer::show(){
 	//	printf("  (inputs) %s %d [%d %d %d %d]\n",i.first.c_str(),i.second,inputs[i.second].n,inputs[i.second].c,inputs[i.second].h,inputs[i.second].w);
 	printf("  (outputs) [%d %d %d %d]\n",outputs[0].n,outputs[0].c,outputs[0].h,outputs[0].w);
 }
+void Layer::show_diff_inputs(){
+	printf("input diff %s %s:\n",type.c_str(),name.c_str());
+	for(int index = 0; index < diff_inputs.size(); ++index){
+		printf("[index %d] ",index);
+		diff_inputs[index].show_data();
+	}
+}
+void Layer::show_diff_outputs(){
+	printf("output diff %s %s:\n",type.c_str(),name.c_str());
+	for(int index = 0; index < diff_outputs.size(); ++index){
+		printf("[index %d] ",index);
+		diff_outputs[index].show_data();
+	}
+}
+void Layer::show_params(){
+	printf("params:\n");
+	for(const auto&i:params){
+		printf("name: %s\n",i.first.c_str());
+		i.second.show_data();
+	}
+}
+void Layer::show_diff_params(){
+	printf("params diff:\n");
+	for(const auto&i:diff_params){
+		printf("name: %s\n",i.first.c_str());
+		i.second.show_data(true);
+	}
+}
 void Layer::show_inputs(){
 	printf("input %s %s:\n",type.c_str(),name.c_str());
 	for(int index = 0; index < inputs.size(); ++index){
-		printf("[index] %d\n",index);
-		Blob &input = inputs[index];
-		int n = input.n, chw = input.chw();
-		for(int b=0;b<n;++b){
-			printf("[batch] %d\n",b);
-			for(int k=0;k<chw;++k)
-				printf("%g ", input.data[b*chw + k]);
-			printf("\n");
-		}
-		printf("\n");
+		printf("[index %d] ",index);
+		inputs[index].show_data();
 	}
 }
 void Layer::show_outputs(){
 	printf("output %s %s\n",type.c_str(),name.c_str());
 	for(int index = 0; index < outputs.size(); ++index){
-		printf("[index] %d\n",index);
-		Blob &output = outputs[index];
-		int n = output.n, chw = output.chw();
-		for(int b=0;b<n;++b){
-			printf("[batch] %d\n",b);
-			for(int k=0;k<chw;++k)
-				printf("%g ", output.data[b*chw + k]);
-			printf("\n");
-		}
-		printf("\n");
+		printf("[index %d] ",index);
+		outputs[index].show_data();
 	}
 }
 bool Layer::is_inplace(){
