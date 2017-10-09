@@ -32,7 +32,7 @@
 				"solver":"sgd",
 				"momentum":0.9,
 				"weight_decay":0.004,
-				"omit":1,
+				"omit":0,
 				"lr":{
 					"type":"fixed",
 					"base":0.001,
