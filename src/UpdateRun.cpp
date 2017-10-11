@@ -76,21 +76,21 @@ void UpdateRun::operator()(Net004& net, int cur){
 void UpdateRun::init(Net004& net, int cur){
 	for(int i=0;i<net.ls.size();++i){
 		Layer* l = net.ls[i];
-		acc_diff[l->name];
-		history[l->name];
+		if(l->params.size()){
+			acc_diff[l->name];
+			history[l->name];
+		}
 		for(const auto&p:l->params){
-			{
 				Blob& b = acc_diff[l->name][p.first];
 				b.set_shape(p.second);
 				b.alloc();
 				memset(b.data,0,sizeof(float)*b.nchw());
-			}
-			{
+		}
+		for(const auto&p:l->params){
 				Blob& b = history[l->name][p.first];
 				b.set_shape(p.second);
 				b.alloc();
 				memset(b.data,0,sizeof(float)*b.nchw());
-			}
 		}
 	}
 	f = &UpdateRun::update;
@@ -99,7 +99,6 @@ void UpdateRun::init(Net004& net, int cur){
 void UpdateRun::accumulate(Net004& net, int cur){
 	for(int i=0;i<net.ls.size();++i){
 		Layer* l = net.ls[i];
-		if(l->diff_params.size()) acc_diff[l->name];
 		for(const auto&p:l->diff_params){
 			Blob& acc = acc_diff[l->name][p.first];
 			const Blob& src = p.second;
@@ -116,11 +115,11 @@ void UpdateRun::sgd(Net004& net, int cur){
 	// generate learning rate
 	float learning_rate = lr.base;
 	if(lr.type == "fixed") learning_rate *= 1.0f;
-	printf("[itre %07d] [update] [solver %s] [learning_rate %g]\n",cur,solver.c_str(),learning_rate);
+	printf("[iter %07d] [update] [solver %s] [learning_rate %g]\n",cur,solver.c_str(),learning_rate);
 
 	// normalize
 	if(iter_interval > 1){
-		float normalize = 1.0f/iter_interval;
+		float normalize = 1.0f/float(iter_interval);
 		for(auto& l:acc_diff)
 			for(auto& b:l.second){
 				int nchw = b.second.nchw();
@@ -134,41 +133,39 @@ void UpdateRun::sgd(Net004& net, int cur){
 	for(auto& l:acc_diff)
 		for(auto& b:l.second){
 			int nchw = b.second.nchw();
-			float *diff_data = b.second.data;
-			Blob& param_blob = net[l.first]->params[b.first];
-			float *data = param_blob.data;
-			for(int i=0;i<nchw;++i){
-				data[i] += weight_decay*diff_data[i];
-			}
+			float *diff_data = b.second.data,
+			      *data = net[l.first]->params[b.first].data;
+			for(int i=0;i<nchw;++i)
+				diff_data[i] += weight_decay*data[i];
 		}
-	
 	// update
 	for(auto& l:acc_diff)
 		for(auto& b:l.second){
 			float local_lr = learning_rate * lr.mults[l.first][b.first];
 			int nchw = b.second.nchw();
-			float *diff_data = b.second.data;
 
-			Blob& history_blob = history[l.first][b.first];
-			float *history_data = history_blob.data;
+			Blob & history_blob = history[l.first][b.first],
+			     & param_blob = net[l.first]->params[b.first];
 
-			Blob& param_blob = net[l.first]->params[b.first];
-			float *data = param_blob.data;
+			float *diff_data = b.second.data,
+			      *history_data = history_blob.data,
+			      *data = param_blob.data;
 			for(int i=0;i<nchw;++i){
-				history_data[i] = history_data[i]*momentum + diff_data[i]*local_lr;
-				data[i] = history_data[i];
+				history_data[i] = history_data[i] * momentum + diff_data[i]*local_lr;
+				// history = history * momentum + lr * (weight_decay * data + diff)
+				// data -= d * momentum + lr * (weight_decay * data + diff)
+				data[i] -= history_data[i];
 			}
 		}
 	
 	for(auto& l:acc_diff)
 		for(auto& b:l.second){
-			float local_lr = learning_rate * lr.mults[l.first][b.first];
 			int nchw = b.second.nchw();
-			memset(b.second.data,0,nchw);
+			memset(b.second.data,0,nchw*sizeof(float));
 		}
 }
 void UpdateRun::update(Net004& net, int cur){
-	accumulate(net,cur);
+	accumulate(net, cur);
 	if(cur%iter_interval != 0) return;
 	(this->*update_f)(net, cur);
 }

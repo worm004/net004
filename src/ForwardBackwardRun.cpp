@@ -180,7 +180,7 @@ void ForwardBackwardRun::operator()(Net004& net, int cur) {
 	}
 	loss_layer_data[0] = loss/iter;
 	net.backward();
-	printf("[iter %07d] [train] [data index %08d - %08d] [train_loss %.3f]\n",cur,cur_index - iter*batch_size, cur_index-1,loss_layer_data[0]);
+	printf("[iter %07d] [train] [data index %08d - %08d] [train_loss %g]\n",cur,cur_index - iter*batch_size, cur_index-1,loss_layer_data[0]);
 }
 void ForwardBackwardRun::init(const Net004& net){
 	if(omit) return;

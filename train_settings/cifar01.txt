@@ -2,8 +2,8 @@
 	"name":"CIFAR10_quick_01",
 	"type":"train",
 	"net_path":"../models/cifar.net004.net",
-	"batch_size":2,
-	"max_iter":1,
+	"batch_size":100,
+	"max_iter":10000,
 	"train":1,
 	"runs":[
 		{ 
@@ -50,7 +50,7 @@
 			"attrs":{ 
 				"name":"init", 
 				"type":"init", 
-				"method":"model",
+				"method":"random",
 				"path":"../models/cifar.net004.data",
 				"layers":[
 					{ "name":"conv1", "weight":{ "init_type":"guassian", "std":0.0001, "mean":0 }, "bias":{ "init_type":"constant", "val":0 } },
@@ -88,7 +88,7 @@
 				"name":"test_step",
 				"type":"forward_test",
 				"iter": 1,
-				"iter_interval": 10,
+				"iter_interval": 1,
 				"omit":1,
 				"data":{ 
 					"name":"test_data", 
