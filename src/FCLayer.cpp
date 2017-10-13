@@ -32,9 +32,9 @@ void FCLayer::forward(){
 			odata, num);
 	if(!bias) return;
 	for(int b = 0; b < batch_size; ++b){
-		float *weight_data = weight_b.data;
+		float *bias_data = bias_b.data;
 		for(int y = 0; y < h; ++y)
-			odata[y] += bias_b.data[y];
+			odata[y] += bias_data[y];
 		odata += h;
 	}
 	//show_outputs();

@@ -132,8 +132,6 @@ void PoolLayer::backward_avg(){
 	    bc = inputs[0].n * inputs[0].c,
 	    bottom = ((h + pad * 2 - kernel+stride-1)/stride + 1)*stride - pad-1,
 	    right = ((w + pad * 2 - kernel+stride-1)/stride + 1)*stride - pad-1;
-	float *idata = inputs[0].data,
-	      *odata = outputs[0].data;
 	float *input_data = diff_inputs[0].data, *output_data = diff_outputs[0].data;
 	memset(input_data,0,sizeof(float)*diff_inputs[0].nchw());
 	for(int t = 0, cur = 0; t < bc; ++t, input_data += w*h)

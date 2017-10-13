@@ -44,7 +44,6 @@ void DisplayRun::operator()(Net004& net, int cur){
 
 		int unit = 10;
 		cv::Mat show = cv::Mat::zeros(b.c*unit*b.h, b.n*unit*b.w,CV_8UC1);
-		uchar *sdata = (uchar *)show.data;
 		for(int i=0;i<b.n;++i){
 			for(int j=0;j<b.c;++j){
 				for(int ii = 0;ii<b.h;++ii){
@@ -71,7 +70,6 @@ void DisplayRun::operator()(Net004& net, int cur){
 
 		int unit = 10;
 		cv::Mat show = cv::Mat::zeros(b.c*unit*b.h, b.n*unit*b.w,CV_8UC1);
-		uchar *sdata = (uchar *)show.data;
 		for(int i=0;i<b.n;++i){
 			for(int j=0;j<b.c;++j){
 				for(int ii = 0;ii<b.h;++ii){
@@ -98,7 +96,6 @@ void DisplayRun::operator()(Net004& net, int cur){
 
 		int unit = 10;
 		cv::Mat show = cv::Mat::zeros(b.c*unit*b.h, b.n*unit*b.w,CV_8UC1);
-		uchar *sdata = (uchar *)show.data;
 		for(int i=0;i<b.n;++i){
 			for(int j=0;j<b.c;++j){
 				for(int ii = 0;ii<b.h;++ii){

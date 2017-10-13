@@ -26,7 +26,7 @@ UpdateRun::UpdateRun(const JsonValue& j):Run(j){
 			}
 		}
 	}
-	f = &UpdateRun::init;
+	f = &UpdateRun::init_and_run;
 	if(solver == "sgd") update_f = &UpdateRun::sgd;
 	else{
 		printf("unknown solver type: %s\n",solver.c_str());
@@ -73,7 +73,7 @@ void UpdateRun::operator()(Net004& net, int cur){
 	if(omit) return;
 	(this->*f)(net,cur);
 }
-void UpdateRun::init(Net004& net, int cur){
+void UpdateRun::init_and_run(Net004& net, int cur){
 	for(int i=0;i<net.ls.size();++i){
 		Layer* l = net.ls[i];
 		if(l->params.size()){

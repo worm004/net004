@@ -15,7 +15,7 @@ class UpdateRun:public Run{
 	virtual void check(const Net004& net)const;
 
 	private:
-	void init(Net004& net, int cur);
+	void init_and_run(Net004& net, int cur);
 	void update(Net004& net, int cur);
 	void accumulate(Net004& net, int cur);
 	void sgd(Net004& net, int cur);
