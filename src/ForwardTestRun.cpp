@@ -51,8 +51,8 @@ void ForwardTestRun::operator()(Net004& net, int cur) {
 			//	int(label_layer_data[j]),input_data->label_name(label_layer_data[j]).c_str());
 		}
 	}
-	printf("[iter %07d] [test] [data index %08d - %08d] [test_loss %.3f]\n",cur,cur_index - iter*batch_size, cur_index-1,loss/iter);
-	printf("[iter %07d] [test] [data index %08d - %08d] [accuracy(top1) %.3f]\n",cur,cur_index - iter*batch_size, cur_index-1,float(acc_top_1)/float(all));
+	printf("[iter %07d] [test] [data index %08d - %08d] [test_loss %g]\n",cur,cur_index - iter*batch_size, cur_index-1,loss/iter);
+	printf("[iter %07d] [test] [data index %08d - %08d] [accuracy(top1) %g]\n",cur,cur_index - iter*batch_size, cur_index-1,float(acc_top_1)/float(all));
 	//printf("Accuracy(top1) in [%d,%d): %f\n",cur_index-iter*batch_size,cur_index,float(acc_top_1)/float(all));
 	//fflush(stdout);
 }

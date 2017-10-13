@@ -3,7 +3,7 @@
 	"type":"train",
 	"net_path":"../models/cifar.net004.net",
 	"batch_size":100,
-	"max_iter":10000,
+	"max_iter":4000,
 	"train":1,
 	"runs":[
 		{ 
@@ -13,7 +13,7 @@
 				"prefix":"cifar.net004.",
 				"dir":"save",
 				"iter_interval":1000,
-				"omit":1
+				"omit":0
 				} 
 		},
 		{ 
@@ -21,8 +21,8 @@
 				"name":"display", 
 				"type":"display", 
 				"layers":["loss"], 
-				"omit":1,
-				"iter_interval": 10
+				"omit":0,
+				"iter_interval": 1
 				} 
 			},
 		{
@@ -44,7 +44,7 @@
 						{ "name":"ip2", "weight": 1, "bias": 2 }
 					]
 				}
-			},
+			}
 		},
 		{
 			"attrs":{ 
@@ -88,8 +88,8 @@
 				"name":"test_step",
 				"type":"forward_test",
 				"iter": 1,
-				"iter_interval": 1,
-				"omit":1,
+				"iter_interval": 10,
+				"omit":0,
 				"data":{ 
 					"name":"test_data", 
 					"type":"cifar10",

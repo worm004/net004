@@ -10,7 +10,6 @@ add_definitions(-DCPU_ONLY)
 include_directories(${Caffe_INCLUDE_DIRS})
 include_directories(${OpenCV_INCLUDE_DIRS})
 
-
 add_executable(model_cvt model_cvt.cpp caffe_parser.cpp)
 target_link_libraries(model_cvt net004 ${OpenCV_LIBRARIES} ${Caffe_LIBRARIES})
 
