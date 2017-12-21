@@ -20,6 +20,7 @@ class InitRun:public Run{
 	void show_random()const;
 	void init_constant(Blob& blob, double val);
 	void init_guassian(Blob& blob, double mean, double std);
+	void init_xavier(Blob& blob);
 	void init_by_random(Net004& net);
 	void init_by_model(Net004& net);
 

@@ -90,6 +90,15 @@ void InitRun::init_guassian(Blob& blob, double mean, double std){
 	for(int i=0;i<n;++i)
 		blob.data[i] = distribution(generator);
 }
+void InitRun::init_xavier(Blob& blob){
+	float ni = blob.chw(), 
+	      no = blob.hw()*blob.n,
+	      a = sqrt(6.0f/(ni+no));
+	uniform_real_distribution<double> distribution(-a,a);
+	int nchw = blob.nchw();
+	for(int i=0;i<nchw;++i)
+		blob.data[i] = distribution(generator);
+}
 void InitRun::init_by_random(Net004& net){
 	for(const auto& l:layers){
 		const string& lname = l.first;
@@ -101,6 +110,7 @@ void InitRun::init_by_random(Net004& net){
 			const string& init_type = b.second.init_type;
 			if(init_type == "constant") init_constant(blob,b.second.val);
 			else if(init_type == "guassian") init_guassian(blob,b.second.mean,b.second.std);
+			else if(init_type == "xavier") init_xavier(blob);
 			//blob.show();
 		}
 	}

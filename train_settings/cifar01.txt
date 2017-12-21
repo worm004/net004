@@ -59,8 +59,9 @@
 					{ "name":"ip1", "weight":{ "init_type":"guassian", "std":0.1, "mean":0 }, "bias":{ "init_type":"constant", "val":0 } },
 					{ "name":"ip2", "weight":{ "init_type":"guassian", "std":0.1, "mean":0 }, "bias":{ "init_type":"constant", "val":0 } }
 				]
-			}
-		},
+			},
+			"omit":0
+		}
 		{
 			"attrs":{
 				"name":"train_step",

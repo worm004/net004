@@ -110,7 +110,7 @@ void DisplayRun::operator()(Net004& net, int cur){
 		imshow("conv3",show);
 	}
 
-	//waitKey(1);
+	//waitKey(0);
 	//for(auto ln:layers){
 	//	Layer* layer = net[ln];
 	//	for(int i=0;i<layer->outputs.size();++i){
