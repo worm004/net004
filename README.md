@@ -1,10 +1,20 @@
 # Net004
 
-A C++ CNN framework. 
-A caffe models converter.
+This is a personal C++ CNN framework toy.
 
-Basic: cifar10, alexnet, gnetv4, sqnet_res, resnet50, inception-res-v2, vgg16, gnetv1, sqnet1.0, dense121, resnet101, gnetv3, sqnet1.1, resnet152
+This toy is created to play with new CNN structures/ideas easier than Caffe for me ***on my macbook currently = =***.
 
-Detection: yolov1, faster_rcnn
+Caffe relies on so many 3rd-party libraries which are not very suitable to quick test.
 
-Segmentation: fcn_seg_8s
+To prove the correctness of the code, two things have been done:
+
+1. Several caffe models are converted into the net004 models.
+2. Several forward and backward steps are conducted on each models, output resluts are compared between net004 and caffe.
+
+Currently, following models are supported:
+
+Base Net: cifar10, alexnet, gnetv4, sqnet\_res, resnet50, inception-res-v2, vgg16, gnetv1, sqnet1.0, dense121, resnet101, gnetv3, sqnet1.1, resnet152
+
+Detection Net: yolov1, faster\_rcnn
+
+Segmentation Net: fcn\_seg\_8s
